@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toast"
+version = "0.1.0"
+description = "TOAST: Training-free Block Replacement in Vision Transformers"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Irene Cannistraci" }]
+
+dependencies = [
+    "torch>=2.0",
+    "transformers>=4.30",
+    "datasets>=2.14",
+    "latentis",
+    "fire",
+    "timm",
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "tqdm",
+    "pytorch-lightning",
+]
+
+[project.optional-dependencies]
+wandb = ["wandb"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
