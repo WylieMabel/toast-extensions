@@ -1,0 +1,1585 @@
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://nexus-central.leomed.ethz.ch/repository/pypi/simple
+Obtaining file:///cluster/home/mwylie/toast-extensions
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.11.0)
+Requirement already satisfied: transformers>=4.30 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (5.7.0)
+Requirement already satisfied: datasets>=2.14 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (4.8.5)
+Requirement already satisfied: latentis in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.0.8)
+Requirement already satisfied: fire in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.7.1)
+Requirement already satisfied: timm in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.0.26)
+Requirement already satisfied: pandas in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (3.0.2)
+Requirement already satisfied: numpy in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.4.4)
+Requirement already satisfied: scikit-learn in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.8.0)
+Requirement already satisfied: tqdm in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from toast==0.1.0) (4.67.3)
+Requirement already satisfied: pytorch-lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.6.1)
+Requirement already satisfied: filelock in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.29.0)
+Requirement already satisfied: pyarrow>=21.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (24.0.0)
+Requirement already satisfied: dill<0.4.2,>=0.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: requests>=2.32.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (2.32.5)
+Requirement already satisfied: httpx<1.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.28.1)
+Requirement already satisfied: xxhash in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.7.0)
+Requirement already satisfied: multiprocess<0.70.20 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.70.19)
+Requirement already satisfied: fsspec<=2026.2.0,>=2023.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2026.2.0)
+Requirement already satisfied: huggingface-hub<2.0,>=0.25.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (1.13.0)
+Requirement already satisfied: packaging in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (6.0.3)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (3.13.5)
+Requirement already satisfied: anyio in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (4.10.0)
+Requirement already satisfied: certifi in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (2026.1.4)
+Requirement already satisfied: httpcore==1.* in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.0.9)
+Requirement already satisfied: idna in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (3.11)
+Requirement already satisfied: h11>=0.16 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpcore==1.*->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (0.16.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.4.3)
+Requirement already satisfied: typer in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.20.0)
+Requirement already satisfied: typing-extensions>=4.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.15.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (6.7.1)
+Requirement already satisfied: propcache>=0.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.23.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (3.4.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (2.6.3)
+Requirement already satisfied: setuptools<82 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (80.10.2)
+Requirement already satisfied: sympy>=1.13.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.1.6)
+Requirement already satisfied: cuda-toolkit==13.0.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.2)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (13.2.0)
+Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (0.8.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.0)
+Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.1.0.3)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.0.61)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.6.3.3)
+Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-bindings<14,>=13.0.3->torch>=2.0->toast==0.1.0) (1.5.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from sympy>=1.13.3->torch>=2.0->toast==0.1.0) (1.3.0)
+Requirement already satisfied: regex>=2025.10.22 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (2026.4.4)
+Requirement already satisfied: tokenizers<=0.23.0,>=0.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.22.2)
+Requirement already satisfied: safetensors>=0.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.7.0)
+Requirement already satisfied: sniffio>=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from anyio->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.3.1)
+Requirement already satisfied: termcolor in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fire->toast==0.1.0) (3.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from jinja2->torch>=2.0->toast==0.1.0) (3.0.3)
+Requirement already satisfied: torchmetrics in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.9.0)
+Requirement already satisfied: backports.strenum in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.8)
+Requirement already satisfied: python-dotenv in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.1)
+Requirement already satisfied: GitPython in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.1.49)
+Requirement already satisfied: matplotlib in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.10.9)
+Requirement already satisfied: faiss-cpu in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.13.2)
+Requirement already satisfied: lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (2.6.1)
+Requirement already satisfied: gitdb<5,>=4.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from GitPython->latentis->toast==0.1.0) (4.0.12)
+Requirement already satisfied: smmap<6,>=3.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from gitdb<5,>=4.0.1->GitPython->latentis->toast==0.1.0) (5.0.3)
+Requirement already satisfied: lightning-utilities<2.0,>=0.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from lightning->latentis->toast==0.1.0) (0.15.3)
+Requirement already satisfied: contourpy>=1.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (4.62.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.5.0)
+Requirement already satisfied: pillow>=8 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (12.2.0)
+Requirement already satisfied: pyparsing>=3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (3.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from python-dateutil>=2.7->matplotlib->latentis->toast==0.1.0) (1.17.0)
+Requirement already satisfied: scipy>=1.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.17.1)
+Requirement already satisfied: joblib>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (3.6.0)
+Requirement already satisfied: torchvision in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from timm->toast==0.1.0) (0.26.0)
+Requirement already satisfied: click>=8.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (8.2.1)
+Requirement already satisfied: shellingham>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.5.4)
+Requirement already satisfied: rich>=10.11.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (14.2.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (2.19.2)
+Requirement already satisfied: mdurl~=0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from markdown-it-py>=2.2.0->rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.1.2)
+Building wheels for collected packages: toast
+  Building editable for toast (pyproject.toml): started
+  Building editable for toast (pyproject.toml): finished with status 'done'
+  Created wheel for toast: filename=toast-0.1.0-0.editable-py3-none-any.whl size=4525 sha256=23a6069c6068a16878faeaaea538757fc7957bde28333971f281827388462459
+  Stored in directory: /scratch/slurm-job.8956048/pip-ephem-wheel-cache-564pvmxr/wheels/a0/f4/1f/d3c12de536bc82f378cfe768fdfa423266178ffc40a4f1de51
+Successfully built toast
+Installing collected packages: toast
+  Attempting uninstall: toast
+    Found existing installation: toast 0.1.0
+    Not uninstalling toast at /cluster/home/mwylie/.local/lib/python3.13/site-packages, outside environment /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env
+    Can't uninstall 'toast'. No files were found to uninstall.
+Successfully installed toast-0.1.0
+
+[notice] A new release of pip is available: 25.3 -> 26.1
+[notice] To update, run: pip install --upgrade pip
+[rank: 0] Seed set to 0
+cuda
+Dataset: mnist, Encoder: facebook/deit-small-patch16-224, Translator: linear, Skips: [[], [(0, 1)]]
+Dataset directory does not exist. Creating: /cluster/home/mwylie/toast-extensions/data/linear_skipped_embeddings/mnist/deit-small-patch16-224/500
+Loading dataset from saved disk version: mnist
+Loading HF AutoModel: facebook/deit-small-patch16-224
+Loading weights:   0%|          | 0/198 [00:00<?, ?it/s]Loading weights: 100%|██████████| 198/198 [00:00<00:00, 43464.29it/s]
+[transformers] [1mViTModel LOAD REPORT[0m from: facebook/deit-small-patch16-224
+Key                 | Status     | 
+--------------------+------------+-
+classifier.weight   | UNEXPECTED | 
+classifier.bias     | UNEXPECTED | 
+pooler.dense.weight | MISSING    | 
+pooler.dense.bias   | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[rank: 0] Seed set to 0
+Extracting via HiddenStates:   0%|          | 0/1875 [00:00<?, ?it/s]Extracting via HiddenStates:   0%|          | 1/1875 [00:01<32:56,  1.05s/it]Extracting via HiddenStates:   0%|          | 2/1875 [00:01<16:00,  1.95it/s]Extracting via HiddenStates:   0%|          | 3/1875 [00:01<10:25,  2.99it/s]Extracting via HiddenStates:   0%|          | 5/1875 [00:01<06:05,  5.12it/s]Extracting via HiddenStates:   0%|          | 7/1875 [00:01<04:46,  6.51it/s]Extracting via HiddenStates:   0%|          | 9/1875 [00:01<04:08,  7.50it/s]Extracting via HiddenStates:   1%|          | 11/1875 [00:02<03:28,  8.93it/s]Extracting via HiddenStates:   1%|          | 13/1875 [00:02<03:31,  8.81it/s]Extracting via HiddenStates:   1%|          | 14/1875 [00:02<03:33,  8.72it/s]Extracting via HiddenStates:   1%|          | 15/1875 [00:02<03:35,  8.61it/s]Extracting via HiddenStates:   1%|          | 16/1875 [00:02<04:59,  6.20it/s]
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Encoding Different Skips:   0%|          | 0/2 [00:00<?, ?it/s]
+Processing skip: []
+Filtered layers (kept 12 out of 12)
+
+Encoding Batches with SkipModel:   0%|          | 0/1875 [00:00<?, ?it/s][A
+Encoding Batches with SkipModel:   0%|          | 1/1875 [00:00<07:40,  4.07it/s][A
+Encoding Batches with SkipModel:   0%|          | 4/1875 [00:00<02:33, 12.20it/s][A
+Encoding Batches with SkipModel:   0%|          | 7/1875 [00:00<01:49, 17.01it/s][A
+Encoding Batches with SkipModel:   1%|          | 10/1875 [00:00<01:34, 19.67it/s][A
+Encoding Batches with SkipModel:   1%|          | 13/1875 [00:00<01:30, 20.54it/s][A
+Encoding Batches with SkipModel:   1%|          | 16/1875 [00:00<01:27, 21.32it/s][A
+Encoding Batches with SkipModel:   1%|          | 19/1875 [00:01<01:26, 21.51it/s][A
+Encoding Batches with SkipModel:   1%|          | 22/1875 [00:01<01:22, 22.46it/s][A
+Encoding Batches with SkipModel:   1%|▏         | 25/1875 [00:01<01:22, 22.37it/s][A
+Encoding Batches with SkipModel:   1%|▏         | 28/1875 [00:01<01:21, 22.72it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 31/1875 [00:01<01:20, 22.91it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 34/1875 [00:01<01:20, 22.99it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 37/1875 [00:01<01:17, 23.76it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 40/1875 [00:01<01:17, 23.68it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 43/1875 [00:02<01:17, 23.66it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 46/1875 [00:02<01:16, 24.02it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 49/1875 [00:02<01:15, 24.10it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 52/1875 [00:02<01:14, 24.34it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 55/1875 [00:02<01:15, 24.25it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 58/1875 [00:02<01:15, 24.07it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 61/1875 [00:02<01:15, 23.99it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 64/1875 [00:02<01:15, 24.03it/s][A
+Encoding Batches with SkipModel:   4%|▎         | 67/1875 [00:03<01:14, 24.31it/s][A
+Encoding Batches with SkipModel:   4%|▎         | 70/1875 [00:03<01:14, 24.38it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 73/1875 [00:03<01:14, 24.35it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 76/1875 [00:03<01:12, 24.77it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 79/1875 [00:03<01:12, 24.76it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 82/1875 [00:03<01:13, 24.56it/s][A
+Encoding Batches with SkipModel:   5%|▍         | 85/1875 [00:03<01:13, 24.43it/s][A
+Encoding Batches with SkipModel:   5%|▍         | 88/1875 [00:03<01:12, 24.55it/s][A
+Encoding Batches with SkipModel:   5%|▍         | 91/1875 [00:03<01:11, 24.94it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 94/1875 [00:04<01:10, 25.15it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 97/1875 [00:04<01:12, 24.68it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 100/1875 [00:04<01:12, 24.49it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 103/1875 [00:04<01:12, 24.56it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 106/1875 [00:04<01:11, 24.86it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 109/1875 [00:04<01:10, 24.93it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 112/1875 [00:04<01:11, 24.61it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 115/1875 [00:04<01:10, 24.93it/s][A
+Encoding Batches with SkipModel:   6%|▋         | 118/1875 [00:05<01:09, 25.26it/s][A
+Encoding Batches with SkipModel:   6%|▋         | 121/1875 [00:05<01:09, 25.29it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 124/1875 [00:05<01:08, 25.44it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 127/1875 [00:05<01:09, 24.99it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 130/1875 [00:05<01:11, 24.50it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 133/1875 [00:05<01:12, 24.11it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 136/1875 [00:05<01:12, 24.02it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 139/1875 [00:05<01:12, 23.93it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 142/1875 [00:06<01:11, 24.07it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 145/1875 [00:06<01:12, 24.02it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 148/1875 [00:06<01:11, 24.24it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 151/1875 [00:06<01:11, 24.22it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 154/1875 [00:06<01:11, 24.20it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 157/1875 [00:06<01:11, 23.91it/s][A
+Encoding Batches with SkipModel:   9%|▊         | 160/1875 [00:06<01:11, 24.07it/s][A
+Encoding Batches with SkipModel:   9%|▊         | 163/1875 [00:06<01:10, 24.41it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 166/1875 [00:07<01:10, 24.33it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 169/1875 [00:07<01:10, 24.33it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 172/1875 [00:07<01:10, 24.31it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 175/1875 [00:07<01:09, 24.36it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 178/1875 [00:07<01:10, 24.01it/s][A
+Encoding Batches with SkipModel:  10%|▉         | 181/1875 [00:07<01:10, 24.05it/s][A
+Encoding Batches with SkipModel:  10%|▉         | 184/1875 [00:07<01:10, 24.00it/s][A
+Encoding Batches with SkipModel:  10%|▉         | 187/1875 [00:07<01:09, 24.25it/s][A
+Encoding Batches with SkipModel:  10%|█         | 190/1875 [00:08<01:10, 23.93it/s][A
+Encoding Batches with SkipModel:  10%|█         | 193/1875 [00:08<01:10, 23.94it/s][A
+Encoding Batches with SkipModel:  10%|█         | 196/1875 [00:08<01:12, 23.27it/s][A
+Encoding Batches with SkipModel:  11%|█         | 199/1875 [00:08<01:12, 23.09it/s][A
+Encoding Batches with SkipModel:  11%|█         | 202/1875 [00:08<01:13, 22.71it/s][A
+Encoding Batches with SkipModel:  11%|█         | 205/1875 [00:08<01:11, 23.26it/s][A
+Encoding Batches with SkipModel:  11%|█         | 208/1875 [00:08<01:10, 23.49it/s][A
+Encoding Batches with SkipModel:  11%|█▏        | 211/1875 [00:08<01:12, 22.95it/s][A
+Encoding Batches with SkipModel:  11%|█▏        | 214/1875 [00:09<01:11, 23.36it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 217/1875 [00:09<01:11, 23.08it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 220/1875 [00:09<01:13, 22.42it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 223/1875 [00:09<01:10, 23.30it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 226/1875 [00:09<01:08, 24.02it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 229/1875 [00:09<01:09, 23.52it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 232/1875 [00:09<01:12, 22.73it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 235/1875 [00:10<01:11, 23.06it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 238/1875 [00:10<01:10, 23.32it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 241/1875 [00:10<01:11, 22.91it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 244/1875 [00:10<01:07, 24.24it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 247/1875 [00:10<01:07, 24.11it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 250/1875 [00:10<01:04, 25.04it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 253/1875 [00:10<01:04, 25.04it/s][A
+Encoding Batches with SkipModel:  14%|█▎        | 256/1875 [00:10<01:05, 24.86it/s][A
+Encoding Batches with SkipModel:  14%|█▍        | 259/1875 [00:10<01:05, 24.80it/s][A
+Encoding Batches with SkipModel:  14%|█▍        | 263/1875 [00:11<01:02, 25.89it/s][A
+Encoding Batches with SkipModel:  14%|█▍        | 266/1875 [00:11<01:00, 26.65it/s][A
+Encoding Batches with SkipModel:  14%|█▍        | 269/1875 [00:11<01:01, 25.99it/s][A
+Encoding Batches with SkipModel:  15%|█▍        | 272/1875 [00:11<01:01, 26.05it/s][A
+Encoding Batches with SkipModel:  15%|█▍        | 275/1875 [00:11<01:02, 25.47it/s][A
+Encoding Batches with SkipModel:  15%|█▍        | 278/1875 [00:11<01:03, 25.15it/s][A
+Encoding Batches with SkipModel:  15%|█▌        | 282/1875 [00:11<01:00, 26.49it/s][A
+Encoding Batches with SkipModel:  15%|█▌        | 285/1875 [00:11<01:03, 24.89it/s][A
+Encoding Batches with SkipModel:  15%|█▌        | 288/1875 [00:12<01:02, 25.51it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 291/1875 [00:12<01:00, 26.35it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 294/1875 [00:12<01:01, 25.68it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 297/1875 [00:12<01:00, 25.90it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 300/1875 [00:12<00:59, 26.59it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 304/1875 [00:12<01:00, 25.95it/s][A
+Encoding Batches with SkipModel:  16%|█▋        | 308/1875 [00:12<00:56, 27.62it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 311/1875 [00:12<00:58, 26.78it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 314/1875 [00:13<00:58, 26.86it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 317/1875 [00:13<00:59, 26.08it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 320/1875 [00:13<01:01, 25.21it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 323/1875 [00:13<00:58, 26.38it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 326/1875 [00:13<00:59, 25.91it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 329/1875 [00:13<00:59, 25.79it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 333/1875 [00:13<00:57, 26.86it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 336/1875 [00:13<00:57, 26.67it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 339/1875 [00:14<01:01, 25.04it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 342/1875 [00:14<01:01, 24.94it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 345/1875 [00:14<00:59, 25.84it/s][A
+Encoding Batches with SkipModel:  19%|█▊        | 348/1875 [00:14<00:59, 25.80it/s][A
+Encoding Batches with SkipModel:  19%|█▊        | 351/1875 [00:14<01:00, 25.36it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 354/1875 [00:14<01:01, 24.63it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 357/1875 [00:14<01:03, 24.08it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 360/1875 [00:14<01:03, 23.86it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 363/1875 [00:15<01:02, 24.08it/s][A
+Encoding Batches with SkipModel:  20%|█▉        | 366/1875 [00:15<01:02, 24.34it/s][A
+Encoding Batches with SkipModel:  20%|█▉        | 369/1875 [00:15<01:01, 24.37it/s][A
+Encoding Batches with SkipModel:  20%|█▉        | 372/1875 [00:15<01:00, 24.82it/s][A
+Encoding Batches with SkipModel:  20%|██        | 375/1875 [00:15<00:59, 25.39it/s][A
+Encoding Batches with SkipModel:  20%|██        | 378/1875 [00:15<00:58, 25.68it/s][A
+Encoding Batches with SkipModel:  20%|██        | 381/1875 [00:15<01:01, 24.14it/s][A
+Encoding Batches with SkipModel:  20%|██        | 384/1875 [00:15<01:01, 24.39it/s][A
+Encoding Batches with SkipModel:  21%|██        | 388/1875 [00:15<00:56, 26.34it/s][A
+Encoding Batches with SkipModel:  21%|██        | 391/1875 [00:16<00:56, 26.21it/s][A
+Encoding Batches with SkipModel:  21%|██        | 394/1875 [00:16<00:55, 26.86it/s][A
+Encoding Batches with SkipModel:  21%|██        | 397/1875 [00:16<00:54, 27.10it/s][A
+Encoding Batches with SkipModel:  21%|██▏       | 400/1875 [00:16<00:55, 26.46it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 404/1875 [00:16<00:54, 27.03it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 407/1875 [00:16<00:56, 25.93it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 410/1875 [00:16<00:59, 24.70it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 413/1875 [00:16<00:58, 25.13it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 417/1875 [00:17<00:55, 26.42it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 420/1875 [00:17<00:54, 26.52it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 423/1875 [00:17<00:56, 25.88it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 426/1875 [00:17<00:53, 26.84it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 429/1875 [00:17<00:55, 25.88it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 432/1875 [00:17<00:54, 26.55it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 435/1875 [00:17<00:53, 26.71it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 438/1875 [00:17<00:55, 25.99it/s][A
+Encoding Batches with SkipModel:  24%|██▎       | 441/1875 [00:18<00:55, 25.77it/s][A
+Encoding Batches with SkipModel:  24%|██▎       | 444/1875 [00:18<00:55, 26.00it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 447/1875 [00:18<00:55, 25.66it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 450/1875 [00:18<00:57, 24.95it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 453/1875 [00:18<00:58, 24.42it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 456/1875 [00:18<00:55, 25.75it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 459/1875 [00:18<00:54, 26.07it/s][A
+Encoding Batches with SkipModel:  25%|██▍       | 462/1875 [00:18<00:53, 26.25it/s][A
+Encoding Batches with SkipModel:  25%|██▍       | 465/1875 [00:18<00:56, 24.80it/s][A
+Encoding Batches with SkipModel:  25%|██▍       | 468/1875 [00:19<00:55, 25.38it/s][A
+Encoding Batches with SkipModel:  25%|██▌       | 471/1875 [00:19<00:54, 25.64it/s][A
+Encoding Batches with SkipModel:  25%|██▌       | 474/1875 [00:19<00:53, 26.35it/s][A
+Encoding Batches with SkipModel:  25%|██▌       | 477/1875 [00:19<00:54, 25.51it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 480/1875 [00:19<00:55, 25.23it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 483/1875 [00:19<00:55, 25.08it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 486/1875 [00:19<00:54, 25.39it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 489/1875 [00:19<00:53, 26.03it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 492/1875 [00:20<00:52, 26.22it/s][A
+Encoding Batches with SkipModel:  26%|██▋       | 495/1875 [00:20<00:54, 25.37it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 498/1875 [00:20<00:53, 25.51it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 501/1875 [00:20<00:56, 24.34it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 505/1875 [00:20<00:54, 25.04it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 509/1875 [00:20<00:54, 25.26it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 513/1875 [00:20<00:49, 27.40it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 516/1875 [00:20<00:51, 26.46it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 520/1875 [00:21<00:50, 26.87it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 523/1875 [00:21<00:50, 26.53it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 526/1875 [00:21<00:51, 26.24it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 529/1875 [00:21<00:59, 22.50it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 532/1875 [00:21<00:56, 23.70it/s][A
+Encoding Batches with SkipModel:  29%|██▊       | 535/1875 [00:21<00:56, 23.74it/s][A
+Encoding Batches with SkipModel:  29%|██▊       | 538/1875 [00:21<00:54, 24.43it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 541/1875 [00:21<00:55, 24.01it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 544/1875 [00:22<00:56, 23.57it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 547/1875 [00:22<00:53, 24.72it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 550/1875 [00:22<00:52, 25.07it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 553/1875 [00:22<00:53, 24.76it/s][A
+Encoding Batches with SkipModel:  30%|██▉       | 556/1875 [00:22<00:50, 26.10it/s][A
+Encoding Batches with SkipModel:  30%|██▉       | 559/1875 [00:22<00:50, 25.92it/s][A
+Encoding Batches with SkipModel:  30%|██▉       | 562/1875 [00:22<00:49, 26.29it/s][A
+Encoding Batches with SkipModel:  30%|███       | 565/1875 [00:22<00:53, 24.34it/s][A
+Encoding Batches with SkipModel:  30%|███       | 568/1875 [00:23<00:51, 25.39it/s][A
+Encoding Batches with SkipModel:  30%|███       | 571/1875 [00:23<00:49, 26.21it/s][A
+Encoding Batches with SkipModel:  31%|███       | 574/1875 [00:23<00:51, 25.46it/s][A
+Encoding Batches with SkipModel:  31%|███       | 577/1875 [00:23<00:51, 25.19it/s][A
+Encoding Batches with SkipModel:  31%|███       | 580/1875 [00:23<00:49, 26.10it/s][A
+Encoding Batches with SkipModel:  31%|███       | 584/1875 [00:23<00:49, 25.99it/s][A
+Encoding Batches with SkipModel:  31%|███▏      | 587/1875 [00:23<00:48, 26.51it/s][A
+Encoding Batches with SkipModel:  31%|███▏      | 590/1875 [00:23<00:48, 26.35it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 593/1875 [00:23<00:48, 26.47it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 596/1875 [00:24<00:47, 26.73it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 600/1875 [00:24<00:46, 27.62it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 603/1875 [00:24<00:45, 27.84it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 606/1875 [00:24<00:46, 27.21it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 610/1875 [00:24<00:43, 28.96it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 613/1875 [00:24<00:47, 26.84it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 616/1875 [00:24<00:48, 25.94it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 619/1875 [00:24<00:48, 26.09it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 622/1875 [00:25<00:48, 25.61it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 625/1875 [00:25<00:49, 25.15it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 628/1875 [00:25<00:50, 24.70it/s][A
+Encoding Batches with SkipModel:  34%|███▎      | 631/1875 [00:25<00:50, 24.87it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 634/1875 [00:25<00:50, 24.62it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 637/1875 [00:25<00:50, 24.76it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 640/1875 [00:25<00:50, 24.30it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 643/1875 [00:25<00:50, 24.19it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 646/1875 [00:26<00:51, 23.73it/s][A
+Encoding Batches with SkipModel:  35%|███▍      | 649/1875 [00:26<00:51, 23.74it/s][A
+Encoding Batches with SkipModel:  35%|███▍      | 652/1875 [00:26<00:51, 23.57it/s][A
+Encoding Batches with SkipModel:  35%|███▍      | 655/1875 [00:26<00:52, 23.21it/s][A
+Encoding Batches with SkipModel:  35%|███▌      | 658/1875 [00:26<00:52, 23.15it/s][A
+Encoding Batches with SkipModel:  35%|███▌      | 661/1875 [00:26<00:52, 23.30it/s][A
+Encoding Batches with SkipModel:  35%|███▌      | 664/1875 [00:26<00:51, 23.57it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 667/1875 [00:26<00:50, 23.72it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 670/1875 [00:27<00:49, 24.37it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 673/1875 [00:27<00:48, 24.79it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 676/1875 [00:27<00:49, 24.09it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 679/1875 [00:27<00:49, 24.02it/s][A
+Encoding Batches with SkipModel:  36%|███▋      | 682/1875 [00:27<00:49, 24.00it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 685/1875 [00:27<00:49, 24.14it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 688/1875 [00:27<00:48, 24.26it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 691/1875 [00:27<00:51, 23.07it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 694/1875 [00:28<00:49, 23.87it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 697/1875 [00:28<00:48, 24.27it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 700/1875 [00:28<00:47, 24.49it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 703/1875 [00:28<00:47, 24.70it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 706/1875 [00:28<00:48, 24.26it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 709/1875 [00:28<00:50, 23.14it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 712/1875 [00:28<00:50, 23.00it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 715/1875 [00:28<00:50, 22.90it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 718/1875 [00:29<00:49, 23.43it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 721/1875 [00:29<00:48, 23.66it/s][A
+Encoding Batches with SkipModel:  39%|███▊      | 724/1875 [00:29<00:48, 23.53it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 727/1875 [00:29<00:48, 23.60it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 730/1875 [00:29<00:47, 24.11it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 733/1875 [00:29<00:48, 23.32it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 736/1875 [00:29<00:48, 23.72it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 739/1875 [00:29<00:48, 23.65it/s][A
+Encoding Batches with SkipModel:  40%|███▉      | 742/1875 [00:30<00:47, 23.63it/s][A
+Encoding Batches with SkipModel:  40%|███▉      | 745/1875 [00:30<00:47, 23.84it/s][A
+Encoding Batches with SkipModel:  40%|███▉      | 748/1875 [00:30<00:47, 23.72it/s][A
+Encoding Batches with SkipModel:  40%|████      | 751/1875 [00:30<00:47, 23.52it/s][A
+Encoding Batches with SkipModel:  40%|████      | 754/1875 [00:30<00:48, 23.13it/s][A
+Encoding Batches with SkipModel:  40%|████      | 757/1875 [00:30<00:47, 23.78it/s][A
+Encoding Batches with SkipModel:  41%|████      | 760/1875 [00:30<00:47, 23.58it/s][A
+Encoding Batches with SkipModel:  41%|████      | 763/1875 [00:31<00:47, 23.44it/s][A
+Encoding Batches with SkipModel:  41%|████      | 766/1875 [00:31<00:47, 23.50it/s][A
+Encoding Batches with SkipModel:  41%|████      | 769/1875 [00:31<00:49, 22.54it/s][A
+Encoding Batches with SkipModel:  41%|████      | 772/1875 [00:31<00:48, 22.79it/s][A
+Encoding Batches with SkipModel:  41%|████▏     | 775/1875 [00:31<00:47, 23.24it/s][A
+Encoding Batches with SkipModel:  41%|████▏     | 778/1875 [00:31<00:47, 22.97it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 781/1875 [00:31<00:47, 23.25it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 784/1875 [00:31<00:46, 23.25it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 787/1875 [00:32<00:46, 23.21it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 790/1875 [00:32<00:46, 23.51it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 793/1875 [00:32<00:45, 23.77it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 796/1875 [00:32<00:45, 23.81it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 799/1875 [00:32<00:44, 24.00it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 802/1875 [00:32<00:44, 23.89it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 805/1875 [00:32<00:44, 24.03it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 808/1875 [00:32<00:44, 24.12it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 811/1875 [00:33<00:44, 24.12it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 814/1875 [00:33<00:43, 24.13it/s][A
+Encoding Batches with SkipModel:  44%|████▎     | 817/1875 [00:33<00:44, 23.71it/s][A
+Encoding Batches with SkipModel:  44%|████▎     | 820/1875 [00:33<00:44, 23.72it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 823/1875 [00:33<00:44, 23.62it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 826/1875 [00:33<00:44, 23.51it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 829/1875 [00:33<00:44, 23.64it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 832/1875 [00:33<00:41, 25.18it/s][A
+Encoding Batches with SkipModel:  45%|████▍     | 835/1875 [00:34<00:42, 24.65it/s][A
+Encoding Batches with SkipModel:  45%|████▍     | 838/1875 [00:34<00:42, 24.43it/s][A
+Encoding Batches with SkipModel:  45%|████▍     | 841/1875 [00:34<00:40, 25.34it/s][A
+Encoding Batches with SkipModel:  45%|████▌     | 844/1875 [00:34<00:40, 25.18it/s][A
+Encoding Batches with SkipModel:  45%|████▌     | 847/1875 [00:34<00:40, 25.27it/s][A
+Encoding Batches with SkipModel:  45%|████▌     | 850/1875 [00:34<00:40, 25.18it/s][A
+Encoding Batches with SkipModel:  45%|████▌     | 853/1875 [00:34<00:40, 25.43it/s][A
+Encoding Batches with SkipModel:  46%|████▌     | 856/1875 [00:34<00:39, 25.52it/s][A
+Encoding Batches with SkipModel:  46%|████▌     | 859/1875 [00:34<00:40, 25.07it/s][A
+Encoding Batches with SkipModel:  46%|████▌     | 863/1875 [00:35<00:38, 26.20it/s][A
+Encoding Batches with SkipModel:  46%|████▌     | 866/1875 [00:35<00:37, 27.05it/s][A
+Encoding Batches with SkipModel:  46%|████▋     | 869/1875 [00:35<00:37, 27.00it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 872/1875 [00:35<00:36, 27.67it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 875/1875 [00:35<00:36, 27.59it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 879/1875 [00:35<00:35, 28.06it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 882/1875 [00:35<00:35, 27.79it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 885/1875 [00:35<00:36, 27.01it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 888/1875 [00:36<00:36, 26.92it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 891/1875 [00:36<00:37, 26.13it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 894/1875 [00:36<00:38, 25.37it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 897/1875 [00:36<00:39, 24.58it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 900/1875 [00:36<00:41, 23.54it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 903/1875 [00:36<00:40, 23.99it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 906/1875 [00:36<00:39, 24.82it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 909/1875 [00:36<00:38, 25.17it/s][A
+Encoding Batches with SkipModel:  49%|████▊     | 912/1875 [00:37<00:39, 24.52it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 915/1875 [00:37<00:38, 24.67it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 918/1875 [00:37<00:38, 25.17it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 921/1875 [00:37<00:38, 24.83it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 924/1875 [00:37<00:37, 25.37it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 927/1875 [00:37<00:37, 25.51it/s][A
+Encoding Batches with SkipModel:  50%|████▉     | 930/1875 [00:37<00:37, 25.47it/s][A
+Encoding Batches with SkipModel:  50%|████▉     | 933/1875 [00:37<00:40, 23.11it/s][A
+Encoding Batches with SkipModel:  50%|████▉     | 936/1875 [00:38<00:43, 21.83it/s][A
+Encoding Batches with SkipModel:  50%|█████     | 939/1875 [00:38<00:42, 21.87it/s][A
+Encoding Batches with SkipModel:  50%|█████     | 942/1875 [00:38<00:40, 23.17it/s][A
+Encoding Batches with SkipModel:  50%|█████     | 945/1875 [00:38<00:39, 23.30it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 949/1875 [00:38<00:35, 26.04it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 952/1875 [00:38<00:36, 25.55it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 956/1875 [00:38<00:34, 26.73it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 959/1875 [00:38<00:34, 26.70it/s][A
+Encoding Batches with SkipModel:  51%|█████▏    | 962/1875 [00:39<00:34, 26.24it/s][A
+Encoding Batches with SkipModel:  51%|█████▏    | 965/1875 [00:39<00:34, 26.24it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 968/1875 [00:39<00:35, 25.79it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 971/1875 [00:39<00:35, 25.49it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 974/1875 [00:39<00:37, 24.03it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 977/1875 [00:39<00:36, 24.29it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 980/1875 [00:39<00:36, 24.54it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 983/1875 [00:39<00:35, 24.82it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 986/1875 [00:40<00:35, 24.98it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 989/1875 [00:40<00:35, 25.10it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 992/1875 [00:40<00:35, 25.14it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 995/1875 [00:40<00:35, 24.58it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 998/1875 [00:40<00:34, 25.51it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 1001/1875 [00:40<00:37, 23.47it/s][A
+Encoding Batches with SkipModel:  54%|█████▎    | 1004/1875 [00:40<00:35, 24.55it/s][A
+Encoding Batches with SkipModel:  54%|█████▎    | 1007/1875 [00:40<00:35, 24.78it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 1010/1875 [00:40<00:35, 24.41it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 1013/1875 [00:41<00:33, 25.57it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 1016/1875 [00:41<00:33, 25.94it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 1019/1875 [00:41<00:33, 25.61it/s][A
+Encoding Batches with SkipModel:  55%|█████▍    | 1022/1875 [00:41<00:33, 25.34it/s][A
+Encoding Batches with SkipModel:  55%|█████▍    | 1025/1875 [00:41<00:34, 24.67it/s][A
+Encoding Batches with SkipModel:  55%|█████▍    | 1028/1875 [00:41<00:33, 25.10it/s][A
+Encoding Batches with SkipModel:  55%|█████▍    | 1031/1875 [00:41<00:32, 25.58it/s][A
+Encoding Batches with SkipModel:  55%|█████▌    | 1034/1875 [00:41<00:33, 25.41it/s][A
+Encoding Batches with SkipModel:  55%|█████▌    | 1037/1875 [00:42<00:33, 24.70it/s][A
+Encoding Batches with SkipModel:  55%|█████▌    | 1040/1875 [00:42<00:33, 25.11it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 1043/1875 [00:42<00:35, 23.14it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 1046/1875 [00:42<00:34, 23.75it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 1049/1875 [00:42<00:34, 23.89it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 1052/1875 [00:42<00:34, 24.02it/s][A
+Encoding Batches with SkipModel:  56%|█████▋    | 1055/1875 [00:42<00:36, 22.25it/s][A
+Encoding Batches with SkipModel:  56%|█████▋    | 1059/1875 [00:42<00:33, 24.25it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1062/1875 [00:43<00:32, 24.74it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1065/1875 [00:43<00:32, 25.28it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1068/1875 [00:43<00:30, 26.40it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1071/1875 [00:43<00:29, 27.05it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1074/1875 [00:43<00:29, 27.30it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1077/1875 [00:43<00:29, 27.40it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1080/1875 [00:43<00:30, 26.44it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1083/1875 [00:43<00:29, 27.08it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1087/1875 [00:44<00:29, 26.86it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1091/1875 [00:44<00:29, 26.84it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1094/1875 [00:44<00:29, 26.92it/s][A
+Encoding Batches with SkipModel:  59%|█████▊    | 1098/1875 [00:44<00:27, 28.03it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 1102/1875 [00:44<00:27, 28.37it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 1106/1875 [00:44<00:27, 27.96it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 1110/1875 [00:44<00:27, 27.74it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 1113/1875 [00:44<00:28, 26.59it/s][A
+Encoding Batches with SkipModel:  60%|█████▉    | 1117/1875 [00:45<00:27, 27.63it/s][A
+Encoding Batches with SkipModel:  60%|█████▉    | 1120/1875 [00:45<00:28, 26.91it/s][A
+Encoding Batches with SkipModel:  60%|█████▉    | 1123/1875 [00:45<00:28, 26.20it/s][A
+Encoding Batches with SkipModel:  60%|██████    | 1126/1875 [00:45<00:29, 25.14it/s][A
+Encoding Batches with SkipModel:  60%|██████    | 1129/1875 [00:45<00:30, 24.16it/s][A
+Encoding Batches with SkipModel:  60%|██████    | 1132/1875 [00:45<00:30, 24.61it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1135/1875 [00:45<00:29, 24.91it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1138/1875 [00:45<00:28, 25.66it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1141/1875 [00:46<00:28, 25.71it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1144/1875 [00:46<00:27, 26.32it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1147/1875 [00:46<00:30, 24.02it/s][A
+Encoding Batches with SkipModel:  61%|██████▏   | 1150/1875 [00:46<00:34, 21.04it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1154/1875 [00:46<00:31, 23.23it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1157/1875 [00:46<00:29, 24.31it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1160/1875 [00:46<00:28, 24.89it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1163/1875 [00:46<00:29, 24.27it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1167/1875 [00:47<00:27, 25.94it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1170/1875 [00:47<00:27, 26.02it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1173/1875 [00:47<00:26, 26.37it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1177/1875 [00:47<00:25, 27.12it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1180/1875 [00:47<00:25, 27.54it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1183/1875 [00:47<00:25, 26.64it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1186/1875 [00:47<00:25, 26.98it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1189/1875 [00:47<00:25, 26.60it/s][A
+Encoding Batches with SkipModel:  64%|██████▎   | 1192/1875 [00:48<00:25, 26.41it/s][A
+Encoding Batches with SkipModel:  64%|██████▎   | 1195/1875 [00:48<00:26, 25.57it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 1198/1875 [00:48<00:26, 25.73it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 1201/1875 [00:48<00:25, 25.93it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 1204/1875 [00:48<00:26, 25.71it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 1208/1875 [00:48<00:24, 27.53it/s][A
+Encoding Batches with SkipModel:  65%|██████▍   | 1211/1875 [00:48<00:26, 24.89it/s][A
+Encoding Batches with SkipModel:  65%|██████▍   | 1215/1875 [00:48<00:24, 27.23it/s][A
+Encoding Batches with SkipModel:  65%|██████▍   | 1218/1875 [00:49<00:24, 26.38it/s][A
+Encoding Batches with SkipModel:  65%|██████▌   | 1221/1875 [00:49<00:24, 26.85it/s][A
+Encoding Batches with SkipModel:  65%|██████▌   | 1224/1875 [00:49<00:24, 26.53it/s][A
+Encoding Batches with SkipModel:  65%|██████▌   | 1227/1875 [00:49<00:24, 26.30it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1230/1875 [00:49<00:25, 25.30it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1233/1875 [00:49<00:25, 25.36it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1236/1875 [00:49<00:25, 24.74it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1239/1875 [00:49<00:24, 25.65it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1242/1875 [00:49<00:24, 25.61it/s][A
+Encoding Batches with SkipModel:  66%|██████▋   | 1245/1875 [00:50<00:24, 25.86it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1248/1875 [00:50<00:24, 25.48it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1251/1875 [00:50<00:24, 25.22it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1254/1875 [00:50<00:23, 26.03it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1258/1875 [00:50<00:23, 26.31it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1261/1875 [00:50<00:23, 25.97it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1265/1875 [00:50<00:21, 28.14it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1268/1875 [00:50<00:23, 26.38it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1272/1875 [00:51<00:22, 27.07it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1275/1875 [00:51<00:22, 26.52it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1279/1875 [00:51<00:21, 28.23it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1282/1875 [00:51<00:21, 27.01it/s][A
+Encoding Batches with SkipModel:  69%|██████▊   | 1285/1875 [00:51<00:22, 26.67it/s][A
+Encoding Batches with SkipModel:  69%|██████▊   | 1288/1875 [00:51<00:21, 27.18it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 1291/1875 [00:51<00:21, 27.05it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 1294/1875 [00:51<00:21, 26.75it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 1298/1875 [00:52<00:19, 29.01it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 1301/1875 [00:52<00:21, 27.19it/s][A
+Encoding Batches with SkipModel:  70%|██████▉   | 1304/1875 [00:52<00:20, 27.78it/s][A
+Encoding Batches with SkipModel:  70%|██████▉   | 1308/1875 [00:52<00:20, 27.82it/s][A
+Encoding Batches with SkipModel:  70%|██████▉   | 1312/1875 [00:52<00:18, 30.11it/s][A
+Encoding Batches with SkipModel:  70%|███████   | 1316/1875 [00:52<00:19, 28.91it/s][A
+Encoding Batches with SkipModel:  70%|███████   | 1320/1875 [00:52<00:18, 30.69it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 1324/1875 [00:52<00:18, 29.24it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 1327/1875 [00:53<00:19, 28.56it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 1330/1875 [00:53<00:19, 28.06it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 1334/1875 [00:53<00:19, 27.43it/s][A
+Encoding Batches with SkipModel:  71%|███████▏  | 1338/1875 [00:53<00:18, 29.06it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1341/1875 [00:53<00:18, 28.90it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1345/1875 [00:53<00:18, 29.33it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1348/1875 [00:53<00:18, 28.92it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1352/1875 [00:53<00:18, 28.16it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1356/1875 [00:54<00:17, 29.71it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1359/1875 [00:54<00:18, 28.37it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1362/1875 [00:54<00:17, 28.60it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1365/1875 [00:54<00:18, 27.86it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1368/1875 [00:54<00:18, 27.48it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1371/1875 [00:54<00:18, 27.17it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1374/1875 [00:54<00:18, 26.85it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1377/1875 [00:54<00:20, 24.70it/s][A
+Encoding Batches with SkipModel:  74%|███████▎  | 1380/1875 [00:54<00:19, 25.71it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 1383/1875 [00:55<00:20, 24.52it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 1387/1875 [00:55<00:17, 27.68it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 1390/1875 [00:55<00:18, 25.59it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 1394/1875 [00:55<00:17, 27.62it/s][A
+Encoding Batches with SkipModel:  75%|███████▍  | 1397/1875 [00:55<00:17, 27.51it/s][A
+Encoding Batches with SkipModel:  75%|███████▍  | 1400/1875 [00:55<00:17, 26.89it/s][A
+Encoding Batches with SkipModel:  75%|███████▍  | 1403/1875 [00:55<00:17, 26.74it/s][A
+Encoding Batches with SkipModel:  75%|███████▍  | 1406/1875 [00:55<00:17, 26.27it/s][A
+Encoding Batches with SkipModel:  75%|███████▌  | 1409/1875 [00:56<00:18, 25.08it/s][A
+Encoding Batches with SkipModel:  75%|███████▌  | 1412/1875 [00:56<00:17, 25.85it/s][A
+Encoding Batches with SkipModel:  75%|███████▌  | 1415/1875 [00:56<00:17, 26.05it/s][A
+Encoding Batches with SkipModel:  76%|███████▌  | 1418/1875 [00:56<00:18, 24.49it/s][A
+Encoding Batches with SkipModel:  76%|███████▌  | 1421/1875 [00:56<00:18, 24.05it/s][A
+Encoding Batches with SkipModel:  76%|███████▌  | 1424/1875 [00:56<00:19, 23.54it/s][A
+Encoding Batches with SkipModel:  76%|███████▌  | 1427/1875 [00:56<00:19, 23.30it/s][A
+Encoding Batches with SkipModel:  76%|███████▋  | 1430/1875 [00:56<00:19, 22.89it/s][A
+Encoding Batches with SkipModel:  76%|███████▋  | 1433/1875 [00:57<00:20, 21.48it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1436/1875 [00:57<00:19, 22.78it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1439/1875 [00:57<00:18, 23.27it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1442/1875 [00:57<00:18, 23.58it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1445/1875 [00:57<00:17, 24.15it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1449/1875 [00:57<00:17, 25.05it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1452/1875 [00:57<00:16, 25.32it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1456/1875 [00:58<00:15, 27.06it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1459/1875 [00:58<00:15, 27.24it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1462/1875 [00:58<00:15, 26.40it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1465/1875 [00:58<00:15, 26.49it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1468/1875 [00:58<00:15, 26.09it/s][A
+Encoding Batches with SkipModel:  79%|███████▊  | 1472/1875 [00:58<00:14, 27.26it/s][A
+Encoding Batches with SkipModel:  79%|███████▊  | 1475/1875 [00:58<00:14, 26.77it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 1478/1875 [00:58<00:14, 27.13it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 1481/1875 [00:58<00:14, 27.82it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 1484/1875 [00:59<00:13, 27.99it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 1487/1875 [00:59<00:14, 27.11it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 1490/1875 [00:59<00:15, 25.62it/s][A
+Encoding Batches with SkipModel:  80%|███████▉  | 1494/1875 [00:59<00:13, 27.31it/s][A
+Encoding Batches with SkipModel:  80%|███████▉  | 1497/1875 [00:59<00:14, 25.84it/s][A
+Encoding Batches with SkipModel:  80%|████████  | 1500/1875 [00:59<00:14, 25.27it/s][A
+Encoding Batches with SkipModel:  80%|████████  | 1503/1875 [00:59<00:15, 24.60it/s][A
+Encoding Batches with SkipModel:  80%|████████  | 1506/1875 [00:59<00:15, 24.54it/s][A
+Encoding Batches with SkipModel:  80%|████████  | 1509/1875 [01:00<00:15, 23.82it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 1512/1875 [01:00<00:15, 23.11it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 1516/1875 [01:00<00:14, 23.99it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 1519/1875 [01:00<00:14, 24.11it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 1522/1875 [01:00<00:14, 23.57it/s][A
+Encoding Batches with SkipModel:  81%|████████▏ | 1525/1875 [01:00<00:14, 24.45it/s][A
+Encoding Batches with SkipModel:  81%|████████▏ | 1528/1875 [01:00<00:14, 24.57it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1531/1875 [01:00<00:14, 24.35it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1534/1875 [01:01<00:13, 24.57it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1537/1875 [01:01<00:13, 24.52it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1541/1875 [01:01<00:13, 25.04it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1544/1875 [01:01<00:13, 25.28it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1548/1875 [01:01<00:12, 25.99it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1551/1875 [01:01<00:12, 26.00it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1554/1875 [01:01<00:12, 26.18it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1557/1875 [01:01<00:12, 25.54it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1560/1875 [01:02<00:12, 25.46it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1563/1875 [01:02<00:12, 25.88it/s][A
+Encoding Batches with SkipModel:  84%|████████▎ | 1566/1875 [01:02<00:12, 24.87it/s][A
+Encoding Batches with SkipModel:  84%|████████▎ | 1569/1875 [01:02<00:12, 24.72it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1572/1875 [01:02<00:12, 24.04it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1575/1875 [01:02<00:12, 24.57it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1578/1875 [01:02<00:12, 23.75it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1581/1875 [01:02<00:11, 24.85it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1584/1875 [01:03<00:12, 23.98it/s][A
+Encoding Batches with SkipModel:  85%|████████▍ | 1587/1875 [01:03<00:12, 23.88it/s][A
+Encoding Batches with SkipModel:  85%|████████▍ | 1590/1875 [01:03<00:11, 24.98it/s][A
+Encoding Batches with SkipModel:  85%|████████▍ | 1593/1875 [01:03<00:11, 24.58it/s][A
+Encoding Batches with SkipModel:  85%|████████▌ | 1596/1875 [01:03<00:10, 25.91it/s][A
+Encoding Batches with SkipModel:  85%|████████▌ | 1599/1875 [01:03<00:10, 25.26it/s][A
+Encoding Batches with SkipModel:  85%|████████▌ | 1602/1875 [01:03<00:11, 24.18it/s][A
+Encoding Batches with SkipModel:  86%|████████▌ | 1605/1875 [01:03<00:10, 24.81it/s][A
+Encoding Batches with SkipModel:  86%|████████▌ | 1608/1875 [01:04<00:10, 24.41it/s][A
+Encoding Batches with SkipModel:  86%|████████▌ | 1611/1875 [01:04<00:10, 25.19it/s][A
+Encoding Batches with SkipModel:  86%|████████▌ | 1614/1875 [01:04<00:10, 25.66it/s][A
+Encoding Batches with SkipModel:  86%|████████▌ | 1617/1875 [01:04<00:10, 24.97it/s][A
+Encoding Batches with SkipModel:  86%|████████▋ | 1620/1875 [01:04<00:10, 25.34it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1623/1875 [01:04<00:09, 25.85it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1626/1875 [01:04<00:09, 26.02it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1629/1875 [01:04<00:09, 24.63it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1632/1875 [01:05<00:10, 24.12it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1635/1875 [01:05<00:09, 25.23it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1638/1875 [01:05<00:09, 25.18it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1641/1875 [01:05<00:09, 25.45it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1644/1875 [01:05<00:08, 26.41it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1647/1875 [01:05<00:08, 26.52it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1650/1875 [01:05<00:08, 26.33it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1653/1875 [01:05<00:08, 26.51it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1656/1875 [01:05<00:08, 26.60it/s][A
+Encoding Batches with SkipModel:  89%|████████▊ | 1660/1875 [01:06<00:07, 27.00it/s][A
+Encoding Batches with SkipModel:  89%|████████▊ | 1663/1875 [01:06<00:07, 27.37it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 1666/1875 [01:06<00:07, 27.92it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 1669/1875 [01:06<00:07, 26.43it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 1673/1875 [01:06<00:07, 26.91it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 1677/1875 [01:06<00:07, 26.54it/s][A
+Encoding Batches with SkipModel:  90%|████████▉ | 1680/1875 [01:06<00:07, 26.16it/s][A
+Encoding Batches with SkipModel:  90%|████████▉ | 1684/1875 [01:06<00:07, 27.27it/s][A
+Encoding Batches with SkipModel:  90%|████████▉ | 1687/1875 [01:07<00:07, 26.63it/s][A
+Encoding Batches with SkipModel:  90%|█████████ | 1690/1875 [01:07<00:06, 27.45it/s][A
+Encoding Batches with SkipModel:  90%|█████████ | 1693/1875 [01:07<00:06, 26.38it/s][A
+Encoding Batches with SkipModel:  90%|█████████ | 1696/1875 [01:07<00:07, 25.44it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 1700/1875 [01:07<00:06, 25.87it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 1704/1875 [01:07<00:06, 27.31it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 1707/1875 [01:07<00:06, 27.25it/s][A
+Encoding Batches with SkipModel:  91%|█████████▏| 1711/1875 [01:07<00:06, 26.91it/s][A
+Encoding Batches with SkipModel:  91%|█████████▏| 1715/1875 [01:08<00:05, 28.61it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1718/1875 [01:08<00:05, 27.91it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1721/1875 [01:08<00:05, 27.38it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1725/1875 [01:08<00:05, 28.11it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1728/1875 [01:08<00:05, 27.43it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1731/1875 [01:08<00:05, 27.81it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1734/1875 [01:08<00:05, 27.70it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1738/1875 [01:08<00:04, 28.28it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1742/1875 [01:09<00:04, 29.31it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1745/1875 [01:09<00:04, 27.84it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1748/1875 [01:09<00:04, 27.78it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1751/1875 [01:09<00:04, 27.78it/s][A
+Encoding Batches with SkipModel:  94%|█████████▎| 1754/1875 [01:09<00:04, 28.14it/s][A
+Encoding Batches with SkipModel:  94%|█████████▎| 1757/1875 [01:09<00:04, 25.88it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 1761/1875 [01:09<00:04, 26.31it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 1764/1875 [01:09<00:04, 27.14it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 1767/1875 [01:10<00:04, 26.33it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 1770/1875 [01:10<00:04, 25.56it/s][A
+Encoding Batches with SkipModel:  95%|█████████▍| 1773/1875 [01:10<00:03, 26.07it/s][A
+Encoding Batches with SkipModel:  95%|█████████▍| 1776/1875 [01:10<00:03, 25.36it/s][A
+Encoding Batches with SkipModel:  95%|█████████▍| 1779/1875 [01:10<00:03, 25.06it/s][A
+Encoding Batches with SkipModel:  95%|█████████▌| 1782/1875 [01:10<00:03, 25.08it/s][A
+Encoding Batches with SkipModel:  95%|█████████▌| 1785/1875 [01:10<00:03, 25.52it/s][A
+Encoding Batches with SkipModel:  95%|█████████▌| 1788/1875 [01:10<00:03, 26.11it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 1791/1875 [01:10<00:03, 25.89it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 1794/1875 [01:11<00:03, 25.62it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 1797/1875 [01:11<00:03, 25.75it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 1800/1875 [01:11<00:02, 25.80it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 1804/1875 [01:11<00:02, 26.17it/s][A
+Encoding Batches with SkipModel:  96%|█████████▋| 1807/1875 [01:11<00:02, 26.85it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1810/1875 [01:11<00:02, 26.50it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1813/1875 [01:11<00:02, 25.38it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1817/1875 [01:11<00:02, 26.27it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1821/1875 [01:12<00:01, 28.31it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1825/1875 [01:12<00:01, 28.68it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1828/1875 [01:12<00:01, 28.93it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1832/1875 [01:12<00:01, 29.77it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1835/1875 [01:12<00:01, 28.54it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1838/1875 [01:12<00:01, 28.15it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1841/1875 [01:12<00:01, 26.01it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1844/1875 [01:12<00:01, 26.98it/s][A
+Encoding Batches with SkipModel:  99%|█████████▊| 1848/1875 [01:13<00:00, 28.12it/s][A
+Encoding Batches with SkipModel:  99%|█████████▊| 1851/1875 [01:13<00:00, 26.85it/s][A
+Encoding Batches with SkipModel:  99%|█████████▉| 1855/1875 [01:13<00:00, 26.01it/s][A
+Encoding Batches with SkipModel:  99%|█████████▉| 1858/1875 [01:13<00:00, 26.50it/s][A
+Encoding Batches with SkipModel:  99%|█████████▉| 1862/1875 [01:13<00:00, 25.88it/s][A
+Encoding Batches with SkipModel: 100%|█████████▉| 1866/1875 [01:13<00:00, 28.05it/s][A
+Encoding Batches with SkipModel: 100%|█████████▉| 1869/1875 [01:13<00:00, 26.72it/s][A
+Encoding Batches with SkipModel: 100%|█████████▉| 1872/1875 [01:13<00:00, 25.87it/s][AEncoding Batches with SkipModel: 100%|██████████| 1875/1875 [01:14<00:00, 25.26it/s]
+
+Encoding Batches with SkipModel:   0%|          | 0/313 [00:00<?, ?it/s][A
+Encoding Batches with SkipModel:   0%|          | 1/313 [00:00<02:06,  2.46it/s][A
+Encoding Batches with SkipModel:   1%|▏         | 4/313 [00:00<00:33,  9.22it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 6/313 [00:00<00:29, 10.34it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 10/313 [00:00<00:18, 16.20it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 13/313 [00:00<00:15, 18.76it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 16/313 [00:01<00:13, 21.24it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 19/313 [00:01<00:12, 22.82it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 22/313 [00:01<00:12, 23.44it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 25/313 [00:01<00:11, 24.40it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 28/313 [00:01<00:11, 25.06it/s][A
+Encoding Batches with SkipModel:  10%|▉         | 31/313 [00:01<00:11, 24.78it/s][A
+Encoding Batches with SkipModel:  11%|█         | 34/313 [00:01<00:11, 24.52it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 37/313 [00:01<00:11, 23.89it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 40/313 [00:02<00:11, 23.90it/s][A
+Encoding Batches with SkipModel:  14%|█▎        | 43/313 [00:02<00:11, 23.96it/s][A
+Encoding Batches with SkipModel:  15%|█▍        | 46/313 [00:02<00:10, 24.43it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 49/313 [00:02<00:10, 24.48it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 52/313 [00:02<00:11, 23.00it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 55/313 [00:02<00:11, 21.73it/s][A
+Encoding Batches with SkipModel:  19%|█▊        | 58/313 [00:02<00:10, 23.49it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 61/313 [00:02<00:10, 24.54it/s][A
+Encoding Batches with SkipModel:  20%|██        | 64/313 [00:03<00:10, 23.98it/s][A
+Encoding Batches with SkipModel:  21%|██▏       | 67/313 [00:03<00:10, 23.04it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 70/313 [00:03<00:10, 23.29it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 73/313 [00:03<00:10, 23.63it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 76/313 [00:03<00:09, 23.83it/s][A
+Encoding Batches with SkipModel:  25%|██▌       | 79/313 [00:03<00:10, 22.99it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 82/313 [00:03<00:10, 23.05it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 85/313 [00:03<00:09, 23.06it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 88/313 [00:04<00:09, 23.11it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 91/313 [00:04<00:09, 23.82it/s][A
+Encoding Batches with SkipModel:  30%|███       | 94/313 [00:04<00:09, 24.22it/s][A
+Encoding Batches with SkipModel:  31%|███       | 97/313 [00:04<00:09, 23.74it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 100/313 [00:04<00:08, 24.92it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 103/313 [00:04<00:08, 24.64it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 106/313 [00:04<00:08, 24.81it/s][A
+Encoding Batches with SkipModel:  35%|███▍      | 109/313 [00:04<00:08, 24.90it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 112/313 [00:05<00:07, 25.34it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 115/313 [00:05<00:07, 25.89it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 118/313 [00:05<00:07, 25.24it/s][A
+Encoding Batches with SkipModel:  39%|███▊      | 121/313 [00:05<00:07, 26.17it/s][A
+Encoding Batches with SkipModel:  40%|███▉      | 124/313 [00:05<00:07, 26.20it/s][A
+Encoding Batches with SkipModel:  41%|████      | 127/313 [00:05<00:07, 26.30it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 130/313 [00:05<00:07, 25.19it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 133/313 [00:05<00:06, 25.82it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 136/313 [00:05<00:07, 25.20it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 139/313 [00:06<00:07, 24.35it/s][A
+Encoding Batches with SkipModel:  45%|████▌     | 142/313 [00:06<00:07, 21.97it/s][A
+Encoding Batches with SkipModel:  46%|████▋     | 145/313 [00:06<00:07, 21.26it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 148/313 [00:06<00:08, 19.56it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 151/313 [00:06<00:08, 19.26it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 154/313 [00:06<00:08, 19.76it/s][A
+Encoding Batches with SkipModel:  50%|█████     | 157/313 [00:07<00:07, 20.28it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 160/313 [00:07<00:07, 21.20it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 163/313 [00:07<00:06, 22.41it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 166/313 [00:07<00:06, 21.49it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 169/313 [00:07<00:06, 22.54it/s][A
+Encoding Batches with SkipModel:  55%|█████▍    | 172/313 [00:07<00:06, 22.96it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 175/313 [00:07<00:05, 24.22it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 178/313 [00:07<00:05, 22.78it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 182/313 [00:08<00:05, 23.40it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 185/313 [00:08<00:05, 24.47it/s][A
+Encoding Batches with SkipModel:  60%|██████    | 188/313 [00:08<00:05, 24.53it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 191/313 [00:08<00:05, 22.89it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 194/313 [00:08<00:04, 24.40it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 197/313 [00:08<00:04, 25.53it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 200/313 [00:08<00:04, 26.71it/s][A
+Encoding Batches with SkipModel:  65%|██████▍   | 203/313 [00:08<00:04, 26.00it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 206/313 [00:09<00:04, 26.16it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 209/313 [00:09<00:04, 24.88it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 212/313 [00:09<00:04, 24.27it/s][A
+Encoding Batches with SkipModel:  69%|██████▊   | 215/313 [00:09<00:03, 24.69it/s][A
+Encoding Batches with SkipModel:  70%|██████▉   | 218/313 [00:09<00:03, 24.67it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 221/313 [00:09<00:03, 24.79it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 224/313 [00:09<00:03, 24.19it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 227/313 [00:09<00:03, 25.23it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 230/313 [00:10<00:03, 24.04it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 233/313 [00:10<00:03, 24.78it/s][A
+Encoding Batches with SkipModel:  75%|███████▌  | 236/313 [00:10<00:03, 24.81it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 240/313 [00:10<00:02, 25.12it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 244/313 [00:10<00:02, 26.71it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 247/313 [00:10<00:02, 25.14it/s][A
+Encoding Batches with SkipModel:  80%|████████  | 251/313 [00:10<00:02, 26.71it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 254/313 [00:10<00:02, 23.99it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 257/313 [00:11<00:02, 24.49it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 260/313 [00:11<00:02, 25.42it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 263/313 [00:11<00:01, 25.24it/s][A
+Encoding Batches with SkipModel:  85%|████████▍ | 266/313 [00:11<00:01, 23.71it/s][A
+Encoding Batches with SkipModel:  86%|████████▋ | 270/313 [00:11<00:01, 25.12it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 273/313 [00:11<00:01, 25.54it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 276/313 [00:11<00:01, 25.07it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 279/313 [00:11<00:01, 24.69it/s][A
+Encoding Batches with SkipModel:  90%|█████████ | 282/313 [00:12<00:01, 24.02it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 285/313 [00:12<00:01, 24.40it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 288/313 [00:12<00:01, 24.46it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 291/313 [00:12<00:00, 25.80it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 294/313 [00:12<00:00, 26.05it/s][A
+Encoding Batches with SkipModel:  95%|█████████▍| 297/313 [00:12<00:00, 25.26it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 300/313 [00:12<00:00, 26.08it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 303/313 [00:12<00:00, 26.17it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 306/313 [00:12<00:00, 26.90it/s][A
+Encoding Batches with SkipModel:  99%|█████████▊| 309/313 [00:13<00:00, 27.34it/s][A
+Encoding Batches with SkipModel: 100%|█████████▉| 312/313 [00:13<00:00, 27.11it/s][AEncoding Batches with SkipModel: 100%|██████████| 313/313 [00:13<00:00, 23.26it/s]
+Saving results to disk...
+
+Saving the dataset (0/1 shards):   0%|          | 0/60000 [00:00<?, ? examples/s][A
+Saving the dataset (0/1 shards):  28%|██▊       | 17000/60000 [00:00<00:00, 152394.64 examples/s][A
+Saving the dataset (0/1 shards):  58%|█████▊    | 35000/60000 [00:00<00:00, 163113.87 examples/s][A
+Saving the dataset (0/1 shards):  88%|████████▊ | 53000/60000 [00:00<00:00, 166948.23 examples/s][A
+Saving the dataset (1/1 shards): 100%|██████████| 60000/60000 [00:00<00:00, 166948.23 examples/s][ASaving the dataset (1/1 shards): 100%|██████████| 60000/60000 [00:00<00:00, 165205.20 examples/s]
+
+Saving the dataset (0/1 shards):   0%|          | 0/10000 [00:00<?, ? examples/s][A
+Saving the dataset (1/1 shards): 100%|██████████| 10000/10000 [00:00<00:00, 160141.73 examples/s][ASaving the dataset (1/1 shards): 100%|██████████| 10000/10000 [00:00<00:00, 159747.71 examples/s]
+Encoding Different Skips:  50%|█████     | 1/2 [02:01<02:01, 121.45s/it]Saved intermediate results for skip [] to /cluster/home/mwylie/toast-extensions/data/linear_skipped_embeddings/mnist/deit-small-patch16-224/500
+
+Processing skip: [(0, 1)]
+Filtered layers (kept 11 out of 12)
+
+Encoding Batches with SkipModel:   0%|          | 0/1875 [00:00<?, ?it/s][A
+Encoding Batches with SkipModel:   0%|          | 1/1875 [00:00<08:06,  3.85it/s][A
+Encoding Batches with SkipModel:   0%|          | 4/1875 [00:00<02:38, 11.82it/s][A
+Encoding Batches with SkipModel:   0%|          | 7/1875 [00:00<01:54, 16.25it/s][A
+Encoding Batches with SkipModel:   1%|          | 10/1875 [00:00<01:39, 18.71it/s][A
+Encoding Batches with SkipModel:   1%|          | 13/1875 [00:00<01:37, 19.13it/s][A
+Encoding Batches with SkipModel:   1%|          | 16/1875 [00:00<01:32, 20.04it/s][A
+Encoding Batches with SkipModel:   1%|          | 19/1875 [00:01<01:32, 19.99it/s][A
+Encoding Batches with SkipModel:   1%|          | 22/1875 [00:01<01:29, 20.66it/s][A
+Encoding Batches with SkipModel:   1%|▏         | 25/1875 [00:01<01:27, 21.14it/s][A
+Encoding Batches with SkipModel:   1%|▏         | 28/1875 [00:01<01:28, 20.83it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 31/1875 [00:01<01:27, 21.02it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 34/1875 [00:01<01:26, 21.21it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 37/1875 [00:01<01:25, 21.47it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 40/1875 [00:02<01:20, 22.71it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 44/1875 [00:02<01:13, 24.92it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 47/1875 [00:02<01:11, 25.47it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 51/1875 [00:02<01:08, 26.48it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 54/1875 [00:02<01:12, 25.03it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 57/1875 [00:02<01:14, 24.47it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 60/1875 [00:02<01:18, 23.15it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 63/1875 [00:02<01:22, 21.88it/s][A
+Encoding Batches with SkipModel:   4%|▎         | 66/1875 [00:03<01:22, 22.01it/s][A
+Encoding Batches with SkipModel:   4%|▎         | 69/1875 [00:03<01:19, 22.76it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 73/1875 [00:03<01:12, 24.93it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 76/1875 [00:03<01:09, 25.80it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 79/1875 [00:03<01:08, 26.13it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 82/1875 [00:03<01:07, 26.65it/s][A
+Encoding Batches with SkipModel:   5%|▍         | 85/1875 [00:03<01:10, 25.56it/s][A
+Encoding Batches with SkipModel:   5%|▍         | 88/1875 [00:03<01:11, 24.92it/s][A
+Encoding Batches with SkipModel:   5%|▍         | 91/1875 [00:04<01:13, 24.40it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 94/1875 [00:04<01:20, 22.05it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 97/1875 [00:04<01:16, 23.23it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 100/1875 [00:04<01:19, 22.45it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 103/1875 [00:04<01:17, 22.95it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 106/1875 [00:04<01:12, 24.25it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 109/1875 [00:04<01:10, 25.01it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 112/1875 [00:04<01:07, 26.23it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 115/1875 [00:05<01:08, 25.76it/s][A
+Encoding Batches with SkipModel:   6%|▋         | 119/1875 [00:05<01:04, 27.22it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 122/1875 [00:05<01:03, 27.77it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 125/1875 [00:05<01:04, 27.02it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 129/1875 [00:05<01:02, 27.80it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 132/1875 [00:05<01:01, 28.31it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 135/1875 [00:05<01:04, 27.17it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 138/1875 [00:05<01:05, 26.47it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 142/1875 [00:06<01:02, 27.59it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 145/1875 [00:06<01:03, 27.17it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 148/1875 [00:06<01:04, 26.75it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 151/1875 [00:06<01:06, 26.04it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 154/1875 [00:06<01:06, 25.81it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 157/1875 [00:06<01:04, 26.53it/s][A
+Encoding Batches with SkipModel:   9%|▊         | 160/1875 [00:06<01:04, 26.78it/s][A
+Encoding Batches with SkipModel:   9%|▊         | 163/1875 [00:06<01:06, 25.92it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 167/1875 [00:06<01:04, 26.56it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 170/1875 [00:07<01:04, 26.30it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 173/1875 [00:07<01:09, 24.61it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 176/1875 [00:07<01:08, 24.84it/s][A
+Encoding Batches with SkipModel:  10%|▉         | 180/1875 [00:07<01:03, 26.54it/s][A
+Encoding Batches with SkipModel:  10%|▉         | 183/1875 [00:07<01:06, 25.53it/s][A
+Encoding Batches with SkipModel:  10%|▉         | 186/1875 [00:07<01:06, 25.44it/s][A
+Encoding Batches with SkipModel:  10%|█         | 190/1875 [00:07<00:59, 28.32it/s][A
+Encoding Batches with SkipModel:  10%|█         | 194/1875 [00:07<00:57, 29.22it/s][A
+Encoding Batches with SkipModel:  11%|█         | 197/1875 [00:08<01:00, 27.51it/s][A
+Encoding Batches with SkipModel:  11%|█         | 201/1875 [00:08<01:02, 26.94it/s][A
+Encoding Batches with SkipModel:  11%|█         | 205/1875 [00:08<00:56, 29.49it/s][A
+Encoding Batches with SkipModel:  11%|█         | 209/1875 [00:08<00:56, 29.62it/s][A
+Encoding Batches with SkipModel:  11%|█▏        | 212/1875 [00:08<00:57, 28.74it/s][A
+Encoding Batches with SkipModel:  11%|█▏        | 215/1875 [00:08<00:59, 27.83it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 218/1875 [00:08<00:59, 27.67it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 222/1875 [00:08<00:58, 28.47it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 225/1875 [00:09<01:01, 26.68it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 228/1875 [00:09<01:00, 27.11it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 231/1875 [00:09<01:01, 26.77it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 234/1875 [00:09<01:00, 27.28it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 237/1875 [00:09<01:00, 27.08it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 240/1875 [00:09<01:01, 26.55it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 243/1875 [00:09<01:01, 26.40it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 246/1875 [00:09<01:03, 25.49it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 249/1875 [00:10<01:01, 26.44it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 253/1875 [00:10<00:58, 27.54it/s][A
+Encoding Batches with SkipModel:  14%|█▎        | 257/1875 [00:10<00:58, 27.84it/s][A
+Encoding Batches with SkipModel:  14%|█▍        | 260/1875 [00:10<00:59, 26.93it/s][A
+Encoding Batches with SkipModel:  14%|█▍        | 263/1875 [00:10<00:59, 27.28it/s][A
+Encoding Batches with SkipModel:  14%|█▍        | 266/1875 [00:10<01:02, 25.93it/s][A
+Encoding Batches with SkipModel:  14%|█▍        | 270/1875 [00:10<00:58, 27.49it/s][A
+Encoding Batches with SkipModel:  15%|█▍        | 273/1875 [00:10<01:00, 26.55it/s][A
+Encoding Batches with SkipModel:  15%|█▍        | 277/1875 [00:11<00:58, 27.25it/s][A
+Encoding Batches with SkipModel:  15%|█▍        | 280/1875 [00:11<00:57, 27.66it/s][A
+Encoding Batches with SkipModel:  15%|█▌        | 283/1875 [00:11<01:00, 26.49it/s][A
+Encoding Batches with SkipModel:  15%|█▌        | 286/1875 [00:11<01:01, 25.89it/s][A
+Encoding Batches with SkipModel:  15%|█▌        | 289/1875 [00:11<01:02, 25.40it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 292/1875 [00:11<01:03, 25.02it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 295/1875 [00:11<01:03, 24.99it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 299/1875 [00:11<01:00, 26.08it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 302/1875 [00:12<01:01, 25.57it/s][A
+Encoding Batches with SkipModel:  16%|█▋        | 306/1875 [00:12<00:58, 26.78it/s][A
+Encoding Batches with SkipModel:  16%|█▋        | 309/1875 [00:12<00:58, 26.55it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 313/1875 [00:12<00:53, 29.42it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 316/1875 [00:12<00:53, 29.00it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 320/1875 [00:12<00:55, 27.96it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 323/1875 [00:12<00:57, 27.12it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 327/1875 [00:12<00:54, 28.59it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 330/1875 [00:13<00:54, 28.31it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 333/1875 [00:13<00:56, 27.18it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 336/1875 [00:13<00:55, 27.58it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 339/1875 [00:13<00:55, 27.78it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 342/1875 [00:13<00:54, 28.27it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 345/1875 [00:13<00:54, 28.23it/s][A
+Encoding Batches with SkipModel:  19%|█▊        | 348/1875 [00:13<00:54, 28.19it/s][A
+Encoding Batches with SkipModel:  19%|█▊        | 351/1875 [00:13<00:56, 26.93it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 355/1875 [00:13<00:55, 27.45it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 358/1875 [00:14<00:56, 26.66it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 361/1875 [00:14<00:55, 27.29it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 364/1875 [00:14<00:55, 27.13it/s][A
+Encoding Batches with SkipModel:  20%|█▉        | 367/1875 [00:14<00:56, 26.60it/s][A
+Encoding Batches with SkipModel:  20%|█▉        | 370/1875 [00:14<00:59, 25.14it/s][A
+Encoding Batches with SkipModel:  20%|█▉        | 374/1875 [00:14<00:53, 27.94it/s][A
+Encoding Batches with SkipModel:  20%|██        | 377/1875 [00:14<00:54, 27.72it/s][A
+Encoding Batches with SkipModel:  20%|██        | 381/1875 [00:14<00:53, 27.98it/s][A
+Encoding Batches with SkipModel:  21%|██        | 385/1875 [00:15<00:52, 28.57it/s][A
+Encoding Batches with SkipModel:  21%|██        | 389/1875 [00:15<00:52, 28.39it/s][A
+Encoding Batches with SkipModel:  21%|██        | 392/1875 [00:15<00:52, 28.21it/s][A
+Encoding Batches with SkipModel:  21%|██        | 395/1875 [00:15<00:52, 28.01it/s][A
+Encoding Batches with SkipModel:  21%|██        | 398/1875 [00:15<00:51, 28.41it/s][A
+Encoding Batches with SkipModel:  21%|██▏       | 401/1875 [00:15<00:53, 27.38it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 405/1875 [00:15<00:53, 27.67it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 408/1875 [00:15<00:52, 28.00it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 411/1875 [00:15<00:54, 26.71it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 415/1875 [00:16<00:53, 27.42it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 418/1875 [00:16<00:55, 26.13it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 421/1875 [00:16<00:55, 26.18it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 424/1875 [00:16<00:54, 26.64it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 427/1875 [00:16<00:56, 25.59it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 430/1875 [00:16<00:56, 25.80it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 433/1875 [00:16<00:55, 26.06it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 436/1875 [00:16<01:02, 23.20it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 439/1875 [00:17<00:58, 24.41it/s][A
+Encoding Batches with SkipModel:  24%|██▎       | 443/1875 [00:17<00:56, 25.16it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 446/1875 [00:17<00:55, 25.61it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 449/1875 [00:17<00:54, 26.40it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 452/1875 [00:17<00:53, 26.53it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 455/1875 [00:17<00:55, 25.59it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 458/1875 [00:17<00:56, 25.28it/s][A
+Encoding Batches with SkipModel:  25%|██▍       | 461/1875 [00:17<00:54, 26.09it/s][A
+Encoding Batches with SkipModel:  25%|██▍       | 464/1875 [00:18<00:55, 25.38it/s][A
+Encoding Batches with SkipModel:  25%|██▍       | 467/1875 [00:18<00:53, 26.23it/s][A
+Encoding Batches with SkipModel:  25%|██▌       | 470/1875 [00:18<00:53, 26.27it/s][A
+Encoding Batches with SkipModel:  25%|██▌       | 473/1875 [00:18<00:52, 26.57it/s][A
+Encoding Batches with SkipModel:  25%|██▌       | 476/1875 [00:18<00:51, 27.02it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 479/1875 [00:18<00:55, 25.07it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 482/1875 [00:18<00:54, 25.35it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 485/1875 [00:18<00:58, 23.72it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 488/1875 [00:18<00:56, 24.52it/s][A
+Encoding Batches with SkipModel:  26%|██▌       | 492/1875 [00:19<00:52, 26.21it/s][A
+Encoding Batches with SkipModel:  26%|██▋       | 496/1875 [00:19<00:51, 26.86it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 499/1875 [00:19<00:52, 26.16it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 502/1875 [00:19<00:50, 27.06it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 505/1875 [00:19<00:49, 27.74it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 508/1875 [00:19<00:50, 26.84it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 511/1875 [00:19<00:51, 26.28it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 514/1875 [00:19<00:52, 26.15it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 517/1875 [00:20<00:52, 25.78it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 520/1875 [00:20<00:53, 25.56it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 524/1875 [00:20<00:52, 25.64it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 527/1875 [00:20<00:52, 25.72it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 531/1875 [00:20<00:50, 26.35it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 534/1875 [00:20<00:50, 26.64it/s][A
+Encoding Batches with SkipModel:  29%|██▊       | 537/1875 [00:20<00:51, 25.93it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 540/1875 [00:20<00:55, 24.08it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 543/1875 [00:21<00:58, 22.80it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 546/1875 [00:21<00:59, 22.42it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 549/1875 [00:21<00:58, 22.57it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 552/1875 [00:21<00:56, 23.33it/s][A
+Encoding Batches with SkipModel:  30%|██▉       | 555/1875 [00:21<00:55, 23.57it/s][A
+Encoding Batches with SkipModel:  30%|██▉       | 558/1875 [00:21<00:58, 22.67it/s][A
+Encoding Batches with SkipModel:  30%|██▉       | 561/1875 [00:21<00:54, 24.23it/s][A
+Encoding Batches with SkipModel:  30%|███       | 564/1875 [00:21<00:52, 25.07it/s][A
+Encoding Batches with SkipModel:  30%|███       | 567/1875 [00:22<00:50, 25.94it/s][A
+Encoding Batches with SkipModel:  30%|███       | 570/1875 [00:22<00:48, 26.67it/s][A
+Encoding Batches with SkipModel:  31%|███       | 573/1875 [00:22<00:47, 27.28it/s][A
+Encoding Batches with SkipModel:  31%|███       | 577/1875 [00:22<00:45, 28.61it/s][A
+Encoding Batches with SkipModel:  31%|███       | 580/1875 [00:22<00:47, 27.11it/s][A
+Encoding Batches with SkipModel:  31%|███       | 583/1875 [00:22<00:47, 26.99it/s][A
+Encoding Batches with SkipModel:  31%|███▏      | 586/1875 [00:22<00:48, 26.80it/s][A
+Encoding Batches with SkipModel:  31%|███▏      | 589/1875 [00:22<00:48, 26.66it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 592/1875 [00:23<00:47, 26.93it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 595/1875 [00:23<00:47, 27.12it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 598/1875 [00:23<00:46, 27.41it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 601/1875 [00:23<00:47, 26.63it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 604/1875 [00:23<00:46, 27.35it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 607/1875 [00:23<00:46, 27.20it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 610/1875 [00:23<00:47, 26.80it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 613/1875 [00:23<00:49, 25.73it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 616/1875 [00:23<00:52, 23.97it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 620/1875 [00:24<00:49, 25.34it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 624/1875 [00:24<00:48, 25.53it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 627/1875 [00:24<00:48, 25.84it/s][A
+Encoding Batches with SkipModel:  34%|███▎      | 631/1875 [00:24<00:48, 25.52it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 635/1875 [00:24<00:45, 27.02it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 638/1875 [00:24<00:46, 26.87it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 641/1875 [00:24<00:45, 27.11it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 644/1875 [00:25<00:48, 25.57it/s][A
+Encoding Batches with SkipModel:  35%|███▍      | 647/1875 [00:25<00:46, 26.15it/s][A
+Encoding Batches with SkipModel:  35%|███▍      | 650/1875 [00:25<00:48, 25.33it/s][A
+Encoding Batches with SkipModel:  35%|███▍      | 653/1875 [00:25<00:47, 25.52it/s][A
+Encoding Batches with SkipModel:  35%|███▌      | 657/1875 [00:25<00:45, 26.60it/s][A
+Encoding Batches with SkipModel:  35%|███▌      | 660/1875 [00:25<00:46, 26.03it/s][A
+Encoding Batches with SkipModel:  35%|███▌      | 663/1875 [00:25<00:46, 26.27it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 666/1875 [00:25<00:45, 26.30it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 669/1875 [00:25<00:45, 26.55it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 672/1875 [00:26<00:46, 25.78it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 675/1875 [00:26<00:49, 24.40it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 678/1875 [00:26<00:47, 25.02it/s][A
+Encoding Batches with SkipModel:  36%|███▋      | 681/1875 [00:26<00:47, 25.11it/s][A
+Encoding Batches with SkipModel:  36%|███▋      | 684/1875 [00:26<00:48, 24.67it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 687/1875 [00:26<00:49, 24.22it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 690/1875 [00:26<00:48, 24.62it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 693/1875 [00:26<00:46, 25.29it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 696/1875 [00:27<00:46, 25.61it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 699/1875 [00:27<00:47, 24.79it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 702/1875 [00:27<00:45, 25.87it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 705/1875 [00:27<00:46, 25.15it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 709/1875 [00:27<00:43, 26.75it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 712/1875 [00:27<00:45, 25.74it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 715/1875 [00:27<00:44, 25.97it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 718/1875 [00:27<00:44, 25.94it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 721/1875 [00:28<00:44, 26.20it/s][A
+Encoding Batches with SkipModel:  39%|███▊      | 724/1875 [00:28<00:44, 25.73it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 727/1875 [00:28<00:44, 26.09it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 730/1875 [00:28<00:46, 24.76it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 733/1875 [00:28<00:47, 24.20it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 737/1875 [00:28<00:43, 25.90it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 740/1875 [00:28<00:42, 26.47it/s][A
+Encoding Batches with SkipModel:  40%|███▉      | 743/1875 [00:28<00:44, 25.36it/s][A
+Encoding Batches with SkipModel:  40%|███▉      | 746/1875 [00:29<00:45, 24.88it/s][A
+Encoding Batches with SkipModel:  40%|████      | 750/1875 [00:29<00:45, 24.87it/s][A
+Encoding Batches with SkipModel:  40%|████      | 754/1875 [00:29<00:41, 26.88it/s][A
+Encoding Batches with SkipModel:  40%|████      | 757/1875 [00:29<00:42, 26.12it/s][A
+Encoding Batches with SkipModel:  41%|████      | 761/1875 [00:29<00:40, 27.48it/s][A
+Encoding Batches with SkipModel:  41%|████      | 765/1875 [00:29<00:39, 27.97it/s][A
+Encoding Batches with SkipModel:  41%|████      | 768/1875 [00:29<00:40, 27.54it/s][A
+Encoding Batches with SkipModel:  41%|████      | 771/1875 [00:29<00:40, 27.29it/s][A
+Encoding Batches with SkipModel:  41%|████▏     | 774/1875 [00:30<00:40, 27.04it/s][A
+Encoding Batches with SkipModel:  41%|████▏     | 777/1875 [00:30<00:40, 26.80it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 780/1875 [00:30<00:41, 26.67it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 784/1875 [00:30<00:40, 27.04it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 787/1875 [00:30<00:40, 26.58it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 790/1875 [00:30<00:42, 25.39it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 793/1875 [00:30<00:43, 24.92it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 796/1875 [00:30<00:42, 25.32it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 799/1875 [00:31<00:41, 25.65it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 802/1875 [00:31<00:44, 24.02it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 805/1875 [00:31<00:45, 23.40it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 808/1875 [00:31<00:43, 24.63it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 811/1875 [00:31<00:42, 24.79it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 814/1875 [00:31<00:43, 24.67it/s][A
+Encoding Batches with SkipModel:  44%|████▎     | 817/1875 [00:31<00:43, 24.60it/s][A
+Encoding Batches with SkipModel:  44%|████▎     | 820/1875 [00:31<00:42, 24.63it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 823/1875 [00:32<00:43, 24.10it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 826/1875 [00:32<00:43, 24.14it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 829/1875 [00:32<00:43, 23.97it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 833/1875 [00:32<00:42, 24.58it/s][A
+Encoding Batches with SkipModel:  45%|████▍     | 837/1875 [00:32<00:39, 26.49it/s][A
+Encoding Batches with SkipModel:  45%|████▍     | 840/1875 [00:32<00:40, 25.43it/s][A
+Encoding Batches with SkipModel:  45%|████▍     | 843/1875 [00:32<00:40, 25.69it/s][A
+Encoding Batches with SkipModel:  45%|████▌     | 846/1875 [00:32<00:41, 24.85it/s][A
+Encoding Batches with SkipModel:  45%|████▌     | 849/1875 [00:33<00:40, 25.43it/s][A
+Encoding Batches with SkipModel:  45%|████▌     | 853/1875 [00:33<00:38, 26.56it/s][A
+Encoding Batches with SkipModel:  46%|████▌     | 856/1875 [00:33<00:38, 26.48it/s][A
+Encoding Batches with SkipModel:  46%|████▌     | 859/1875 [00:33<00:37, 27.15it/s][A
+Encoding Batches with SkipModel:  46%|████▌     | 862/1875 [00:33<00:37, 26.94it/s][A
+Encoding Batches with SkipModel:  46%|████▌     | 865/1875 [00:33<00:37, 26.84it/s][A
+Encoding Batches with SkipModel:  46%|████▋     | 868/1875 [00:33<00:38, 26.11it/s][A
+Encoding Batches with SkipModel:  46%|████▋     | 871/1875 [00:33<00:41, 24.34it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 875/1875 [00:34<00:39, 25.47it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 879/1875 [00:34<00:37, 26.23it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 883/1875 [00:34<00:38, 25.89it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 886/1875 [00:34<00:37, 26.08it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 889/1875 [00:34<00:38, 25.92it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 893/1875 [00:34<00:36, 27.05it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 896/1875 [00:34<00:37, 26.32it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 899/1875 [00:34<00:37, 25.83it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 902/1875 [00:35<00:39, 24.84it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 905/1875 [00:35<00:37, 25.68it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 908/1875 [00:35<00:36, 26.38it/s][A
+Encoding Batches with SkipModel:  49%|████▊     | 912/1875 [00:35<00:37, 25.99it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 915/1875 [00:35<00:36, 26.54it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 918/1875 [00:35<00:36, 26.30it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 921/1875 [00:35<00:38, 24.57it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 924/1875 [00:35<00:37, 25.14it/s][A
+Encoding Batches with SkipModel:  49%|████▉     | 927/1875 [00:36<00:37, 25.62it/s][A
+Encoding Batches with SkipModel:  50%|████▉     | 930/1875 [00:36<00:37, 25.47it/s][A
+Encoding Batches with SkipModel:  50%|████▉     | 933/1875 [00:36<00:37, 25.04it/s][A
+Encoding Batches with SkipModel:  50%|████▉     | 936/1875 [00:36<00:36, 25.67it/s][A
+Encoding Batches with SkipModel:  50%|█████     | 939/1875 [00:36<00:36, 25.91it/s][A
+Encoding Batches with SkipModel:  50%|█████     | 942/1875 [00:36<00:36, 25.25it/s][A
+Encoding Batches with SkipModel:  50%|█████     | 945/1875 [00:36<00:38, 24.43it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 948/1875 [00:36<00:38, 23.94it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 951/1875 [00:37<00:38, 23.73it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 954/1875 [00:37<00:38, 24.03it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 957/1875 [00:37<00:39, 23.46it/s][A
+Encoding Batches with SkipModel:  51%|█████     | 960/1875 [00:37<00:39, 23.41it/s][A
+Encoding Batches with SkipModel:  51%|█████▏    | 963/1875 [00:37<00:37, 24.52it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 966/1875 [00:37<00:36, 24.63it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 969/1875 [00:37<00:36, 24.90it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 972/1875 [00:37<00:35, 25.59it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 975/1875 [00:37<00:35, 25.36it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 978/1875 [00:38<00:34, 25.86it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 981/1875 [00:38<00:34, 26.08it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 985/1875 [00:38<00:33, 26.50it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 988/1875 [00:38<00:33, 26.53it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 992/1875 [00:38<00:32, 27.22it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 995/1875 [00:38<00:32, 27.11it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 998/1875 [00:38<00:35, 24.98it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 1001/1875 [00:38<00:34, 25.30it/s][A
+Encoding Batches with SkipModel:  54%|█████▎    | 1004/1875 [00:39<00:34, 25.16it/s][A
+Encoding Batches with SkipModel:  54%|█████▎    | 1007/1875 [00:39<00:33, 25.89it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 1010/1875 [00:39<00:33, 26.01it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 1013/1875 [00:39<00:34, 24.96it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 1016/1875 [00:39<00:34, 24.71it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 1019/1875 [00:39<00:33, 25.59it/s][A
+Encoding Batches with SkipModel:  55%|█████▍    | 1022/1875 [00:39<00:33, 25.69it/s][A
+Encoding Batches with SkipModel:  55%|█████▍    | 1025/1875 [00:39<00:32, 26.48it/s][A
+Encoding Batches with SkipModel:  55%|█████▍    | 1028/1875 [00:40<00:35, 24.06it/s][A
+Encoding Batches with SkipModel:  55%|█████▍    | 1031/1875 [00:40<00:35, 23.77it/s][A
+Encoding Batches with SkipModel:  55%|█████▌    | 1034/1875 [00:40<00:33, 25.19it/s][A
+Encoding Batches with SkipModel:  55%|█████▌    | 1037/1875 [00:40<00:32, 26.03it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 1041/1875 [00:40<00:32, 25.72it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 1044/1875 [00:40<00:32, 25.25it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 1047/1875 [00:40<00:33, 24.98it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 1050/1875 [00:40<00:34, 23.98it/s][A
+Encoding Batches with SkipModel:  56%|█████▌    | 1053/1875 [00:41<00:35, 23.24it/s][A
+Encoding Batches with SkipModel:  56%|█████▋    | 1056/1875 [00:41<00:35, 22.96it/s][A
+Encoding Batches with SkipModel:  56%|█████▋    | 1059/1875 [00:41<00:35, 23.08it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1062/1875 [00:41<00:34, 23.51it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1065/1875 [00:41<00:32, 24.76it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1068/1875 [00:41<00:32, 24.76it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1071/1875 [00:41<00:32, 24.59it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1074/1875 [00:41<00:32, 24.67it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 1077/1875 [00:42<00:31, 25.18it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1080/1875 [00:42<00:31, 25.24it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1084/1875 [00:42<00:29, 26.38it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1087/1875 [00:42<00:29, 26.33it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1090/1875 [00:42<00:29, 26.28it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 1094/1875 [00:42<00:29, 26.44it/s][A
+Encoding Batches with SkipModel:  59%|█████▊    | 1097/1875 [00:42<00:29, 26.61it/s][A
+Encoding Batches with SkipModel:  59%|█████▊    | 1100/1875 [00:42<00:31, 24.49it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 1104/1875 [00:43<00:29, 25.84it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 1107/1875 [00:43<00:29, 26.11it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 1110/1875 [00:43<00:29, 26.03it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 1113/1875 [00:43<00:29, 25.89it/s][A
+Encoding Batches with SkipModel:  60%|█████▉    | 1116/1875 [00:43<00:29, 26.06it/s][A
+Encoding Batches with SkipModel:  60%|█████▉    | 1119/1875 [00:43<00:28, 26.07it/s][A
+Encoding Batches with SkipModel:  60%|█████▉    | 1122/1875 [00:43<00:29, 25.80it/s][A
+Encoding Batches with SkipModel:  60%|██████    | 1125/1875 [00:43<00:28, 26.41it/s][A
+Encoding Batches with SkipModel:  60%|██████    | 1128/1875 [00:43<00:29, 25.62it/s][A
+Encoding Batches with SkipModel:  60%|██████    | 1132/1875 [00:44<00:26, 27.90it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1135/1875 [00:44<00:27, 27.25it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1138/1875 [00:44<00:28, 26.08it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1141/1875 [00:44<00:27, 26.73it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1145/1875 [00:44<00:26, 27.78it/s][A
+Encoding Batches with SkipModel:  61%|██████    | 1148/1875 [00:44<00:27, 26.41it/s][A
+Encoding Batches with SkipModel:  61%|██████▏   | 1152/1875 [00:44<00:26, 27.52it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1155/1875 [00:44<00:25, 27.99it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1158/1875 [00:45<00:26, 27.22it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1161/1875 [00:45<00:26, 27.23it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1164/1875 [00:45<00:27, 25.50it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1167/1875 [00:45<00:27, 25.73it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 1171/1875 [00:45<00:27, 25.78it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1175/1875 [00:45<00:26, 26.65it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1179/1875 [00:45<00:25, 27.41it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1182/1875 [00:46<00:27, 25.52it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1185/1875 [00:46<00:27, 24.99it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 1188/1875 [00:46<00:26, 25.80it/s][A
+Encoding Batches with SkipModel:  64%|██████▎   | 1191/1875 [00:46<00:27, 24.47it/s][A
+Encoding Batches with SkipModel:  64%|██████▎   | 1194/1875 [00:46<00:27, 25.08it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 1197/1875 [00:46<00:27, 24.59it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 1200/1875 [00:46<00:26, 25.34it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 1204/1875 [00:46<00:25, 26.26it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 1208/1875 [00:47<00:24, 26.68it/s][A
+Encoding Batches with SkipModel:  65%|██████▍   | 1212/1875 [00:47<00:23, 28.66it/s][A
+Encoding Batches with SkipModel:  65%|██████▍   | 1215/1875 [00:47<00:24, 27.01it/s][A
+Encoding Batches with SkipModel:  65%|██████▍   | 1218/1875 [00:47<00:30, 21.43it/s][A
+Encoding Batches with SkipModel:  65%|██████▌   | 1223/1875 [00:47<00:26, 24.87it/s][A
+Encoding Batches with SkipModel:  65%|██████▌   | 1226/1875 [00:47<00:25, 25.01it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1230/1875 [00:47<00:24, 26.25it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1233/1875 [00:48<00:24, 25.98it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1236/1875 [00:48<00:24, 26.06it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1239/1875 [00:48<00:24, 26.31it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 1242/1875 [00:48<00:23, 26.68it/s][A
+Encoding Batches with SkipModel:  66%|██████▋   | 1245/1875 [00:48<00:26, 24.20it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1249/1875 [00:48<00:24, 26.05it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1252/1875 [00:48<00:23, 26.65it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1255/1875 [00:48<00:26, 23.74it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1259/1875 [00:49<00:24, 24.84it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1262/1875 [00:49<00:23, 25.79it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 1265/1875 [00:49<00:23, 25.96it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1269/1875 [00:49<00:22, 26.41it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1272/1875 [00:49<00:23, 25.91it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1275/1875 [00:49<00:23, 25.63it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1278/1875 [00:49<00:23, 25.73it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1281/1875 [00:49<00:23, 25.67it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 1284/1875 [00:49<00:22, 26.40it/s][A
+Encoding Batches with SkipModel:  69%|██████▊   | 1287/1875 [00:50<00:22, 26.49it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 1290/1875 [00:50<00:21, 27.02it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 1293/1875 [00:50<00:22, 26.20it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 1296/1875 [00:50<00:23, 24.55it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 1299/1875 [00:50<00:22, 25.56it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 1302/1875 [00:50<00:23, 24.71it/s][A
+Encoding Batches with SkipModel:  70%|██████▉   | 1305/1875 [00:50<00:24, 22.82it/s][A
+Encoding Batches with SkipModel:  70%|██████▉   | 1308/1875 [00:51<00:25, 22.04it/s][A
+Encoding Batches with SkipModel:  70%|██████▉   | 1311/1875 [00:51<00:26, 21.68it/s][A
+Encoding Batches with SkipModel:  70%|███████   | 1314/1875 [00:51<00:25, 22.23it/s][A
+Encoding Batches with SkipModel:  70%|███████   | 1317/1875 [00:51<00:24, 22.87it/s][A
+Encoding Batches with SkipModel:  70%|███████   | 1320/1875 [00:51<00:23, 23.58it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 1323/1875 [00:51<00:22, 24.52it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 1326/1875 [00:51<00:23, 23.86it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 1329/1875 [00:51<00:22, 24.82it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 1333/1875 [00:52<00:21, 25.77it/s][A
+Encoding Batches with SkipModel:  71%|███████▏  | 1336/1875 [00:52<00:20, 26.56it/s][A
+Encoding Batches with SkipModel:  71%|███████▏  | 1339/1875 [00:52<00:19, 27.31it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1342/1875 [00:52<00:19, 27.24it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1345/1875 [00:52<00:19, 27.63it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1348/1875 [00:52<00:19, 27.62it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1351/1875 [00:52<00:19, 27.15it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1354/1875 [00:52<00:19, 26.57it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 1357/1875 [00:52<00:18, 27.35it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1360/1875 [00:53<00:19, 26.99it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1363/1875 [00:53<00:18, 27.28it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1366/1875 [00:53<00:19, 26.55it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1369/1875 [00:53<00:18, 26.71it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1372/1875 [00:53<00:19, 26.31it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 1375/1875 [00:53<00:19, 25.65it/s][A
+Encoding Batches with SkipModel:  74%|███████▎  | 1379/1875 [00:53<00:18, 26.72it/s][A
+Encoding Batches with SkipModel:  74%|███████▎  | 1382/1875 [00:53<00:19, 24.67it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 1385/1875 [00:53<00:20, 24.04it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 1388/1875 [00:54<00:20, 23.99it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 1391/1875 [00:54<00:20, 23.94it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 1394/1875 [00:54<00:19, 24.24it/s][A
+Encoding Batches with SkipModel:  75%|███████▍  | 1397/1875 [00:54<00:18, 25.66it/s][A
+Encoding Batches with SkipModel:  75%|███████▍  | 1400/1875 [00:54<00:19, 24.46it/s][A
+Encoding Batches with SkipModel:  75%|███████▍  | 1403/1875 [00:54<00:18, 25.85it/s][A
+Encoding Batches with SkipModel:  75%|███████▍  | 1406/1875 [00:54<00:17, 26.45it/s][A
+Encoding Batches with SkipModel:  75%|███████▌  | 1409/1875 [00:54<00:19, 23.80it/s][A
+Encoding Batches with SkipModel:  75%|███████▌  | 1412/1875 [00:55<00:18, 24.57it/s][A
+Encoding Batches with SkipModel:  75%|███████▌  | 1415/1875 [00:55<00:18, 25.51it/s][A
+Encoding Batches with SkipModel:  76%|███████▌  | 1418/1875 [00:55<00:25, 17.67it/s][A
+Encoding Batches with SkipModel:  76%|███████▌  | 1421/1875 [00:55<00:24, 18.82it/s][A
+Encoding Batches with SkipModel:  76%|███████▌  | 1424/1875 [00:55<00:21, 20.95it/s][A
+Encoding Batches with SkipModel:  76%|███████▌  | 1427/1875 [00:55<00:20, 21.54it/s][A
+Encoding Batches with SkipModel:  76%|███████▋  | 1430/1875 [00:55<00:19, 23.14it/s][A
+Encoding Batches with SkipModel:  76%|███████▋  | 1433/1875 [00:56<00:19, 23.00it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1436/1875 [00:56<00:18, 23.12it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1439/1875 [00:56<00:18, 23.78it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1442/1875 [00:56<00:17, 24.22it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1445/1875 [00:56<00:18, 23.37it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1448/1875 [00:56<00:17, 24.24it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 1452/1875 [00:56<00:16, 25.22it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1455/1875 [00:56<00:16, 25.45it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1458/1875 [00:57<00:16, 25.11it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1462/1875 [00:57<00:14, 27.94it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1465/1875 [00:57<00:14, 28.19it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1468/1875 [00:57<00:14, 27.30it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 1471/1875 [00:57<00:16, 25.17it/s][A
+Encoding Batches with SkipModel:  79%|███████▊  | 1475/1875 [00:57<00:15, 25.78it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 1479/1875 [00:57<00:14, 27.84it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 1482/1875 [00:57<00:15, 25.40it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 1486/1875 [00:58<00:14, 26.42it/s][A
+Encoding Batches with SkipModel:  79%|███████▉  | 1489/1875 [00:58<00:15, 25.49it/s][A
+Encoding Batches with SkipModel:  80%|███████▉  | 1493/1875 [00:58<00:14, 25.98it/s][A
+Encoding Batches with SkipModel:  80%|███████▉  | 1496/1875 [00:58<00:14, 25.98it/s][A
+Encoding Batches with SkipModel:  80%|███████▉  | 1499/1875 [00:58<00:14, 25.40it/s][A
+Encoding Batches with SkipModel:  80%|████████  | 1502/1875 [00:58<00:15, 24.64it/s][A
+Encoding Batches with SkipModel:  80%|████████  | 1505/1875 [00:58<00:14, 24.74it/s][A
+Encoding Batches with SkipModel:  80%|████████  | 1508/1875 [00:59<00:14, 24.71it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 1511/1875 [00:59<00:14, 24.43it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 1514/1875 [00:59<00:15, 22.58it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 1518/1875 [00:59<00:14, 25.44it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 1521/1875 [00:59<00:15, 23.27it/s][A
+Encoding Batches with SkipModel:  81%|████████▏ | 1525/1875 [00:59<00:14, 24.76it/s][A
+Encoding Batches with SkipModel:  81%|████████▏ | 1528/1875 [00:59<00:14, 23.68it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1532/1875 [01:00<00:13, 24.88it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1535/1875 [01:00<00:13, 25.72it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1538/1875 [01:00<00:13, 25.44it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1541/1875 [01:00<00:13, 25.33it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 1544/1875 [01:00<00:13, 25.44it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1547/1875 [01:00<00:13, 25.04it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1550/1875 [01:00<00:12, 26.24it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1553/1875 [01:00<00:12, 25.60it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1557/1875 [01:00<00:11, 26.62it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1560/1875 [01:01<00:11, 26.83it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 1563/1875 [01:01<00:11, 26.18it/s][A
+Encoding Batches with SkipModel:  84%|████████▎ | 1566/1875 [01:01<00:12, 24.84it/s][A
+Encoding Batches with SkipModel:  84%|████████▎ | 1569/1875 [01:01<00:11, 26.01it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1572/1875 [01:01<00:12, 24.62it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1575/1875 [01:01<00:12, 24.98it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1578/1875 [01:01<00:11, 25.62it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1581/1875 [01:01<00:11, 25.41it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 1584/1875 [01:02<00:11, 24.88it/s][A
+Encoding Batches with SkipModel:  85%|████████▍ | 1588/1875 [01:02<00:11, 25.84it/s][A
+Encoding Batches with SkipModel:  85%|████████▍ | 1591/1875 [01:02<00:10, 26.28it/s][A
+Encoding Batches with SkipModel:  85%|████████▌ | 1594/1875 [01:02<00:10, 26.85it/s][A
+Encoding Batches with SkipModel:  85%|████████▌ | 1597/1875 [01:02<00:10, 27.27it/s][A
+Encoding Batches with SkipModel:  85%|████████▌ | 1600/1875 [01:02<00:10, 25.61it/s][A
+Encoding Batches with SkipModel:  85%|████████▌ | 1603/1875 [01:02<00:10, 26.69it/s][A
+Encoding Batches with SkipModel:  86%|████████▌ | 1606/1875 [01:02<00:10, 26.00it/s][A
+Encoding Batches with SkipModel:  86%|████████▌ | 1609/1875 [01:02<00:10, 26.28it/s][A
+Encoding Batches with SkipModel:  86%|████████▌ | 1613/1875 [01:03<00:10, 26.15it/s][A
+Encoding Batches with SkipModel:  86%|████████▌ | 1616/1875 [01:03<00:09, 25.97it/s][A
+Encoding Batches with SkipModel:  86%|████████▋ | 1619/1875 [01:03<00:09, 26.62it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1622/1875 [01:03<00:10, 24.32it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1625/1875 [01:03<00:11, 22.03it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1628/1875 [01:03<00:11, 21.94it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1631/1875 [01:03<00:10, 23.50it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1634/1875 [01:04<00:09, 24.43it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1637/1875 [01:04<00:09, 25.50it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 1640/1875 [01:04<00:09, 26.10it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1643/1875 [01:04<00:09, 25.60it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1646/1875 [01:04<00:09, 25.43it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1649/1875 [01:04<00:08, 25.21it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1653/1875 [01:04<00:08, 27.22it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1656/1875 [01:04<00:08, 26.83it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 1659/1875 [01:04<00:08, 26.75it/s][A
+Encoding Batches with SkipModel:  89%|████████▊ | 1662/1875 [01:05<00:08, 26.48it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 1665/1875 [01:05<00:07, 26.39it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 1668/1875 [01:05<00:08, 24.83it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 1672/1875 [01:05<00:07, 25.56it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 1675/1875 [01:05<00:07, 25.28it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 1678/1875 [01:05<00:07, 26.40it/s][A
+Encoding Batches with SkipModel:  90%|████████▉ | 1681/1875 [01:05<00:07, 26.27it/s][A
+Encoding Batches with SkipModel:  90%|████████▉ | 1685/1875 [01:05<00:06, 27.61it/s][A
+Encoding Batches with SkipModel:  90%|█████████ | 1688/1875 [01:06<00:07, 25.13it/s][A
+Encoding Batches with SkipModel:  90%|█████████ | 1691/1875 [01:06<00:07, 25.25it/s][A
+Encoding Batches with SkipModel:  90%|█████████ | 1694/1875 [01:06<00:07, 24.11it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 1697/1875 [01:06<00:07, 25.07it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 1700/1875 [01:06<00:06, 25.45it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 1703/1875 [01:06<00:07, 24.56it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 1706/1875 [01:06<00:06, 24.61it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 1709/1875 [01:06<00:06, 24.66it/s][A
+Encoding Batches with SkipModel:  91%|█████████▏| 1712/1875 [01:07<00:06, 24.12it/s][A
+Encoding Batches with SkipModel:  91%|█████████▏| 1715/1875 [01:07<00:06, 25.09it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1718/1875 [01:07<00:06, 26.04it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1721/1875 [01:07<00:05, 26.87it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1724/1875 [01:07<00:05, 27.11it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1727/1875 [01:07<00:05, 27.90it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1730/1875 [01:07<00:05, 27.02it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 1733/1875 [01:07<00:05, 25.85it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1737/1875 [01:07<00:04, 27.79it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1740/1875 [01:08<00:04, 28.33it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1743/1875 [01:08<00:04, 27.35it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1746/1875 [01:08<00:04, 27.72it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1749/1875 [01:08<00:04, 27.14it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 1752/1875 [01:08<00:04, 27.20it/s][A
+Encoding Batches with SkipModel:  94%|█████████▎| 1755/1875 [01:08<00:04, 25.67it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 1758/1875 [01:08<00:04, 25.41it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 1762/1875 [01:08<00:04, 27.92it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 1765/1875 [01:09<00:04, 25.71it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 1768/1875 [01:09<00:04, 26.39it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 1771/1875 [01:09<00:03, 26.48it/s][A
+Encoding Batches with SkipModel:  95%|█████████▍| 1774/1875 [01:09<00:03, 25.55it/s][A
+Encoding Batches with SkipModel:  95%|█████████▍| 1777/1875 [01:09<00:03, 24.53it/s][A
+Encoding Batches with SkipModel:  95%|█████████▍| 1780/1875 [01:09<00:03, 24.52it/s][A
+Encoding Batches with SkipModel:  95%|█████████▌| 1783/1875 [01:09<00:03, 24.40it/s][A
+Encoding Batches with SkipModel:  95%|█████████▌| 1786/1875 [01:09<00:03, 24.67it/s][A
+Encoding Batches with SkipModel:  95%|█████████▌| 1789/1875 [01:10<00:03, 24.78it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 1792/1875 [01:10<00:03, 25.51it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 1795/1875 [01:10<00:03, 24.63it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 1799/1875 [01:10<00:02, 25.56it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 1802/1875 [01:10<00:02, 26.17it/s][A
+Encoding Batches with SkipModel:  96%|█████████▋| 1805/1875 [01:10<00:02, 24.79it/s][A
+Encoding Batches with SkipModel:  96%|█████████▋| 1809/1875 [01:10<00:02, 26.31it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1812/1875 [01:10<00:02, 26.54it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1816/1875 [01:11<00:02, 26.56it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1819/1875 [01:11<00:02, 25.94it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1822/1875 [01:11<00:02, 26.45it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1825/1875 [01:11<00:01, 25.99it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 1828/1875 [01:11<00:01, 24.44it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1831/1875 [01:11<00:01, 25.17it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1834/1875 [01:11<00:01, 24.77it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1837/1875 [01:11<00:01, 24.22it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1840/1875 [01:11<00:01, 25.09it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1843/1875 [01:12<00:01, 26.21it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 1846/1875 [01:12<00:01, 25.70it/s][A
+Encoding Batches with SkipModel:  99%|█████████▊| 1850/1875 [01:12<00:00, 26.80it/s][A
+Encoding Batches with SkipModel:  99%|█████████▉| 1853/1875 [01:12<00:00, 26.80it/s][A
+Encoding Batches with SkipModel:  99%|█████████▉| 1856/1875 [01:12<00:00, 25.11it/s][A
+Encoding Batches with SkipModel:  99%|█████████▉| 1859/1875 [01:12<00:00, 24.44it/s][A
+Encoding Batches with SkipModel:  99%|█████████▉| 1862/1875 [01:12<00:00, 23.70it/s][A
+Encoding Batches with SkipModel:  99%|█████████▉| 1865/1875 [01:13<00:00, 23.33it/s][A
+Encoding Batches with SkipModel: 100%|█████████▉| 1868/1875 [01:13<00:00, 22.96it/s][A
+Encoding Batches with SkipModel: 100%|█████████▉| 1871/1875 [01:13<00:00, 22.86it/s][A
+Encoding Batches with SkipModel: 100%|█████████▉| 1874/1875 [01:13<00:00, 21.33it/s][AEncoding Batches with SkipModel: 100%|██████████| 1875/1875 [01:13<00:00, 25.43it/s]
+
+Encoding Batches with SkipModel:   0%|          | 0/313 [00:00<?, ?it/s][A
+Encoding Batches with SkipModel:   0%|          | 1/313 [00:00<01:49,  2.85it/s][A
+Encoding Batches with SkipModel:   1%|          | 3/313 [00:00<00:40,  7.56it/s][A
+Encoding Batches with SkipModel:   2%|▏         | 6/313 [00:00<00:25, 12.07it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 8/313 [00:00<00:22, 13.47it/s][A
+Encoding Batches with SkipModel:   3%|▎         | 10/313 [00:00<00:20, 14.62it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 12/313 [00:00<00:20, 14.52it/s][A
+Encoding Batches with SkipModel:   4%|▍         | 14/313 [00:01<00:20, 14.89it/s][A
+Encoding Batches with SkipModel:   5%|▌         | 17/313 [00:01<00:18, 16.41it/s][A
+Encoding Batches with SkipModel:   6%|▌         | 19/313 [00:01<00:17, 16.45it/s][A
+Encoding Batches with SkipModel:   7%|▋         | 22/313 [00:01<00:15, 18.25it/s][A
+Encoding Batches with SkipModel:   8%|▊         | 25/313 [00:01<00:13, 20.91it/s][A
+Encoding Batches with SkipModel:   9%|▉         | 28/313 [00:01<00:12, 22.70it/s][A
+Encoding Batches with SkipModel:  10%|▉         | 31/313 [00:01<00:12, 22.81it/s][A
+Encoding Batches with SkipModel:  11%|█         | 35/313 [00:02<00:11, 23.99it/s][A
+Encoding Batches with SkipModel:  12%|█▏        | 38/313 [00:02<00:11, 24.80it/s][A
+Encoding Batches with SkipModel:  13%|█▎        | 41/313 [00:02<00:11, 23.79it/s][A
+Encoding Batches with SkipModel:  14%|█▍        | 44/313 [00:02<00:11, 23.87it/s][A
+Encoding Batches with SkipModel:  15%|█▌        | 47/313 [00:02<00:10, 24.78it/s][A
+Encoding Batches with SkipModel:  16%|█▌        | 50/313 [00:02<00:11, 23.84it/s][A
+Encoding Batches with SkipModel:  17%|█▋        | 53/313 [00:02<00:11, 22.16it/s][A
+Encoding Batches with SkipModel:  18%|█▊        | 56/313 [00:02<00:11, 21.99it/s][A
+Encoding Batches with SkipModel:  19%|█▉        | 59/313 [00:03<00:11, 21.76it/s][A
+Encoding Batches with SkipModel:  20%|█▉        | 62/313 [00:03<00:11, 21.98it/s][A
+Encoding Batches with SkipModel:  21%|██        | 65/313 [00:03<00:11, 21.71it/s][A
+Encoding Batches with SkipModel:  22%|██▏       | 68/313 [00:03<00:11, 20.51it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 71/313 [00:03<00:12, 18.92it/s][A
+Encoding Batches with SkipModel:  23%|██▎       | 73/313 [00:03<00:13, 18.24it/s][A
+Encoding Batches with SkipModel:  24%|██▍       | 75/313 [00:03<00:13, 17.52it/s][A
+Encoding Batches with SkipModel:  25%|██▍       | 77/313 [00:04<00:13, 17.79it/s][A
+Encoding Batches with SkipModel:  25%|██▌       | 79/313 [00:04<00:16, 14.02it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 83/313 [00:04<00:12, 18.46it/s][A
+Encoding Batches with SkipModel:  27%|██▋       | 86/313 [00:04<00:12, 18.07it/s][A
+Encoding Batches with SkipModel:  28%|██▊       | 88/313 [00:04<00:12, 18.09it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 90/313 [00:04<00:12, 18.18it/s][A
+Encoding Batches with SkipModel:  29%|██▉       | 92/313 [00:04<00:12, 17.63it/s][A
+Encoding Batches with SkipModel:  30%|███       | 95/313 [00:05<00:11, 19.19it/s][A
+Encoding Batches with SkipModel:  31%|███▏      | 98/313 [00:05<00:10, 20.46it/s][A
+Encoding Batches with SkipModel:  32%|███▏      | 101/313 [00:05<00:11, 19.24it/s][A
+Encoding Batches with SkipModel:  33%|███▎      | 104/313 [00:05<00:10, 19.84it/s][A
+Encoding Batches with SkipModel:  34%|███▍      | 107/313 [00:05<00:10, 20.37it/s][A
+Encoding Batches with SkipModel:  35%|███▌      | 110/313 [00:05<00:09, 20.99it/s][A
+Encoding Batches with SkipModel:  36%|███▌      | 113/313 [00:05<00:09, 21.66it/s][A
+Encoding Batches with SkipModel:  37%|███▋      | 116/313 [00:06<00:08, 21.92it/s][A
+Encoding Batches with SkipModel:  38%|███▊      | 119/313 [00:06<00:08, 21.86it/s][A
+Encoding Batches with SkipModel:  39%|███▉      | 122/313 [00:06<00:09, 20.39it/s][A
+Encoding Batches with SkipModel:  40%|███▉      | 125/313 [00:06<00:08, 21.59it/s][A
+Encoding Batches with SkipModel:  41%|████      | 128/313 [00:06<00:08, 20.73it/s][A
+Encoding Batches with SkipModel:  42%|████▏     | 131/313 [00:06<00:08, 20.83it/s][A
+Encoding Batches with SkipModel:  43%|████▎     | 134/313 [00:06<00:08, 20.98it/s][A
+Encoding Batches with SkipModel:  44%|████▍     | 137/313 [00:07<00:08, 21.42it/s][A
+Encoding Batches with SkipModel:  45%|████▍     | 140/313 [00:07<00:08, 21.26it/s][A
+Encoding Batches with SkipModel:  46%|████▌     | 143/313 [00:07<00:08, 20.68it/s][A
+Encoding Batches with SkipModel:  47%|████▋     | 146/313 [00:07<00:07, 20.95it/s][A
+Encoding Batches with SkipModel:  48%|████▊     | 149/313 [00:07<00:07, 21.54it/s][A
+Encoding Batches with SkipModel:  49%|████▊     | 152/313 [00:07<00:07, 22.15it/s][A
+Encoding Batches with SkipModel:  50%|████▉     | 155/313 [00:07<00:06, 22.95it/s][A
+Encoding Batches with SkipModel:  50%|█████     | 158/313 [00:07<00:06, 23.55it/s][A
+Encoding Batches with SkipModel:  51%|█████▏    | 161/313 [00:08<00:06, 23.65it/s][A
+Encoding Batches with SkipModel:  52%|█████▏    | 164/313 [00:08<00:06, 23.26it/s][A
+Encoding Batches with SkipModel:  53%|█████▎    | 167/313 [00:08<00:06, 22.43it/s][A
+Encoding Batches with SkipModel:  54%|█████▍    | 170/313 [00:08<00:06, 22.50it/s][A
+Encoding Batches with SkipModel:  55%|█████▌    | 173/313 [00:08<00:06, 21.64it/s][A
+Encoding Batches with SkipModel:  57%|█████▋    | 177/313 [00:08<00:05, 24.33it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 180/313 [00:08<00:05, 23.68it/s][A
+Encoding Batches with SkipModel:  58%|█████▊    | 183/313 [00:09<00:05, 23.60it/s][A
+Encoding Batches with SkipModel:  59%|█████▉    | 186/313 [00:09<00:05, 23.63it/s][A
+Encoding Batches with SkipModel:  60%|██████    | 189/313 [00:09<00:05, 22.49it/s][A
+Encoding Batches with SkipModel:  61%|██████▏   | 192/313 [00:09<00:05, 23.53it/s][A
+Encoding Batches with SkipModel:  62%|██████▏   | 195/313 [00:09<00:05, 23.12it/s][A
+Encoding Batches with SkipModel:  63%|██████▎   | 198/313 [00:09<00:04, 23.83it/s][A
+Encoding Batches with SkipModel:  64%|██████▍   | 201/313 [00:09<00:04, 23.34it/s][A
+Encoding Batches with SkipModel:  65%|██████▌   | 204/313 [00:09<00:04, 23.35it/s][A
+Encoding Batches with SkipModel:  66%|██████▌   | 207/313 [00:10<00:04, 23.93it/s][A
+Encoding Batches with SkipModel:  67%|██████▋   | 210/313 [00:10<00:04, 23.25it/s][A
+Encoding Batches with SkipModel:  68%|██████▊   | 213/313 [00:10<00:04, 24.79it/s][A
+Encoding Batches with SkipModel:  69%|██████▉   | 216/313 [00:10<00:03, 24.45it/s][A
+Encoding Batches with SkipModel:  70%|██████▉   | 219/313 [00:10<00:03, 23.86it/s][A
+Encoding Batches with SkipModel:  71%|███████   | 222/313 [00:10<00:03, 24.65it/s][A
+Encoding Batches with SkipModel:  72%|███████▏  | 225/313 [00:10<00:03, 25.13it/s][A
+Encoding Batches with SkipModel:  73%|███████▎  | 228/313 [00:10<00:03, 24.33it/s][A
+Encoding Batches with SkipModel:  74%|███████▍  | 231/313 [00:11<00:03, 25.18it/s][A
+Encoding Batches with SkipModel:  75%|███████▍  | 234/313 [00:11<00:03, 24.69it/s][A
+Encoding Batches with SkipModel:  76%|███████▌  | 237/313 [00:11<00:03, 23.44it/s][A
+Encoding Batches with SkipModel:  77%|███████▋  | 240/313 [00:11<00:03, 22.90it/s][A
+Encoding Batches with SkipModel:  78%|███████▊  | 243/313 [00:11<00:02, 23.49it/s][A
+Encoding Batches with SkipModel:  79%|███████▊  | 246/313 [00:11<00:02, 23.46it/s][A
+Encoding Batches with SkipModel:  80%|███████▉  | 249/313 [00:11<00:02, 23.71it/s][A
+Encoding Batches with SkipModel:  81%|████████  | 252/313 [00:11<00:02, 22.89it/s][A
+Encoding Batches with SkipModel:  81%|████████▏ | 255/313 [00:12<00:02, 23.51it/s][A
+Encoding Batches with SkipModel:  82%|████████▏ | 258/313 [00:12<00:02, 22.48it/s][A
+Encoding Batches with SkipModel:  83%|████████▎ | 261/313 [00:12<00:02, 23.40it/s][A
+Encoding Batches with SkipModel:  84%|████████▍ | 264/313 [00:12<00:02, 23.72it/s][A
+Encoding Batches with SkipModel:  85%|████████▌ | 267/313 [00:12<00:01, 24.43it/s][A
+Encoding Batches with SkipModel:  86%|████████▋ | 270/313 [00:12<00:01, 25.33it/s][A
+Encoding Batches with SkipModel:  87%|████████▋ | 273/313 [00:12<00:01, 25.62it/s][A
+Encoding Batches with SkipModel:  88%|████████▊ | 276/313 [00:12<00:01, 25.64it/s][A
+Encoding Batches with SkipModel:  89%|████████▉ | 279/313 [00:13<00:01, 25.69it/s][A
+Encoding Batches with SkipModel:  90%|█████████ | 282/313 [00:13<00:01, 26.39it/s][A
+Encoding Batches with SkipModel:  91%|█████████ | 285/313 [00:13<00:01, 26.38it/s][A
+Encoding Batches with SkipModel:  92%|█████████▏| 288/313 [00:13<00:00, 25.39it/s][A
+Encoding Batches with SkipModel:  93%|█████████▎| 291/313 [00:13<00:00, 24.85it/s][A
+Encoding Batches with SkipModel:  94%|█████████▍| 294/313 [00:13<00:00, 24.83it/s][A
+Encoding Batches with SkipModel:  95%|█████████▍| 297/313 [00:13<00:00, 24.67it/s][A
+Encoding Batches with SkipModel:  96%|█████████▌| 300/313 [00:13<00:00, 23.71it/s][A
+Encoding Batches with SkipModel:  97%|█████████▋| 303/313 [00:14<00:00, 23.79it/s][A
+Encoding Batches with SkipModel:  98%|█████████▊| 306/313 [00:14<00:00, 24.07it/s][A
+Encoding Batches with SkipModel:  99%|█████████▊| 309/313 [00:14<00:00, 24.08it/s][A
+Encoding Batches with SkipModel: 100%|█████████▉| 312/313 [00:14<00:00, 23.69it/s][AEncoding Batches with SkipModel: 100%|██████████| 313/313 [00:14<00:00, 21.37it/s]
+Saving results to disk...
+
+Saving the dataset (0/1 shards):   0%|          | 0/60000 [00:00<?, ? examples/s][A
+Saving the dataset (0/1 shards):  22%|██▏       | 13000/60000 [00:00<00:00, 109414.28 examples/s][A
+Saving the dataset (0/1 shards):  43%|████▎     | 26000/60000 [00:00<00:00, 112105.96 examples/s][A
+Saving the dataset (0/1 shards):  65%|██████▌   | 39000/60000 [00:00<00:00, 113026.77 examples/s][A
+Saving the dataset (0/1 shards):  85%|████████▌ | 51000/60000 [00:00<00:00, 114591.04 examples/s][A
+Saving the dataset (1/1 shards): 100%|██████████| 60000/60000 [00:00<00:00, 114591.04 examples/s][ASaving the dataset (1/1 shards): 100%|██████████| 60000/60000 [00:00<00:00, 113255.39 examples/s]
+
+Saving the dataset (0/1 shards):   0%|          | 0/10000 [00:00<?, ? examples/s][A
+Saving the dataset (1/1 shards): 100%|██████████| 10000/10000 [00:00<00:00, 110318.36 examples/s][ASaving the dataset (1/1 shards): 100%|██████████| 10000/10000 [00:00<00:00, 110044.55 examples/s]
+Encoding Different Skips: 100%|██████████| 2/2 [04:04<00:00, 122.56s/it]Encoding Different Skips: 100%|██████████| 2/2 [04:04<00:00, 122.39s/it]
+Saved intermediate results for skip [(0, 1)] to /cluster/home/mwylie/toast-extensions/data/linear_skipped_embeddings/mnist/deit-small-patch16-224/500

@@ -34,7 +34,8 @@ from toast.utils.utils import image_encode, extract_representations, open_clip_i
 from toast.modules.module import SkipModel
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+# changed to check
+print(device)
 
 @torch.no_grad()
 def encode_data(loader, skip_encoder):
@@ -74,7 +75,7 @@ def run_encoding(
     seed: int,
     skips: str = "[[], [(0, 1)]]",
     samples_to_extract: int = 500,
-    batch_size: int = 256,
+    batch_size: int = 32, #changed from 256!!!!!1
     mode: int = 1,
 ):
 
@@ -128,12 +129,18 @@ def run_encoding(
                 test=load_dataset(DATASET_NAME2HF_NAME[dataset_name], "cropped_digits", split="test"),
             )
         else:
-            print(f"Loading dataset: {dataset_name}")
-            data: DatasetDict = DatasetDict(
-                train=load_dataset(DATASET_NAME2HF_NAME[dataset_name], split="train"),
-                test=load_dataset(DATASET_NAME2HF_NAME[dataset_name], split="test"),
-            )
+            print(f"Loading dataset from saved disk version: {dataset_name}")
 
+            if dataset_name != "mnist":
+                raise ValueError("This local loading patch currently only supports MNIST")
+
+            dataset_path = "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/mnist_clean"
+
+            if not os.path.exists(dataset_path):
+                raise ValueError(f"Dataset path does not exist: {dataset_path}")
+
+            data: DatasetDict = load_from_disk(dataset_path)
+                
     if encoder_name.startswith("open_clip:"):
         import open_clip
 
@@ -178,7 +185,7 @@ def run_encoding(
         batch_size=batch_size,
         pin_memory=True,
         shuffle=False,
-        num_workers=8,
+        num_workers=1,
         collate_fn=collate_fn,
     )
 
@@ -187,7 +194,7 @@ def run_encoding(
         batch_size=batch_size,
         pin_memory=True,
         shuffle=False,
-        num_workers=8,
+        num_workers=1,
         collate_fn=collate_fn,
     )
 

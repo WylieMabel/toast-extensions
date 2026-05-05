@@ -3,6 +3,9 @@ data/
 results/
 models/
 plots/
+# added for cluster
+hf_temp_cache/
+
 
 # Logs
 wandb/
