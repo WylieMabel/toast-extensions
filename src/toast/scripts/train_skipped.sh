@@ -2,6 +2,11 @@
 
 declare -a skips=("[]" "[(0, 1)]")
 
+# --- NEW: Point HF to your customapps local assets ---
+export HF_HOME="/cluster/customapps/biomed/vogtlab/users/mwylie/toast/hf_cache"
+export HF_DATASETS_OFFLINE=1
+export TRANSFORMERS_OFFLINE=1
+
 for dataset_name in mnist
 do
     for seed in 0 

@@ -57,6 +57,63 @@ class NoEncoder(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return x
 
+class MLPLinearisedEncoder(nn.Module):
+    def __init__(self, encoder, mlp_layers_to_linearize=None):
+        super().__init__()
+
+        self.encoder = encoder
+        self.mlp_layers_to_linearize = set(mlp_layers_to_linearize or [])
+
+        self._patch_mlp()
+
+    def forward(self, *args, **kwargs):
+        return self.encoder(*args, **kwargs)
+
+    def _patch_mlp(self):
+        # This method identifies the MLP layers in the transformer and replaces their forward pass with a linear transformation using the weights of the two linear layers in the MLP.
+        layers = self._get_layers()
+
+        for idx, layer in enumerate(layers):
+
+            if idx not in self.mlp_layers_to_linearize:
+                continue
+
+            if not hasattr(layer, "mlp"):
+                continue
+
+            mlp = layer.mlp
+
+            if not (hasattr(mlp, "fc1") and hasattr(mlp, "fc2")):
+                continue
+
+            W1 = mlp.fc1.weight
+            b1 = mlp.fc1.bias
+            W2 = mlp.fc2.weight
+            b2 = mlp.fc2.bias
+
+            def linear_forward(x, W1=W1, b1=b1, W2=W2, b2=b2):
+                original_shape = x.shape
+                x_flat = x.reshape(-1, x.shape[-1])
+                x_transformed = torch.nn.functional.linear(x_flat, W1, b1)
+                x_transformed = torch.nn.functional.silu(x_transformed)
+                x_transformed = torch.nn.functional.linear(x_transformed, W2, b2)
+                return x_transformed.reshape(original_shape)
+                
+            mlp.forward = linear_forward
+
+    def _get_layers(self):
+        # DeiT / ViT
+        if hasattr(self.encoder, "encoder") and hasattr(self.encoder.encoder, "layer"):
+            return self.encoder.encoder.layer
+
+        # CLIP
+        if hasattr(self.encoder, "vision_model"):
+            vm = self.encoder.vision_model
+            if hasattr(vm.encoder, "layers"):
+                return vm.encoder.layers
+
+        raise ValueError("Could not find transformer layers")
+
 
 class SkipModel(nn.Module):
 
