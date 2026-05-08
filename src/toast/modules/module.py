@@ -3,6 +3,7 @@ import pickle
 from typing import Callable, Dict, Sequence, Optional, Any
 from torch import nn
 import torch
+import torch.nn.functional as F
 from functools import partial
 from toast.utils.dictionaries import NAME2TRANSLATORS
 from toast.utils.utils import resolve_path
@@ -58,61 +59,145 @@ class NoEncoder(nn.Module):
         return x
 
 class MLPLinearisedEncoder(nn.Module):
-    def __init__(self, encoder, mlp_layers_to_linearize=None):
+    """
+    Replaces target MLP layers with a linear approximation in one of two modes.
+
+    mode="collapse" (default): purely algebraic. Composes fc1 and fc2 weight
+        matrices into a single linear map at init time — no data needed, no
+        non-linearity. output = F.linear(x, W2@W1, W2@b1+b2).
+
+    mode="fitted": data-driven. Runs a one-time calibration pass to collect
+        (input, output) pairs at each target MLP boundary, then fits a
+        least-squares linear map (same translator as SkipModel "linear").
+        Call .fit(loader) after construction; every forward pass after that
+        is just a single matrix multiply.
+    """
+
+    def __init__(self, encoder, mlp_layers_to_linearize=None, mode: str = "collapse"):
         super().__init__()
+
+        if mode not in ("collapse", "fitted"):
+            raise ValueError(f"mode must be 'collapse' or 'fitted', got '{mode}'")
 
         self.encoder = encoder
         self.mlp_layers_to_linearize = set(mlp_layers_to_linearize or [])
+        self.mode = mode
 
-        self._patch_mlp()
-
-    def forward(self, *args, **kwargs):
-        return self.encoder(*args, **kwargs)
-
-    def _patch_mlp(self):
-        # This method identifies the MLP layers in the transformer and replaces their forward pass with a linear transformation using the weights of the two linear layers in the MLP.
-        layers = self._get_layers()
-
-        for idx, layer in enumerate(layers):
-
-            if idx not in self.mlp_layers_to_linearize:
-                continue
-
-            if not hasattr(layer, "mlp"):
-                continue
-
-            mlp = layer.mlp
-
-            if not (hasattr(mlp, "fc1") and hasattr(mlp, "fc2")):
-                continue
-
-            W1 = mlp.fc1.weight
-            b1 = mlp.fc1.bias
-            W2 = mlp.fc2.weight
-            b2 = mlp.fc2.bias
-
-            def linear_forward(x, W1=W1, b1=b1, W2=W2, b2=b2):
-                original_shape = x.shape
-                x_flat = x.reshape(-1, x.shape[-1])
-                x_transformed = torch.nn.functional.linear(x_flat, W1, b1)
-                x_transformed = torch.nn.functional.silu(x_transformed)
-                x_transformed = torch.nn.functional.linear(x_transformed, W2, b2)
-                return x_transformed.reshape(original_shape)
-                
-            mlp.forward = linear_forward
+        if mode == "collapse":
+            self._patch_mlp_collapse()
 
     def _get_layers(self):
-        # DeiT / ViT
         if hasattr(self.encoder, "encoder") and hasattr(self.encoder.encoder, "layer"):
             return self.encoder.encoder.layer
-
-        # CLIP
         if hasattr(self.encoder, "vision_model"):
             vm = self.encoder.vision_model
             if hasattr(vm.encoder, "layers"):
                 return vm.encoder.layers
+        raise ValueError("Could not find transformer layers in the encoder")
 
-        raise ValueError("Could not find transformer layers")
+    def _patch_mlp_collapse(self):
+        layers = self._get_layers()
+
+        for idx, layer in enumerate(layers):
+            if idx not in self.mlp_layers_to_linearize:
+                continue
+            if not hasattr(layer, "mlp"):
+                continue
+
+            mlp = layer.mlp
+            if not (hasattr(mlp, "fc1") and hasattr(mlp, "fc2")):
+                continue
+
+            W1 = mlp.fc1.weight.detach()  # [d_ff, d_in]
+            b1 = mlp.fc1.bias.detach()    # [d_ff]
+            W2 = mlp.fc2.weight.detach()  # [d_out, d_ff]
+            b2 = mlp.fc2.bias.detach()    # [d_out]
+
+            # fc2(fc1(x)) without activation = (W2 W1)x + (W2 b1 + b2)
+            W_combined = (W2 @ W1).clone()       # [d_out, d_in]
+            b_combined = (W2 @ b1 + b2).clone()  # [d_out]
+
+            def collapsed_forward(x, W=W_combined, b=b_combined):
+                s = x.shape
+                return F.linear(x.reshape(-1, s[-1]), W, b).reshape(s)
+
+            mlp.forward = collapsed_forward
+
+    @torch.no_grad()
+    def fit(self, loader, max_samples: int = 500):
+        """
+        Calibration pass for mode="fitted".
+
+        Registers a forward hook on each target MLP to collect (input, output)
+        token-level pairs across batches. After enough samples are seen, removes
+        the hooks, fits one least-squares linear translator per MLP, and patches
+        each mlp.forward with the resulting map. Called once; not called again
+        during inference.
+        """
+        if self.mode != "fitted":
+            raise RuntimeError("fit() is only valid for mode='fitted'")
+
+        layers = self._get_layers()
+
+        mlp_inputs: dict[int, list] = {i: [] for i in self.mlp_layers_to_linearize}
+        mlp_outputs: dict[int, list] = {i: [] for i in self.mlp_layers_to_linearize}
+        hooks = []
+
+        for idx, layer in enumerate(layers):
+            if idx not in self.mlp_layers_to_linearize or not hasattr(layer, "mlp"):
+                continue
+
+            def make_hook(i):
+                def hook(module, inp, out):
+                    # inp is a tuple; inp[0] is the tensor passed to mlp.forward
+                    x = inp[0].detach().cpu()
+                    y = out.detach().cpu()
+                    mlp_inputs[i].append(x.reshape(-1, x.shape[-1]))
+                    mlp_outputs[i].append(y.reshape(-1, y.shape[-1]))
+                return hook
+
+            hooks.append(layer.mlp.register_forward_hook(make_hook(idx)))
+
+        self.encoder.eval()
+        n_seen = 0
+        for batch in loader:
+            images = batch.get("pixel_values", batch.get("images"))
+            if images is None:
+                raise KeyError("Batch missing 'pixel_values' or 'images'")
+            self.encoder(images.to(next(self.encoder.parameters()).device))
+            n_seen += images.shape[0]
+            if n_seen >= max_samples:
+                break
+
+        for h in hooks:
+            h.remove()
+
+        translator_factory = NAME2TRANSLATORS["linear"]
+        for idx, layer in enumerate(layers):
+            if idx not in self.mlp_layers_to_linearize or not hasattr(layer, "mlp"):
+                continue
+            if not mlp_inputs[idx]:
+                continue
+
+            X = torch.cat(mlp_inputs[idx]).float()  # [N*seq_len, d_in]
+            Y = torch.cat(mlp_outputs[idx]).float()  # [N*seq_len, d_out]
+
+            translator = translator_factory()
+            translator.fit(x=X, y=Y)
+
+            def make_forward(t):
+                def fitted_forward(x):
+                    s = x.shape
+                    out, _ = t.transform(x.reshape(-1, s[-1]).float())
+                    return out.reshape(s).to(x.dtype)
+                return fitted_forward
+
+            layer.mlp.forward = make_forward(translator)
+
+        return self
+
+    def forward(self, *args, **kwargs):
+        return self.encoder(*args, **kwargs)
 
 
 class SkipModel(nn.Module):

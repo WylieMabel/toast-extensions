@@ -86,7 +86,7 @@ def run_encoding(
     skips: str = "[[], [(0, 1)]]",
     mlp_skips: str = "[[]]",   # for mlp,
     samples_to_extract: int = 500,
-    batch_size: int = 32, #changed from 256!!!!!1
+    batch_size: int = 32, #changed from 256!!!!!
     mode: int = 1,
 ):
 
@@ -220,6 +220,8 @@ def run_encoding(
     )
     print(f"Captured embeddings for layers: {list(all_layer_embeddings.keys())}")
 
+    base_encoder = encoder
+
     for skip in tqdm(skips, desc="Encoding Different Skips"):
         for mlp_skip in tqdm(mlp_skips, desc="Encoding Different MLP Skips"):  
             print(f"\nProcessing skip: {skip}")
@@ -227,13 +229,13 @@ def run_encoding(
 
             split2encoding = {}
 
-            encoder = MLPLinearisedEncoder(
-                encoder,
-                mlp_skip_layers=mlp_skip,
-            )
+            current_mlp_encoder = MLPLinearisedEncoder(
+                base_encoder,
+                mlp_layers_to_linearize=mlp_skip,
+            ).to(device).eval()
 
             skip_encoder = SkipModel(
-                encoder=encoder,
+                encoder=current_mlp_encoder.encoder,
                 skips=skip,
                 mode=mode,
                 precomputed_embeddings=all_layer_embeddings,
@@ -264,6 +266,7 @@ def run_encoding(
                     data[split] = data[split].add_column(final_column_name, encoding)
 
             del skip_encoder
+            del current_mlp_encoder
             torch.cuda.empty_cache()
 
             if DATASET_DIR.exists():
@@ -274,7 +277,7 @@ def run_encoding(
                     data.save_to_disk(str(temp_dir))
                     shutil.rmtree(DATASET_DIR)
                     shutil.move(str(temp_dir), DATASET_DIR)
-                    print(f"Saved intermediate results for skip {skip} to {DATASET_DIR}")
+                    print(f"Saved intermediate results for skip {skip}, mlp skip(s) {mlp_skip} to {DATASET_DIR}")
                 except Exception as e:
                     print(f"Error saving intermediate results: {e}")
                     if temp_dir.exists():
@@ -282,7 +285,8 @@ def run_encoding(
             else:
                 DATASET_DIR.mkdir(parents=True, exist_ok=True)
                 data.save_to_disk(str(DATASET_DIR))
-                print(f"Saved initial results for skip {skip} to {DATASET_DIR}")
+                print(f"Saved initial results for skip {skip}, mlp skip(s) {mlp_skip} to {DATASET_DIR}")
+            
 
 
 if __name__ == "__main__":
