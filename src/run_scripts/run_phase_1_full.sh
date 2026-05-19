@@ -2,9 +2,9 @@
 #SBATCH -p gpu
 #SBATCH --gres=gpu:rtx4090:1
 #SBATCH --cpus-per-task=2
-#SBATCH --mem=12000
+#SBATCH --mem=24000
 #SBATCH --time=2:00:00
-#SBATCH --output=logs/mlp_phasetwoa_extended.out.txt
+#SBATCH --output=logs/mlp_phaseone_extended_full.out.txt
 
 # 1. Path Setup
 BASE_DIR="/cluster/customapps/biomed/vogtlab/users/mwylie/toast"
@@ -16,7 +16,6 @@ mkdir -p $WRITABLE_CACHE
 # 2. Activate the venv
 source $GPU_ENV/bin/activate
 pip install -e .
-
 # 3. CRITICAL Environment Variable Setup
 # Point this to your existing data on customapps
 export HF_HOME="/cluster/customapps/biomed/vogtlab/users/mwylie/toast/hf_cache"
@@ -37,4 +36,7 @@ export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR/src
 # 6. Execute
 cd $PROJECT_DIR
 
-bash src/toast/scripts/train_skipped_mlp.sh
+# IMPORTANT: We pass the local path to the encoder here if 
+# you want to avoid the "Model configuration not found" error, 
+# OR ensure the MODEL2CONFIGS dict is updated in your python code.
+bash src/toast/scripts/encode_vision_full.sh

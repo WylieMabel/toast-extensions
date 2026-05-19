@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH -p gpu
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:rtx4090:1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=12000
 #SBATCH --time=2:00:00
-#SBATCH --output=logs/mlp_sphaseone.out.txt
+#SBATCH --output=logs/mlp_phaseone_extended.out.txt
 
 # 1. Path Setup
 BASE_DIR="/cluster/customapps/biomed/vogtlab/users/mwylie/toast"

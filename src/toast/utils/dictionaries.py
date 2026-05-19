@@ -92,6 +92,13 @@ DATASET_NAME2HF_NAME = {
     "yelp_polarity": "yelp_polarity",
 }
 
+DATASET2LOCAL_PATH = {
+    "mnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/mnist_clean",
+    "fashion-mnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/fashion_mnist_clean",
+    "cifar10": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/cifar10_clean",
+    "cifar100": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/cifar100_clean",
+}
+
 # Text dataset configurations with full HuggingFace loading details
 TEXT_DATASET_CONFIGS = {
     "ag_news": {

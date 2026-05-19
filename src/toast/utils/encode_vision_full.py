@@ -1,3 +1,4 @@
+import copy
 import functools
 import os
 import shutil
@@ -32,50 +33,37 @@ from toast.utils.dictionaries import (
     MODEL2CONFIGS,
 )
 from toast.utils.utils import image_encode, extract_representations, open_clip_image_encode
-from toast.modules.module import SkipModel, MLPLinearisedEncoder
+from toast.modules.module import SkipModel, MLPLinearisedEncoder, AttentionLinearisedEncoder
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# changed to check
 print(device)
+
 
 @torch.no_grad()
 def encode_data(loader, skip_encoder):
     embeddings = []
     skip_encoder.eval()
-
-    for batch in tqdm(loader, desc="Encoding Batches with SkipModel"):
+    for batch in tqdm(loader, desc="Encoding Batches"):
         image_input = batch.get("pixel_values", batch.get("images"))
         if image_input is None:
             raise KeyError("Batch missing required key 'pixel_values' or 'images'")
         image_input = image_input.to(device)
-
         attn_mask = batch.get("attention_mask", None)
         if attn_mask is not None:
             attn_mask = attn_mask.to(device)
-
         x = skip_encoder(image_input, attention_mask=attn_mask)
         embeddings.extend(x.cpu().tolist())
-
     return embeddings
 
 
-def _parse_skips(skips):
+def _parse_list_of_lists(val):
     import ast
-    if isinstance(skips, str):
-        skips = ast.literal_eval(skips)
-    if not skips or not isinstance(skips[0], list):
-        skips = [skips]
-    return skips
-
-def _parse_mlp_skips(mlp_skips):
-    import ast
-    if isinstance(mlp_skips, str):
-        mlp_skips = ast.literal_eval(mlp_skips)
-    if not isinstance(mlp_skips[0], list):
-        mlp_skips = [mlp_skips]
-    # DEBUG
-    print(f"Checking MLP Skips parse: {mlp_skips}")
-    return mlp_skips
+    if isinstance(val, str):
+        val = ast.literal_eval(val)
+    # Single list like [1,2] → wrap to [[1,2]]; already [[],[1,2]] → keep
+    if not val or not isinstance(val[0], list):
+        val = [val]
+    return val
 
 
 @torch.no_grad()
@@ -85,29 +73,28 @@ def run_encoding(
     translator_name: str,
     seed: int,
     skips: str = "[[], [(0, 1)]]",
-    mlp_skips: str = "[[]]",   # for mlp,
+    mlp_skips: str = "[[]]",
+    attention_skips: str = "[[]]",
     samples_to_extract: int = 500,
-    batch_size: int = 32, #changed from 256!!!!!
+    batch_size: int = 32,
     mode: int = 1,
 ):
-
     seed_everything(seed)
-    split2encoding = {}
 
-    skips = _parse_skips(skips)
-    mlp_skips = _parse_mlp_skips(mlp_skips)
+    skips = _parse_list_of_lists(skips)
+    mlp_skips = _parse_list_of_lists(mlp_skips)
+    attention_skips = _parse_list_of_lists(attention_skips)
+
+    print(f"Skips: {skips} | MLP skips: {mlp_skips} | Attention skips: {attention_skips}")
 
     if encoder_name not in MODEL2CONFIGS:
-        raise ValueError(f"Model configuration not found for {encoder_name}. Please add it to MODEL2CONFIGS.")
-
+        raise ValueError(f"Model config not found for {encoder_name}.")
     model_config = MODEL2CONFIGS[encoder_name]
-
-    print(f"Dataset: {dataset_name}, Encoder: {encoder_name}, Translator: {translator_name}, Skips: {skips}")
 
     DATASET_DIR = (
         PROJECT_ROOT
         / "data"
-        / f"{translator_name}_skipped_embeddings"
+        / f"{translator_name}_skipped_embeddings_full"
         / dataset_name
         / encoder_name.split("/")[1]
         / str(samples_to_extract)
@@ -117,7 +104,7 @@ def run_encoding(
         print(f"Loading existing dataset from {DATASET_DIR}")
         data: DatasetDict = load_from_disk(dataset_path=str(DATASET_DIR))
     else:
-        print(f"Dataset directory does not exist. Creating: {DATASET_DIR}")
+        print(f"Creating dataset dir: {DATASET_DIR}")
         DATASET_DIR.mkdir(parents=True, exist_ok=True)
         if dataset_name == "imagenet-1k":
             val_data = load_dataset(
@@ -129,32 +116,23 @@ def run_encoding(
                 download_config=DownloadConfig(resume_download=True),
                 verification_mode=VerificationMode.NO_CHECKS,
             )
-
-            train_test_split = val_data.train_test_split(test_size=0.2)
-
-            data: DatasetDict = DatasetDict(
-                train=train_test_split["train"],
-                test=train_test_split["test"],
-            )
+            split = val_data.train_test_split(test_size=0.2)
+            data = DatasetDict(train=split["train"], test=split["test"])
         elif dataset_name == "svhn":
-            data: DatasetDict = DatasetDict(
+            data = DatasetDict(
                 train=load_dataset(DATASET_NAME2HF_NAME[dataset_name], "cropped_digits", split="train"),
                 test=load_dataset(DATASET_NAME2HF_NAME[dataset_name], "cropped_digits", split="test"),
             )
         else:
-            print(f"Loading dataset from saved disk version: {dataset_name}")
-
             if dataset_name not in DATASET2LOCAL_PATH:
                 raise ValueError(f"No local path configured for dataset '{dataset_name}'. Add it to DATASET2LOCAL_PATH in dictionaries.py.")
             dataset_path = DATASET2LOCAL_PATH[dataset_name]
             if not os.path.exists(dataset_path):
                 raise ValueError(f"Dataset path does not exist: {dataset_path}")
-            data: DatasetDict = load_from_disk(dataset_path)
-                
+            data = load_from_disk(dataset_path)
+
     if encoder_name.startswith("open_clip:"):
         import open_clip
-
-        print(f"Loading OpenCLIP model: {encoder_name}")
         open_clip_hub_name = f"hf-hub:{encoder_name.split(':', 1)[1]}"
         model, _, preprocess_val = open_clip.create_model_and_transforms(open_clip_hub_name, device=device)
         encoder = model
@@ -164,9 +142,7 @@ def run_encoding(
             image_name=DATASET2INPUT_COLUMN[dataset_name],
             label_name=DATASET2LABEL_COLUMN[dataset_name],
         )
-
     elif encoder_name == "openai/clip-vit-base-patch32":
-        print(f"Loading HF CLIP model: {encoder_name}")
         config = CLIPVisionConfig.from_pretrained(encoder_name, output_hidden_states=True, return_dict=True)
         processor = CLIPImageProcessor.from_pretrained(encoder_name)
         encoder = CLIPVisionModel.from_pretrained(encoder_name, config=config)
@@ -177,7 +153,6 @@ def run_encoding(
             label_name=DATASET2LABEL_COLUMN[dataset_name],
         )
     else:
-        print(f"Loading HF AutoModel: {encoder_name}")
         config = AutoConfig.from_pretrained(encoder_name, output_hidden_states=True, return_dict=True)
         processor = AutoImageProcessor.from_pretrained(encoder_name)
         encoder = AutoModel.from_pretrained(encoder_name, config=config)
@@ -191,21 +166,12 @@ def run_encoding(
     encoder.eval().to(device)
 
     train_loader = DataLoader(
-        data["train"],
-        batch_size=batch_size,
-        pin_memory=True,
-        shuffle=False,
-        num_workers=1,
-        collate_fn=collate_fn,
+        data["train"], batch_size=batch_size, pin_memory=True,
+        shuffle=False, num_workers=1, collate_fn=collate_fn,
     )
-
     test_loader = DataLoader(
-        data["test"],
-        batch_size=batch_size,
-        pin_memory=True,
-        shuffle=False,
-        num_workers=1,
-        collate_fn=collate_fn,
+        data["test"], batch_size=batch_size, pin_memory=True,
+        shuffle=False, num_workers=1, collate_fn=collate_fn,
     )
 
     all_layer_embeddings = extract_representations(
@@ -218,71 +184,78 @@ def run_encoding(
     )
     print(f"Captured embeddings for layers: {list(all_layer_embeddings.keys())}")
 
-    base_encoder = encoder
+    total = len(skips) * len(mlp_skips) * len(attention_skips)
+    combo_idx = 0
+    for skip in skips:
+        for attn_skip in attention_skips:
+            for mlp_skip in mlp_skips:
+                combo_idx += 1
+                print(f"\n[{combo_idx}/{total}] skip={skip} | attn={attn_skip} | mlp={mlp_skip}")
 
-    for skip in tqdm(skips, desc="Encoding Different Skips"):
-        for mlp_skip in tqdm(mlp_skips, desc="Encoding Different MLP Skips"):  
-            print(f"\nProcessing skip: {skip}")
-            print(f"\nProcessing MLP skips: {mlp_skip}")
+                column_name = f"skip={skip}_mlp={mlp_skip}_attn={attn_skip}"
 
-            split2encoding = {}
-
-            current_mlp_encoder = MLPLinearisedEncoder(
-                base_encoder,
-                mlp_layers_to_linearize=mlp_skip,
-                mode="collapse",
-            ).to(device).eval()
-
-            skip_encoder = SkipModel(
-                encoder=current_mlp_encoder.encoder,
-                skips=skip,
-                mode=mode,
-                precomputed_embeddings=all_layer_embeddings,
-                translator_factory_name=translator_name,
-                **model_config,
-            )
-            skip_encoder = skip_encoder.to(device).eval()
-
-            split2encoding["train"] = encode_data(loader=train_loader, skip_encoder=skip_encoder)
-            split2encoding["test"] = encode_data(loader=test_loader, skip_encoder=skip_encoder)
-
-            print("Saving results to disk...")
-            for split, encoding in split2encoding.items():
-                if not encoding:
-                    print(f"Warning: No embeddings generated for split '{split}', skip '{skip}', mlp skip(s) '{mlp_skip}'. Skipping saving.")
+                if column_name in data["train"].column_names and column_name in data["test"].column_names:
+                    print(f"Column '{column_name}' already exists, skipping.")
                     continue
-                column_name = f"skip={skip}_mlp={mlp_skip}"
-                if len(encoding) != len(data[split]):
-                    print(
-                        f"Error: Encoding length ({len(encoding)}) does not match dataset length ({len(data[split])}) for split '{split}', skip '{skip}'."
-                    )
-                    continue
-                if column_name in data[split].column_names:
-                    data[split] = data[split].remove_columns([column_name])
-                data[split] = data[split].add_column(column_name, encoding)
 
-            del skip_encoder
-            del current_mlp_encoder
-            torch.cuda.empty_cache()
+                # Use a fresh deep copy so patches from previous combinations don't accumulate
+                combo_encoder = copy.deepcopy(encoder)
 
-            if DATASET_DIR.exists():
+                AttentionLinearisedEncoder(
+                    combo_encoder,
+                    attention_layers_to_linearize=attn_skip,
+                    mode="zero",
+                ).to(device).eval()
+
+                MLPLinearisedEncoder(
+                    combo_encoder,
+                    mlp_layers_to_linearize=mlp_skip,
+                    mode="collapse",
+                ).to(device).eval()
+
+                skip_encoder = SkipModel(
+                    encoder=combo_encoder,
+                    skips=skip,
+                    mode=mode,
+                    precomputed_embeddings=all_layer_embeddings,
+                    translator_factory_name=translator_name,
+                    **model_config,
+                ).to(device).eval()
+
+                split2encoding = {
+                    "train": encode_data(loader=train_loader, skip_encoder=skip_encoder),
+                    "test": encode_data(loader=test_loader, skip_encoder=skip_encoder),
+                }
+
+                print("Saving results to disk...")
+                for split_name, encoding in split2encoding.items():
+                    if not encoding:
+                        print(f"Warning: no embeddings for split '{split_name}'. Skipping.")
+                        continue
+                    if len(encoding) != len(data[split_name]):
+                        print(f"Error: length mismatch for split '{split_name}'. Skipping.")
+                        continue
+                    if column_name in data[split_name].column_names:
+                        data[split_name] = data[split_name].remove_columns([column_name])
+                    data[split_name] = data[split_name].add_column(column_name, encoding)
+
+                del skip_encoder, combo_encoder
+                torch.cuda.empty_cache()
+
                 temp_dir = DATASET_DIR.parent / f"{DATASET_DIR.name}_temp"
                 try:
                     if temp_dir.exists():
                         shutil.rmtree(temp_dir)
                     data.save_to_disk(str(temp_dir))
-                    shutil.rmtree(DATASET_DIR)
+                    if DATASET_DIR.exists():
+                        shutil.rmtree(DATASET_DIR)
                     shutil.move(str(temp_dir), DATASET_DIR)
-                    print(f"Saved intermediate results for skip {skip}, mlp skip(s) {mlp_skip} to {DATASET_DIR}")
+                    print(f"Saved to {DATASET_DIR}")
+                    data = load_from_disk(str(DATASET_DIR))
                 except Exception as e:
-                    print(f"Error saving intermediate results: {e}")
+                    print(f"Error saving: {e}")
                     if temp_dir.exists():
                         shutil.rmtree(temp_dir)
-            else:
-                DATASET_DIR.mkdir(parents=True, exist_ok=True)
-                data.save_to_disk(str(DATASET_DIR))
-                print(f"Saved initial results for skip {skip}, mlp skip(s) {mlp_skip} to {DATASET_DIR}")
-            
 
 
 if __name__ == "__main__":

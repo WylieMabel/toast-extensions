@@ -1,11 +1,11 @@
 #!/bin/bash
 
-declare -a skips=("[]" "[(0, 1)]")
-declare -a mlp_skips=("[]" "[2,3]")
+declare -a skips=("[]")
+declare -a mlp_skips=("[]" "[1,2]" "[3,4]" "[5,6]" "[7,8]" "[9,10]" "[2,4,6,8,10]" "[1,3,5,7,9]")
 
 for dataset_name in mnist
 do
-    for model_name in facebook/deit-small-patch16-224
+    for model_name in google/vit-base-patch16-224
     do
         if [[ "$model_name" == *"dinov2"* ]]; then
             encoder_lr_flag="--encoder_lr=1e-6"

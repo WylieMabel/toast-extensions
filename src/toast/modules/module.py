@@ -101,27 +101,55 @@ class MLPLinearisedEncoder(nn.Module):
         for idx, layer in enumerate(layers):
             if idx not in self.mlp_layers_to_linearize:
                 continue
-            if not hasattr(layer, "mlp"):
-                continue
 
-            mlp = layer.mlp
-            if not (hasattr(mlp, "fc1") and hasattr(mlp, "fc2")):
-                continue
+            # CLIP-style: layer.mlp.fc1 / layer.mlp.fc2
+            if hasattr(layer, "mlp"):
+                mlp = layer.mlp
+                if not (hasattr(mlp, "fc1") and hasattr(mlp, "fc2")):
+                    continue
+                W1 = mlp.fc1.weight.detach()
+                b1 = mlp.fc1.bias.detach()
+                W2 = mlp.fc2.weight.detach()
+                b2 = mlp.fc2.bias.detach()
+                W_combined = (W2 @ W1).clone()
+                b_combined = (W2 @ b1 + b2).clone()
+                mlp.register_buffer("_W_collapsed", W_combined)
+                mlp.register_buffer("_b_collapsed", b_combined)
+                def _make_clip_forward(mod):
+                    def collapsed_forward(x):
+                        s = x.shape
+                        return F.linear(x.reshape(-1, s[-1]), mod._W_collapsed, mod._b_collapsed).reshape(s)
+                    return collapsed_forward
+                mlp.forward = _make_clip_forward(mlp)
 
-            W1 = mlp.fc1.weight.detach()  # [d_ff, d_in]
-            b1 = mlp.fc1.bias.detach()    # [d_ff]
-            W2 = mlp.fc2.weight.detach()  # [d_out, d_ff]
-            b2 = mlp.fc2.bias.detach()    # [d_out]
-
-            # fc2(fc1(x)) without activation = (W2 W1)x + (W2 b1 + b2)
-            W_combined = (W2 @ W1).clone()       # [d_out, d_in]
-            b_combined = (W2 @ b1 + b2).clone()  # [d_out]
-
-            def collapsed_forward(x, W=W_combined, b=b_combined):
-                s = x.shape
-                return F.linear(x.reshape(-1, s[-1]), W, b).reshape(s)
-
-            mlp.forward = collapsed_forward
+            # HF ViT/DeiT-style: layer.intermediate (dense + act) + layer.output (dense + dropout + residual)
+            elif hasattr(layer, "intermediate") and hasattr(layer, "output"):
+                inter = layer.intermediate
+                out = layer.output
+                if not (hasattr(inter, "dense") and hasattr(out, "dense")):
+                    continue
+                W1 = inter.dense.weight.detach()
+                b1 = inter.dense.bias.detach()
+                W2 = out.dense.weight.detach()
+                b2 = out.dense.bias.detach()
+                W_combined = (W2 @ W1).clone()
+                b_combined = (W2 @ b1 + b2).clone()
+                # Register as buffers so .to(device) moves them with the model
+                inter.register_buffer("_W_collapsed", W_combined)
+                inter.register_buffer("_b_collapsed", b_combined)
+                def _make_vit_intermediate_forward(mod):
+                    def collapsed_intermediate(x):
+                        s = x.shape
+                        return F.linear(x.reshape(-1, s[-1]), mod._W_collapsed, mod._b_collapsed).reshape(s)
+                    return collapsed_intermediate
+                def _make_vit_output_forward(mod):
+                    def passthrough_output(hidden_states, input_tensor):
+                        # dense is replaced by collapsed_intermediate above; keep dropout + residual
+                        hidden_states = mod.dropout(hidden_states)
+                        return hidden_states + input_tensor
+                    return passthrough_output
+                inter.forward = _make_vit_intermediate_forward(inter)
+                out.forward = _make_vit_output_forward(out)
 
     @torch.no_grad()
     def fit(self, loader, max_samples: int = 500):
@@ -144,19 +172,37 @@ class MLPLinearisedEncoder(nn.Module):
         hooks = []
 
         for idx, layer in enumerate(layers):
-            if idx not in self.mlp_layers_to_linearize or not hasattr(layer, "mlp"):
+            if idx not in self.mlp_layers_to_linearize:
                 continue
 
-            def make_hook(i):
-                def hook(module, inp, out):
-                    # inp is a tuple; inp[0] is the tensor passed to mlp.forward
-                    x = inp[0].detach().cpu()
-                    y = out.detach().cpu()
-                    mlp_inputs[i].append(x.reshape(-1, x.shape[-1]))
-                    mlp_outputs[i].append(y.reshape(-1, y.shape[-1]))
-                return hook
+            if hasattr(layer, "mlp"):
+                # CLIP-style: single mlp module; hook captures input and output together
+                def make_clip_hook(i):
+                    def hook(_, inp, out):
+                        x = inp[0].detach().cpu()
+                        y = out.detach().cpu()
+                        mlp_inputs[i].append(x.reshape(-1, x.shape[-1]))
+                        mlp_outputs[i].append(y.reshape(-1, y.shape[-1]))
+                    return hook
+                hooks.append(layer.mlp.register_forward_hook(make_clip_hook(idx)))
 
-            hooks.append(layer.mlp.register_forward_hook(make_hook(idx)))
+            elif hasattr(layer, "intermediate") and hasattr(layer, "output"):
+                # HF ViT/DeiT-style: hook intermediate for inputs, output.dense for targets
+                # (output.dense gives the MLP result before dropout and residual)
+                def make_vit_input_hook(i):
+                    def hook(_, inp, __):
+                        x = inp[0].detach().cpu()
+                        mlp_inputs[i].append(x.reshape(-1, x.shape[-1]))
+                    return hook
+
+                def make_vit_output_hook(i):
+                    def hook(_, __, out):
+                        y = out.detach().cpu()
+                        mlp_outputs[i].append(y.reshape(-1, y.shape[-1]))
+                    return hook
+
+                hooks.append(layer.intermediate.register_forward_hook(make_vit_input_hook(idx)))
+                hooks.append(layer.output.dense.register_forward_hook(make_vit_output_hook(idx)))
 
         self.encoder.eval()
         n_seen = 0
@@ -174,7 +220,7 @@ class MLPLinearisedEncoder(nn.Module):
 
         translator_factory = NAME2TRANSLATORS["linear"]
         for idx, layer in enumerate(layers):
-            if idx not in self.mlp_layers_to_linearize or not hasattr(layer, "mlp"):
+            if idx not in self.mlp_layers_to_linearize:
                 continue
             if not mlp_inputs[idx]:
                 continue
@@ -192,7 +238,137 @@ class MLPLinearisedEncoder(nn.Module):
                     return out.reshape(s).to(x.dtype)
                 return fitted_forward
 
-            layer.mlp.forward = make_forward(translator)
+            if hasattr(layer, "mlp"):
+                layer.mlp.forward = make_forward(translator)
+            elif hasattr(layer, "intermediate") and hasattr(layer, "output"):
+                layer.intermediate.forward = make_forward(translator)
+                def _make_vit_output_forward(mod):
+                    def passthrough_output(hidden_states, input_tensor):
+                        hidden_states = mod.dropout(hidden_states)
+                        return hidden_states + input_tensor
+                    return passthrough_output
+                layer.output.forward = _make_vit_output_forward(layer.output)
+
+        return self
+
+    def forward(self, *args, **kwargs):
+        return self.encoder(*args, **kwargs)
+
+
+class AttentionLinearisedEncoder(nn.Module):
+    """
+    Replaces target self-attention layers with a linear approximation.
+
+    mode="zero": bypasses attention entirely — the patched forward returns zeros,
+        so the residual connection in ViTLayer leaves hidden_states unchanged.
+        The MLP sublayer of each targeted layer still runs normally.
+
+    mode="fitted": data-driven. Runs a calibration pass to collect (input, output)
+        pairs at each target attention layer, fits a least-squares linear map, and
+        patches each layer.attention.forward. Call .fit(loader) after construction.
+    """
+
+    def __init__(self, encoder, attention_layers_to_linearize=None, mode: str = "fitted"):
+        super().__init__()
+        if mode not in ("zero", "fitted"):
+            raise ValueError(f"mode must be 'zero' or 'fitted', got '{mode}'")
+        self.encoder = encoder
+        flat = []
+        for item in (attention_layers_to_linearize or []):
+            if isinstance(item, (list, tuple)):
+                flat.extend(item)
+            else:
+                flat.append(item)
+        self.attention_layers_to_linearize = set(flat)
+        self.mode = mode
+
+        if mode == "zero":
+            self._patch_attention_zero()
+
+    def _get_layers(self):
+        if hasattr(self.encoder, "encoder") and hasattr(self.encoder.encoder, "layer"):
+            return self.encoder.encoder.layer
+        if hasattr(self.encoder, "vision_model"):
+            vm = self.encoder.vision_model
+            if hasattr(vm.encoder, "layers"):
+                return vm.encoder.layers
+        raise ValueError("Could not find transformer layers in the encoder")
+
+    def _patch_attention_zero(self):
+        layers = self._get_layers()
+        for idx, layer in enumerate(layers):
+            if idx not in self.attention_layers_to_linearize:
+                continue
+            if not hasattr(layer, "attention"):
+                continue
+            def zero_attn(hidden_states, *_):
+                return torch.zeros_like(hidden_states)
+            layer.attention.forward = zero_attn
+
+    @torch.no_grad()
+    def fit(self, loader, max_samples: int = 500):
+        if self.mode != "fitted":
+            raise RuntimeError("fit() is only valid for mode='fitted'")
+
+        layers = self._get_layers()
+        attn_inputs: dict[int, list] = {i: [] for i in self.attention_layers_to_linearize}
+        attn_outputs: dict[int, list] = {i: [] for i in self.attention_layers_to_linearize}
+        hooks = []
+
+        for idx, layer in enumerate(layers):
+            if idx not in self.attention_layers_to_linearize or not hasattr(layer, "attention"):
+                continue
+
+            def make_input_hook(i):
+                def hook(_, inp, __):
+                    x = inp[0].detach().cpu()
+                    attn_inputs[i].append(x.reshape(-1, x.shape[-1]))
+                return hook
+
+            def make_output_hook(i):
+                def hook(_, __, out):
+                    y = out.detach().cpu() if isinstance(out, torch.Tensor) else out[0].detach().cpu()
+                    attn_outputs[i].append(y.reshape(-1, y.shape[-1]))
+                return hook
+
+            hooks.append(layer.attention.register_forward_pre_hook(make_input_hook(idx)))
+            hooks.append(layer.attention.register_forward_hook(make_output_hook(idx)))
+
+        self.encoder.eval()
+        n_seen = 0
+        for batch in loader:
+            images = batch.get("pixel_values", batch.get("images"))
+            if images is None:
+                raise KeyError("Batch missing 'pixel_values' or 'images'")
+            self.encoder(images.to(next(self.encoder.parameters()).device))
+            n_seen += images.shape[0]
+            if n_seen >= max_samples:
+                break
+
+        for h in hooks:
+            h.remove()
+
+        translator_factory = NAME2TRANSLATORS["linear"]
+        for idx, layer in enumerate(layers):
+            if idx not in self.attention_layers_to_linearize or not hasattr(layer, "attention"):
+                continue
+            if not attn_inputs[idx]:
+                continue
+
+            X = torch.cat(attn_inputs[idx]).float()
+            Y = torch.cat(attn_outputs[idx]).float()
+
+            translator = translator_factory()
+            translator.fit(x=X, y=Y)
+
+            def make_forward(t):
+                def fitted_attn(hidden_states, *_):
+                    s = hidden_states.shape
+                    out, _ = t.transform(hidden_states.reshape(-1, s[-1]).float())
+                    return out.reshape(s).to(hidden_states.dtype)
+                return fitted_attn
+
+            layer.attention.forward = make_forward(translator)
 
         return self
 
