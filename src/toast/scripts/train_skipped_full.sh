@@ -1,8 +1,10 @@
 #!/bin/bash
 
 declare -a skips=("[]")
-declare -a mlp_skips=("[]")
-declare -a attention_skips=("[]" "[0]" "[1]" "[2]" "[3]" "[4]" "[5]" "[6]" "[7]" "[8]" "[9]" "[10]" "[11]")
+#declare -a mlp_skips=("[]")
+#declare -a attention_skips=("[]" "[0]" "[1]" "[2]" "[3]" "[4]" "[5]" "[6]" "[7]" "[8]" "[9]" "[10]" "[11]")
+declare -a mlp_skips=("[]" "[0]" "[1]" "[2]" "[3]" "[4]" "[5]" "[6]" "[7]" "[8]" "[9]" "[10]" "[11]")
+declare -a attention_skips=("[]")
 
 export HF_HOME="/cluster/customapps/biomed/vogtlab/users/mwylie/toast/hf_cache"
 export HF_DATASETS_OFFLINE=1

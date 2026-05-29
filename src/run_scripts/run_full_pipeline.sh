@@ -28,7 +28,7 @@ export TRANSFORMERS_OFFLINE=1
 export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR/src
 
 # 5. Configure experiment
-export DATASET_NAME="fashion-mnist"
+export DATASET_NAME="mnist"
 export ENCODER_NAME="google/vit-base-patch16-224"
 
 # 6. Execute

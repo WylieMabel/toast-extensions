@@ -76,8 +76,8 @@ class MLPLinearisedEncoder(nn.Module):
     def __init__(self, encoder, mlp_layers_to_linearize=None, mode: str = "collapse"):
         super().__init__()
 
-        if mode not in ("collapse", "fitted"):
-            raise ValueError(f"mode must be 'collapse' or 'fitted', got '{mode}'")
+        if mode not in ("collapse", "fitted", "zero"):
+            raise ValueError(f"mode must be 'collapse', 'fitted', or 'zero', got '{mode}'")
 
         self.encoder = encoder
         self.mlp_layers_to_linearize = set(mlp_layers_to_linearize or [])
@@ -85,6 +85,8 @@ class MLPLinearisedEncoder(nn.Module):
 
         if mode == "collapse":
             self._patch_mlp_collapse()
+        elif mode == "zero":
+            self._patch_mlp_zero()
 
     def _get_layers(self):
         if hasattr(self.encoder, "encoder") and hasattr(self.encoder.encoder, "layer"):
@@ -150,6 +152,22 @@ class MLPLinearisedEncoder(nn.Module):
                     return passthrough_output
                 inter.forward = _make_vit_intermediate_forward(inter)
                 out.forward = _make_vit_output_forward(out)
+
+    def _patch_mlp_zero(self):
+        layers = self._get_layers()
+        for idx, layer in enumerate(layers):
+            if idx not in self.mlp_layers_to_linearize:
+                continue
+            if hasattr(layer, "mlp"):
+                def zero_mlp(x, *_):
+                    return torch.zeros_like(x)
+                layer.mlp.forward = zero_mlp
+            elif hasattr(layer, "intermediate") and hasattr(layer, "output"):
+                def _make_identity_output():
+                    def identity_output(_, input_tensor):
+                        return input_tensor
+                    return identity_output
+                layer.output.forward = _make_identity_output()
 
     @torch.no_grad()
     def fit(self, loader, max_samples: int = 500):
@@ -234,8 +252,9 @@ class MLPLinearisedEncoder(nn.Module):
             def make_forward(t):
                 def fitted_forward(x):
                     s = x.shape
-                    out, _ = t.transform(x.reshape(-1, s[-1]).float())
-                    return out.reshape(s).to(x.dtype)
+                    dev = x.device
+                    out, _ = t.transform(x.reshape(-1, s[-1]).float().cpu())
+                    return out.reshape(s).to(dev).to(x.dtype)
                 return fitted_forward
 
             if hasattr(layer, "mlp"):
@@ -364,8 +383,9 @@ class AttentionLinearisedEncoder(nn.Module):
             def make_forward(t):
                 def fitted_attn(hidden_states, *_):
                     s = hidden_states.shape
-                    out, _ = t.transform(hidden_states.reshape(-1, s[-1]).float())
-                    return out.reshape(s).to(hidden_states.dtype)
+                    dev = hidden_states.device
+                    out, _ = t.transform(hidden_states.reshape(-1, s[-1]).float().cpu())
+                    return out.reshape(s).to(dev).to(hidden_states.dtype)
                 return fitted_attn
 
             layer.attention.forward = make_forward(translator)

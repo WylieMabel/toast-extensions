@@ -7,8 +7,10 @@ export TRANSFORMERS_OFFLINE=1
 
 SKIPS='[[]]'
 #SKIPS='[[]]'
-MLP_SKIPS='[]'
-SELF_ATTENTION_SKIPS='[],[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]'
+#MLP_SKIPS='[]'
+#SELF_ATTENTION_SKIPS='[],[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]'
+MLP_SKIPS='[],[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]'
+SELF_ATTENTION_SKIPS='[]'
 
 for dataset_name in "${DATASET_NAME:-mnist}"
 do

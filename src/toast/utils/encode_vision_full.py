@@ -207,11 +207,12 @@ def run_encoding(
                     mode="zero",
                 ).to(device).eval()
 
-                MLPLinearisedEncoder(
+                mlp_enc = MLPLinearisedEncoder(
                     combo_encoder,
                     mlp_layers_to_linearize=mlp_skip,
-                    mode="collapse",
+                    mode="fitted",
                 ).to(device).eval()
+                mlp_enc.fit(train_loader, max_samples=samples_to_extract)
 
                 skip_encoder = SkipModel(
                     encoder=combo_encoder,

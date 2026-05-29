@@ -144,7 +144,7 @@ def skip_and_train_full_run(
         "original_accuracy", "accuracy", "delta_acc", "num_samples",
     ]
 
-    results_path = PROJECT_ROOT / "results" / "results_full.csv"
+    results_path = PROJECT_ROOT / "results" / "results_full_fitted.csv"
     if os.path.exists(results_path):
         try:
             results_df = pd.read_csv(results_path)
