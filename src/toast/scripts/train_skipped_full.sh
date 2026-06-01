@@ -3,7 +3,7 @@
 declare -a skips=("[]")
 #declare -a mlp_skips=("[]")
 #declare -a attention_skips=("[]" "[0]" "[1]" "[2]" "[3]" "[4]" "[5]" "[6]" "[7]" "[8]" "[9]" "[10]" "[11]")
-declare -a mlp_skips=("[]" "[0]" "[1]" "[2]" "[3]" "[4]" "[5]" "[6]" "[7]" "[8]" "[9]" "[10]" "[11]")
+declare -a mlp_skips=("[]" "[3,4]" "[10,11]" "[1]" "[11]")
 declare -a attention_skips=("[]")
 
 export HF_HOME="/cluster/customapps/biomed/vogtlab/users/mwylie/toast/hf_cache"
@@ -12,13 +12,14 @@ export TRANSFORMERS_OFFLINE=1
 
 for dataset_name in "${DATASET_NAME:-mnist}"
 do
-    for seed in 0
+    for seed in 1 2 3
     do
         for classifier_type in linear
         do
             for translator_name in linear
             do
-                for model_name in "${ENCODER_NAME:-google/vit-base-patch16-224}"
+                #for model_name in "${ENCODER_NAME:-google/vit-base-patch16-224}"
+                for model_name in "${ENCODER_NAME:-facebook/deit-small-patch16-224}"
                 do
                     for to_approximate in "${skips[@]}"
                     do

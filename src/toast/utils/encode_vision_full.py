@@ -7,8 +7,6 @@ import fire
 import torch
 from datasets import (
     DatasetDict,
-    DownloadConfig,
-    VerificationMode,
     load_dataset,
     load_from_disk,
 )
@@ -37,6 +35,8 @@ from toast.modules.module import SkipModel, MLPLinearisedEncoder, AttentionLinea
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(device)
+
+MLP_MODE = "zero"  # "zero" or "fitted"
 
 
 @torch.no_grad()
@@ -100,36 +100,32 @@ def run_encoding(
         / str(samples_to_extract)
     )
 
+    # Always load raw data (with images) for DataLoaders — never stripped
+    if dataset_name == "svhn":
+        raw_data = DatasetDict(
+            train=load_dataset(DATASET_NAME2HF_NAME[dataset_name], "cropped_digits", split="train"),
+            test=load_dataset(DATASET_NAME2HF_NAME[dataset_name], "cropped_digits", split="test"),
+        )
+    else:
+        if dataset_name not in DATASET2LOCAL_PATH:
+            raise ValueError(f"No local path configured for dataset '{dataset_name}'. Add it to DATASET2LOCAL_PATH in dictionaries.py.")
+        dataset_path = DATASET2LOCAL_PATH[dataset_name]
+        if not os.path.exists(dataset_path):
+            raise ValueError(f"Dataset path does not exist: {dataset_path}")
+        raw_data = load_from_disk(dataset_path)
+
+    # Separate embeddings dataset: labels only, grows with each encoded column
+    label_col = DATASET2LABEL_COLUMN[dataset_name]
     if (DATASET_DIR / "dataset_dict.json").exists():
         print(f"Loading existing dataset from {DATASET_DIR}")
         data: DatasetDict = load_from_disk(dataset_path=str(DATASET_DIR))
     else:
         print(f"Creating dataset dir: {DATASET_DIR}")
         DATASET_DIR.mkdir(parents=True, exist_ok=True)
-        if dataset_name == "imagenet-1k":
-            val_data = load_dataset(
-                DATASET_NAME2HF_NAME[dataset_name],
-                split="validation",
-                data_files={"val": "data/val_images.tar.gz"},
-                revision="refs/pr/20",
-                trust_remote_code=True,
-                download_config=DownloadConfig(resume_download=True),
-                verification_mode=VerificationMode.NO_CHECKS,
-            )
-            split = val_data.train_test_split(test_size=0.2)
-            data = DatasetDict(train=split["train"], test=split["test"])
-        elif dataset_name == "svhn":
-            data = DatasetDict(
-                train=load_dataset(DATASET_NAME2HF_NAME[dataset_name], "cropped_digits", split="train"),
-                test=load_dataset(DATASET_NAME2HF_NAME[dataset_name], "cropped_digits", split="test"),
-            )
-        else:
-            if dataset_name not in DATASET2LOCAL_PATH:
-                raise ValueError(f"No local path configured for dataset '{dataset_name}'. Add it to DATASET2LOCAL_PATH in dictionaries.py.")
-            dataset_path = DATASET2LOCAL_PATH[dataset_name]
-            if not os.path.exists(dataset_path):
-                raise ValueError(f"Dataset path does not exist: {dataset_path}")
-            data = load_from_disk(dataset_path)
+        data = DatasetDict({
+            split: raw_data[split].select_columns([label_col])
+            for split in raw_data.keys()
+        })
 
     if encoder_name.startswith("open_clip:"):
         import open_clip
@@ -166,11 +162,11 @@ def run_encoding(
     encoder.eval().to(device)
 
     train_loader = DataLoader(
-        data["train"], batch_size=batch_size, pin_memory=True,
+        raw_data["train"], batch_size=batch_size, pin_memory=True,
         shuffle=False, num_workers=1, collate_fn=collate_fn,
     )
     test_loader = DataLoader(
-        data["test"], batch_size=batch_size, pin_memory=True,
+        raw_data["test"], batch_size=batch_size, pin_memory=True,
         shuffle=False, num_workers=1, collate_fn=collate_fn,
     )
 
@@ -210,9 +206,10 @@ def run_encoding(
                 mlp_enc = MLPLinearisedEncoder(
                     combo_encoder,
                     mlp_layers_to_linearize=mlp_skip,
-                    mode="fitted",
+                    mode=MLP_MODE,
                 ).to(device).eval()
-                mlp_enc.fit(train_loader, max_samples=samples_to_extract)
+                if MLP_MODE == "fitted":
+                    mlp_enc.fit(train_loader, max_samples=samples_to_extract)
 
                 skip_encoder = SkipModel(
                     encoder=combo_encoder,
@@ -233,7 +230,7 @@ def run_encoding(
                     if not encoding:
                         print(f"Warning: no embeddings for split '{split_name}'. Skipping.")
                         continue
-                    if len(encoding) != len(data[split_name]):
+                    if len(encoding) != len(raw_data[split_name]):
                         print(f"Error: length mismatch for split '{split_name}'. Skipping.")
                         continue
                     if column_name in data[split_name].column_names:

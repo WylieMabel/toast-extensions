@@ -9,12 +9,14 @@ SKIPS='[[]]'
 #SKIPS='[[]]'
 #MLP_SKIPS='[]'
 #SELF_ATTENTION_SKIPS='[],[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]'
-MLP_SKIPS='[],[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]'
+MLP_SKIPS='[],[3,4],[10,11],[1],[11]'
 SELF_ATTENTION_SKIPS='[]'
 
 for dataset_name in "${DATASET_NAME:-mnist}"
 do
-    for encoder_name in "${ENCODER_NAME:-google/vit-base-patch16-224}"
+
+    #for encoder_name in "${ENCODER_NAME:-google/vit-base-patch16-224}"
+    for encoder_name in "${ENCODER_NAME:-facebook/deit-small-patch16-224}"
     do
         for translator_name in linear
         do

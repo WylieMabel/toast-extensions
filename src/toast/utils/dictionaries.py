@@ -97,6 +97,7 @@ DATASET2LOCAL_PATH = {
     "fashion-mnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/fashion_mnist_clean",
     "cifar10": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/cifar10_clean",
     "cifar100": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/cifar100_clean",
+    "imagenet-1k": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/imagenet1k_clean",
 }
 
 # Text dataset configurations with full HuggingFace loading details
