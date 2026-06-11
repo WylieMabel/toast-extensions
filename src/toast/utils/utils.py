@@ -1,4 +1,7 @@
+import hashlib
+import json
 from functools import partial, reduce
+from pathlib import Path
 import torch
 from torch import nn
 from typing import Optional, Sequence, List, Dict
@@ -8,6 +11,28 @@ from tqdm import tqdm
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
+def cfg_embedding_dir(cfg: dict, samples: int, base) -> Path:
+    """Return a unique, deterministic directory for a single experiment config's embeddings."""
+    head_dict = cfg.get("head_dict") or {}
+    canonical = json.dumps({
+        "dataset":        cfg.get("dataset"),
+        "encoder":        cfg.get("encoder"),
+        "skip":           str(cfg.get("skip") or []),
+        "mlp_skip":       str(cfg.get("mlp_skip") or []),
+        "attn_skip":      str(cfg.get("attn_skip") or []),
+        "head_dict":      json.dumps(
+            {str(k): sorted(v) for k, v in head_dict.items()}, sort_keys=True
+        ),
+        "skip_translator": cfg.get("skip_translator"),
+        "mlp_mode":       cfg.get("mlp_mode", "identity"),
+        "attn_mode":      cfg.get("attn_mode", "identity"),
+        "samples":        samples,
+    }, sort_keys=True)
+    h = hashlib.md5(canonical.encode()).hexdigest()[:12]
+    enc_slug = (cfg.get("encoder") or "unknown").split("/")[-1]
+    return Path(base) / (cfg.get("dataset") or "unknown") / enc_slug / h
 
 
 def resolve_path(obj, path: Optional[str]):

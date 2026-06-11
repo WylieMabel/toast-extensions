@@ -4,7 +4,7 @@
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=24000
 #SBATCH --time=6:00:00
-#SBATCH --output=logs/full_pipeline_compare.out.txt
+#SBATCH --output=logs/full_pipeline_csv.out.txt
 
 # 1. Path Setup
 BASE_DIR="/cluster/customapps/biomed/vogtlab/users/mwylie/toast"
@@ -28,8 +28,8 @@ export TRANSFORMERS_OFFLINE=1
 export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR/src
 
 # 5. Configure experiment
-export DATASET_NAME="imagenet-1k"
-export ENCODER_NAME="google/vit-base-patch16-224"
+#export DATASET_NAME="imagenet-1k"
+#export ENCODER_NAME="facebook/deit-small-patch16-224"xxx
 
 # 6. Execute
 cd $PROJECT_DIR

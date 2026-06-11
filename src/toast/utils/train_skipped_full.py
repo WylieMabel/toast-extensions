@@ -1,5 +1,6 @@
+import ast
+import csv as _csv
 import os
-from typing import List
 
 import fire
 import pandas as pd
@@ -16,193 +17,225 @@ from toast.utils.dictionaries import (
     DATASET2LABEL_COLUMN,
     DATASET2NUM_CLASSES,
 )
+from toast.utils.utils import cfg_embedding_dir
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
+def _read_config_csv(path: str):
+    configs = []
+    with open(path) as f:
+        for row in _csv.DictReader(f):
+            configs.append({
+                "dataset":         row.get("dataset") or None,
+                "encoder":         row.get("encoder") or None,
+                "skip":            ast.literal_eval(row["skip"]),
+                "mlp_skip":        ast.literal_eval(row["mlp_skip"]),
+                "attn_skip":       ast.literal_eval(row["attn_skip"]),
+                "head_dict":       ast.literal_eval(row.get("head_dict", "{}")),
+                "skip_translator": row.get("skip_translator") or None,
+                "mlp_mode":        row.get("mlp_mode") or "identity",
+                "attn_mode":       row.get("attn_mode") or "identity",
+            })
+    return configs
+
+
 def skip_and_train_full_run(
-    dataset_name: str,
-    model_name: str,
-    layers_to_approximate: List,
-    mlp_layers_to_linearize: List,
-    attention_layers_to_linearize: List,
     seed: int,
     classifier_type: str,
     translator_name: str,
     samples_to_extract: int,
-    mode: int = 1,
+    dataset_name: str = None,
+    model_name: str = None,
+    config_csv: str = None,
+    layers_to_approximate=None,
+    mlp_layers_to_linearize=None,
+    attention_layers_to_linearize=None,
     save_checkpoint: bool = False,
 ):
-    import ast
-
-    if isinstance(layers_to_approximate, str):
-        layers_to_approximate = ast.literal_eval(layers_to_approximate)
-    if isinstance(mlp_layers_to_linearize, str):
-        mlp_layers_to_linearize = ast.literal_eval(mlp_layers_to_linearize)
-    if isinstance(attention_layers_to_linearize, str):
-        attention_layers_to_linearize = ast.literal_eval(attention_layers_to_linearize)
-
-    print(
-        f"Dataset: {dataset_name} | Model: {model_name} | "
-        f"Skip: {layers_to_approximate} | MLP: {mlp_layers_to_linearize} | "
-        f"Attn: {attention_layers_to_linearize} | Seed: {seed}"
-    )
-
     seed_everything(seed)
 
-    model_name_slug = model_name.split("/")[-1]
-
-    EMBEDDINGS_DIR = str(
-        PROJECT_ROOT
-        / "data"
-        / f"{translator_name}_skipped_embeddings_full"
-        / dataset_name
-        / model_name_slug
-        / str(samples_to_extract)
-    )
-
-    print(f"Loading embeddings from: {EMBEDDINGS_DIR}")
-    if not os.path.exists(EMBEDDINGS_DIR):
-        raise FileNotFoundError(f"Embeddings not found: {EMBEDDINGS_DIR}.")
-
-    embeddings = DatasetDict.load_from_disk(EMBEDDINGS_DIR)
-    embeddings.set_format("torch")
-
-    embedding_col_name = (
-        f"skip={layers_to_approximate}"
-        f"_mlp={mlp_layers_to_linearize}"
-        f"_attn={attention_layers_to_linearize}"
-    )
-
-    if (embedding_col_name not in embeddings["train"].column_names) or (
-        embedding_col_name not in embeddings["test"].column_names
-    ):
-        available = embeddings["train"].column_names
-        raise KeyError(f"Column '{embedding_col_name}' not found. Available: {available}")
-
-    label_col_name = DATASET2LABEL_COLUMN[dataset_name]
-    num_classes = DATASET2NUM_CLASSES[dataset_name]
-
-    hf_train = (
-        embeddings["train"]
-        .select_columns([embedding_col_name, label_col_name])
-        .rename_column(embedding_col_name, "images")
-        .rename_column(label_col_name, "labels")
-    )
-    hf_test = (
-        embeddings["test"]
-        .select_columns([embedding_col_name, label_col_name])
-        .rename_column(embedding_col_name, "images")
-        .rename_column(label_col_name, "labels")
-    )
-
-    batch_size = 256
-    num_workers = 2
-    train_loader = DataLoader(hf_train, shuffle=True, batch_size=batch_size, num_workers=num_workers, pin_memory=True)
-    test_loader = DataLoader(hf_test, shuffle=False, batch_size=batch_size, num_workers=num_workers, pin_memory=True)
-
-    hidden_size = embeddings["train"][0][embedding_col_name].shape[-1]
-
-    if classifier_type == "MLP":
-        classifier = nn.Sequential(
-            nn.Linear(hidden_size, hidden_size),
-            nn.Dropout(0.5),
-            nn.LayerNorm(hidden_size),
-            nn.SiLU(),
-            nn.Linear(hidden_size, num_classes),
-        )
-        lr, num_epochs = 0.001, 50
-        optimizer = optim.Adam(classifier.parameters(), lr=lr, weight_decay=1e-5)
-    elif classifier_type == "linear":
-        classifier = nn.Linear(hidden_size, num_classes)
-        lr, num_epochs = 0.01, 5
-        optimizer = optim.Adam(classifier.parameters(), lr=lr)
+    if config_csv:
+        configs = _read_config_csv(config_csv)
     else:
-        raise ValueError(f"Unsupported classifier_type: {classifier_type}")
+        if isinstance(layers_to_approximate, str):
+            layers_to_approximate = ast.literal_eval(layers_to_approximate)
+        if isinstance(mlp_layers_to_linearize, str):
+            mlp_layers_to_linearize = ast.literal_eval(mlp_layers_to_linearize)
+        if isinstance(attention_layers_to_linearize, str):
+            attention_layers_to_linearize = ast.literal_eval(attention_layers_to_linearize)
+        configs = [{
+            "skip":      layers_to_approximate,
+            "mlp_skip":  mlp_layers_to_linearize,
+            "attn_skip": attention_layers_to_linearize,
+            "head_dict": {},
+        }]
 
-    model = HFwrapper(encoder=NoEncoder(), classifier=classifier)
-    model.to(device)
-    model.freeze_encoder()
+    # Resolve per-row fields against CLI defaults
+    for cfg in configs:
+        if not cfg.get("dataset"):
+            cfg["dataset"] = dataset_name
+        if not cfg.get("encoder"):
+            cfg["encoder"] = model_name
+        if not cfg.get("skip_translator"):
+            cfg["skip_translator"] = translator_name
 
-    print("Starting classifier training...")
-    _, _, _, eval_accuracies, _ = train_classifier(
-        model=model,
-        train_data_loader=train_loader,
-        test_data_loader=test_loader,
-        optimizer=optimizer,
-        criterion=nn.CrossEntropyLoss(),
-        label_column_name="labels",
-        num_epochs=num_epochs,
-    )
-    accuracy = eval_accuracies[-1]
-    print(f"Done. Final accuracy: {accuracy:.4f}")
-
-    columns = [
+    results_columns = [
         "seed", "dataset", "model", "optimizer", "lr", "classifier",
-        "translator", "batch_size", "num_epochs", "approx_layer",
-        "mlp_linearize", "attn_linearize", "num_layers",
-        "original_accuracy", "accuracy", "delta_acc", "num_samples",
+        "translator", "batch_size", "num_epochs",
+        "approx_layer", "mlp_linearize", "attn_linearize", "head_dict",
+        "mlp_mode", "attn_mode",
+        "num_layers", "original_accuracy", "accuracy", "delta_acc", "num_samples",
     ]
-
     results_path = PROJECT_ROOT / "results" / "results_full_compare.csv"
     if os.path.exists(results_path):
         try:
             results_df = pd.read_csv(results_path)
+            for col in results_columns:
+                if col not in results_df.columns:
+                    results_df[col] = None
         except Exception:
-            results_df = pd.DataFrame(columns=columns)
+            results_df = pd.DataFrame(columns=results_columns)
     else:
         results_path.parent.mkdir(parents=True, exist_ok=True)
-        results_df = pd.DataFrame(columns=columns)
+        results_df = pd.DataFrame(columns=results_columns)
 
-    original_accuracy = 0.0
-    is_baseline = not layers_to_approximate and not mlp_layers_to_linearize and not attention_layers_to_linearize
-    if is_baseline:
-        original_accuracy = accuracy
-    else:
-        filtered = results_df[
-            (results_df["approx_layer"] == str([]))
-            & (results_df["mlp_linearize"] == str([]))
-            & (results_df["attn_linearize"] == str([]))
-            & (results_df["dataset"] == dataset_name)
-            & (results_df["model"] == model_name)
-            & (results_df["classifier"] == classifier.__class__.__name__)
-            & (results_df["translator"] == translator_name)
-            & (results_df["seed"] == seed)
-            & (results_df["num_samples"] == samples_to_extract)
-        ]
-        original_accuracy = filtered["accuracy"].iloc[0] if not filtered.empty else 0.0
+    embeddings_base = PROJECT_ROOT / "data" / "embeddings"
+    hidden_size = None
 
-    delta_acc = original_accuracy - accuracy if original_accuracy != 0.0 else 0.0
-    num_layers_skipped = sum(end - start for start, end in layers_to_approximate) if layers_to_approximate else 0
+    for cfg in configs:
+        skip           = cfg["skip"]
+        mlp_skip       = cfg["mlp_skip"]
+        attn_skip      = cfg["attn_skip"]
+        head_dict      = cfg["head_dict"]
+        mlp_mode       = cfg.get("mlp_mode", "identity")
+        attn_mode      = cfg.get("attn_mode", "identity")
+        row_dataset    = cfg["dataset"]
+        row_encoder    = cfg["encoder"]
+        row_translator = cfg["skip_translator"]
 
-    row = {
-        "seed": seed,
-        "dataset": dataset_name,
-        "model": model_name,
-        "optimizer": optimizer.__class__.__name__,
-        "lr": lr,
-        "classifier": classifier.__class__.__name__,
-        "translator": translator_name,
-        "batch_size": batch_size,
-        "num_epochs": num_epochs,
-        "approx_layer": str(layers_to_approximate),
-        "mlp_linearize": str(mlp_layers_to_linearize),
-        "attn_linearize": str(attention_layers_to_linearize),
-        "num_layers": num_layers_skipped,
-        "original_accuracy": original_accuracy,
-        "accuracy": accuracy,
-        "delta_acc": delta_acc,
-        "num_samples": samples_to_extract,
-    }
+        cfg_dir = cfg_embedding_dir(cfg, samples_to_extract, embeddings_base)
 
-    results_df = pd.concat([results_df, pd.DataFrame([row])], ignore_index=True)
-    results_df.to_csv(results_path, index=False)
-    print(f"Results saved to: {results_path}")
+        print(f"\nDataset: {row_dataset} | Model: {row_encoder} | translator: {row_translator}")
+        print(f"  skip={skip} | mlp={mlp_skip}({mlp_mode}) | attn={attn_skip}({attn_mode}) | heads={head_dict or 'full'}")
+        print(f"  -> {cfg_dir}")
 
-    if save_checkpoint:
-        model_dir = PROJECT_ROOT / "models" / model_name_slug
-        model_dir.mkdir(parents=True, exist_ok=True)
-        torch.save(model.classifier, model_dir / f"{dataset_name}_full_classifier.ckpt")
+        if not cfg_dir.exists():
+            print(f"  WARNING: embeddings not found at '{cfg_dir}'. Run encode first. Skipping.")
+            continue
+
+        embeddings = DatasetDict.load_from_disk(str(cfg_dir))
+        embeddings.set_format("torch")
+
+        row_label_col   = DATASET2LABEL_COLUMN[row_dataset]
+        row_num_classes = DATASET2NUM_CLASSES[row_dataset]
+
+        hf_train = (
+            embeddings["train"]
+            .select_columns(["embeddings", row_label_col])
+            .rename_column("embeddings", "images")
+            .rename_column(row_label_col, "labels")
+        )
+        hf_test = (
+            embeddings["test"]
+            .select_columns(["embeddings", row_label_col])
+            .rename_column("embeddings", "images")
+            .rename_column(row_label_col, "labels")
+        )
+
+        if hidden_size is None:
+            hidden_size = embeddings["train"][0]["embeddings"].shape[-1]
+
+        batch_size = 256
+        train_loader = DataLoader(hf_train, shuffle=True,  batch_size=batch_size, num_workers=2, pin_memory=True)
+        test_loader  = DataLoader(hf_test,  shuffle=False, batch_size=batch_size, num_workers=2, pin_memory=True)
+
+        if classifier_type == "MLP":
+            classifier = nn.Sequential(
+                nn.Linear(hidden_size, hidden_size),
+                nn.Dropout(0.5),
+                nn.LayerNorm(hidden_size),
+                nn.SiLU(),
+                nn.Linear(hidden_size, row_num_classes),
+            )
+            lr, num_epochs = 0.001, 50
+            optimizer = optim.Adam(classifier.parameters(), lr=lr, weight_decay=1e-5)
+        elif classifier_type == "linear":
+            classifier = nn.Linear(hidden_size, row_num_classes)
+            lr, num_epochs = 0.01, 5
+            optimizer = optim.Adam(classifier.parameters(), lr=lr)
+        else:
+            raise ValueError(f"Unsupported classifier_type: {classifier_type}")
+
+        model = HFwrapper(encoder=NoEncoder(), classifier=classifier)
+        model.to(device)
+        model.freeze_encoder()
+
+        print("  Starting classifier training...")
+        _, _, _, eval_accuracies, _ = train_classifier(
+            model=model,
+            train_data_loader=train_loader,
+            test_data_loader=test_loader,
+            optimizer=optimizer,
+            criterion=nn.CrossEntropyLoss(),
+            label_column_name="labels",
+            num_epochs=num_epochs,
+        )
+        accuracy = eval_accuracies[-1]
+        print(f"  Done. Accuracy: {accuracy:.4f}")
+
+        is_baseline = not skip and not mlp_skip and not attn_skip and not head_dict
+        if is_baseline:
+            original_accuracy = accuracy
+        else:
+            filtered = results_df[
+                (results_df["approx_layer"]  == str([]))
+                & (results_df["mlp_linearize"] == str([]))
+                & (results_df["attn_linearize"] == str([]))
+                & (results_df["head_dict"]     == str({}))
+                & (results_df["dataset"]       == row_dataset)
+                & (results_df["model"]         == row_encoder)
+                & (results_df["classifier"]    == classifier.__class__.__name__)
+                & (results_df["translator"]    == row_translator)
+                & (results_df["seed"]          == seed)
+                & (results_df["num_samples"]   == samples_to_extract)
+            ]
+            original_accuracy = filtered["accuracy"].iloc[0] if not filtered.empty else 0.0
+
+        delta_acc = original_accuracy - accuracy if original_accuracy != 0.0 else 0.0
+        num_layers_skipped = sum(end - start for start, end in skip) if skip else 0
+
+        row = {
+            "seed":              seed,
+            "dataset":           row_dataset,
+            "model":             row_encoder,
+            "optimizer":         optimizer.__class__.__name__,
+            "lr":                lr,
+            "classifier":        classifier.__class__.__name__,
+            "translator":        row_translator,
+            "batch_size":        batch_size,
+            "num_epochs":        num_epochs,
+            "approx_layer":      str(skip),
+            "mlp_linearize":     str(mlp_skip),
+            "attn_linearize":    str(attn_skip),
+            "head_dict":         str(head_dict),
+            "mlp_mode":          mlp_mode,
+            "attn_mode":         attn_mode,
+            "num_layers":        num_layers_skipped,
+            "original_accuracy": original_accuracy,
+            "accuracy":          accuracy,
+            "delta_acc":         delta_acc,
+            "num_samples":       samples_to_extract,
+        }
+
+        results_df = pd.concat([results_df, pd.DataFrame([row])], ignore_index=True)
+        results_df.to_csv(results_path, index=False)
+        print(f"  Results saved to: {results_path}")
+
+        if save_checkpoint:
+            model_dir = PROJECT_ROOT / "models" / row_encoder.split("/")[-1]
+            model_dir.mkdir(parents=True, exist_ok=True)
+            torch.save(model.classifier, model_dir / f"{row_dataset}_full_classifier.ckpt")
 
 
 if __name__ == "__main__":

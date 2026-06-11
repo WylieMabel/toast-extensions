@@ -76,8 +76,8 @@ class MLPLinearisedEncoder(nn.Module):
     def __init__(self, encoder, mlp_layers_to_linearize=None, mode: str = "collapse"):
         super().__init__()
 
-        if mode not in ("collapse", "fitted", "zero"):
-            raise ValueError(f"mode must be 'collapse', 'fitted', or 'zero', got '{mode}'")
+        if mode not in ("collapse", "linear", "identity"):
+            raise ValueError(f"mode must be 'collapse', 'linear', or 'identity', got '{mode}'")
 
         self.encoder = encoder
         self.mlp_layers_to_linearize = set(mlp_layers_to_linearize or [])
@@ -85,8 +85,8 @@ class MLPLinearisedEncoder(nn.Module):
 
         if mode == "collapse":
             self._patch_mlp_collapse()
-        elif mode == "zero":
-            self._patch_mlp_zero()
+        elif mode == "identity":
+            self._patch_mlp_identity()
 
     def _get_layers(self):
         if hasattr(self.encoder, "encoder") and hasattr(self.encoder.encoder, "layer"):
@@ -153,15 +153,15 @@ class MLPLinearisedEncoder(nn.Module):
                 inter.forward = _make_vit_intermediate_forward(inter)
                 out.forward = _make_vit_output_forward(out)
 
-    def _patch_mlp_zero(self):
+    def _patch_mlp_identity(self):
         layers = self._get_layers()
         for idx, layer in enumerate(layers):
             if idx not in self.mlp_layers_to_linearize:
                 continue
             if hasattr(layer, "mlp"):
-                def zero_mlp(x, *_):
+                def identity_mlp(x, *_):
                     return torch.zeros_like(x)
-                layer.mlp.forward = zero_mlp
+                layer.mlp.forward = identity_mlp
             elif hasattr(layer, "intermediate") and hasattr(layer, "output"):
                 def _make_identity_output():
                     def identity_output(_, input_tensor):
@@ -180,8 +180,8 @@ class MLPLinearisedEncoder(nn.Module):
         each mlp.forward with the resulting map. Called once; not called again
         during inference.
         """
-        if self.mode != "fitted":
-            raise RuntimeError("fit() is only valid for mode='fitted'")
+        if self.mode != "linear":
+            raise RuntimeError("fit() is only valid for mode='linear'")
 
         layers = self._get_layers()
 
@@ -278,19 +278,19 @@ class AttentionLinearisedEncoder(nn.Module):
     """
     Replaces target self-attention layers with a linear approximation.
 
-    mode="zero": bypasses attention entirely — the patched forward returns zeros,
+    mode="identity": bypasses attention entirely — the patched forward returns zeros,
         so the residual connection in ViTLayer leaves hidden_states unchanged.
         The MLP sublayer of each targeted layer still runs normally.
 
-    mode="fitted": data-driven. Runs a calibration pass to collect (input, output)
+    mode="linear": data-driven. Runs a calibration pass to collect (input, output)
         pairs at each target attention layer, fits a least-squares linear map, and
         patches each layer.attention.forward. Call .fit(loader) after construction.
     """
 
-    def __init__(self, encoder, attention_layers_to_linearize=None, mode: str = "fitted"):
+    def __init__(self, encoder, attention_layers_to_linearize=None, mode: str = "linear"):
         super().__init__()
-        if mode not in ("zero", "fitted"):
-            raise ValueError(f"mode must be 'zero' or 'fitted', got '{mode}'")
+        if mode not in ("identity", "linear"):
+            raise ValueError(f"mode must be 'identity' or 'linear', got '{mode}'")
         self.encoder = encoder
         flat = []
         for item in (attention_layers_to_linearize or []):
@@ -301,8 +301,8 @@ class AttentionLinearisedEncoder(nn.Module):
         self.attention_layers_to_linearize = set(flat)
         self.mode = mode
 
-        if mode == "zero":
-            self._patch_attention_zero()
+        if mode == "identity":
+            self._patch_attention_identity()
 
     def _get_layers(self):
         if hasattr(self.encoder, "encoder") and hasattr(self.encoder.encoder, "layer"):
@@ -313,21 +313,21 @@ class AttentionLinearisedEncoder(nn.Module):
                 return vm.encoder.layers
         raise ValueError("Could not find transformer layers in the encoder")
 
-    def _patch_attention_zero(self):
+    def _patch_attention_identity(self):
         layers = self._get_layers()
         for idx, layer in enumerate(layers):
             if idx not in self.attention_layers_to_linearize:
                 continue
             if not hasattr(layer, "attention"):
                 continue
-            def zero_attn(hidden_states, *_):
+            def identity_attn(hidden_states, *_):
                 return torch.zeros_like(hidden_states)
-            layer.attention.forward = zero_attn
+            layer.attention.forward = identity_attn
 
     @torch.no_grad()
     def fit(self, loader, max_samples: int = 500):
-        if self.mode != "fitted":
-            raise RuntimeError("fit() is only valid for mode='fitted'")
+        if self.mode != "linear":
+            raise RuntimeError("fit() is only valid for mode='linear'")
 
         layers = self._get_layers()
         attn_inputs: dict[int, list] = {i: [] for i in self.attention_layers_to_linearize}
@@ -391,6 +391,97 @@ class AttentionLinearisedEncoder(nn.Module):
             layer.attention.forward = make_forward(translator)
 
         return self
+
+    def forward(self, *args, **kwargs):
+        return self.encoder(*args, **kwargs)
+
+
+class HeadPrunedEncoder(nn.Module):
+    """
+    Keeps only the specified attention heads in target layers; all others are
+    permanently removed by resizing Q/K/V and the output projection in-place.
+
+    heads_to_keep: {layer_idx: [head_indices_to_keep]}
+    Layers not in the dict are left unchanged.
+    Only supports HF ViT/DeiT-style attention (layer.attention.attention).
+    """
+
+    def __init__(self, encoder, heads_to_keep: dict):
+        super().__init__()
+        self.encoder = encoder
+        self.heads_to_keep = {int(k): list(v) for k, v in heads_to_keep.items()}
+        self._patch_heads()
+
+    def _get_layers(self):
+        if hasattr(self.encoder, "encoder") and hasattr(self.encoder.encoder, "layer"):
+            return self.encoder.encoder.layer
+        if hasattr(self.encoder, "vision_model"):
+            vm = self.encoder.vision_model
+            if hasattr(vm.encoder, "layers"):
+                return vm.encoder.layers
+        raise ValueError("Could not find transformer layers in the encoder")
+
+    def _patch_heads(self):
+        layers = self._get_layers()
+
+        for layer_idx, keep in self.heads_to_keep.items():
+            layer = layers[layer_idx]
+            if not hasattr(layer, "attention") or not hasattr(layer.attention, "attention"):
+                raise ValueError(f"Layer {layer_idx} does not have HF-style attention.attention block")
+
+            attn_block = layer.attention.attention
+            out_dense = layer.attention.output.dense
+
+            num_heads = attn_block.num_attention_heads
+            hidden_size = attn_block.query.weight.shape[1]
+            head_size = hidden_size // num_heads
+
+            remove = sorted(set(range(num_heads)) - set(keep), reverse=True)
+            if not remove:
+                continue
+
+            with torch.no_grad():
+                q_w = attn_block.query.weight.data.clone()
+                q_b = attn_block.query.bias.data.clone()
+                k_w = attn_block.key.weight.data.clone()
+                k_b = attn_block.key.bias.data.clone()
+                v_w = attn_block.value.weight.data.clone()
+                v_b = attn_block.value.bias.data.clone()
+                d_w = out_dense.weight.data.clone()
+                d_b = out_dense.bias.data.clone()
+
+                for h in remove:
+                    s, e = h * head_size, (h + 1) * head_size
+                    q_w = torch.cat([q_w[:s], q_w[e:]], dim=0)
+                    q_b = torch.cat([q_b[:s], q_b[e:]], dim=0)
+                    k_w = torch.cat([k_w[:s], k_w[e:]], dim=0)
+                    k_b = torch.cat([k_b[:s], k_b[e:]], dim=0)
+                    v_w = torch.cat([v_w[:s], v_w[e:]], dim=0)
+                    v_b = torch.cat([v_b[:s], v_b[e:]], dim=0)
+                    d_w = torch.cat([d_w[:, :s], d_w[:, e:]], dim=1)
+
+                rem_heads = len(keep)
+                rem_feat = rem_heads * head_size
+
+                attn_block.query = nn.Linear(hidden_size, rem_feat, bias=True)
+                attn_block.query.weight = nn.Parameter(q_w)
+                attn_block.query.bias = nn.Parameter(q_b)
+                attn_block.key = nn.Linear(hidden_size, rem_feat, bias=True)
+                attn_block.key.weight = nn.Parameter(k_w)
+                attn_block.key.bias = nn.Parameter(k_b)
+                attn_block.value = nn.Linear(hidden_size, rem_feat, bias=True)
+                attn_block.value.weight = nn.Parameter(v_w)
+                attn_block.value.bias = nn.Parameter(v_b)
+
+                new_dense = nn.Linear(rem_feat, hidden_size, bias=True)
+                new_dense.weight = nn.Parameter(d_w)
+                new_dense.bias = nn.Parameter(d_b)
+                layer.attention.output.dense = new_dense
+
+                attn_block.num_attention_heads = rem_heads
+                attn_block.all_head_size = rem_feat
+                if hasattr(attn_block, "attention_head_size"):
+                    attn_block.attention_head_size = head_size
 
     def forward(self, *args, **kwargs):
         return self.encoder(*args, **kwargs)

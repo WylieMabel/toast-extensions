@@ -1,0 +1,100 @@
+seed,dataset,model,optimizer,lr,classifier,translator,batch_size,num_epochs,approx_layer,mlp_linearize,attn_linearize,num_layers,original_accuracy,accuracy,delta_acc,num_samples
+1,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7688,0.7688,0.0,500
+2,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7659,0.7659,0.0,500
+3,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7716,0.7716,0.0,500
+1,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7688,0.7688,0.0,500
+1,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7688,0.7034,0.0654,500
+1,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7688,0.7445,0.0242999999999999,500
+1,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7688,0.7191,0.0497,500
+1,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7688,0.7708,-0.002,500
+2,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7659,0.7659,0.0,500
+2,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7659,0.6966,0.0693,500
+2,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7659,0.747,0.0189,500
+2,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7659,0.7141,0.0518,500
+2,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7659,0.7669,-0.001,500
+3,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7716,0.7716,0.0,500
+3,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7716,0.6986,0.0729999999999999,500
+3,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7716,0.7449,0.0266999999999999,500
+3,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7716,0.7202,0.0514,500
+3,imagenet-1k,google/vit-base-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7716,0.7702,0.0013999999999999,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7389,0.7389,0.0,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7389,0.7,0.0389,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7389,0.7252,0.0137,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7389,0.6937,0.0452,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7389,0.7384,0.0005,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7362,0.7362,0.0,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7362,0.6948,0.0413999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7362,0.7216,0.0145999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7362,0.6923,0.0438999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7362,0.7375,-0.0013,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7372,0.7372,0.0,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7372,0.7022,0.0349999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7372,0.7231,0.0141,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7372,0.6938,0.0433999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7372,0.7384,-0.0011999999999999,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7389,0.7389,0.0,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7389,0.7,0.0389,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7389,0.7252,0.0137,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7389,0.6937,0.0452,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7389,0.7384,0.0005,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(2, 4)]",[],[],2,0.7389,0.6966,0.0423,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(9, 11)]",[],[],2,0.7389,0.6966,0.0423,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(0, 1)]",[],[],1,0.7389,0.6286,0.1102999999999999,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(10, 11)]",[],[],1,0.7389,0.7379,0.001,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7362,0.7362,0.0,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7362,0.6948,0.0413999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7362,0.7216,0.0145999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7362,0.6923,0.0438999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7362,0.7375,-0.0013,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(2, 4)]",[],[],2,0.7362,0.6973,0.0388999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(9, 11)]",[],[],2,0.7362,0.6961,0.0400999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(0, 1)]",[],[],1,0.7362,0.6212,0.1149999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(10, 11)]",[],[],1,0.7362,0.736,0.0001999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],0,0.7372,0.7372,0.0,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7372,0.7022,0.0349999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7372,0.7231,0.0141,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7372,0.6938,0.0433999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7372,0.7384,-0.0011999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(2, 4)]",[],[],2,0.7372,0.6975,0.0396999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(9, 11)]",[],[],2,0.7372,0.7,0.0372,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(0, 1)]",[],[],1,0.7372,0.6248,0.1123999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(10, 11)]",[],[],1,0.7372,0.733,0.0041999999999999,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7389,0.7,0.0389,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7389,0.7252,0.0137,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7389,0.6937,0.0452,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7389,0.7384,0.0005,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],"[3, 4]",0,0.7389,0.6969,0.042,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],"[10, 11]",0,0.7389,0.7079,0.031,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[1],0,0.7389,0.7174,0.0214999999999999,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[11],0,0.7389,0.7357,0.0031999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7362,0.6948,0.0413999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7362,0.7216,0.0145999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7362,0.6923,0.0438999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7362,0.7375,-0.0013,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],"[3, 4]",0,0.7362,0.699,0.0372,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],"[10, 11]",0,0.7362,0.7111,0.0251,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[1],0,0.7362,0.7164,0.0197999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[11],0,0.7362,0.7356,0.0005999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[3, 4]",[],0,0.7372,0.7022,0.0349999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],"[10, 11]",[],0,0.7372,0.7231,0.0141,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[1],[],0,0.7372,0.6938,0.0433999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[11],[],0,0.7372,0.7384,-0.0011999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],"[3, 4]",0,0.7372,0.6965,0.0406999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],"[10, 11]",0,0.7372,0.7095,0.0276999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[1],0,0.7372,0.7153,0.0218999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[11],0,0.7372,0.7331,0.0040999999999999,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[],0,0.7389,0.7389,0.0,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(2, 4)]",[],[],2,0.7389,0.6304,0.1085,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(9, 11)]",[],[],2,0.7389,0.6967,0.0422,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(0, 1)]",[],[],1,0.7389,0.6421,0.0968,500
+1,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(10, 11)]",[],[],1,0.7389,0.7366,0.0022999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[],0,0.7362,0.7362,0.0,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(2, 4)]",[],[],2,0.7362,0.6337,0.1024999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(9, 11)]",[],[],2,0.7362,0.6963,0.0398999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(0, 1)]",[],[],1,0.7362,0.6383,0.0978999999999999,500
+2,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(10, 11)]",[],[],1,0.7362,0.7367,-0.0005,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[],0,0.7372,0.7372,0.0,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(2, 4)]",[],[],2,0.7372,0.6328,0.1043999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(9, 11)]",[],[],2,0.7372,0.6985,0.0386999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(0, 1)]",[],[],1,0.7372,0.6401,0.0970999999999999,500
+3,imagenet-1k,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(10, 11)]",[],[],1,0.7372,0.7331,0.0040999999999999925,500

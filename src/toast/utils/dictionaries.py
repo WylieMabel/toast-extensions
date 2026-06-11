@@ -140,6 +140,7 @@ MODEL2NUM_LAYERS = {
     "google/vit-large-patch16-224": 24,
     "facebook/dinov2-small": 12,
     "facebook/dinov2-base": 12,
+
     "openai/clip-vit-base-patch32": 12,
     # TIMM (DC-ViT Table 5 checkpoints)
     "timm/vit_tiny_patch16_224.augreg_in21k_ft_in1k": 12,
@@ -169,6 +170,7 @@ MODEL2CONFIGS = {
         "pooler_path": None,
         "layers_accept_masks": False,
     },
+
     "WinKawaks/vit-tiny-patch16-224": {
         "embeddings_path": "embeddings",
         "layers_parent_path": "encoder",
