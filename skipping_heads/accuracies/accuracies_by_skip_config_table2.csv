@@ -1,0 +1,73 @@
+skip_config,accuracy_mean,accuracy_std
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.06706666666666666,0.000896288643983248
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.6175333333333334,0.0008082903768654511
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(0, 1), (2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.12653333333333333,0.002112660250332116
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(0, 1), (2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.7120666666666667,0.006305817419917338
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(0, 1)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.6584333333333333,0.0018502252115170613
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(0, 1)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.7371333333333334,0.002750151510977763
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(0, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.03576666666666667,0.0026539279065817397
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(0, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.27626666666666666,0.00795633919169698
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(5, 6)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.2937666666666667,0.0037819747927945466
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [(5, 6)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.7311,0.00581291665173342
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: identity, Attn: []",0.06046666666666667,0.002550163393458023
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: linear, Attn: []",0.5195,0.00345108678534746
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: identity, Attn: []",0.24333333333333332,0.006251666444503688
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: linear, Attn: []",0.6821999999999999,0.0022649503305812698
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: identity, Attn: []",0.5389,0.0015716233645501321
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: linear, Attn: []",0.7101333333333333,0.0023007245235649983
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [1], MLP Mode: identity, Attn: []",0.7200000000000001,0.002066397831977171
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [1], MLP Mode: linear, Attn: []",0.7347666666666667,0.000709459888459785
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [6], MLP Mode: identity, Attn: []",0.1894,0.00221133443874958
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [6], MLP Mode: linear, Attn: []",0.7315333333333333,0.0022368132093077363
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 2, 3, 4]",0.0927,0.004942671342502959
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3, 5]",0.15446666666666667,0.0011372481406154728
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3]",0.4569666666666667,0.000862167810425143
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1]",0.7301666666666667,0.0032254198693090286
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [6]",0.5533666666666667,0.002916047553338823
+"Encoder: facebook/dinov2-base, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.7418,0.0007549834435271022
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(16, 17), (22, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.7768666666666667,0.002650157228040195
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(16, 17), (22, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.7774,0.002515949125081839
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(17, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.666,0.0020000000000000018
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(17, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.6696,0.0008717797887081502
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(2, 4), (18, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.6317333333333334,0.0014843629385474567
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(2, 4), (18, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.6744,9.999999999998899e-05
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(22, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.7847,0.001833030277982325
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(22, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.7812333333333333,0.000709459888459785
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(3, 4), (19, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.7049333333333333,0.002150193789716075
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(3, 4), (19, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.7157666666666667,0.0014571661996262903
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(3, 4), (20, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.7354666666666666,0.000873689494805391
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(3, 4), (20, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.7396666666666668,0.0036855573979159588
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(3, 4), (21, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.7558000000000001,0.002381176179958163
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(3, 4), (21, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.762,0.0032046840717924446
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(3, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.7725666666666667,0.001550268793897757
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(3, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.7844666666666668,0.002079262689833433
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(7, 8), (15, 16)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.7680666666666666,0.000550757054728621
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [(7, 8), (15, 16)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: []",0.7738999999999999,0.0024515301344262847
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [17, 23], MLP Mode: identity, Attn: []",0.7836666666666666,0.003187998327059359
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [17, 23], MLP Mode: linear, Attn: []",0.7776,0.002645751311064572
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [18, 19, 20, 21, 22, 23], MLP Mode: identity, Attn: []",0.7255333333333333,0.0037859388972001956
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [18, 19, 20, 21, 22, 23], MLP Mode: linear, Attn: []",0.7337333333333333,0.0005033222956847108
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [23], MLP Mode: identity, Attn: []",0.7848,0.003764306044943712
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [23], MLP Mode: linear, Attn: []",0.7813333333333333,0.001059874206372303
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [3, 4, 19, 20, 21, 22, 23], MLP Mode: identity, Attn: []",0.7084,0.003567912554982292
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [3, 4, 19, 20, 21, 22, 23], MLP Mode: linear, Attn: []",0.7225666666666667,0.0018175074506954958
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [4, 20, 21, 22, 23], MLP Mode: identity, Attn: []",0.7412666666666666,0.0015947831618540354
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [4, 20, 21, 22, 23], MLP Mode: linear, Attn: []",0.7438666666666666,0.005607435539828623
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [4, 21, 22, 23], MLP Mode: identity, Attn: []",0.7579333333333333,0.0026159765544311406
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [4, 21, 22, 23], MLP Mode: linear, Attn: []",0.7515000000000001,0.0010816653826391854
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [4, 22, 23], MLP Mode: identity, Attn: []",0.7703666666666668,0.0036004629331980184
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [4, 22, 23], MLP Mode: linear, Attn: []",0.7638333333333334,0.004867579823005823
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [4], MLP Mode: identity, Attn: []",0.7769333333333334,0.0026839026311201077
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [4], MLP Mode: linear, Attn: []",0.7786,0.0013228756555323593
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [8, 16], MLP Mode: identity, Attn: []",0.7792333333333333,0.0012662279942148088
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [8, 16], MLP Mode: linear, Attn: []",0.7777666666666666,0.0016802777548170927
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [17, 23]",0.7772,0.002685144316419488
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [18, 19, 20, 21, 22, 23]",0.6671,0.003151190251317704
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [23]",0.7827999999999999,0.0010148891565092155
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [3, 4, 19, 20, 21, 22, 23]",0.6529666666666666,0.000585946527708246
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [4, 20, 21, 22, 23]",0.7205666666666666,0.001429452109492729
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [4, 21, 22, 23]",0.7414000000000001,0.0016822603841260444
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [4, 22, 23]",0.7605666666666666,0.001357694123627716
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [4]",0.7788333333333334,0.002779088579612622
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [8, 16]",0.7718666666666666,0.0027061657993059703
+"Encoder: google/vit-large-patch16-224, Dataset: imagenet-1k, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: []",0.7846000000000001,0.0014933184523067734

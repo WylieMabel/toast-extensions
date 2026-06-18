@@ -2,7 +2,7 @@
 #SBATCH -p gpu
 #SBATCH --gres=gpu:rtx4090:1
 #SBATCH --cpus-per-task=2
-#SBATCH --mem=24000
+#SBATCH --mem=48000
 #SBATCH --time=48:00:00
 #SBATCH --output=logs/pipeline_row_by_row.out.txt
 

@@ -87,7 +87,7 @@ def skip_and_train_full_run(
         "mlp_mode", "attn_mode",
         "num_layers", "original_accuracy", "accuracy", "delta_acc", "num_samples",
     ]
-    results_path = PROJECT_ROOT / "results" / "results_full_compare.csv"
+    results_path = PROJECT_ROOT / "results" / "results_full_table3.csv"
     if os.path.exists(results_path):
         try:
             results_df = pd.read_csv(results_path)

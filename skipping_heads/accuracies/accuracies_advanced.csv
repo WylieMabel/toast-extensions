@@ -1,0 +1,13 @@
+skip_config,accuracy_mean,accuracy_std,order
+"Encoder: facebook/deit-small-patch16-224, Dataset: cifar100, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7124666666666667,0.0004163331998932585,0
+"Encoder: facebook/deit-small-patch16-224, Dataset: cifar100, Block: [(9, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7209,0.0032511536414017717,3
+"Encoder: facebook/deit-small-patch16-224, Dataset: cifar100, Block: [], Block Mode: identity, MLP: [4], MLP Mode: linear, Attn: [] Heads: {}",0.7089333333333334,0.003231614663497708,6
+"Encoder: facebook/deit-small-patch16-224, Dataset: cifar100, Block: [(9, 11)], Block Mode: linear, MLP: [4], MLP Mode: linear, Attn: [] Heads: {}",0.7138666666666666,0.0014571661996262883,9
+"Encoder: facebook/dinov2-base, Dataset: cifar100, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8720666666666667,0.0047427137098219625,12
+"Encoder: facebook/dinov2-base, Dataset: cifar100, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8609666666666667,0.0020599352740640117,15
+"Encoder: facebook/dinov2-base, Dataset: cifar100, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1] Heads: {}",0.8389666666666667,0.0024440403706430212,18
+"Encoder: facebook/dinov2-base, Dataset: cifar100, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [1] Heads: {}",0.6596,0.00462276973253045,21
+"Encoder: google/vit-large-patch16-224, Dataset: cifar100, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8637333333333334,0.002514623895005656,24
+"Encoder: google/vit-large-patch16-224, Dataset: cifar100, Block: [], Block Mode: identity, MLP: [21, 22, 23], MLP Mode: identity, Attn: [] Heads: {}",0.8674666666666666,0.0020526405757788123,27
+"Encoder: google/vit-large-patch16-224, Dataset: cifar100, Block: [(3, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8610666666666665,0.002900574655707653,30
+"Encoder: google/vit-large-patch16-224, Dataset: cifar100, Block: [(3, 4)], Block Mode: linear, MLP: [21, 22, 23], MLP Mode: identity, Attn: [] Heads: {}",0.8677333333333334,0.002779088579612647,33

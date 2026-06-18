@@ -1,0 +1,13 @@
+dataset,encoder,skip,mlp_skip,attn_skip,head_dict,skip_translator,mlp_mode,attn_mode
+"cifar100","facebook/deit-small-patch16-224","[]","[]","[]",{},"identity","identity","identity"
+"cifar100","facebook/deit-small-patch16-224","[(9, 11)]","[]","[]",{},"linear","identity","identity"
+"cifar100","facebook/deit-small-patch16-224","[]","[4]","[]",{},"identity","linear","identity"
+"cifar100","facebook/deit-small-patch16-224","[(9, 11)]","[4]","[]",{},"linear","linear","identity"
+"cifar100","facebook/dinov2-base","[]","[]","[]",{},"identity","identity","identity"
+"cifar100","facebook/dinov2-base","[(2, 3)]","[]","[]",{},"linear","identity","identity"
+"cifar100","facebook/dinov2-base","[]","[]","[1]",{},"identity","identity","identity"
+"cifar100","facebook/dinov2-base","[(2, 3)]","[]","[1]",{},"linear","identity","identity"
+"cifar100","google/vit-large-patch16-224","[]","[]","[]",{},"identity","identity","identity"
+"cifar100","google/vit-large-patch16-224","[]","[21,22,23]","[]",{},"identity","identity","identity"
+"cifar100","google/vit-large-patch16-224","[(3, 4)]","[]","[]",{},"linear","identity","identity"
+"cifar100","google/vit-large-patch16-224","[(3, 4)]","[21,22,23]","[]",{},"linear","identity","identity"
