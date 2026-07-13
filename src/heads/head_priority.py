@@ -19,9 +19,9 @@ import tqdm
 from datasets import load_from_disk
 from torch.utils.data import DataLoader
 from transformers import (
+    AutoConfig,
     AutoImageProcessor,
-    AutoModelForImageClassification,
-    DeiTForImageClassification,
+    AutoModel,
 )
 
 MODEL_REGISTRY = {
@@ -29,19 +29,16 @@ MODEL_REGISTRY = {
         "hf_id": "facebook/deit-small-patch16-224",
         "num_layers": 12,
         "num_heads": 6,
-        "loader": "deit",
     },
     "dinobase": {
         "hf_id": "facebook/dinov2-base",
         "num_layers": 12,
         "num_heads": 12,
-        "loader": "vit",
     },
     "vitlarge": {
         "hf_id": "google/vit-large-patch16-224",
         "num_layers": 24,
         "num_heads": 16,
-        "loader": "vit",
     },
 }
 
@@ -89,28 +86,21 @@ def _load_dataset(dataset_name: str, num_samples: int, model_hf_id: str):
         batch, processor, DATASET_IMAGE_COL[dataset_name], DATASET_LABEL_COL[dataset_name]
     )
 
-    return DataLoader(ds, batch_size=64, shuffle=False, num_workers=1, collate_fn=collate_fn), n
+    return DataLoader(ds, batch_size=8, shuffle=False, num_workers=1, collate_fn=collate_fn), n
 
 
 def _load_model(model_key: str, device: torch.device):
     cfg = MODEL_REGISTRY[model_key]
-    kwargs = dict(
-        attn_implementation="eager",
-        output_attentions=True,
-        output_hidden_states=True,
-        ignore_mismatched_sizes=True,
-    )
-    if cfg["loader"] == "deit":
-        model = DeiTForImageClassification.from_pretrained(cfg["hf_id"], **kwargs)
-    else:
-        model = AutoModelForImageClassification.from_pretrained(cfg["hf_id"], **kwargs)
+    enc_config = AutoConfig.from_pretrained(cfg["hf_id"], output_attentions=True, output_hidden_states=True, return_dict=True)
+    model = AutoModel.from_pretrained(cfg["hf_id"], config=enc_config, attn_implementation="eager")
     model.to(device).eval()
     return model, cfg["num_layers"], cfg["num_heads"]
 
 
 def _accumulate_jsd(model, loader, num_layers, num_heads, device):
-    total_heads = num_layers * num_heads
-    total_jsd = torch.zeros((total_heads, total_heads), dtype=torch.float64, device="cpu")
+    # Only compute within-layer similarities — cross-layer pairs are never used by _compute_keep_dicts.
+    # This reduces comparisons from TH^2 to L * H^2 (e.g. 24x fewer for vitlarge).
+    total_jsd = torch.zeros((num_layers, num_heads, num_heads), dtype=torch.float64)
     n_images = 0
 
     with torch.no_grad():
@@ -119,25 +109,39 @@ def _accumulate_jsd(model, loader, num_layers, num_heads, device):
             bs = images.shape[0]
             outputs = model(images)
 
-            stacked = torch.stack(outputs.attentions)          # [L, bs, H, S, S]
-            flat = stacked.permute(1, 0, 2, 3, 4).reshape(bs, total_heads, -1)  # [bs, TH, S*S]
+            # Stack per-layer attention tensors and keep shape [bs, L, H, S, S].
+            # Each row heads[l, h, q, :] is one softmax over key tokens — sums to 1, no normalization needed.
+            stacked = torch.stack(outputs.attentions)              # [L, bs, H, S, S]
+            attn = stacked.permute(1, 0, 2, 3, 4)                 # [bs, L, H, S, S]
+            del outputs, stacked
+            torch.cuda.empty_cache()
 
             for i in range(bs):
-                heads = flat[i]
-                P = heads.unsqueeze(1)
-                Q = heads.unsqueeze(0)
-                M = torch.clamp(0.5 * (P + Q), min=1e-12)
-                P = torch.clamp(P, min=1e-12)
-                Q = torch.clamp(Q, min=1e-12)
-                kl_pm = torch.sum(P * (torch.log2(P) - torch.log2(M)), dim=-1)
-                kl_qm = torch.sum(Q * (torch.log2(Q) - torch.log2(M)), dim=-1)
-                total_jsd += (0.5 * kl_pm + 0.5 * kl_qm).cpu().double()
+                for l in range(num_layers):
+                    heads_c = torch.clamp(attn[i, l], min=1e-10)  # [H, S, S]
+                    log_h = torch.log2(heads_c)                    # [H, S, S]
+
+                    # All H×H pairs at once: [H, H, S, S] is small enough to fit on GPU
+                    # (e.g. vitlarge: [16, 16, 197, 197] ≈ 400 MB).
+                    P = heads_c.unsqueeze(1)                           # [H, 1, S, S]
+                    Q = heads_c.unsqueeze(0)                           # [1, H, S, S]
+                    M = torch.clamp(0.5 * (P + Q), min=1e-10)         # [H, H, S, S] mixture
+                    log_M = torch.log2(M)
+
+                    # KL per query token (sum over keys, dim=-1), then average across query tokens.
+                    # Result is mean JSD between each head pair for this image, in [0, 1].
+                    kl_pm = torch.sum(P * (log_h.unsqueeze(1) - log_M), dim=-1)  # [H, H, S]
+                    kl_qm = torch.sum(Q * (log_h.unsqueeze(0) - log_M), dim=-1)  # [H, H, S]
+                    total_jsd[l] += (0.5 * kl_pm + 0.5 * kl_qm).mean(dim=-1).cpu().double()  # [H, H]
+
                 n_images += 1
 
-            del outputs, stacked, flat
+            del attn
             torch.cuda.empty_cache()
             gc.collect()
 
+    # similarity[l, i, j] = 1 - avg JSD(head_i, head_j in layer l) across all images, in [0, 1].
+    # 1 = identical attention patterns, 0 = maximally different.
     similarity = (1.0 - total_jsd / n_images).numpy()
     return similarity, n_images
 
@@ -147,19 +151,24 @@ def _compute_keep_dicts(similarity, num_layers, num_heads, thresholds):
     For each threshold: within each layer, greedily mark the higher-index head
     redundant if its similarity with any already-kept head exceeds the threshold.
     Returns heads to KEEP (complement of removed) per layer.
+    similarity shape: [L, H, H]
     """
+    # might tweak to sort by similarity but for now it's fine
     results = []
     all_heads = set(range(num_heads))
 
     for thresh in thresholds:
         head_dict = {}
         for l in range(num_layers):
-            start = l * num_heads
             to_remove = set()
-            for i in range(start, start + num_heads):
-                for j in range(i + 1, start + num_heads):
-                    if similarity[i][j] > thresh:
-                        to_remove.add(j - start)
+            for i in range(num_heads):
+                # If this head is already scheduled for deletion,
+                # it cannot serve as a valid baseline to prune other heads.
+                if i in to_remove:
+                    continue
+                for j in range(i + 1, num_heads):
+                    if similarity[l][i][j] > thresh:
+                        to_remove.add(j)
             head_dict[l] = sorted(all_heads - to_remove)
         results.append((thresh, head_dict))
 

@@ -18,6 +18,15 @@ DATASET2INPUT_COLUMN = {
     "cifar100-fine": "img",
     "cifar100-coarse": "img",
     "sceneparse150": "image",
+    # MedMNIST datasets
+    "pathmnist": "image",
+    "chestmnist": "image",
+    "dermamnist": "image",
+    "pneumoniamnist": "image",
+    "retinamnist": "image",
+    "breastmnist": "image",
+    "bloodmnist": "image",
+    "tissuemnist": "image",
     # text data
     "sst2": "sentence",
     "ag_news": "text",
@@ -32,6 +41,15 @@ DATASET2LABEL_COLUMN = {
     "cifar100-fine": "fine_label",
     "cifar100-coarse": "coarse_label",
     "sceneparse150": "annotation",
+    # MedMNIST datasets
+    "pathmnist": "label",
+    "chestmnist": "label",
+    "dermamnist": "label",
+    "pneumoniamnist": "label",
+    "retinamnist": "label",
+    "breastmnist": "label",
+    "bloodmnist": "label",
+    "tissuemnist": "label",
     # text data
     "sst2": "label",
     "ag_news": "label",
@@ -46,6 +64,15 @@ DATASET2NUM_CLASSES = {
     "cifar100-fine": 100,
     "cifar100-coarse": 20,
     "sceneparse150": 150,
+    # MedMNIST datasets
+    "pathmnist": 9,
+    "chestmnist": 2,
+    "dermamnist": 7,
+    "pneumoniamnist": 2,
+    "retinamnist": 5,
+    "breastmnist": 2,
+    "bloodmnist": 8,
+    "tissuemnist": 8,
     # text data
     "sst2": 2,
     "ag_news": 4,
@@ -63,6 +90,7 @@ MODEL_NAME2HF_NAME = {
     # DINO
     "dinov2-small": "facebook/dinov2-small",
     "dinov2-base": "facebook/dinov2-base",
+    "rad-dino": "microsoft/rad-dino",
     # CLIP
     "clip-base": "openai/clip-vit-base-patch32",
     # TIMM (DC-ViT Table 5 checkpoints)
@@ -85,6 +113,15 @@ DATASET_NAME2HF_NAME = {
     "cifar100-fine": "cifar100",
     "cifar100-coarse": "cifar100",
     "sceneparse150": "zhoubolei/scene_parse_150",
+    # MedMNIST datasets
+    "pathmnist": "albertvillanova/medmnist-v2",
+    "chestmnist": "albertvillanova/medmnist-v2",
+    "dermamnist": "albertvillanova/medmnist-v2",
+    "pneumoniamnist": "albertvillanova/medmnist-v2",
+    "retinamnist": "albertvillanova/medmnist-v2",
+    "breastmnist": "albertvillanova/medmnist-v2",
+    "bloodmnist": "albertvillanova/medmnist-v2",
+    "tissuemnist": "albertvillanova/medmnist-v2",
     # text data
     "sst2": "glue",
     "imdb": "imdb",
@@ -98,6 +135,15 @@ DATASET2LOCAL_PATH = {
     "cifar10": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/cifar10_clean",
     "cifar100": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/cifar100_clean",
     "imagenet-1k": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/imagenet1k_clean",
+    # MedMNIST datasets
+    "pathmnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_pathmnist_clean",
+    "chestmnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_chestmnist_clean",
+    "dermamnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_dermamnist_clean",
+    "pneumoniamnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_pneumoniamnist_clean",
+    "retinamnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_retinamnist_clean",
+    "breastmnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_breastmnist_clean",
+    "bloodmnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_bloodmnist_clean",
+    "tissuemnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_tissuemnist_clean",
 }
 
 # Text dataset configurations with full HuggingFace loading details
@@ -140,6 +186,7 @@ MODEL2NUM_LAYERS = {
     "google/vit-large-patch16-224": 24,
     "facebook/dinov2-small": 12,
     "facebook/dinov2-base": 12,
+    "microsoft/rad-dino": 12,
 
     "openai/clip-vit-base-patch32": 12,
     # TIMM (DC-ViT Table 5 checkpoints)
@@ -162,6 +209,15 @@ MODEL2CONFIGS = {
         "layers_accept_masks": False,
     },
     "facebook/dinov2-base": {
+        "embeddings_path": "embeddings",
+        "layers_parent_path": "encoder",
+        "layers_attribute_name": "layer",
+        "pre_norm_path": None,
+        "post_norm_path": "layernorm",
+        "pooler_path": None,
+        "layers_accept_masks": False,
+    },
+    "microsoft/rad-dino": {
         "embeddings_path": "embeddings",
         "layers_parent_path": "encoder",
         "layers_attribute_name": "layer",

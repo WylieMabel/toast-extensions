@@ -3,7 +3,7 @@
 #SBATCH --gres=gpu:rtx4090:1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=24000
-#SBATCH --time=6:00:00
+#SBATCH --time=16:00:00
 #SBATCH --output=logs/full_pipeline_csv.out.txt
 
 # 1. Path Setup

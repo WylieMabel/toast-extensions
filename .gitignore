@@ -6,6 +6,8 @@ plots/
 # added for cluster
 hf_temp_cache/
 
+# claude stuff
+claude_out/
 
 # Logs
 wandb/

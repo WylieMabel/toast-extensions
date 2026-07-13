@@ -168,151 +168,185 @@ def run_encoding(
 
         label_col = DATASET2LABEL_COLUMN[ds_name]
 
-        if enc_name.startswith("open_clip:"):
-            import open_clip
-            open_clip_hub_name = f"hf-hub:{enc_name.split(':', 1)[1]}"
-            model, _, preprocess_val = open_clip.create_model_and_transforms(open_clip_hub_name, device=device)
-            encoder = model
-            collate_fn = functools.partial(
-                open_clip_image_encode,
-                processor=preprocess_val,
-                image_name=DATASET2INPUT_COLUMN[ds_name],
-                label_name=DATASET2LABEL_COLUMN[ds_name],
-            )
-        elif enc_name == "openai/clip-vit-base-patch32":
-            enc_config = CLIPVisionConfig.from_pretrained(enc_name, output_hidden_states=True, return_dict=True)
-            processor = CLIPImageProcessor.from_pretrained(enc_name)
-            encoder = CLIPVisionModel.from_pretrained(enc_name, config=enc_config)
-            collate_fn = functools.partial(
-                image_encode,
-                processor=processor,
-                image_name=DATASET2INPUT_COLUMN[ds_name],
-                label_name=DATASET2LABEL_COLUMN[ds_name],
-            )
-        else:
-            enc_config = AutoConfig.from_pretrained(enc_name, output_hidden_states=True, return_dict=True)
-            processor = AutoImageProcessor.from_pretrained(enc_name)
-            encoder = AutoModel.from_pretrained(enc_name, config=enc_config)
-            collate_fn = functools.partial(
-                image_encode,
-                processor=processor,
-                image_name=DATASET2INPUT_COLUMN[ds_name],
-                label_name=DATASET2LABEL_COLUMN[ds_name],
-            )
+        try:
+            if enc_name.startswith("open_clip:"):
+                import open_clip
+                open_clip_hub_name = f"hf-hub:{enc_name.split(':', 1)[1]}"
+                model, _, preprocess_val = open_clip.create_model_and_transforms(open_clip_hub_name, device=device)
+                encoder = model
+                collate_fn = functools.partial(
+                    open_clip_image_encode,
+                    processor=preprocess_val,
+                    image_name=DATASET2INPUT_COLUMN[ds_name],
+                    label_name=DATASET2LABEL_COLUMN[ds_name],
+                )
+            elif enc_name == "openai/clip-vit-base-patch32":
+                enc_config = CLIPVisionConfig.from_pretrained(enc_name, output_hidden_states=True, return_dict=True)
+                processor = CLIPImageProcessor.from_pretrained(enc_name)
+                encoder = CLIPVisionModel.from_pretrained(enc_name, config=enc_config)
+                collate_fn = functools.partial(
+                    image_encode,
+                    processor=processor,
+                    image_name=DATASET2INPUT_COLUMN[ds_name],
+                    label_name=DATASET2LABEL_COLUMN[ds_name],
+                )
+            else:
+                enc_config = AutoConfig.from_pretrained(enc_name, output_hidden_states=True, return_dict=True)
+                processor = AutoImageProcessor.from_pretrained(enc_name)
+                encoder = AutoModel.from_pretrained(enc_name, config=enc_config)
+                collate_fn = functools.partial(
+                    image_encode,
+                    processor=processor,
+                    image_name=DATASET2INPUT_COLUMN[ds_name],
+                    label_name=DATASET2LABEL_COLUMN[ds_name],
+                )
 
-        encoder.eval().to(device)
+            encoder.eval().to(device)
+        except Exception as e:
+            print(f"✗ Error loading encoder '{enc_name}': {e}")
+            continue
 
-        train_loader = DataLoader(
-            raw_data["train"], batch_size=batch_size, pin_memory=True,
-            shuffle=False, num_workers=1, collate_fn=collate_fn,
-        )
-        test_loader = DataLoader(
-            raw_data["test"], batch_size=batch_size, pin_memory=True,
-            shuffle=False, num_workers=1, collate_fn=collate_fn,
-        )
+        try:
+            train_loader = DataLoader(
+                raw_data["train"], batch_size=batch_size, pin_memory=True,
+                shuffle=False, num_workers=1, collate_fn=collate_fn,
+            )
+            test_loader = DataLoader(
+                raw_data["test"], batch_size=batch_size, pin_memory=True,
+                shuffle=False, num_workers=1, collate_fn=collate_fn,
+            )
+        except Exception as e:
+            print(f"✗ Error creating data loaders: {e}")
+            del encoder
+            torch.cuda.empty_cache()
+            continue
 
-        all_layer_embeddings = extract_representations(
-            encoder=encoder,
-            max_samples=samples_to_extract,
-            loader=train_loader,
-            model_config=model_config,
-            model_is_open_clip=enc_name.startswith("open_clip:"),
-            seed=seed,
-        )
-        print(f"Captured embeddings for layers: {list(all_layer_embeddings.keys())}")
+        try:
+            all_layer_embeddings = extract_representations(
+                encoder=encoder,
+                max_samples=samples_to_extract,
+                loader=train_loader,
+                model_config=model_config,
+                model_is_open_clip=enc_name.startswith("open_clip:"),
+                seed=seed,
+            )
+            print(f"Captured embeddings for layers: {list(all_layer_embeddings.keys())}")
+        except Exception as e:
+            print(f"✗ Error extracting representations: {e}")
+            del encoder
+            torch.cuda.empty_cache()
+            continue
 
         total = len(config_rows)
         for combo_idx, cfg in enumerate(config_rows, 1):
-            skip           = cfg["skip"]
-            mlp_skip       = cfg["mlp_skip"]
-            attn_skip      = cfg["attn_skip"]
-            head_dict      = cfg["head_dict"]
-            mlp_mode       = cfg.get("mlp_mode", "identity")
-            attn_mode      = cfg.get("attn_mode", "identity")
-            row_translator = cfg["skip_translator"]
+            try:
+                skip           = cfg["skip"]
+                mlp_skip       = cfg["mlp_skip"]
+                attn_skip      = cfg["attn_skip"]
+                head_dict      = cfg["head_dict"]
+                mlp_mode       = cfg.get("mlp_mode", "identity")
+                attn_mode      = cfg.get("attn_mode", "identity")
+                row_translator = cfg["skip_translator"]
 
-            cfg_dir = cfg_embedding_dir(cfg, samples_to_extract, embeddings_base)
+                cfg_dir = cfg_embedding_dir(cfg, samples_to_extract, embeddings_base)
 
-            print(f"\n[{combo_idx}/{total}] skip={skip} | attn={attn_skip}({attn_mode}) | mlp={mlp_skip}({mlp_mode}) | heads={head_dict or 'full'} | translator={row_translator}")
-            print(f"  -> {cfg_dir}")
+                print(f"\n[{combo_idx}/{total}] skip={skip} | attn={attn_skip}({attn_mode}) | mlp={mlp_skip}({mlp_mode}) | heads={head_dict or 'full'} | translator={row_translator}")
+                print(f"  -> {cfg_dir}")
 
-            if (cfg_dir / "dataset_dict.json").exists():
-                print("  Already encoded, skipping.")
-                continue
+                if (cfg_dir / "dataset_dict.json").exists():
+                    print("  Already encoded, skipping.")
+                    continue
 
-            combo_encoder = copy.deepcopy(encoder)
+                combo_encoder = copy.deepcopy(encoder)
 
-            AttentionLinearisedEncoder(
-                combo_encoder,
-                attention_layers_to_linearize=attn_skip,
-                mode=attn_mode,
-            ).to(device).eval()
+                AttentionLinearisedEncoder(
+                    combo_encoder,
+                    attention_layers_to_linearize=attn_skip,
+                    mode=attn_mode,
+                ).to(device).eval()
 
-            mlp_enc = MLPLinearisedEncoder(
-                combo_encoder,
-                mlp_layers_to_linearize=mlp_skip,
-                mode=mlp_mode,
-            ).to(device).eval()
-            if mlp_mode == "linear":
-                mlp_enc.fit(train_loader, max_samples=samples_to_extract)
+                mlp_enc = MLPLinearisedEncoder(
+                    combo_encoder,
+                    mlp_layers_to_linearize=mlp_skip,
+                    mode=mlp_mode,
+                ).to(device).eval()
+                if mlp_mode == "linear":
+                    mlp_enc.fit(train_loader, max_samples=samples_to_extract)
 
-            if head_dict:
-                HeadPrunedEncoder(combo_encoder, head_dict).to(device).eval()
+                if head_dict:
+                    HeadPrunedEncoder(combo_encoder, head_dict).to(device).eval()
 
-            skip_encoder = SkipModel(
-                encoder=combo_encoder,
-                skips=skip,
-                mode=mode,
-                precomputed_embeddings=all_layer_embeddings,
-                translator_factory_name=row_translator,
-                **model_config,
-            ).to(device).eval()
+                skip_encoder = SkipModel(
+                    encoder=combo_encoder,
+                    skips=skip,
+                    mode=mode,
+                    precomputed_embeddings=all_layer_embeddings,
+                    translator_factory_name=row_translator,
+                    **model_config,
+                ).to(device).eval()
 
-            split2encoding = {
-                "train": encode_data(loader=train_loader, skip_encoder=skip_encoder),
-                "test":  encode_data(loader=test_loader,  skip_encoder=skip_encoder),
-            }
+                split2encoding = {
+                    "train": encode_data(loader=train_loader, skip_encoder=skip_encoder),
+                    "test":  encode_data(loader=test_loader,  skip_encoder=skip_encoder),
+                }
 
-            valid = True
-            for split, enc in split2encoding.items():
-                if len(enc) != len(raw_data[split]):
-                    print(f"  Error: length mismatch for '{split}' ({len(enc)} vs {len(raw_data[split])}). Skipping.")
-                    valid = False
-                    break
-            if not valid:
+                valid = True
+                for split, enc in split2encoding.items():
+                    if len(enc) != len(raw_data[split]):
+                        print(f"  Error: length mismatch for '{split}' ({len(enc)} vs {len(raw_data[split])}). Skipping.")
+                        valid = False
+                        break
+                if not valid:
+                    del skip_encoder, combo_encoder
+                    torch.cuda.empty_cache()
+                    continue
+
+                new_dataset = DatasetDict({
+                    split: Dataset.from_dict({
+                        "embeddings": enc,
+                        label_col:    raw_data[split][label_col],
+                    })
+                    for split, enc in split2encoding.items()
+                })
+
+                temp_dir = cfg_dir.parent / f"{cfg_dir.name}_temp"
+                try:
+                    if temp_dir.exists():
+                        shutil.rmtree(temp_dir)
+                    cfg_dir.parent.mkdir(parents=True, exist_ok=True)
+                    new_dataset.save_to_disk(str(temp_dir))
+                    if cfg_dir.exists():
+                        shutil.rmtree(cfg_dir)
+                    shutil.move(str(temp_dir), str(cfg_dir))
+                    print(f"  Saved to {cfg_dir}")
+                except Exception as e:
+                    print(f"  Error saving: {e}")
+                    if temp_dir.exists():
+                        shutil.rmtree(temp_dir)
+
                 del skip_encoder, combo_encoder
                 torch.cuda.empty_cache()
-                continue
 
-            new_dataset = DatasetDict({
-                split: Dataset.from_dict({
-                    "embeddings": enc,
-                    label_col:    raw_data[split][label_col],
-                })
-                for split, enc in split2encoding.items()
-            })
-
-            temp_dir = cfg_dir.parent / f"{cfg_dir.name}_temp"
-            try:
-                if temp_dir.exists():
-                    shutil.rmtree(temp_dir)
-                cfg_dir.parent.mkdir(parents=True, exist_ok=True)
-                new_dataset.save_to_disk(str(temp_dir))
-                if cfg_dir.exists():
-                    shutil.rmtree(cfg_dir)
-                shutil.move(str(temp_dir), str(cfg_dir))
-                print(f"  Saved to {cfg_dir}")
             except Exception as e:
-                print(f"  Error saving: {e}")
-                if temp_dir.exists():
-                    shutil.rmtree(temp_dir)
-
-            del skip_encoder, combo_encoder
-            torch.cuda.empty_cache()
+                print(f"  ✗ Error processing config {combo_idx}/{total}: {e}")
+                import traceback
+                traceback.print_exc()
+                try:
+                    del skip_encoder, combo_encoder
+                except:
+                    pass
+                torch.cuda.empty_cache()
+                continue
 
         del encoder
         torch.cuda.empty_cache()
 
 
 if __name__ == "__main__":
-    fire.Fire(run_encoding)
+    try:
+        fire.Fire(run_encoding)
+    except Exception as e:
+        print(f"\n✗ Fatal error: {e}")
+        import traceback
+        traceback.print_exc()
+        exit(1)

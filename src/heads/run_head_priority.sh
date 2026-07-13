@@ -29,7 +29,9 @@ export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR/src
 # 5. Run all 9 model x dataset combinations
 cd $PROJECT_DIR
 
-MODELS=("deitsmall" "dinobase" "vitlarge")
+#MODELS=("deitsmall" "dinobase")
+MODELS=("deitsmall")
+#MODELS=("vitlarge")
 DATASETS=("mnist" "cifar100" "imagenet1k")
 
 for MODEL in "${MODELS[@]}"; do
