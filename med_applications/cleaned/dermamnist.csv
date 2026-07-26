@@ -1,0 +1,122 @@
+dataset,model,approx_layer,translator,mlp_linearize,mlp_mode,attn_linearize,head_dict,accuracy_mean,accuracy_std
+dermamnist,facebook/deit-small-patch16-224,"[(2, 3)]",linear,[],identity,[],{},0.7286783042394015,0.0034912718204488558
+dermamnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",linear,[],identity,[],{},0.7281795511221945,0.0030337967732160603
+dermamnist,facebook/deit-small-patch16-224,[],identity,[],identity,[3],{},0.7280133000831256,0.007301809228926933
+dermamnist,facebook/deit-small-patch16-224,[],identity,"[4, 10, 11]",linear,[],{},0.7263507896924356,0.0027469179786962904
+dermamnist,facebook/deit-small-patch16-224,[],identity,"[4, 10]",linear,[],{},0.7260182876142975,0.001888248826533829
+dermamnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",identity,[],identity,[],{},0.7256857855361596,0.01080120091157492
+dermamnist,facebook/deit-small-patch16-224,"[(10, 11)]",identity,[],identity,[],{},0.7248545303408146,0.0035031267673658727
+dermamnist,facebook/deit-small-patch16-224,[],identity,[11],identity,[],{},0.7248545303408146,0.0032065339188671734
+dermamnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",linear,[],identity,[],{},0.7248545303408146,0.007954030732439388
+dermamnist,facebook/deit-small-patch16-224,[],linear,[],linear,[],{},0.7245220282626766,0.0030474318835949227
+dermamnist,facebook/deit-small-patch16-224,[],identity,[],linear,[],{},0.7245220282626766,0.0030474318835949227
+dermamnist,facebook/deit-small-patch16-224,[],identity,[11],linear,[],{},0.7245220282626766,0.0022490023704852154
+dermamnist,facebook/deit-small-patch16-224,[],identity,[],identity,"[4, 10, 11]",{},0.7230257689110556,0.00274691797869632
+dermamnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",identity,[],identity,[],{},0.7225270157938487,0.0030063410340856536
+dermamnist,facebook/deit-small-patch16-224,[],identity,[],identity,"[4, 10]",{},0.7216957605985037,0.007838520521447153
+dermamnist,facebook/deit-small-patch16-224,[],identity,[],identity,[11],{},0.7213632585203658,0.0023570152749389987
+dermamnist,facebook/deit-small-patch16-224,[],identity,[3],linear,[],{},0.7203657522859518,0.004000402133172406
+dermamnist,facebook/deit-small-patch16-224,"[(2, 3)]",identity,[],identity,[],{},0.7200332502078138,0.002015686725350273
+dermamnist,facebook/deit-small-patch16-224,"[(10, 11)]",linear,[],identity,[],{},0.7188694929343309,0.004634201118791804
+dermamnist,facebook/deit-small-patch16-224,[],identity,"[4, 10, 11]",identity,[],{},0.7172069825436408,0.0017277314788717059
+dermamnist,facebook/deit-small-patch16-224,[],identity,"[4, 10]",identity,[],{},0.7170407315045719,0.0007618579708986633
+dermamnist,facebook/deit-small-patch16-224,[],identity,[3],identity,[],{},0.714546965918537,0.004634201118791794
+dermamnist,facebook/dinov2-base,[],identity,"[1, 3, 5]",linear,[],{},0.743308395677473,0.007059309641084685
+dermamnist,facebook/dinov2-base,"[(0, 1)]",identity,[],identity,[],{},0.7413133832086451,0.010127677080976246
+dermamnist,facebook/dinov2-base,[],identity,[1],identity,[],{},0.7404821280133,0.0067715417637294086
+dermamnist,facebook/dinov2-base,[],identity,[1],linear,[],{},0.7389858686616791,0.005672060551698062
+dermamnist,facebook/dinov2-base,"[(0, 1), (2, 3)]",linear,[],identity,[],{},0.7354945968412302,0.024884398659441653
+dermamnist,facebook/dinov2-base,[],identity,"[1, 2, 3, 4]",linear,[],{},0.7349958437240233,0.012913115364343405
+dermamnist,facebook/dinov2-base,[],identity,[],identity,[1],{},0.7336658354114713,0.013902603356375475
+dermamnist,facebook/dinov2-base,[],identity,[],identity,[6],{},0.7336658354114713,0.0075310069179757985
+dermamnist,facebook/dinov2-base,"[(5, 6)]",identity,[],identity,[],{},0.7326683291770574,0.0037655034589879535
+dermamnist,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",linear,[],identity,[],{},0.7321695760598503,0.011241324358687903
+dermamnist,facebook/dinov2-base,"[(5, 6)]",linear,[],identity,[],{},0.7308395677472984,0.006509317356758741
+dermamnist,facebook/dinov2-base,[],identity,"[1, 3]",linear,[],{},0.7300083125519534,0.006641723808957047
+dermamnist,facebook/dinov2-base,[],identity,[],identity,[],{},0.7283458021612635,0.005780661230495
+dermamnist,facebook/dinov2-base,[],identity,[],identity,"[1, 2, 3, 4]",{},0.7273482959268495,0.03619426778612996
+dermamnist,facebook/dinov2-base,"[(0, 1)]",linear,[],identity,[],{},0.7258520365752287,0.01034637265669265
+dermamnist,facebook/dinov2-base,[],identity,[6],identity,[],{},0.7251870324189525,0.020024797905121995
+dermamnist,facebook/dinov2-base,[],identity,[6],linear,[],{},0.7243557772236077,0.012719019418743224
+dermamnist,facebook/dinov2-base,[],identity,[],identity,"[1, 3]",{},0.7233582709891936,0.025734565371982054
+dermamnist,facebook/dinov2-base,"[(0, 4)]",linear,[],identity,[],{},0.7226932668329177,0.03445730762975734
+dermamnist,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",identity,[],identity,[],{},0.7201995012468828,0.027349685527890646
+dermamnist,facebook/dinov2-base,[],identity,"[1, 3]",identity,[],{},0.715876974231089,0.024415141043072332
+dermamnist,facebook/dinov2-base,[],identity,"[1, 3, 5]",identity,[],{},0.7068994181213633,0.03621488020973736
+dermamnist,facebook/dinov2-base,[],identity,[],identity,"[1, 3, 5]",{},0.7064006650041562,0.04067004710895399
+dermamnist,facebook/dinov2-base,[],identity,"[1, 2, 3, 4]",identity,[],{},0.7017456359102244,0.032472620071138214
+dermamnist,facebook/dinov2-base,"[(0, 4)]",identity,[],identity,[],{},0.6989193682460515,0.051739075588907835
+dermamnist,facebook/dinov2-base,"[(0, 1), (2, 3)]",identity,[],identity,[],{},0.6906068162926018,0.0567929220447974
+dermamnist,google/vit-large-patch16-224,[],identity,"[18, 19, 20, 21, 22, 23]",identity,[],{},0.7745635910224439,0.008330819495506315
+dermamnist,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",linear,[],identity,[],{},0.767913549459684,0.009064875065812467
+dermamnist,google/vit-large-patch16-224,[],identity,"[4, 20, 21, 22, 23]",linear,[],{},0.7677472984206152,0.010987671914785283
+dermamnist,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",identity,[],identity,[],{},0.7675810473815461,0.011296510376963694
+dermamnist,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",linear,[],identity,[],{},0.7675810473815461,0.003895386372023317
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,"[4, 20, 21, 22, 23]",{},0.7674147963424772,0.004498004740970503
+dermamnist,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",linear,[],identity,[],{},0.767082294264339,0.007244807504405991
+dermamnist,google/vit-large-patch16-224,[],identity,"[3, 4, 19, 20, 21, 22, 23]",linear,[],{},0.767082294264339,0.0024937655860348684
+dermamnist,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",identity,[],identity,[],{},0.7669160432252702,0.00823068581511992
+dermamnist,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",linear,[],identity,[],{},0.7667497921862013,0.006509317356758741
+dermamnist,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",linear,[],identity,[],{},0.7664172901080631,0.00400040213317237
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,"[4, 21, 22, 23]",{},0.7655860349127183,0.004348028871362275
+dermamnist,google/vit-large-patch16-224,"[(17, 23)]",identity,[],identity,[],{},0.7654197838736492,0.00849833943084422
+dermamnist,google/vit-large-patch16-224,"[(17, 23)]",linear,[],identity,[],{},0.7650872817955112,0.007742730521825441
+dermamnist,google/vit-large-patch16-224,[],identity,"[4, 20, 21, 22, 23]",identity,[],{},0.7649210307564421,0.010127677080976246
+dermamnist,google/vit-large-patch16-224,[],identity,"[4, 22, 23]",linear,[],{},0.7645885286783042,0.0037655034589878593
+dermamnist,google/vit-large-patch16-224,[],identity,"[3, 4, 19, 20, 21, 22, 23]",identity,[],{},0.7642560266001662,0.006490181644536358
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,"[18, 19, 20, 21, 22, 23]",{},0.7642560266001662,0.0072333532561287125
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,"[3, 4, 19, 20, 21, 22, 23]",{},0.7637572734829593,0.006315351592094006
+dermamnist,google/vit-large-patch16-224,[],identity,"[4, 21, 22, 23]",linear,[],{},0.7637572734829593,0.004525571933105936
+dermamnist,google/vit-large-patch16-224,[],identity,"[18, 19, 20, 21, 22, 23]",linear,[],{},0.7634247714048213,0.002076474812435059
+dermamnist,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",identity,[],identity,[],{},0.7615960099750624,0.012647104571676856
+dermamnist,google/vit-large-patch16-224,"[(3, 4)]",linear,[],identity,[],{},0.7615960099750624,0.012186325908100383
+dermamnist,google/vit-large-patch16-224,"[(3, 4)]",identity,[],identity,[],{},0.7609310058187863,0.007403306426670773
+dermamnist,google/vit-large-patch16-224,[],identity,"[17, 23]",identity,[],{},0.7609310058187863,0.0076348877826799425
+dermamnist,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",identity,[],identity,[],{},0.7605985037406483,0.011230254612666047
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,"[4, 22, 23]",{},0.7605985037406483,0.00707104582481683
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,[4],{},0.7605985037406483,0.00654108580977756
+dermamnist,google/vit-large-patch16-224,[],identity,"[4, 21, 22, 23]",identity,[],{},0.7594347464671655,0.012855194295742868
+dermamnist,google/vit-large-patch16-224,[],identity,"[4, 22, 23]",identity,[],{},0.7592684954280964,0.014337164197739243
+dermamnist,google/vit-large-patch16-224,[],identity,"[8, 16]",identity,[],{},0.7584372402327514,0.0035384533090262265
+dermamnist,google/vit-large-patch16-224,[],identity,"[17, 23]",linear,[],{},0.7577722360764755,0.00806274690140121
+dermamnist,google/vit-large-patch16-224,[],identity,"[8, 16]",linear,[],{},0.7572734829592686,0.00806274690140128
+dermamnist,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",identity,[],identity,[],{},0.7571072319201995,0.009019023102256905
+dermamnist,google/vit-large-patch16-224,[],identity,[23],linear,[],{},0.7567747298420615,0.005780661230495
+dermamnist,google/vit-large-patch16-224,[],identity,[23],identity,[],{},0.7566084788029924,0.006483790523690772
+dermamnist,google/vit-large-patch16-224,"[(22, 23)]",identity,[],identity,[],{},0.7562759767248545,0.008814441324562968
+dermamnist,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",identity,[],identity,[],{},0.7559434746467165,0.005238886535856569
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,"[8, 16]",{},0.7547797173732335,0.004000402133172406
+dermamnist,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",linear,[],identity,[],{},0.7547797173732335,0.004792530442360595
+dermamnist,google/vit-large-patch16-224,[],identity,[4],linear,[],{},0.7544472152950955,0.0070769066180524035
+dermamnist,google/vit-large-patch16-224,"[(22, 23)]",linear,[],identity,[],{},0.7541147132169576,0.007347092200826052
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,[],{},0.7511221945137158,0.01018482686117808
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,[23],{},0.7504571903574396,0.011111491146471775
+dermamnist,google/vit-large-patch16-224,[],identity,[],identity,"[17, 23]",{},0.7491271820448878,0.013776785353549236
+dermamnist,google/vit-large-patch16-224,[],identity,[4],identity,[],{},0.7466334164588528,0.017067270456128304
+dermamnist,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",linear,[],identity,[],{},0.7168744804655028,0.009480683244810172
+dermamnist,microsoft/rad-dino,"[(0, 4)]",identity,[],identity,[],{},0.7135494596841231,0.012462176114321
+dermamnist,microsoft/rad-dino,[],identity,[],identity,"[1, 2, 3, 4]",{},0.713383208645054,0.010078433626751628
+dermamnist,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",identity,[],identity,[],{},0.7127182044887781,0.008977556109725657
+dermamnist,microsoft/rad-dino,"[(0, 1), (2, 3)]",linear,[],identity,[],{},0.712718204488778,0.004261348501405191
+dermamnist,microsoft/rad-dino,"[(0, 4)]",linear,[],identity,[],{},0.7087281795511222,0.022904663348039943
+dermamnist,microsoft/rad-dino,[],identity,"[1, 2, 3, 4]",linear,[],{},0.7072319201995012,0.007035778543474286
+dermamnist,microsoft/rad-dino,"[(0, 1), (2, 3)]",identity,[],identity,[],{},0.7067331670822942,0.003895386372023322
+dermamnist,microsoft/rad-dino,"[(0, 1)]",linear,[],identity,[],{},0.7055694098088113,0.004525571933105942
+dermamnist,microsoft/rad-dino,[],identity,[],identity,"[1, 3, 5]",{},0.7054031587697424,0.010225452578342004
+dermamnist,microsoft/rad-dino,[],identity,"[1, 2, 3, 4]",identity,[],{},0.7045719035743973,0.005516428935340676
+dermamnist,microsoft/rad-dino,[],identity,"[1, 3, 5]",identity,[],{},0.7032418952618453,0.01150380308695342
+dermamnist,microsoft/rad-dino,[],identity,[1],linear,[],{},0.7025768911055694,0.006509317356758764
+dermamnist,microsoft/rad-dino,[],identity,"[1, 3, 5]",linear,[],{},0.7024106400665003,0.007796092493894148
+dermamnist,microsoft/rad-dino,[],identity,[6],identity,[],{},0.7017456359102244,0.006128780911443656
+dermamnist,microsoft/rad-dino,[],identity,[6],linear,[],{},0.7017456359102244,0.00588021252995091
+dermamnist,microsoft/rad-dino,"[(0, 1)]",identity,[],identity,[],{},0.7012468827930175,0.005394839813661784
+dermamnist,microsoft/rad-dino,[],linear,[],linear,[],{},0.7009143807148795,0.0074702051333868594
+dermamnist,microsoft/rad-dino,[],identity,[],identity,[],{},0.7009143807148795,0.0074702051333868594
+dermamnist,microsoft/rad-dino,[],identity,[],identity,"[1, 3]",{},0.7007481296758105,0.008653043178502441
+dermamnist,microsoft/rad-dino,"[(5, 6)]",identity,[],identity,[],{},0.7005818786367414,0.004525571933105993
+dermamnist,microsoft/rad-dino,[],identity,"[1, 3]",identity,[],{},0.7004156275976725,0.007796092493894173
+dermamnist,microsoft/rad-dino,[],identity,[],identity,[6],{},0.7002493765586034,0.006522043307043403
+dermamnist,microsoft/rad-dino,"[(5, 6)]",linear,[],identity,[],{},0.7000831255195346,0.0033949422870593804
+dermamnist,microsoft/rad-dino,[],identity,"[1, 3]",linear,[],{},0.6989193682460515,0.007732013934652368
+dermamnist,microsoft/rad-dino,[],identity,[1],identity,[],{},0.6975893599334997,0.00511880442837599
+dermamnist,microsoft/rad-dino,[],identity,[],identity,[1],{},0.6964256026600166,0.00479253044236062

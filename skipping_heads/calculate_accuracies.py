@@ -1,4 +1,6 @@
 # %%
+import argparse
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -17,7 +19,11 @@ def __main__():
     path = "cifar_heads.csv"
     input_path = "skipping_heads/results/results_" + path
     output_path = "skipping_heads/accuracies/accuracies_" + path
-    accuracies(input_path, output_path)
+    p = argparse.ArgumentParser(description="Mean/std of accuracy per unique run")
+    p.add_argument("--input", default=input_path, help="results CSV with per-seed rows")
+    p.add_argument("--output", default=output_path, help="where to write the mean/std summary")
+    args = p.parse_args()
+    accuracies(args.input, args.output)
 
 __main__()
 

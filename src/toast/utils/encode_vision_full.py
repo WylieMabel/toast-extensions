@@ -111,7 +111,7 @@ def run_encoding(
     attention_skips: str = "[[]]",
     reduced_heads: bool = False,
     samples_to_extract: int = 500,
-    batch_size: int = 32,
+    batch_size: int = 8,
     mode: int = 1,
 ):
     seed_everything(seed)

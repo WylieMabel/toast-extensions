@@ -7,7 +7,7 @@
 #SBATCH --output=logs/pipeline_row_by_row.out.txt
 
 CONFIG_CSV="${CONFIG_CSV:-src/configs/experiments.csv}"
-SAMPLES=500
+SAMPLES=250
 
 # 1. Path Setup
 BASE_DIR="/cluster/customapps/biomed/vogtlab/users/mwylie/toast"
@@ -26,6 +26,12 @@ export TRANSFORMERS_CACHE="$WRITABLE_CACHE/transformers"
 export HF_MODULES_CACHE="$WRITABLE_CACHE/modules"
 export HF_DATASETS_OFFLINE=1
 export TRANSFORMERS_OFFLINE=1
+
+# Quiet noisy libraries (progress bars / load reports) — we only want config + accuracy
+export TQDM_DISABLE=1
+export TRANSFORMERS_VERBOSITY=error
+export HF_HUB_DISABLE_PROGRESS_BARS=1
+export DATASETS_VERBOSITY=error
 
 # 4. Fix Python imports
 export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR/src
@@ -48,28 +54,33 @@ for i in $(seq 1 "$NUM_ROWS"); do
     echo "=== Row $i / $NUM_ROWS ==="
     echo "$ROW"
 
-    # Phase 1
-    CONFIG_CSV="$TEMP_CSV" bash src/toast/scripts/encode_vision_full.sh
+    LOG=$(mktemp /tmp/exp_row_log_XXXXXX)
+
+    # Phase 1: encode (silent unless it fails)
+    CONFIG_CSV="$TEMP_CSV" bash src/toast/scripts/encode_vision_full.sh > "$LOG" 2>&1
     if [ $? -ne 0 ]; then
-        echo "ERROR: phase 1 failed for row $i, skipping."
-        rm -f "$TEMP_CSV"
+        echo "ERROR: phase 1 failed for row $i:"
+        cat "$LOG"
+        rm -f "$TEMP_CSV" "$LOG"
         continue
     fi
 
-    # Phase 2a
-    CONFIG_CSV="$TEMP_CSV" bash src/toast/scripts/train_skipped_full.sh
-
-    # Delete embeddings for this row
-    EMB_DIR=$(python src/toast/scripts/get_embed_dir.py "$TEMP_CSV" "$SAMPLES" 2>&1)
-    echo "Embedding dir: $EMB_DIR"
-    if [ -d "$EMB_DIR" ]; then
-        echo "Deleting $EMB_DIR"
-        rm -rf "$EMB_DIR"
-        echo "Deleted."
+    # Phase 2a: train — print the params-saved line and the per-seed accuracy strings
+    CONFIG_CSV="$TEMP_CSV" bash src/toast/scripts/train_skipped_full.sh > "$LOG" 2>&1
+    if [ $? -ne 0 ]; then
+        echo "ERROR: phase 2 failed for row $i:"
+        cat "$LOG"
     else
-        echo "WARNING: embedding dir not found or failed to compute — skipping delete"
+        grep -E '^[[:space:]]*Params saved:' "$LOG"
+        if ! grep -oE 'Accuracy: [0-9.]+' "$LOG"; then
+            echo "(no result — check row config)"
+        fi
     fi
+    rm -f "$LOG"
 
+    # Delete embeddings for this row (silent)
+    EMB_DIR=$(python src/toast/scripts/get_embed_dir.py "$TEMP_CSV" "$SAMPLES" 2>/dev/null)
+    [ -d "$EMB_DIR" ] && rm -rf "$EMB_DIR"
     rm -f "$TEMP_CSV"
 done
 

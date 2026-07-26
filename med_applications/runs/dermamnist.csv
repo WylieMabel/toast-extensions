@@ -1,0 +1,364 @@
+seed,dataset,model,optimizer,lr,classifier,translator,batch_size,num_epochs,approx_layer,mlp_linearize,attn_linearize,head_dict,mlp_mode,attn_mode,num_layers,original_accuracy,accuracy,delta_acc,num_samples
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],{},linear,identity,0,0.7271820448877806,0.7271820448877806,0.0,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],{},linear,identity,0,0.7211970074812968,0.7211970074812968,0.0,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,[],[],[],{},linear,identity,0,0.7251870324189527,0.7251870324189527,0.0,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,[],[],[],{},linear,identity,0,0.6947630922693266,0.6947630922693266,0.0,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,[],[],[],{},linear,identity,0,0.6987531172069825,0.6987531172069825,0.0,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,[],[],[],{},linear,identity,0,0.7092269326683291,0.7092269326683291,0.0,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[],{},linear,identity,0,0.7271820448877806,0.7271820448877806,0.0,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[],{},linear,identity,0,0.7211970074812968,0.7211970074812968,0.0,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[],{},linear,identity,0,0.7251870324189527,0.7251870324189527,0.0,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (9, 11)]",[],[],{},identity,identity,3,0.7271820448877806,0.7316708229426434,-0.0044887780548628,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (9, 11)]",[],[],{},identity,identity,3,0.7211970074812968,0.713216957605985,0.0079800498753117,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (9, 11)]",[],[],{},identity,identity,3,0.7251870324189527,0.7321695760598503,-0.0069825436408976,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (9, 10)]",[],[],{},identity,identity,2,0.7271820448877806,0.7221945137157108,0.0049875311720698,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (9, 10)]",[],[],{},identity,identity,2,0.7211970074812968,0.7197007481296758,0.001496259351621,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (9, 10)]",[],[],{},identity,identity,2,0.7251870324189527,0.7256857855361596,-0.0004987531172069,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(2, 3)]",[],[],{},identity,identity,1,0.7271820448877806,0.7221945137157108,0.0049875311720698,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(2, 3)]",[],[],{},identity,identity,1,0.7211970074812968,0.7197007481296758,0.001496259351621,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(2, 3)]",[],[],{},identity,identity,1,0.7251870324189527,0.7182044887780549,0.0069825436408977,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(10, 11)]",[],[],{},identity,identity,1,0.7271820448877806,0.7281795511221946,-0.0009975062344139,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(10, 11)]",[],[],{},identity,identity,1,0.7211970074812968,0.7211970074812968,0.0,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,"[(10, 11)]",[],[],{},identity,identity,1,0.7251870324189527,0.7251870324189527,0.0,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10, 11]",[],{},identity,identity,0,0.7271820448877806,0.7162094763092269,0.0109725685785536,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10, 11]",[],{},identity,identity,0,0.7211970074812968,0.7162094763092269,0.0049875311720698,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10, 11]",[],{},identity,identity,0,0.7251870324189527,0.7192019950124688,0.0059850374064838,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10]",[],{},identity,identity,0,0.7271820448877806,0.7162094763092269,0.0109725685785536,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10]",[],{},identity,identity,0,0.7211970074812968,0.7172069825436409,0.0039900249376558,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10]",[],{},identity,identity,0,0.7251870324189527,0.7177057356608478,0.0074812967581048,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[3],[],{},identity,identity,0,0.7271820448877806,0.7177057356608478,0.0094763092269327,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[3],[],{},identity,identity,0,0.7211970074812968,0.7092269326683291,0.0119700748129676,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[3],[],{},identity,identity,0,0.7251870324189527,0.7167082294264339,0.0084788029925187,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[11],[],{},identity,identity,0,0.7271820448877806,0.7261845386533666,0.0009975062344139,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[11],[],{},identity,identity,0,0.7211970074812968,0.7211970074812968,0.0,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[11],[],{},identity,identity,0,0.7251870324189527,0.7271820448877806,-0.0019950124688279,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 10, 11]",{},identity,identity,0,0.7271820448877806,0.7216957605985037,0.0054862842892768,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 10, 11]",{},identity,identity,0,0.7211970074812968,0.7211970074812968,0.0,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 10, 11]",{},identity,identity,0,0.7251870324189527,0.7261845386533666,-0.0009975062344139,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 10]",{},identity,identity,0,0.7271820448877806,0.7201995012468828,0.0069825436408977,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 10]",{},identity,identity,0,0.7211970074812968,0.714713216957606,0.0064837905236907,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 10]",{},identity,identity,0,0.7251870324189527,0.7301745635910224,-0.0049875311720697,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[3],{},identity,identity,0,0.7271820448877806,0.7346633416458853,-0.0074812967581047,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[3],{},identity,identity,0,0.7211970074812968,0.7201995012468828,0.0009975062344139,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[3],{},identity,identity,0,0.7251870324189527,0.7291770573566084,-0.0039900249376557,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[11],{},identity,identity,0,0.7271820448877806,0.7221945137157108,0.0049875311720698,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[11],{},identity,identity,0,0.7211970074812968,0.7187032418952618,0.0024937655860349,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[11],{},identity,identity,0,0.7251870324189527,0.7231920199501247,0.0019950124688279,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (9, 11)]",[],[],{},identity,identity,3,0.7271820448877806,0.7182044887780549,0.0089775561097257,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (9, 11)]",[],[],{},identity,identity,3,0.7211970074812968,0.7226932668329177,-0.0014962593516208,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (9, 11)]",[],[],{},identity,identity,3,0.7251870324189527,0.7336658354114713,-0.0084788029925186,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (9, 10)]",[],[],{},identity,identity,2,0.7271820448877806,0.7296758104738155,-0.0024937655860348,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (9, 10)]",[],[],{},identity,identity,2,0.7211970074812968,0.7246882793017456,-0.0034912718204488,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (9, 10)]",[],[],{},identity,identity,2,0.7251870324189527,0.7301745635910224,-0.0049875311720697,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(2, 3)]",[],[],{},identity,identity,1,0.7271820448877806,0.7311720698254364,-0.0039900249376557,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(2, 3)]",[],[],{},identity,identity,1,0.7211970074812968,0.7246882793017456,-0.0034912718204488,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(2, 3)]",[],[],{},identity,identity,1,0.7251870324189527,0.7301745635910224,-0.0049875311720697,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(10, 11)]",[],[],{},identity,identity,1,0.7271820448877806,0.71571072319202,0.0114713216957605,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(10, 11)]",[],[],{},identity,identity,1,0.7211970074812968,0.7167082294264339,0.0044887780548629,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,linear,256,5,"[(10, 11)]",[],[],{},identity,identity,1,0.7251870324189527,0.7241895261845387,0.0009975062344139,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10, 11]",[],{},linear,identity,0,0.7271820448877806,0.7281795511221946,-0.0009975062344139,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10, 11]",[],{},linear,identity,0,0.7211970074812968,0.7231920199501247,-0.0019950124688279,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10, 11]",[],{},linear,identity,0,0.7251870324189527,0.7276807980049875,-0.0024937655860348,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10]",[],{},linear,identity,0,0.7271820448877806,0.7251870324189527,0.0019950124688279,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10]",[],{},linear,identity,0,0.7211970074812968,0.7246882793017456,-0.0034912718204488,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 10]",[],{},linear,identity,0,0.7251870324189527,0.7281795511221946,-0.0029925187032419,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[3],[],{},linear,identity,0,0.7271820448877806,0.7206982543640897,0.0064837905236908,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[3],[],{},linear,identity,0,0.7211970074812968,0.7162094763092269,0.0049875311720698,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[3],[],{},linear,identity,0,0.7251870324189527,0.7241895261845387,0.0009975062344139,250
+1,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[11],[],{},linear,identity,0,0.7271820448877806,0.7246882793017456,0.0024937655860349,250
+2,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[11],[],{},linear,identity,0,0.7211970074812968,0.7221945137157108,-0.0009975062344139,250
+3,dermamnist,facebook/deit-small-patch16-224,Adam,0.01,Linear,identity,256,5,[],[11],[],{},linear,identity,0,0.7251870324189527,0.7266832917705736,-0.0014962593516208,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],[],{},identity,identity,0,0.7216957605985037,0.7216957605985037,0.0,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],[],{},identity,identity,0,0.7321695760598503,0.7321695760598503,0.0,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],[],{},identity,identity,0,0.7311720698254364,0.7311720698254364,0.0,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.7216957605985037,0.6394014962593516,0.0822942643391521,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.7321695760598503,0.7331670822942643,-0.0009975062344139,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.7311720698254364,0.7241895261845387,0.0069825436408976,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.7216957605985037,0.6887780548628429,0.0329177057356607,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.7321695760598503,0.7386533665835412,-0.0064837905236908,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.7311720698254364,0.7331670822942643,-0.0019950124688279,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.7216957605985037,0.629426433915212,0.0922693266832916,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.7321695760598503,0.741645885286783,-0.0094763092269326,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.7311720698254364,0.7007481296758105,0.0304239401496259,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.7216957605985037,0.7481296758104738,-0.0264339152119701,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.7321695760598503,0.7461346633416459,-0.0139650872817955,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.7311720698254364,0.7296758104738155,0.0014962593516208,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.7216957605985037,0.7291770573566084,-0.0074812967581047,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.7321695760598503,0.7366583541147133,-0.0044887780548629,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.7311720698254364,0.7321695760598503,-0.0009975062344139,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},identity,identity,0,0.7216957605985037,0.6643391521197007,0.0573566084788029,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},identity,identity,0,0.7321695760598503,0.7182044887780549,0.0139650872817954,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},identity,identity,0,0.7311720698254364,0.7226932668329177,0.0084788029925186,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},identity,identity,0,0.7216957605985037,0.6653366583541147,0.056359102244389,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},identity,identity,0,0.7321695760598503,0.7236907730673316,0.0084788029925186,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},identity,identity,0,0.7311720698254364,0.7316708229426434,-0.000498753117207,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},identity,identity,0,0.7216957605985037,0.6897755610972569,0.0319201995012468,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},identity,identity,0,0.7321695760598503,0.7381546134663342,-0.0059850374064838,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},identity,identity,0,0.7311720698254364,0.7197007481296758,0.0114713216957605,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[1],[],{},identity,identity,0,0.7216957605985037,0.7446384039900249,-0.0229426433915211,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[1],[],{},identity,identity,0,0.7321695760598503,0.744139650872818,-0.0119700748129676,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[1],[],{},identity,identity,0,0.7311720698254364,0.7326683291770574,-0.001496259351621,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[6],[],{},identity,identity,0,0.7216957605985037,0.7042394014962593,0.0174563591022444,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[6],[],{},identity,identity,0,0.7321695760598503,0.744139650872818,-0.0119700748129676,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[6],[],{},identity,identity,0,0.7311720698254364,0.7271820448877806,0.0039900249376557,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],"[1, 2, 3, 4]",{},identity,identity,0,0.7216957605985037,0.686284289276808,0.0354114713216957,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],"[1, 2, 3, 4]",{},identity,identity,0,0.7321695760598503,0.7546134663341646,-0.0224438902743142,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],"[1, 2, 3, 4]",{},identity,identity,0,0.7311720698254364,0.7411471321695761,-0.0099750623441396,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3, 5]",{},identity,identity,0,0.7216957605985037,0.6728179551122194,0.0488778054862842,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3, 5]",{},identity,identity,0,0.7321695760598503,0.7516209476309227,-0.0194513715710723,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3, 5]",{},identity,identity,0,0.7311720698254364,0.6947630922693266,0.0364089775561097,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3]",{},identity,identity,0,0.7216957605985037,0.7251870324189527,-0.0034912718204489,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3]",{},identity,identity,0,0.7321695760598503,0.7481296758104738,-0.0159600997506235,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3]",{},identity,identity,0,0.7311720698254364,0.6967581047381546,0.0344139650872817,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],[1],{},identity,identity,0,0.7216957605985037,0.7401496259351621,-0.0184538653366583,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],[1],{},identity,identity,0,0.7321695760598503,0.743142144638404,-0.0109725685785536,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],[1],{},identity,identity,0,0.7311720698254364,0.7177057356608478,0.0134663341645885,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],[6],{},identity,identity,0,0.7216957605985037,0.7326683291770574,-0.0109725685785536,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],[6],{},identity,identity,0,0.7321695760598503,0.741645885286783,-0.0094763092269326,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[],[6],{},identity,identity,0,0.7311720698254364,0.7266832917705736,0.0044887780548628,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.0,0.6892768079800499,0.0,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.0,0.7581047381546134,0.0,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.0,0.7206982543640897,0.0,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.0,0.7251870324189527,0.0,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.0,0.7451371571072319,0.0,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.0,0.7261845386533666,0.0,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.0,0.7072319201995012,0.0,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.0,0.7541147132169576,0.0,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.0,0.7451371571072319,0.0,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.0,0.714713216957606,0.0,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.0,0.7276807980049875,0.0,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.0,0.7351620947630922,0.0,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.0,0.7286783042394015,0.0,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.0,0.7381546134663342,0.0,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,linear,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.0,0.7256857855361596,0.0,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},linear,identity,0,0.7216957605985037,0.7251870324189527,-0.0034912718204489,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},linear,identity,0,0.7321695760598503,0.7496259351620947,-0.0174563591022444,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},linear,identity,0,0.7311720698254364,0.7301745635910224,0.0009975062344139,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},linear,identity,0,0.7216957605985037,0.7471321695760599,-0.0254364089775561,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},linear,identity,0,0.7321695760598503,0.7476309226932668,-0.0154613466334164,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},linear,identity,0,0.7311720698254364,0.7351620947630922,-0.0039900249376558,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},linear,identity,0,0.7216957605985037,0.7356608478802993,-0.0139650872817955,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},linear,identity,0,0.7321695760598503,0.7226932668329177,0.0094763092269326,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},linear,identity,0,0.7311720698254364,0.7316708229426434,-0.000498753117207,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[1],[],{},linear,identity,0,0.7216957605985037,0.7406483790523691,-0.0189526184538654,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[1],[],{},linear,identity,0,0.7321695760598503,0.7326683291770574,-0.000498753117207,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[1],[],{},linear,identity,0,0.7311720698254364,0.7436408977556109,-0.0124688279301745,250
+1,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[6],[],{},linear,identity,0,0.7216957605985037,0.7117206982543641,0.0099750623441395,250
+2,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[6],[],{},linear,identity,0,0.7321695760598503,0.7371571072319202,-0.0049875311720698,250
+3,dermamnist,facebook/dinov2-base,Adam,0.01,Linear,identity,256,5,[],[6],[],{},linear,identity,0,0.7311720698254364,0.7241895261845387,0.0069825436408976,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],[],{},identity,identity,0,0.6947630922693266,0.6947630922693266,0.0,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],[],{},identity,identity,0,0.6987531172069825,0.6987531172069825,0.0,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],[],{},identity,identity,0,0.7092269326683291,0.7092269326683291,0.0,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.6947630922693266,0.7027431421446384,-0.0079800498753117,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.6987531172069825,0.7271820448877806,-0.028428927680798,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.7092269326683291,0.7107231920199502,-0.001496259351621,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.6947630922693266,0.7127182044887781,-0.0179551122194514,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.6987531172069825,0.7037406483790524,-0.0049875311720698,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.7092269326683291,0.7216957605985037,-0.0124688279301745,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.6947630922693266,0.7042394014962593,-0.0094763092269326,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.6987531172069825,0.7047381546134663,-0.0059850374064838,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.7092269326683291,0.7112219451371571,-0.0019950124688279,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.6947630922693266,0.6997506234413965,-0.0049875311720698,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.6987531172069825,0.6967581047381546,0.0019950124688279,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.7092269326683291,0.7072319201995012,0.0019950124688279,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.6947630922693266,0.6957605985037406,-0.0009975062344139,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.6987531172069825,0.7012468827930175,-0.0024937655860349,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.7092269326683291,0.7047381546134663,0.0044887780548628,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},identity,identity,0,0.6947630922693266,0.7052369077306733,-0.0104738154613466,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},identity,identity,0,0.6987531172069825,0.6987531172069825,0.0,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},identity,identity,0,0.7092269326683291,0.7097256857855362,-0.000498753117207,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},identity,identity,0,0.6947630922693266,0.7042394014962593,-0.0094763092269326,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},identity,identity,0,0.6987531172069825,0.6912718204488778,0.0074812967581047,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},identity,identity,0,0.7092269326683291,0.714214463840399,-0.0049875311720698,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},identity,identity,0,0.6947630922693266,0.6992518703241896,-0.0044887780548629,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},identity,identity,0,0.6987531172069825,0.6932668329177057,0.0054862842892767,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},identity,identity,0,0.7092269326683291,0.7087281795511222,0.0004987531172069,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[1],[],{},identity,identity,0,0.6947630922693266,0.6962593516209477,-0.001496259351621,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[1],[],{},identity,identity,0,0.6987531172069825,0.6932668329177057,0.0054862842892767,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[1],[],{},identity,identity,0,0.7092269326683291,0.7032418952618454,0.0059850374064837,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[6],[],{},identity,identity,0,0.6947630922693266,0.6972568578553616,-0.0024937655860349,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[6],[],{},identity,identity,0,0.6987531172069825,0.6992518703241896,-0.000498753117207,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[6],[],{},identity,identity,0,0.7092269326683291,0.7087281795511222,0.0004987531172069,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],"[1, 2, 3, 4]",{},identity,identity,0,0.6947630922693266,0.7117206982543641,-0.0169576059850374,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],"[1, 2, 3, 4]",{},identity,identity,0,0.6987531172069825,0.7042394014962593,-0.0054862842892767,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],"[1, 2, 3, 4]",{},identity,identity,0,0.7092269326683291,0.7241895261845387,-0.0149625935162095,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3, 5]",{},identity,identity,0,0.6947630922693266,0.7052369077306733,-0.0104738154613466,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3, 5]",{},identity,identity,0,0.6987531172069825,0.6952618453865337,0.0034912718204488,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3, 5]",{},identity,identity,0,0.7092269326683291,0.71571072319202,-0.0064837905236908,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3]",{},identity,identity,0,0.6947630922693266,0.6962593516209477,-0.001496259351621,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3]",{},identity,identity,0,0.6987531172069825,0.6952618453865337,0.0034912718204488,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],"[1, 3]",{},identity,identity,0,0.7092269326683291,0.7107231920199502,-0.001496259351621,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],[1],{},identity,identity,0,0.6947630922693266,0.6972568578553616,-0.0024937655860349,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],[1],{},identity,identity,0,0.6987531172069825,0.6912718204488778,0.0074812967581047,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],[1],{},identity,identity,0,0.7092269326683291,0.7007481296758105,0.0084788029925186,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],[6],{},identity,identity,0,0.6947630922693266,0.6957605985037406,-0.0009975062344139,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],[6],{},identity,identity,0,0.6987531172069825,0.6972568578553616,0.0014962593516208,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[],[6],{},identity,identity,0,0.7092269326683291,0.7077306733167082,0.0014962593516208,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.6947630922693266,0.6947630922693266,0.0,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.6987531172069825,0.6962593516209477,0.0024937655860348,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 4)]",[],[],{},identity,identity,4,0.7092269326683291,0.7351620947630922,-0.025935162094763,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.6947630922693266,0.7172069825436409,-0.0224438902743142,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.6987531172069825,0.7072319201995012,-0.0084788029925186,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,3,0.7092269326683291,0.7261845386533666,-0.0169576059850374,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.6947630922693266,0.7082294264339152,-0.0134663341645885,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.6987531172069825,0.713216957605985,-0.0144638403990025,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 1), (2, 3)]",[],[],{},identity,identity,2,0.7092269326683291,0.7167082294264339,-0.0074812967581047,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.6947630922693266,0.7007481296758105,-0.0059850374064838,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.6987531172069825,0.7062344139650872,-0.0074812967581047,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(0, 1)]",[],[],{},identity,identity,1,0.7092269326683291,0.7097256857855362,-0.000498753117207,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.6947630922693266,0.7012468827930175,-0.0064837905236908,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.6987531172069825,0.6962593516209477,0.0024937655860348,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,linear,256,5,"[(5, 6)]",[],[],{},identity,identity,1,0.7092269326683291,0.7027431421446384,0.0064837905236907,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},linear,identity,0,0.6947630922693266,0.6997506234413965,-0.0049875311720698,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},linear,identity,0,0.6987531172069825,0.7137157107231921,-0.0149625935162095,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 2, 3, 4]",[],{},linear,identity,0,0.7092269326683291,0.7082294264339152,0.0009975062344139,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},linear,identity,0,0.6947630922693266,0.6952618453865337,-0.000498753117207,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},linear,identity,0,0.6987531172069825,0.7107231920199502,-0.0119700748129676,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3, 5]",[],{},linear,identity,0,0.7092269326683291,0.7012468827930175,0.0079800498753116,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},linear,identity,0,0.6947630922693266,0.6932668329177057,0.0014962593516208,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},linear,identity,0,0.6987531172069825,0.7077306733167082,-0.0089775561097257,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],"[1, 3]",[],{},linear,identity,0,0.7092269326683291,0.6957605985037406,0.0134663341645885,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[1],[],{},linear,identity,0,0.6947630922693266,0.6952618453865337,-0.000498753117207,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[1],[],{},linear,identity,0,0.6987531172069825,0.7047381546134663,-0.0059850374064838,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[1],[],{},linear,identity,0,0.7092269326683291,0.7077306733167082,0.0014962593516208,250
+1,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[6],[],{},linear,identity,0,0.6947630922693266,0.6967581047381546,-0.0019950124688279,250
+2,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[6],[],{},linear,identity,0,0.6987531172069825,0.7002493765586035,-0.001496259351621,250
+3,dermamnist,microsoft/rad-dino,Adam,0.01,Linear,identity,256,5,[],[6],[],{},linear,identity,0,0.7092269326683291,0.7082294264339152,0.0009975062344139,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[],{},identity,identity,0,0.7591022443890274,0.7591022443890274,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[],{},identity,identity,0,0.7396508728179552,0.7396508728179552,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[],{},identity,identity,0,0.7546134663341646,0.7546134663341646,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(2, 4), (18, 23)]",[],[],{},identity,identity,7,0.7591022443890274,0.7670822942643392,-0.0079800498753117,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(2, 4), (18, 23)]",[],[],{},identity,identity,7,0.7396508728179552,0.7586034912718205,-0.0189526184538653,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(2, 4), (18, 23)]",[],[],{},identity,identity,7,0.7546134663341646,0.7750623441396509,-0.0204488778054863,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(17, 23)]",[],[],{},identity,identity,6,0.7591022443890274,0.7660847880299252,-0.0069825436408977,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(17, 23)]",[],[],{},identity,identity,6,0.7396508728179552,0.7566084788029925,-0.0169576059850373,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(17, 23)]",[],[],{},identity,identity,6,0.7546134663341646,0.7735660847880299,-0.0189526184538653,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (19, 23)]",[],[],{},identity,identity,5,0.7591022443890274,0.7690773067331671,-0.0099750623441396,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (19, 23)]",[],[],{},identity,identity,5,0.7396508728179552,0.7556109725685786,-0.0159600997506234,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (19, 23)]",[],[],{},identity,identity,5,0.7546134663341646,0.7780548628428927,-0.0234413965087281,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (20, 23)]",[],[],{},identity,identity,4,0.7591022443890274,0.7600997506234414,-0.0009975062344139,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (20, 23)]",[],[],{},identity,identity,4,0.7396508728179552,0.7496259351620947,-0.0099750623441395,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (20, 23)]",[],[],{},identity,identity,4,0.7546134663341646,0.772069825436409,-0.0174563591022444,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (21, 23)]",[],[],{},identity,identity,3,0.7591022443890274,0.7561097256857855,0.0029925187032419,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (21, 23)]",[],[],{},identity,identity,3,0.7396508728179552,0.7526184538653367,-0.0129675810473814,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4), (21, 23)]",[],[],{},identity,identity,3,0.7546134663341646,0.7760598503740649,-0.0214463840399002,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(7, 8), (15, 16)]",[],[],{},identity,identity,2,0.7591022443890274,0.7506234413965087,0.0084788029925186,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(7, 8), (15, 16)]",[],[],{},identity,identity,2,0.7396508728179552,0.7561097256857855,-0.0164588528678303,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(7, 8), (15, 16)]",[],[],{},identity,identity,2,0.7546134663341646,0.7610972568578553,-0.0064837905236907,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(16, 17), (22, 23)]",[],[],{},identity,identity,2,0.7591022443890274,0.7581047381546134,0.0009975062344139,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(16, 17), (22, 23)]",[],[],{},identity,identity,2,0.7396508728179552,0.7476309226932668,-0.0079800498753116,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(16, 17), (22, 23)]",[],[],{},identity,identity,2,0.7546134663341646,0.7655860349127181,-0.0109725685785535,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4)]",[],[],{},identity,identity,1,0.7591022443890274,0.7591022443890274,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4)]",[],[],{},identity,identity,1,0.7396508728179552,0.7546134663341646,-0.0149625935162094,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(3, 4)]",[],[],{},identity,identity,1,0.7546134663341646,0.7690773067331671,-0.0144638403990025,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(22, 23)]",[],[],{},identity,identity,1,0.7591022443890274,0.7620947630922693,-0.0029925187032419,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(22, 23)]",[],[],{},identity,identity,1,0.7396508728179552,0.7461346633416459,-0.0064837905236907,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,"[(22, 23)]",[],[],{},identity,identity,1,0.7546134663341646,0.7605985037406484,-0.0059850374064838,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[3, 4, 19, 20, 21, 22, 23]",[],{},identity,identity,0,0.7591022443890274,0.7645885286783043,-0.0054862842892768,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[3, 4, 19, 20, 21, 22, 23]",[],{},identity,identity,0,0.7396508728179552,0.7576059850374065,-0.0179551122194513,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[3, 4, 19, 20, 21, 22, 23]",[],{},identity,identity,0,0.7546134663341646,0.770573566084788,-0.0159600997506234,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[18, 19, 20, 21, 22, 23]",[],{},identity,identity,0,0.7591022443890274,0.7655860349127181,-0.0064837905236907,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[18, 19, 20, 21, 22, 23]",[],{},identity,identity,0,0.7396508728179552,0.7760598503740649,-0.0364089775561097,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[18, 19, 20, 21, 22, 23]",[],{},identity,identity,0,0.7546134663341646,0.7820448877805486,-0.0274314214463839,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 20, 21, 22, 23]",[],{},identity,identity,0,0.7591022443890274,0.7600997506234414,-0.0009975062344139,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 20, 21, 22, 23]",[],{},identity,identity,0,0.7396508728179552,0.7581047381546134,-0.0184538653366582,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 20, 21, 22, 23]",[],{},identity,identity,0,0.7546134663341646,0.7765586034912718,-0.0219451371571072,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 21, 22, 23]",[],{},identity,identity,0,0.7591022443890274,0.7615960099750624,-0.0024937655860349,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 21, 22, 23]",[],{},identity,identity,0,0.7396508728179552,0.7456359102244389,-0.0059850374064837,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 21, 22, 23]",[],{},identity,identity,0,0.7546134663341646,0.771072319201995,-0.0164588528678304,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 22, 23]",[],{},identity,identity,0,0.7591022443890274,0.7571072319201995,0.0019950124688279,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 22, 23]",[],{},identity,identity,0,0.7396508728179552,0.7461346633416459,-0.0064837905236907,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 22, 23]",[],{},identity,identity,0,0.7546134663341646,0.7745635910224439,-0.0199501246882792,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[8, 16]",[],{},identity,identity,0,0.7591022443890274,0.7591022443890274,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[8, 16]",[],{},identity,identity,0,0.7396508728179552,0.7546134663341646,-0.0149625935162094,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[8, 16]",[],{},identity,identity,0,0.7546134663341646,0.7615960099750624,-0.0069825436408977,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[17, 23]",[],{},identity,identity,0,0.7591022443890274,0.7655860349127181,-0.0064837905236907,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[17, 23]",[],{},identity,identity,0,0.7396508728179552,0.7521197007481297,-0.0124688279301745,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[17, 23]",[],{},identity,identity,0,0.7546134663341646,0.7650872817955112,-0.0104738154613466,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[4],[],{},identity,identity,0,0.7591022443890274,0.7536159600997506,0.0054862842892767,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[4],[],{},identity,identity,0,0.7396508728179552,0.7271820448877806,0.0124688279301745,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[4],[],{},identity,identity,0,0.7546134663341646,0.7591022443890274,-0.0044887780548628,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[23],[],{},identity,identity,0,0.7591022443890274,0.7605985037406484,-0.001496259351621,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[23],[],{},identity,identity,0,0.7396508728179552,0.7491271820448878,-0.0094763092269326,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[23],[],{},identity,identity,0,0.7546134663341646,0.7600997506234414,-0.0054862842892767,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[3, 4, 19, 20, 21, 22, 23]",{},identity,identity,0,0.7591022443890274,0.7581047381546134,0.0009975062344139,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[3, 4, 19, 20, 21, 22, 23]",{},identity,identity,0,0.7396508728179552,0.7625935162094764,-0.0229426433915211,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[3, 4, 19, 20, 21, 22, 23]",{},identity,identity,0,0.7546134663341646,0.770573566084788,-0.0159600997506234,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[18, 19, 20, 21, 22, 23]",{},identity,identity,0,0.7591022443890274,0.7640897755610973,-0.0049875311720698,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[18, 19, 20, 21, 22, 23]",{},identity,identity,0,0.7396508728179552,0.7571072319201995,-0.0174563591022443,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[18, 19, 20, 21, 22, 23]",{},identity,identity,0,0.7546134663341646,0.771571072319202,-0.0169576059850373,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 20, 21, 22, 23]",{},identity,identity,0,0.7591022443890274,0.7670822942643392,-0.0079800498753117,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 20, 21, 22, 23]",{},identity,identity,0,0.7396508728179552,0.7630922693266833,-0.0234413965087281,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 20, 21, 22, 23]",{},identity,identity,0,0.7546134663341646,0.772069825436409,-0.0174563591022444,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 21, 22, 23]",{},identity,identity,0,0.7591022443890274,0.7625935162094764,-0.0034912718204489,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 21, 22, 23]",{},identity,identity,0,0.7396508728179552,0.7635910224438903,-0.0239401496259351,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 21, 22, 23]",{},identity,identity,0,0.7546134663341646,0.770573566084788,-0.0159600997506234,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 22, 23]",{},identity,identity,0,0.7591022443890274,0.7581047381546134,0.0009975062344139,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 22, 23]",{},identity,identity,0,0.7396508728179552,0.7551122194513715,-0.0154613466334163,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[4, 22, 23]",{},identity,identity,0,0.7546134663341646,0.7685785536159601,-0.0139650872817954,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[8, 16]",{},identity,identity,0,0.7591022443890274,0.7551122194513715,0.0039900249376558,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[8, 16]",{},identity,identity,0,0.7396508728179552,0.7506234413965087,-0.0109725685785535,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[8, 16]",{},identity,identity,0,0.7546134663341646,0.7586034912718205,-0.0039900249376558,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[17, 23]",{},identity,identity,0,0.7591022443890274,0.7536159600997506,0.0054862842892767,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[17, 23]",{},identity,identity,0,0.7396508728179552,0.7336658354114713,0.0059850374064838,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],"[17, 23]",{},identity,identity,0,0.7546134663341646,0.7600997506234414,-0.0054862842892767,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[4],{},identity,identity,0,0.7591022443890274,0.7596009975062344,-0.000498753117207,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[4],{},identity,identity,0,0.7396508728179552,0.7546134663341646,-0.0149625935162094,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[4],{},identity,identity,0,0.7546134663341646,0.7675810473815461,-0.0129675810473814,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[23],{},identity,identity,0,0.7591022443890274,0.7576059850374065,0.0014962593516208,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[23],{},identity,identity,0,0.7396508728179552,0.7376558603491272,0.0019950124688279,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[],[23],{},identity,identity,0,0.7546134663341646,0.7561097256857855,-0.0014962593516208,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(2, 4), (18, 23)]",[],[],{},identity,identity,7,0.0,0.7645885286783043,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(2, 4), (18, 23)]",[],[],{},identity,identity,7,0.0,0.7615960099750624,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(2, 4), (18, 23)]",[],[],{},identity,identity,7,0.0,0.774064837905237,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(17, 23)]",[],[],{},identity,identity,6,0.0,0.7571072319201995,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(17, 23)]",[],[],{},identity,identity,6,0.0,0.7655860349127181,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(17, 23)]",[],[],{},identity,identity,6,0.0,0.7725685785536159,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (19, 23)]",[],[],{},identity,identity,5,0.0,0.7650872817955112,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (19, 23)]",[],[],{},identity,identity,5,0.0,0.7605985037406484,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (19, 23)]",[],[],{},identity,identity,5,0.0,0.7780548628428927,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (20, 23)]",[],[],{},identity,identity,4,0.0,0.7596009975062344,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (20, 23)]",[],[],{},identity,identity,4,0.0,0.7675810473815461,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (20, 23)]",[],[],{},identity,identity,4,0.0,0.774064837905237,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (21, 23)]",[],[],{},identity,identity,3,0.0,0.7655860349127181,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (21, 23)]",[],[],{},identity,identity,3,0.0,0.7650872817955112,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4), (21, 23)]",[],[],{},identity,identity,3,0.0,0.772069825436409,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(7, 8), (15, 16)]",[],[],{},identity,identity,2,0.0,0.7660847880299252,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(7, 8), (15, 16)]",[],[],{},identity,identity,2,0.0,0.7625935162094764,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(7, 8), (15, 16)]",[],[],{},identity,identity,2,0.0,0.770573566084788,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(16, 17), (22, 23)]",[],[],{},identity,identity,2,0.0,0.7591022443890274,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(16, 17), (22, 23)]",[],[],{},identity,identity,2,0.0,0.7496259351620947,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(16, 17), (22, 23)]",[],[],{},identity,identity,2,0.0,0.7556109725685786,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4)]",[],[],{},identity,identity,1,0.0,0.7700748129675811,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4)]",[],[],{},identity,identity,1,0.0,0.7476309226932668,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(3, 4)]",[],[],{},identity,identity,1,0.0,0.7670822942643392,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(22, 23)]",[],[],{},identity,identity,1,0.0,0.7605985037406484,0.0,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(22, 23)]",[],[],{},identity,identity,1,0.0,0.7461346633416459,0.0,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,linear,256,5,"[(22, 23)]",[],[],{},identity,identity,1,0.0,0.7556109725685786,0.0,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[3, 4, 19, 20, 21, 22, 23]",[],{},linear,identity,0,0.7591022443890274,0.7670822942643392,-0.0079800498753117,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[3, 4, 19, 20, 21, 22, 23]",[],{},linear,identity,0,0.7396508728179552,0.7645885286783043,-0.0249376558603491,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[3, 4, 19, 20, 21, 22, 23]",[],{},linear,identity,0,0.7546134663341646,0.769576059850374,-0.0149625935162094,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[18, 19, 20, 21, 22, 23]",[],{},linear,identity,0,0.7591022443890274,0.7650872817955112,-0.0059850374064838,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[18, 19, 20, 21, 22, 23]",[],{},linear,identity,0,0.7396508728179552,0.7610972568578553,-0.0214463840399001,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[18, 19, 20, 21, 22, 23]",[],{},linear,identity,0,0.7546134663341646,0.7640897755610973,-0.0094763092269326,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 20, 21, 22, 23]",[],{},linear,identity,0,0.7591022443890274,0.7750623441396509,-0.0159600997506235,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 20, 21, 22, 23]",[],{},linear,identity,0,0.7396508728179552,0.7551122194513715,-0.0154613466334163,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 20, 21, 22, 23]",[],{},linear,identity,0,0.7546134663341646,0.773067331670823,-0.0184538653366583,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 21, 22, 23]",[],{},linear,identity,0,0.7591022443890274,0.7655860349127181,-0.0064837905236907,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 21, 22, 23]",[],{},linear,identity,0,0.7396508728179552,0.7586034912718205,-0.0189526184538653,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 21, 22, 23]",[],{},linear,identity,0,0.7546134663341646,0.7670822942643392,-0.0124688279301745,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 22, 23]",[],{},linear,identity,0,0.7591022443890274,0.7640897755610973,-0.0049875311720698,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 22, 23]",[],{},linear,identity,0,0.7396508728179552,0.7610972568578553,-0.0214463840399001,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[4, 22, 23]",[],{},linear,identity,0,0.7546134663341646,0.7685785536159601,-0.0139650872817954,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[8, 16]",[],{},linear,identity,0,0.7591022443890274,0.7586034912718205,0.0004987531172069,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[8, 16]",[],{},linear,identity,0,0.7396508728179552,0.7486284289276808,-0.0089775561097256,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[8, 16]",[],{},linear,identity,0,0.7546134663341646,0.7645885286783043,-0.0099750623441396,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[17, 23]",[],{},linear,identity,0,0.7591022443890274,0.7650872817955112,-0.0059850374064838,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[17, 23]",[],{},linear,identity,0,0.7396508728179552,0.7491271820448878,-0.0094763092269326,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],"[17, 23]",[],{},linear,identity,0,0.7546134663341646,0.7591022443890274,-0.0044887780548628,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[4],[],{},linear,identity,0,0.7591022443890274,0.7620947630922693,-0.0029925187032419,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[4],[],{},linear,identity,0,0.7396508728179552,0.7481296758104738,-0.0084788029925186,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[4],[],{},linear,identity,0,0.7546134663341646,0.7531172069825436,0.001496259351621,250
+1,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[23],[],{},linear,identity,0,0.7591022443890274,0.7605985037406484,-0.001496259351621,250
+2,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[23],[],{},linear,identity,0,0.7396508728179552,0.7501246882793018,-0.0104738154613466,250
+3,dermamnist,google/vit-large-patch16-224,Adam,0.01,Linear,identity,256,5,[],[23],[],{},linear,identity,0,0.7546134663341646,0.7596009975062344,-0.004987531172069848,250

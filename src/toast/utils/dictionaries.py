@@ -407,3 +407,293 @@ NAME2TRANSLATORS = {
     "mlp": lambda: SGDMLPAligner(num_steps=300, lr=1e-3, random_seed=0),
     "deep_mlp": lambda: SGDDeepMLPAligner(num_steps=300, lr=1e-3, random_seed=0),
 }
+
+# Parameter savings per single edit, keyed by HF encoder name (matching
+# MODEL2NUM_LAYERS / MODEL2CONFIGS so the training loop can look an encoder up directly).
+# branch = sublayer + its LayerNorm (+ LayerScale for DINOv2).
+# drop_*   = identity-mode saving (branch removed outright).
+# linear_* = branch replaced by Linear(d, d, bias=True); equals drop_* minus (d*d + d).
+# Use params_saved_for_config() below to total these for a full config row.
+
+PARAM_SAVINGS = {
+    "WinKawaks/vit-tiny-patch16-224": {
+        "d": 192, "heads": 3, "head_dim": 64, "mlp": 768, "layers": 12,
+        "params_per_block": 444864, "encoder_body_params": 5338368,
+        "drop_head": 49344,
+        "drop_mlp": 296256,
+        "drop_attn": 148608,
+        "drop_block": 444864,
+        "linear_mlp": 259200,
+        "linear_attn": 111552,
+        "linear_block": 407808,
+    },
+    "WinKawaks/vit-small-patch16-224": {
+        "d": 384, "heads": 6, "head_dim": 64, "mlp": 1536, "layers": 12,
+        "params_per_block": 1774464, "encoder_body_params": 21293568,
+        "drop_head": 98496,
+        "drop_mlp": 1182336,
+        "drop_attn": 592128,
+        "drop_block": 1774464,
+        "linear_mlp": 1034496,
+        "linear_attn": 444288,
+        "linear_block": 1626624,
+    },
+    "google/vit-base-patch16-224": {
+        "d": 768, "heads": 12, "head_dim": 64, "mlp": 3072, "layers": 12,
+        "params_per_block": 7087872, "encoder_body_params": 85054464,
+        "drop_head": 196800,
+        "drop_mlp": 4723968,
+        "drop_attn": 2363904,
+        "drop_block": 7087872,
+        "linear_mlp": 4133376,
+        "linear_attn": 1773312,
+        "linear_block": 6497280,
+    },
+    "google/vit-large-patch16-224": {
+        "d": 1024, "heads": 16, "head_dim": 64, "mlp": 4096, "layers": 24,
+        "params_per_block": 12596224, "encoder_body_params": 302309376,
+        "drop_head": 262336,
+        "drop_mlp": 8395776,
+        "drop_attn": 4200448,
+        "drop_block": 12596224,
+        "linear_mlp": 7346176,
+        "linear_attn": 3150848,
+        "linear_block": 11546624,
+    },
+    "facebook/deit-small-patch16-224": {
+        "d": 384, "heads": 6, "head_dim": 64, "mlp": 1536, "layers": 12,
+        "params_per_block": 1774464, "encoder_body_params": 21293568,
+        "drop_head": 98496,
+        "drop_mlp": 1182336,
+        "drop_attn": 592128,
+        "drop_block": 1774464,
+        "linear_mlp": 1034496,
+        "linear_attn": 444288,
+        "linear_block": 1626624,
+    },
+    "facebook/deit-base-patch16-224": {
+        "d": 768, "heads": 12, "head_dim": 64, "mlp": 3072, "layers": 12,
+        "params_per_block": 7087872, "encoder_body_params": 85054464,
+        "drop_head": 196800,
+        "drop_mlp": 4723968,
+        "drop_attn": 2363904,
+        "drop_block": 7087872,
+        "linear_mlp": 4133376,
+        "linear_attn": 1773312,
+        "linear_block": 6497280,
+    },
+    "facebook/dinov2-small": {
+        "d": 384, "heads": 6, "head_dim": 64, "mlp": 1536, "layers": 12,
+        "params_per_block": 1775232, "encoder_body_params": 21302784,
+        "drop_head": 98496,
+        "drop_mlp": 1182720,
+        "drop_attn": 592512,
+        "drop_block": 1775232,
+        "linear_mlp": 1034880,
+        "linear_attn": 444672,
+        "linear_block": 1627392,
+    },
+    "facebook/dinov2-base": {
+        "d": 768, "heads": 12, "head_dim": 64, "mlp": 3072, "layers": 12,
+        "params_per_block": 7089408, "encoder_body_params": 85072896,
+        "drop_head": 196800,
+        "drop_mlp": 4724736,
+        "drop_attn": 2364672,
+        "drop_block": 7089408,
+        "linear_mlp": 4134144,
+        "linear_attn": 1774080,
+        "linear_block": 6498816,
+    },
+    "microsoft/rad-dino": {  # DINOv2-base arch, patch14/518px
+        "d": 768, "heads": 12, "head_dim": 64, "mlp": 3072, "layers": 12,
+        "params_per_block": 7089408, "encoder_body_params": 85072896,
+        "drop_head": 196800,
+        "drop_mlp": 4724736,
+        "drop_attn": 2364672,
+        "drop_block": 7089408,
+        "linear_mlp": 4134144,
+        "linear_attn": 1774080,
+        "linear_block": 6498816,
+    },
+    "openai/clip-vit-base-patch32": {  # vision tower only
+        "d": 768, "heads": 12, "head_dim": 64, "mlp": 3072, "layers": 12,
+        "params_per_block": 7087872, "encoder_body_params": 85054464,
+        "drop_head": 196800,
+        "drop_mlp": 4723968,
+        "drop_attn": 2363904,
+        "drop_block": 7087872,
+        "linear_mlp": 4133376,
+        "linear_attn": 1773312,
+        "linear_block": 6497280,
+    },
+    "timm/vit_tiny_patch16_224.augreg_in21k_ft_in1k": {
+        "d": 192, "heads": 3, "head_dim": 64, "mlp": 768, "layers": 12,
+        "params_per_block": 444864, "encoder_body_params": 5338368,
+        "drop_head": 49344,
+        "drop_mlp": 296256,
+        "drop_attn": 148608,
+        "drop_block": 444864,
+        "linear_mlp": 259200,
+        "linear_attn": 111552,
+        "linear_block": 407808,
+    },
+    "timm/vit_small_patch16_224.augreg_in21k_ft_in1k": {
+        "d": 384, "heads": 6, "head_dim": 64, "mlp": 1536, "layers": 12,
+        "params_per_block": 1774464, "encoder_body_params": 21293568,
+        "drop_head": 98496,
+        "drop_mlp": 1182336,
+        "drop_attn": 592128,
+        "drop_block": 1774464,
+        "linear_mlp": 1034496,
+        "linear_attn": 444288,
+        "linear_block": 1626624,
+    },
+    "timm/vit_large_patch16_224.augreg_in21k_ft_in1k": {
+        "d": 1024, "heads": 16, "head_dim": 64, "mlp": 4096, "layers": 24,
+        "params_per_block": 12596224, "encoder_body_params": 302309376,
+        "drop_head": 262336,
+        "drop_mlp": 8395776,
+        "drop_attn": 4200448,
+        "drop_block": 12596224,
+        "linear_mlp": 7346176,
+        "linear_attn": 3150848,
+        "linear_block": 11546624,
+    },
+    "timm/deit_base_patch16_224.fb_in1k": {
+        "d": 768, "heads": 12, "head_dim": 64, "mlp": 3072, "layers": 12,
+        "params_per_block": 7087872, "encoder_body_params": 85054464,
+        "drop_head": 196800,
+        "drop_mlp": 4723968,
+        "drop_attn": 2363904,
+        "drop_block": 7087872,
+        "linear_mlp": 4133376,
+        "linear_attn": 1773312,
+        "linear_block": 6497280,
+    },
+    "answerdotai/ModernBERT-base": {  # layer 0 attn_norm is Identity
+        "d": 768, "heads": 12, "head_dim": 64, "mlp": 1152, "layers": 22,
+        "params_per_block": 5015040, "encoder_body_params": 110330880,
+        "drop_head": 196608,
+        "drop_mlp": 2654976,
+        "drop_attn": 2360064,
+        "drop_block": 5015040,
+        "linear_mlp": 2064384,
+        "linear_attn": 1769472,
+        "linear_block": 4424448,
+    },
+    "google-bert/bert-base-uncased": {
+        "d": 768, "heads": 12, "head_dim": 64, "mlp": 3072, "layers": 12,
+        "params_per_block": 7087872, "encoder_body_params": 85054464,
+        "drop_head": 196800,
+        "drop_mlp": 4723968,
+        "drop_attn": 2363904,
+        "drop_block": 7087872,
+        "linear_mlp": 4133376,
+        "linear_attn": 1773312,
+        "linear_block": 6497280,
+    },
+    "FacebookAI/xlm-roberta-base": {
+        "d": 768, "heads": 12, "head_dim": 64, "mlp": 3072, "layers": 12,
+        "params_per_block": 7087872, "encoder_body_params": 85054464,
+        "drop_head": 196800,
+        "drop_mlp": 4723968,
+        "drop_attn": 2363904,
+        "drop_block": 7087872,
+        "linear_mlp": 4133376,
+        "linear_attn": 1773312,
+        "linear_block": 6497280,
+    },
+    "clip-base-text-tower": {  # not an encoder in MODEL_NAME2HF_NAME; kept under its own key
+        "d": 512, "heads": 8, "head_dim": 64, "mlp": 2048, "layers": 12,
+        "params_per_block": 3152384, "encoder_body_params": 37828608,
+        "drop_head": 131264,
+        "drop_mlp": 2100736,
+        "drop_attn": 1051648,
+        "drop_block": 3152384,
+        "linear_mlp": 1838080,
+        "linear_attn": 788992,
+        "linear_block": 2889728,
+    },
+}
+
+
+def _resolve_param_savings(encoder):
+    """PARAM_SAVINGS entry for an encoder given by HF name (preferred) or short name."""
+    if encoder in PARAM_SAVINGS:
+        return PARAM_SAVINGS[encoder]
+    hf = MODEL_NAME2HF_NAME.get(encoder)
+    if hf is not None and hf in PARAM_SAVINGS:
+        return PARAM_SAVINGS[hf]
+    return None
+
+
+def _translator_cost(name, d):
+    """Params added by one skip-bridge translator. identity is free; linear and the
+    learned aligners are all costed as a single Linear(d, d, bias=True) = d*d + d."""
+    return 0 if name == "identity" else d * d + d
+
+
+def params_saved_for_config(
+    encoder,
+    skip=None,
+    mlp_skip=None,
+    attn_skip=None,
+    head_dict=None,
+    skip_translator="identity",
+    mlp_mode="identity",
+    attn_mode="identity",
+):
+    """Total encoder-body params removed by one config row, and that as a percent of the
+    intact body. Returns {"params_saved", "encoder_body_params", "params_saved_pct"};
+    params_saved is 0 for the baseline (all-empty) row. If the encoder has no
+    PARAM_SAVINGS entry, all three values come back as None.
+
+    Savings honor the per-edit mode: sub-block edits use drop_* under identity mode and
+    linear_* otherwise; each whole-block skip (skip_from, skip_to) frees
+    (skip_to - skip_from) blocks minus one skip_translator bridge; head_dict maps a layer
+    to the heads it keeps, so (heads - kept) heads are pruned per listed layer.
+
+    Double counting is suppressed with a fixed precedence -- whole block > mlp/attention >
+    heads -- so an edit is never counted for params another edit already removed:
+      * a layer inside a dropped block contributes only drop_block (its mlp/attn/head
+        edits are ignored, since that layer's sublayers are already gone);
+      * a layer whose attention is dropped ignores any head pruning on it;
+      * overlapping skip spans count each block once; repeated indices count once.
+    """
+    entry = _resolve_param_savings(encoder)
+    if entry is None:
+        return {"params_saved": None, "encoder_body_params": None, "params_saved_pct": None}
+
+    d = entry["d"]
+    saved = 0
+
+    # Layers whose whole block is removed (union across spans -> each block counted once).
+    dropped_layers = set()
+    for skip_from, skip_to in (skip or []):
+        dropped_layers.update(range(skip_from + 1, skip_to + 1))
+    saved += len(dropped_layers) * entry["drop_block"]
+    # one bridge translator per span (identity is free, linear/learned cost d*d + d).
+    saved -= len(skip or []) * _translator_cost(skip_translator, d)
+
+    # MLP sublayers not already inside a dropped block.
+    for i in set(mlp_skip or []):
+        if i not in dropped_layers:
+            saved += entry["drop_mlp"] if mlp_mode == "identity" else entry["linear_mlp"]
+
+    # Attention sublayers not already inside a dropped block.
+    attn_layers = set(attn_skip or [])
+    for i in attn_layers:
+        if i not in dropped_layers:
+            saved += entry["drop_attn"] if attn_mode == "identity" else entry["linear_attn"]
+
+    # Head pruning, skipped where the whole block OR its attention sublayer is already gone.
+    for layer, kept in (head_dict or {}).items():
+        if layer in dropped_layers or layer in attn_layers:
+            continue
+        pruned = entry["heads"] - len(kept)
+        if pruned > 0:
+            saved += pruned * entry["drop_head"]
+
+    body = entry["encoder_body_params"]
+    pct = 100.0 * saved / body if body else 0.0
+    return {"params_saved": int(saved), "encoder_body_params": body, "params_saved_pct": pct}
