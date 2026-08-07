@@ -1,0 +1,220 @@
+skip_config,accuracy_mean,accuracy_std,order
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: linear, Attn: [] Heads: {}",0.7283458021612635,0.005780661230495,0
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(0, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.6989193682460515,0.051739075588907835,3
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(0, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7226932668329177,0.03445730762975734,6
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: identity, Attn: [] Heads: {}",0.7017456359102244,0.032472620071138214,9
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: linear, Attn: [] Heads: {}",0.739983374896093,0.011721582535043906,12
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 2, 3, 4] Heads: {}",0.7273482959268495,0.03619426778612996,15
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7201995012468828,0.027349685527890646,18
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7321695760598503,0.011241324358687903,21
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: identity, Attn: [] Heads: {}",0.7068994181213633,0.03621488020973736,24
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: linear, Attn: [] Heads: {}",0.743308395677473,0.007059309641084685,27
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3, 5] Heads: {}",0.7064006650041562,0.04067004710895399,30
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(0, 1), (2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.6906068162926018,0.0567929220447974,33
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(0, 1), (2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7354945968412302,0.024884398659441653,36
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: identity, Attn: [] Heads: {}",0.715876974231089,0.024415141043072332,39
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: linear, Attn: [] Heads: {}",0.7339983374896093,0.005561339545695,42
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3] Heads: {}",0.7233582709891936,0.025734565371982054,45
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(0, 1)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7413133832086451,0.010127677080976246,48
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(0, 1)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7258520365752287,0.01034637265669265,51
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: identity, Attn: [] Heads: {}",0.7404821280133,0.0067715417637294086,54
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: linear, Attn: [] Heads: {}",0.7389858686616791,0.005672060551698062,57
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1] Heads: {}",0.7336658354114713,0.013902603356375475,60
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7461346633416458,0.008026671790239961,63
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7285120532003324,0.009228055917790818,66
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: identity, Attn: [] Heads: {}",0.738154613466334,0.01438623950309817,69
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: linear, Attn: [] Heads: {}",0.7326683291770574,0.004809800878300727,72
+"Encoder: facebook/dinov2-base, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [3] Heads: {}",0.7331670822942643,0.014770167476270153,75
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: linear, Attn: [] Heads: {}",0.7009143807148795,0.0074702051333868594,78
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(0, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7135494596841231,0.012462176114321,81
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(0, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7087281795511222,0.022904663348039943,84
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: identity, Attn: [] Heads: {}",0.7045719035743973,0.005516428935340676,87
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: linear, Attn: [] Heads: {}",0.7077306733167082,0.012458848874610249,90
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 2, 3, 4] Heads: {}",0.713383208645054,0.010078433626751628,93
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7127182044887781,0.008977556109725657,96
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7168744804655028,0.009480683244810172,99
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: identity, Attn: [] Heads: {}",0.7032418952618453,0.01150380308695342,102
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: linear, Attn: [] Heads: {}",0.6989193682460515,0.011614988179357317,105
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3, 5] Heads: {}",0.7054031587697424,0.010225452578342004,108
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(0, 1), (2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7067331670822942,0.003895386372023322,111
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(0, 1), (2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.712718204488778,0.004261348501405191,114
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: identity, Attn: [] Heads: {}",0.7004156275976725,0.007796092493894173,117
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: linear, Attn: [] Heads: {}",0.6989193682460515,0.007732013934652368,120
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3] Heads: {}",0.7007481296758105,0.008653043178502441,123
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(0, 1)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7012468827930175,0.005394839813661784,126
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(0, 1)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7055694098088113,0.004525571933105942,129
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: identity, Attn: [] Heads: {}",0.6975893599334997,0.00511880442837599,132
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: linear, Attn: [] Heads: {}",0.7015793848711555,0.00504538350972353,135
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1] Heads: {}",0.6964256026600166,0.00479253044236062,138
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7040731504571903,0.01004134255730114,141
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7047381546134663,0.00850809082754713,144
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: identity, Attn: [] Heads: {}",0.7004156275976725,0.0050944483611120375,147
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: linear, Attn: [] Heads: {}",0.7039068994181213,0.007164243200803117,150
+"Encoder: microsoft/rad-dino, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [3] Heads: {}",0.6987531172069826,0.008026671790239961,153
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: linear, Attn: [] Heads: {}",0.7245220282626766,0.0030474318835949227,156
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [(3, 4), (9, 11)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7256857855361596,0.01080120091157492,159
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [(3, 4), (9, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7248545303408146,0.007954030732439388,162
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [4, 10, 11], MLP Mode: identity, Attn: [] Heads: {}",0.7172069825436408,0.0017277314788717059,165
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [4, 10, 11], MLP Mode: linear, Attn: [] Heads: {}",0.7268495428096425,0.0027469179786963308,168
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [4, 10, 11] Heads: {}",0.7230257689110556,0.00274691797869632,171
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [(9, 11)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7255195344970905,0.00430008883005072,174
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [(9, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7155444721529509,0.003743418204221997,177
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [10, 11], MLP Mode: identity, Attn: [] Heads: {}",0.7260182876142975,0.0002879552464786657,180
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [10, 11], MLP Mode: linear, Attn: [] Heads: {}",0.7266832917705736,0.0038953863720232367,183
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [10, 11] Heads: {}",0.7270157938487115,0.005823534459895951,186
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [(8, 9)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7265170407315046,0.002746917978696284,189
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [(8, 9)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7216957605985037,0.005254690151048814,192
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [9], MLP Mode: identity, Attn: [] Heads: {}",0.7268495428096425,0.003676366481711755,195
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [9], MLP Mode: linear, Attn: [] Heads: {}",0.7218620116375728,0.005379447942597947,198
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [9] Heads: {}",0.7221945137157108,0.0009975062344139696,201
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [(9, 10)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7295095594347464,0.0020156867253503237,204
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [(9, 10)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7231920199501247,0.004488778054862919,207
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [10], MLP Mode: identity, Attn: [] Heads: {}",0.7235245220282627,0.0015237159417974477,210
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [10], MLP Mode: linear, Attn: [] Heads: {}",0.7246882793017457,0.002776939831835477,213
+"Encoder: facebook/deit-small-patch16-224, Dataset: dermamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [10] Heads: {}",0.7286783042394015,0.0013195767137478684,216
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: linear, Attn: [] Heads: {}",0.8771367521367521,0.016985163563658857,219
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(0, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8418803418803419,0.01878033742654589,222
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(0, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8424145299145299,0.02152055243427749,225
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: identity, Attn: [] Heads: {}",0.8087606837606837,0.009252408160090124,228
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: linear, Attn: [] Heads: {}",0.8637820512820512,0.004807692307692318,231
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 2, 3, 4] Heads: {}",0.8194444444444443,0.023352022429908564,234
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8317307692307692,0.008479972150848121,237
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8584401709401709,0.009791828408025319,240
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: identity, Attn: [] Heads: {}",0.8034188034188033,0.01698516356365883,243
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: linear, Attn: [] Heads: {}",0.8824786324786325,0.0018504816320180247,246
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3, 5] Heads: {}",0.8274572649572649,0.044072940881054096,249
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(0, 1), (2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.844551282051282,0.024038461538461536,252
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(0, 1), (2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8557692307692308,0.010008009612818013,255
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: identity, Attn: [] Heads: {}",0.8563034188034188,0.017284924879661757,258
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: linear, Attn: [] Heads: {}",0.8728632478632479,0.030336048855770698,261
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3] Heads: {}",0.8498931623931624,0.01668001602136329,264
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(0, 1)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8333333333333334,0.014423076923076886,267
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(0, 1)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8707264957264957,0.016052328206534985,270
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: identity, Attn: [] Heads: {}",0.8600427350427351,0.030293689911875695,273
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: linear, Attn: [] Heads: {}",0.8792735042735043,0.022454967475409968,276
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1] Heads: {}",0.8627136752136751,0.029564303636798506,279
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8568376068376068,0.03482889596731419,282
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8782051282051282,0.011217948717948678,285
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: identity, Attn: [] Heads: {}",0.8648504273504273,0.012447842091593029,288
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: linear, Attn: [] Heads: {}",0.8717948717948718,0.015287487202194607,291
+"Encoder: facebook/dinov2-base, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [3] Heads: {}",0.8525641025641025,0.017334381132038425,294
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: linear, Attn: [] Heads: {}",0.8878205128205128,0.008479972150848043,297
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(0, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.9316239316239315,0.003336003204272579,300
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(0, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.857905982905983,0.01713569971404429,303
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: identity, Attn: [] Heads: {}",0.9006410256410257,0.005778127044012782,306
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: linear, Attn: [] Heads: {}",0.87767094017094,0.014001434211625119,309
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 2, 3, 4] Heads: {}",0.8931623931623931,0.020292115291904417,312
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8883547008547009,0.00562802016712226,315
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8728632478632479,0.009390168713272907,318
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: identity, Attn: [] Heads: {}",0.889423076923077,0.006410256410256415,321
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: linear, Attn: [] Heads: {}",0.8717948717948718,0.0042399860754240085,324
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3, 5] Heads: {}",0.8840811965811967,0.010303045684821523,327
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(0, 1), (2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8952991452991453,0.004033031215422395,330
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: identity, Attn: [] Heads: {}",0.8899572649572649,0.008066062430844826,333
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: linear, Attn: [] Heads: {}",0.8739316239316239,0.0056280201671221695,336
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3] Heads: {}",0.8888888888888888,0.008066062430844817,339
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(0, 1)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8942307692307692,0.0073438713060190305,342
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(0, 1)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8915598290598291,0.012953371424126201,345
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: identity, Attn: [] Heads: {}",0.8899572649572649,0.005151522842410863,348
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: linear, Attn: [] Heads: {}",0.8851495726495727,0.00790526099730176,351
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1] Heads: {}",0.8974358974358975,0.008922699299407137,354
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8835470085470085,0.009791828408025291,357
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: identity, Attn: [] Heads: {}",0.8846153846153846,0.006410256410256415,360
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: linear, Attn: [] Heads: {}",0.8803418803418803,0.0033360032042726367,363
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [3] Heads: {}",0.8878205128205128,0.013692313694419147,366
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: linear, Attn: [] Heads: {}",0.7857905982905983,0.008826234851420004,369
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [(3, 4), (9, 11)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7761752136752137,0.01067039762576822,372
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [(3, 4), (9, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.764423076923077,0.006410256410256471,375
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [4, 10, 11], MLP Mode: identity, Attn: [] Heads: {}",0.7783119658119658,0.010303045684821497,378
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [4, 10, 11], MLP Mode: linear, Attn: [] Heads: {}",0.7793803418803419,0.0096597977136886,381
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [4, 10, 11] Heads: {}",0.8012820512820512,0.011102889792108172,384
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [(9, 11)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7745726495726496,0.01871183748732581,387
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [(9, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7686965811965812,0.01454130084275239,390
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [10, 11], MLP Mode: identity, Attn: [] Heads: {}",0.7900641025641025,0.014243901309800652,393
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [10, 11], MLP Mode: linear, Attn: [] Heads: {}",0.7879273504273504,0.016833281257039267,396
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [10, 11] Heads: {}",0.7831196581196581,0.0148038530561442,399
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [(8, 9)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7996794871794872,0.01545456852723227,402
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [(8, 9)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8018162393162394,0.009112565229290657,405
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [9], MLP Mode: identity, Attn: [] Heads: {}",0.797008547008547,0.007401926528072123,408
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [9], MLP Mode: linear, Attn: [] Heads: {}",0.7911324786324787,0.012953371424126189,411
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [9] Heads: {}",0.7879273504273504,0.009390168713272907,414
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [(9, 10)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7948717948717948,0.009748016875477992,417
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [(9, 10)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7799145299145298,0.01713569971404424,420
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [10], MLP Mode: identity, Attn: [] Heads: {}",0.7900641025641025,0.014243901309800652,423
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [10], MLP Mode: linear, Attn: [] Heads: {}",0.781517094017094,0.013629648314287424,426
+"Encoder: facebook/deit-small-patch16-224, Dataset: pneumoniamnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [10] Heads: {}",0.7916666666666666,0.011217948717948756,429
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: linear, Attn: [] Heads: {}",0.8926183844011142,0.01618657655796354,432
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(0, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7920612813370473,0.005841286065601928,435
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(0, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8506035283194059,0.03101109756673088,438
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: identity, Attn: [] Heads: {}",0.7991179201485608,0.031689547392149735,441
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: linear, Attn: [] Heads: {}",0.8608170844939647,0.026102349521315505,444
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 2, 3, 4] Heads: {}",0.8440111420612814,0.029675544693235485,447
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8447539461467038,0.015403882931111829,450
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8851903435468896,0.006983722628931432,453
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: identity, Attn: [] Heads: {}",0.8489786443825441,0.01864492817159127,456
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: linear, Attn: [] Heads: {}",0.8844011142061281,0.011701651148353713,459
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3, 5] Heads: {}",0.861188486536676,0.03212453234566445,462
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(0, 1), (2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8377437325905293,0.027185901743763376,465
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(0, 1), (2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8896935933147633,0.017071936869263605,468
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: identity, Attn: [] Heads: {}",0.8357010213556174,0.04015113645573377,471
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: linear, Attn: [] Heads: {}",0.88347260909935,0.013558718169932624,474
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3] Heads: {}",0.8640668523676881,0.0324225487832495,477
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(0, 1)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8712627669452182,0.011142351435404927,480
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(0, 1)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8905292479108636,0.007238321147736062,483
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: identity, Attn: [] Heads: {}",0.8726090993500465,0.012399715529937405,486
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: linear, Attn: [] Heads: {}",0.883008356545961,0.007478213793124682,489
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1] Heads: {}",0.8704735376044569,0.022619773685669933,492
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8759052924791085,0.026897536531547354,495
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8866295264623956,0.016081979171759183,498
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: identity, Attn: [] Heads: {}",0.8765552460538534,0.008987694426664403,501
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: linear, Attn: [] Heads: {}",0.8846332404828227,0.015278705999969016,504
+"Encoder: facebook/dinov2-base, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [3] Heads: {}",0.861188486536676,0.0059111584187174875,507
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: linear, Attn: [] Heads: {}",0.7999999999999999,0.012512359947879751,510
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(0, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8258124419684308,0.012170768295941901,513
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: identity, Attn: [] Heads: {}",0.8102135561745589,0.01706360244192674,516
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 2, 3, 4], MLP Mode: linear, Attn: [] Heads: {}",0.8260909935004642,0.011448885899200279,519
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 2, 3, 4] Heads: {}",0.8061281337047354,0.010354289133034218,522
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8042246982358403,0.016338260381255364,525
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: identity, Attn: [] Heads: {}",0.8046889507892293,0.01843725695815342,528
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 3, 5], MLP Mode: linear, Attn: [] Heads: {}",0.8088207985143918,0.01424725962437021,531
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3, 5] Heads: {}",0.8070566388115133,0.009266113463851668,534
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(0, 1), (2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.796053853296193,0.014859055528726897,537
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: identity, Attn: [] Heads: {}",0.797585886722377,0.007039054717632997,540
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1, 3], MLP Mode: linear, Attn: [] Heads: {}",0.7999071494893221,0.009856487347057614,543
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1, 3] Heads: {}",0.8021355617455895,0.006343293828765224,546
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(0, 1)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8017177344475394,0.011352754900285629,549
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: identity, Attn: [] Heads: {}",0.7994428969359332,0.009449221799433695,552
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [1], MLP Mode: linear, Attn: [] Heads: {}",0.7973073351903436,0.012883071093224736,555
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [1] Heads: {}",0.8018105849582172,0.00933459391649918,558
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7985143918291552,0.012146837808397669,561
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: identity, Attn: [] Heads: {}",0.7961931290622098,0.008008457469793185,564
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [3], MLP Mode: linear, Attn: [] Heads: {}",0.8022284122562674,0.008687727116295682,567
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [3] Heads: {}",0.8015784586815227,0.010368641928838252,570
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: linear, Attn: [] Heads: {}",0.877669452181987,0.0023690530774694725,573
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [(3, 4), (9, 11)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.9001857010213556,0.001661609114964971,576
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [(3, 4), (9, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8904828226555246,0.0007919555296764852,579
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [4, 10, 11], MLP Mode: identity, Attn: [] Heads: {}",0.8938254410399257,0.003845457454016506,582
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [4, 10, 11], MLP Mode: linear, Attn: [] Heads: {}",0.8758588672237697,0.003502261692208372,585
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [4, 10, 11] Heads: {}",0.8916434540389973,0.0013927576601671793,588
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [(9, 11)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.889368616527391,0.0022036108238265247,591
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [(9, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8811977715877437,0.0021030179485434252,594
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [10, 11], MLP Mode: identity, Attn: [] Heads: {}",0.8762766945218199,0.0026327663656003524,597
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [10, 11], MLP Mode: linear, Attn: [] Heads: {}",0.8760445682451253,0.0028166780523895016,600
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [10, 11] Heads: {}",0.8831940575673167,0.003055614238050934,603
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [(8, 9)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8798050139275766,0.002795941490234623,606
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [(8, 9)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8801764159702877,0.0027054414641287526,609
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [9], MLP Mode: identity, Attn: [] Heads: {}",0.8790157845868153,0.0035843784859716805,612
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [9], MLP Mode: linear, Attn: [] Heads: {}",0.8759981429897864,0.00342384290946929,615
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [9] Heads: {}",0.8790622098421541,0.0005628763070093504,618
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [(9, 10)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8759981429897864,0.0009881056942336443,621
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [(9, 10)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.874837511606314,0.0025389988698004233,624
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [10], MLP Mode: identity, Attn: [] Heads: {}",0.8774373259052926,0.00268625369386989,627
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [10], MLP Mode: linear, Attn: [] Heads: {}",0.876648096564531,0.001449628133333004,630
+"Encoder: facebook/deit-small-patch16-224, Dataset: pathmnist, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [10] Heads: {}",0.8773444753946147,0.0011845265387347742,633
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(0, 1), (2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8835470085470085,0.009791828408025291,636
+"Encoder: microsoft/rad-dino, Dataset: pneumoniamnist, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8862179487179488,0.010008009612817937,639
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(0, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7826369545032498,0.015148654008775303,642
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8042711234911794,0.025773293158099238,645
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(0, 1), (2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8002785515320334,0.011265851333743247,648
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(0, 1)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.7947075208913649,0.009003507720832308,651
+"Encoder: microsoft/rad-dino, Dataset: pathmnist, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [] Heads: {}",0.8006963788300836,0.013272183989639471,654

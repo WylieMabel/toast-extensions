@@ -12,7 +12,7 @@ from datasets import (
     load_dataset,
     load_from_disk,
 )
-from pytorch_lightning import seed_everything
+from toast.utils.utils import seed_everything
 from transformers import (
     AutoModel,
     AutoConfig,
@@ -25,6 +25,12 @@ from tqdm import tqdm
 from torch.utils.data import DataLoader
 
 from toast import PROJECT_ROOT
+from toast.utils.translator_keys import (
+    read_sweep_rows,
+    row_saves_translator,
+    transfer_requirements,
+    translator_store_key,
+)
 from toast.utils.dictionaries import (
     DATASET2INPUT_COLUMN,
     DATASET2LABEL_COLUMN,
@@ -87,6 +93,10 @@ def _read_config_csv(path: str):
                 "skip_translator":  row.get("skip_translator") or None,
                 "mlp_mode":         row.get("mlp_mode") or "identity",
                 "attn_mode":        row.get("attn_mode") or "identity",
+                # Optional 10th column. Blank (or equal to dataset) means the ordinary
+                # fit-here-evaluate-here run; naming a different dataset makes this row load
+                # the translator fitted by that dataset's row instead of fitting its own.
+                "fit_dataset":      row.get("fit_dataset") or None,
             })
     return configs
 
@@ -137,6 +147,10 @@ def run_encoding(
             cfg["encoder"] = encoder_name
         if not cfg.get("skip_translator"):
             cfg["skip_translator"] = translator_name
+        # A row that names no fit_dataset fits its translator on its own data, which is the
+        # existing behaviour for every config written before this column existed.
+        if not cfg.get("fit_dataset"):
+            cfg["fit_dataset"] = cfg["dataset"]
 
     # Group by (dataset, encoder) to load each model/dataset only once
     groups: dict = {}
@@ -145,6 +159,40 @@ def run_encoding(
         groups.setdefault(key, []).append(cfg)
 
     embeddings_base = PROJECT_ROOT / "data" / "embeddings"
+    # Fitted translators persist here so a transfer row in the same sweep can reuse one across
+    # datasets. Unlike embeddings (which run_pipeline_row_by_row.sh deletes per row to bound
+    # disk use), these outlive the row that produced them -- until the sweep ends and the
+    # runner deletes the ones it created.
+    translators_base = PROJECT_ROOT / "data" / "translators"
+
+    # Only save translators some transfer row will actually load: one identical to the fitting
+    # row in every respect except its dataset. Saving on every non-identity row wrote a map per
+    # span for sweeps that never read one back; combined with the storage bug in
+    # save_translator that came to 15GB and exhausted the home quota mid-sweep.
+    #
+    # The sweep CSV, not config_csv: run_pipeline_row_by_row.sh invokes this once per row with
+    # a single-row temp CSV, so the process encoding a fitting row cannot otherwise see that a
+    # later row transfers from it. SWEEP_CSV names the original. Falling back to config_csv
+    # keeps the whole-CSV invocation (encode_vision_full.sh on its own) working unchanged.
+    sweep_csv = os.environ.get("SWEEP_CSV") or config_csv
+    transfer_reqs = set()
+    if sweep_csv:
+        try:
+            transfer_reqs = transfer_requirements(read_sweep_rows(sweep_csv))
+        except Exception as e:
+            # Never fatal: a bad SWEEP_CSV should not sink an encoding run. Saving nothing is
+            # the safe direction -- an absent translator fails loudly in load_translator,
+            # whereas a stale one would silently bridge the wrong span.
+            print(f"  Warning: could not read sweep CSV '{sweep_csv}' ({e}); saving no translators.")
+    if transfer_reqs:
+        print(f"Saving translators for {len(transfer_reqs)} config(s) needed by transfer rows.")
+
+    # Errors below are caught per group/config so one bad row does not kill a long sweep, but
+    # they are counted and re-raised at the end. Without this the process exits 0 having
+    # written nothing, run_pipeline_row_by_row.sh treats phase 1 as successful and deletes the
+    # log holding the actual error, and the failure only surfaces later as "embeddings not
+    # found" during training -- with the cause already thrown away.
+    n_failed = 0
 
     for (ds_name, enc_name), config_rows in groups.items():
         print(f"\n=== dataset={ds_name} | encoder={enc_name} | {len(config_rows)} configs ===")
@@ -204,6 +252,9 @@ def run_encoding(
             encoder.eval().to(device)
         except Exception as e:
             print(f"✗ Error loading encoder '{enc_name}': {e}")
+            import traceback
+            traceback.print_exc()
+            n_failed += len(config_rows)
             continue
 
         try:
@@ -217,6 +268,9 @@ def run_encoding(
             )
         except Exception as e:
             print(f"✗ Error creating data loaders: {e}")
+            import traceback
+            traceback.print_exc()
+            n_failed += len(config_rows)
             del encoder
             torch.cuda.empty_cache()
             continue
@@ -233,6 +287,9 @@ def run_encoding(
             print(f"Captured embeddings for layers: {list(all_layer_embeddings.keys())}")
         except Exception as e:
             print(f"✗ Error extracting representations: {e}")
+            import traceback
+            traceback.print_exc()
+            n_failed += len(config_rows)
             del encoder
             torch.cuda.empty_cache()
             continue
@@ -247,10 +304,27 @@ def run_encoding(
                 mlp_mode       = cfg.get("mlp_mode", "identity")
                 attn_mode      = cfg.get("attn_mode", "identity")
                 row_translator = cfg["skip_translator"]
+                row_fit_dataset = cfg.get("fit_dataset") or ds_name
+
+                # Transfer rows load the map fitted by their fit_dataset's row; a fitting row
+                # saves only when this sweep holds a transfer row with an identical config.
+                # identity has no state worth persisting, so it opts out entirely.
+                is_transfer = row_fit_dataset != ds_name
+                translator_key = translator_store_key(
+                    row_fit_dataset, enc_name, row_translator, samples_to_extract
+                )
+                save_path = load_path = None
+                if row_translator != "identity":
+                    if is_transfer:
+                        load_path = translators_base
+                    elif row_saves_translator(cfg, transfer_reqs):
+                        save_path = translators_base
 
                 cfg_dir = cfg_embedding_dir(cfg, samples_to_extract, embeddings_base)
 
                 print(f"\n[{combo_idx}/{total}] skip={skip} | attn={attn_skip}({attn_mode}) | mlp={mlp_skip}({mlp_mode}) | heads={head_dict or 'full'} | translator={row_translator}")
+                if is_transfer:
+                    print(f"  translator fitted on '{row_fit_dataset}', evaluating on '{ds_name}' (key: {translator_key})")
                 print(f"  -> {cfg_dir}")
 
                 if (cfg_dir / "dataset_dict.json").exists():
@@ -282,6 +356,9 @@ def run_encoding(
                     mode=mode,
                     precomputed_embeddings=all_layer_embeddings,
                     translator_factory_name=row_translator,
+                    precomputed_translator_path=load_path,
+                    to_save_translator_path=save_path,
+                    translator_key=translator_key if (load_path or save_path) else None,
                     **model_config,
                 ).to(device).eval()
 
@@ -331,6 +408,7 @@ def run_encoding(
                 print(f"  ✗ Error processing config {combo_idx}/{total}: {e}")
                 import traceback
                 traceback.print_exc()
+                n_failed += 1
                 try:
                     del skip_encoder, combo_encoder
                 except:
@@ -340,6 +418,13 @@ def run_encoding(
 
         del encoder
         torch.cuda.empty_cache()
+
+    if n_failed:
+        raise RuntimeError(
+            f"{n_failed}/{len(all_configs)} configs failed to encode -- see the tracebacks "
+            f"above. Nothing was written for them, so training would report their embeddings "
+            f"as missing rather than showing this cause."
+        )
 
 
 if __name__ == "__main__":

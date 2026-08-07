@@ -24,6 +24,7 @@ Usage:
 import argparse
 import csv
 import gc
+import shutil
 from pathlib import Path
 
 import numpy as np
@@ -386,24 +387,68 @@ def _save_sublayer_scores(results, num_layers, path):
     print(f"  sublayer scores   -> {path}")
 
 
+# Files a completed run writes, as suffixes on the stem. head_similarity is architecture
+# dependent (absent when the model exposes no attentions), so it is adopted if present but
+# never required.
+OUTPUT_SUFFIXES = [
+    "_block_scores.csv",
+    "_sublayer_scores.csv",
+    "_angdist.npy",
+    "_cka.npy",
+    "_head_similarity.npy",
+]
+REQUIRED_SUFFIXES = ["_block_scores.csv", "_angdist.npy", "_cka.npy"]
+
+
+def _adopt_legacy_stems(out_dir, hf_id, ds_key, stem):
+    """Copy score files written under an old alias stem onto the canonical stem.
+
+    Runs made before the stem was built from the resolved HF id landed under the alias
+    instead ("dinobase_imagenet-1k_*" rather than "facebook_dinov2-base_imagenet-1k_*").
+    Downstream tools (analysis_plots.py, recommend_runs.py) construct the canonical stem
+    from the encoder id, so those files are invisible to them and the expensive GPU pass
+    would be redone. Copy rather than move, so anything still pointing at the old names
+    keeps working.
+    """
+    for alias, target in MODEL_ALIASES.items():
+        if target != hf_id:
+            continue
+        legacy = f"{alias}_{ds_key}"
+        if legacy == stem:
+            continue
+        if not all((out_dir / f"{legacy}{s}").exists() for s in REQUIRED_SUFFIXES):
+            continue
+        for suffix in OUTPUT_SUFFIXES:
+            src = out_dir / f"{legacy}{suffix}"
+            dst = out_dir / f"{stem}{suffix}"
+            if src.exists() and not dst.exists():
+                shutil.copy2(src, dst)
+        print(f"  Adopted legacy scores '{legacy}_*' -> '{stem}_*'.")
+        return True
+    return False
+
+
 def run(model_arg, dataset_name, num_samples, max_span, token_cap, output_dir, force=False):
     hf_id = _resolve_hf_id(model_arg)
     ds_key = dataset_name.lower().strip()
     out_dir = Path(output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    stem = f"{model_arg.lower().strip().replace('/', '_')}_{ds_key}"
+    # Build the stem from the *resolved* HF id, not the raw --model string, so an alias
+    # ("raddino") and its HF id ("microsoft/rad-dino") share one set of output files
+    # instead of duplicating an expensive GPU pass under two names. This also matches the
+    # stem run_layer_pipeline.sh constructs from the encoder id.
+    stem = f"{hf_id.lower().strip().replace('/', '_')}_{ds_key}"
 
     # Skip the (expensive, GPU) analysis pass if the core score files already exist.
     # Gate on the block-scores CSV + both matrices so a partial/interrupted run still
     # recomputes; head-similarity is model-dependent so it is not part of the check.
-    expected = [
-        out_dir / f"{stem}_block_scores.csv",
-        out_dir / f"{stem}_angdist.npy",
-        out_dir / f"{stem}_cka.npy",
-    ]
-    if not force and all(p.exists() for p in expected):
-        print(f"  Scores already exist for {stem}; skipping (pass --force to recompute).")
-        return
+    expected = [out_dir / f"{stem}{s}" for s in REQUIRED_SUFFIXES]
+    if not force:
+        if not all(p.exists() for p in expected):
+            _adopt_legacy_stems(out_dir, hf_id, ds_key, stem)
+        if all(p.exists() for p in expected):
+            print(f"  Scores already exist for {stem}; skipping (pass --force to recompute).")
+            return
 
     print(f"\n{'=' * 60}")
     print(f"  Model   : {model_arg}  ({hf_id})")

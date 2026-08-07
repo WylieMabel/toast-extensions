@@ -14,8 +14,10 @@ from toast import PROJECT_ROOT  # only imports pathlib — no heavy deps
 
 
 def cfg_embedding_dir(cfg: dict, samples: int, base) -> Path:
+    # Must stay in lockstep with toast.utils.utils.cfg_embedding_dir -- if the two disagree,
+    # this script hands run_pipeline_row_by_row.sh the wrong directory to delete.
     head_dict = cfg.get("head_dict") or {}
-    canonical = json.dumps({
+    payload = {
         "dataset":         cfg.get("dataset"),
         "encoder":         cfg.get("encoder"),
         "skip":            str(cfg.get("skip") or []),
@@ -28,8 +30,14 @@ def cfg_embedding_dir(cfg: dict, samples: int, base) -> Path:
         "mlp_mode":        cfg.get("mlp_mode", "identity"),
         "attn_mode":       cfg.get("attn_mode", "identity"),
         "samples":         samples,
-    }, sort_keys=True)
-    h = hashlib.md5(canonical.encode()).hexdigest()[:12]
+    }
+
+    # Only hashed when it differs from dataset, so pre-existing embedding dirs keep resolving.
+    fit_dataset = cfg.get("fit_dataset")
+    if fit_dataset and fit_dataset != cfg.get("dataset"):
+        payload["fit_dataset"] = fit_dataset
+
+    h = hashlib.md5(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:12]
     enc_slug = (cfg.get("encoder") or "unknown").split("/")[-1]
     return Path(base) / (cfg.get("dataset") or "unknown") / enc_slug / h
 
@@ -50,6 +58,7 @@ cfg = {
     "skip_translator": row.get("skip_translator") or None,
     "mlp_mode":        row.get("mlp_mode") or "identity",
     "attn_mode":       row.get("attn_mode") or "identity",
+    "fit_dataset":     row.get("fit_dataset") or None,
 }
 
 print(cfg_embedding_dir(cfg, samples, PROJECT_ROOT / "data" / "embeddings"))

@@ -3,7 +3,7 @@
 #SBATCH --gres=gpu:rtx4090:1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=48000
-#SBATCH --time=48:00:00
+#SBATCH --time=72:00:00
 #SBATCH --output=logs/layer_pipeline.out.txt
 
 # =============================================================================
@@ -20,8 +20,15 @@
 # -------------------------------- CONFIG -------------------------------------
 RESULTS_PATH="results/results_pipeline.csv"          # per-seed rows land here
 EXPERIMENTS_CSV="src/configs/experiments_pipeline.csv"  # assembled candidate rows
-DATASETS=(chestmnist)                                # datasets to analyse
-ENCODERS=(facebook/dinov2-base)                      # HF encoder ids to analyse
+DATASETS=(chestmnist dermamnist cifar100)            # datasets to analyse
+ENCODERS=(                                           # HF encoder ids to analyse
+    facebook/deit-small-patch16-224
+    facebook/deit-base-patch16-224
+    facebook/dinov2-base
+    google/vit-base-patch16-224
+    google/vit-large-patch16-224
+    microsoft/rad-dino
+)
 NUM_SAMPLES=5000                                     # images for the analysis pass
 OUTPUTS_DIR="src/layers/outputs"                     # score files (.csv/.npy)
 PLOTS_DIR="src/layers/plots"                         # per-run plot folders

@@ -3,11 +3,64 @@
 #SBATCH --gres=gpu:rtx4090:1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=48000
-#SBATCH --time=48:00:00
-#SBATCH --output=logs/pipeline_row_by_row.out.txt
+#SBATCH --time=72:00:00
+# %j keeps concurrent submissions from writing over each other's log -- this script is
+# routinely run as several jobs at once, one per config shard.
+#SBATCH --output=logs/pipeline_row_by_row_%j.out.txt
 
-CONFIG_CSV="${CONFIG_CSV:-src/configs/experiments.csv}"
+usage() {
+    cat <<'USAGE'
+Usage: [sbatch] run_pipeline_row_by_row.sh [CONFIG_CSV] [RESULTS_CSV_NAME]
+
+  CONFIG_CSV         sweep to run; path relative to the project root. Default:
+                     src/configs/experiments_table3_medical_missing.csv
+  RESULTS_CSV_NAME   basename written under results/. Default: the config's own name with
+                     experiments_ swapped for results_, so concurrent shards land in separate
+                     files without having to be told to.
+
+Both are also readable from the environment under the same names; a positional argument wins
+over the environment. Concurrent jobs MUST end up with different RESULTS_CSV_NAMEs -- every
+row rewrites that file in full, so two jobs sharing one lose each other's rows.
+
+  sbatch src/run_scripts/run_pipeline_row_by_row.sh src/configs/experiments_skip_grid_part1.csv
+USAGE
+}
+
+case "$1" in
+    -h|--help) usage; exit 0 ;;
+esac
+
+if [ "$#" -gt 2 ]; then
+    echo "ERROR: expected at most 2 arguments, got $#." >&2
+    usage >&2
+    exit 2
+fi
+
+CONFIG_CSV="${1:-${CONFIG_CSV:-src/configs/experiments_table3_medical_missing.csv}}"
+RESULTS_CSV_NAME="${2:-${RESULTS_CSV_NAME:-}}"
+
+# Derive the results name from the config when it was not given. experiments_foo.csv ->
+# results_foo.csv, which reproduces the old hard-coded pair for the default config and, more
+# usefully, makes a per-shard results file the automatic outcome of passing a per-shard config.
+stem=$(basename "$CONFIG_CSV" .csv)
+DERIVED_RESULTS="results_${stem#experiments_}.csv"
+if [ -z "$RESULTS_CSV_NAME" ]; then
+    RESULTS_CSV_NAME="$DERIVED_RESULTS"
+elif [ -n "$1" ] && [ -z "$2" ] && [ "$RESULTS_CSV_NAME" != "$DERIVED_RESULTS" ]; then
+    # sbatch forwards the submitting shell's environment, so a RESULTS_CSV_NAME exported for
+    # an earlier run silently attaches itself to a config passed positionally here. Left
+    # unnoticed across concurrent shards that is precisely how rows get overwritten.
+    echo "WARNING: config given as an argument but RESULTS_CSV_NAME=$RESULTS_CSV_NAME comes" >&2
+    echo "         from the environment (would otherwise be $DERIVED_RESULTS). Unset it to" >&2
+    echo "         derive the name from the config." >&2
+fi
+export RESULTS_CSV_NAME
 SAMPLES=250
+
+# The loop below runs each row in its own process with a single-row temp CSV, so that process
+# cannot see whether a *later* row transfers from the translator it is about to fit. Exporting
+# the whole sweep lets encode_vision_full.py answer that and save only what will be read back.
+export SWEEP_CSV="$CONFIG_CSV"
 
 # 1. Path Setup
 BASE_DIR="/cluster/customapps/biomed/vogtlab/users/mwylie/toast"
@@ -38,10 +91,33 @@ export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR/src
 
 cd $PROJECT_DIR
 
+# Checked here rather than at the top: CONFIG_CSV is conventionally relative to the project
+# root, which only becomes the working directory now. A missing file otherwise reaches the
+# loop as zero rows and the job "succeeds" having run nothing.
+if [ ! -f "$CONFIG_CSV" ]; then
+    echo "ERROR: config CSV not found: $CONFIG_CSV (looked in $PROJECT_DIR)" >&2
+    exit 2
+fi
+
 # 5. Row-by-row loop
 HEADER=$(head -1 "$CONFIG_CSV")
 NUM_ROWS=$(tail -n +2 "$CONFIG_CSV" | grep -c .)
+echo "Config : $CONFIG_CSV"
+echo "Results: results/$RESULTS_CSV_NAME"
 echo "Running $NUM_ROWS rows from $CONFIG_CSV"
+
+FAILED_ROWS=""
+
+# Delete this row's embeddings (~11GB for imagenet-1k + vit-large). Has to run on the failure
+# paths too, not just the happy one: a row that dies partway through save_to_disk can leave a
+# *_temp directory behind, and on a quota-limited home those accumulate until nothing runs.
+cleanup_row_embeddings() {
+    local emb_dir
+    emb_dir=$(python src/toast/scripts/get_embed_dir.py "$1" "$SAMPLES" 2>/dev/null)
+    [ -n "$emb_dir" ] && [ -d "$emb_dir" ] && rm -rf "$emb_dir"
+    [ -n "$emb_dir" ] && [ -d "${emb_dir}_temp" ] && rm -rf "${emb_dir}_temp"
+    return 0
+}
 
 for i in $(seq 1 "$NUM_ROWS"); do
     ROW=$(sed -n "$((i + 1))p" "$CONFIG_CSV")
@@ -61,6 +137,8 @@ for i in $(seq 1 "$NUM_ROWS"); do
     if [ $? -ne 0 ]; then
         echo "ERROR: phase 1 failed for row $i:"
         cat "$LOG"
+        FAILED_ROWS="$FAILED_ROWS $i"
+        cleanup_row_embeddings "$TEMP_CSV"
         rm -f "$TEMP_CSV" "$LOG"
         continue
     fi
@@ -70,18 +148,44 @@ for i in $(seq 1 "$NUM_ROWS"); do
     if [ $? -ne 0 ]; then
         echo "ERROR: phase 2 failed for row $i:"
         cat "$LOG"
+        FAILED_ROWS="$FAILED_ROWS $i"
     else
         grep -E '^[[:space:]]*Params saved:' "$LOG"
         if ! grep -oE 'Accuracy: [0-9.]+' "$LOG"; then
-            echo "(no result — check row config)"
+            # Phase 2 produced no accuracy despite exiting 0. Keep the log rather than
+            # deleting it -- this is exactly the case where the cause is in the text and
+            # discarding it leaves only the symptom.
+            KEPT="logs/failed_row_${i}.log"
+            cp "$LOG" "$KEPT"
+            echo "(no result — full log kept at $KEPT)"
+            FAILED_ROWS="$FAILED_ROWS $i"
         fi
     fi
     rm -f "$LOG"
 
-    # Delete embeddings for this row (silent)
-    EMB_DIR=$(python src/toast/scripts/get_embed_dir.py "$TEMP_CSV" "$SAMPLES" 2>/dev/null)
-    [ -d "$EMB_DIR" ] && rm -rf "$EMB_DIR"
+    cleanup_row_embeddings "$TEMP_CSV"
     rm -f "$TEMP_CSV"
 done
 
-echo "Done."
+# Wipe the translators this sweep created, pass or fail. Scoped to this sweep's own keys --
+# the store is shared, so a blanket rm would take out maps another sweep still needs. Sweeps
+# with no transfer rows saved nothing and this is a no-op.
+SAVED_TRANSLATORS=$(python src/toast/scripts/sweep_translators.py "$SWEEP_CSV" "$SAMPLES" 2>/dev/null)
+if [ -n "$SAVED_TRANSLATORS" ]; then
+    echo ""
+    echo "Removing $(echo "$SAVED_TRANSLATORS" | wc -l | tr -d ' ') translator(s) saved by this sweep:"
+    echo "$SAVED_TRANSLATORS" | while IFS= read -r d; do
+        [ -n "$d" ] && [ -d "$d" ] && du -sh "$d" && rm -rf "$d"
+    done
+fi
+
+if [ -n "$FAILED_ROWS" ]; then
+    echo ""
+    echo "=================================================="
+    echo "INCOMPLETE: $(echo $FAILED_ROWS | wc -w) of $NUM_ROWS rows failed:$FAILED_ROWS"
+    echo "results/$RESULTS_CSV_NAME is missing those configs."
+    echo "=================================================="
+    exit 1
+fi
+
+echo "Done. All $NUM_ROWS rows completed."

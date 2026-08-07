@@ -6,9 +6,24 @@ import torch
 import torch.nn.functional as F
 from functools import partial
 from toast.utils.dictionaries import NAME2TRANSLATORS
+from toast.utils.translator_keys import span_translator_key
 from toast.utils.utils import resolve_path
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+#: Translators that cannot round-trip through save_translator/load_translator.
+#:
+#: This is a limitation of the *persistence path only* -- these translators work fine in the
+#: normal fit-and-use-in-one-process flow that every existing config uses. The problem is that
+#: save_translator writes translator.aligner.state_dict() and nothing else, while these
+#: translators keep fitted state elsewhere: "sgd_mlp_aligner" wraps StandardScaling() as its
+#: x_transform/y_transform, and those learn a mean and std during fit(). Reloading would
+#: restore the aligner but leave the scalers unfitted, feeding raw data to an aligner that was
+#: fit on standardised data -- wrong numbers with no error. Refuse instead of half-restoring.
+#:
+#: The translators used for transfer experiments (linear, lowrank_*, rrr_*, lora_*) have no
+#: input/output transforms, so they are unaffected.
+_TRANSLATORS_WITH_UNSAVED_STATE = {"sgd_mlp_aligner"}
 
 
 class HFwrapper(nn.Module):
@@ -522,7 +537,6 @@ class SkipModel(nn.Module):
         self.precomputed_translator_path = precomputed_translator_path
         self.to_save_translator_path = to_save_translator_path
         self.translator_key = translator_key
-        self.precomputed_translator = None
 
         self.check_skip_consistency()
         self.check_translator_consistency()
@@ -549,18 +563,19 @@ class SkipModel(nn.Module):
             self.encoder_layers_list, self.skips, self.layers_accept_masks, self.needs_position_ids
         )
 
-        if self.precomputed_translator_path:
-            self.precomputed_translator = load_translator(
-                translator_key=self.translator_key,
-                translator_factory_name=self.translator_factory_name,
-                dir_to_load=self.precomputed_translator_path,
+        if self.precomputed_translator_path and self.mode != 1:
+            raise ValueError(
+                "precomputed_translator_path is only supported for mode=1. save_translator "
+                "serialises a single aligner's state_dict, so the per-token translators of "
+                f"mode={self.mode} have no on-disk representation."
             )
 
+        # Translators are loaded per span inside compute_skipping, not once here -- one
+        # config can carry several spans and each needs its own map.
         self.computed_skips: Sequence[IndexedLayer] = self.compute_skipping(
             self.precomputed_embeddings,
             self.skips,
             self.mode,
-            self.precomputed_translator,
             self.to_save_translator_path,
             self.translator_key,
         )
@@ -692,7 +707,6 @@ class SkipModel(nn.Module):
         precomputed_embeddings: Dict[int, torch.Tensor],
         skips: Sequence[tuple[int, int]],
         mode: int,
-        precomputed_translator=None,
         to_save_translator_path=None,
         translator_key=None,
     ):
@@ -704,8 +718,20 @@ class SkipModel(nn.Module):
                     f"Precomputed embeddings missing for skip ({skip_from}, {skip_to}). Available keys: {list(precomputed_embeddings.keys())}"
                 )
 
-            if precomputed_translator:
-                translators = precomputed_translator
+            # Every span needs its own translator, so the on-disk key has to name the span.
+            # Without the suffix a multi-span config saved each span's translator over the
+            # last one and then loaded that single survivor back for *all* spans -- silently
+            # bridging (2,4) with the map fitted for (9,10).
+            span_key = span_translator_key(translator_key, skip_from, skip_to)
+
+            if self.precomputed_translator_path:
+                translators = [
+                    load_translator(
+                        translator_key=span_key,
+                        translator_factory_name=self.translator_factory_name,
+                        dir_to_load=self.precomputed_translator_path,
+                    )
+                ]
             else:
                 translators = self.fit_translators(
                     spaces_to_fit=precomputed_embeddings,
@@ -716,7 +742,7 @@ class SkipModel(nn.Module):
                 if to_save_translator_path:
                     save_translator(
                         translator=translators[0] if mode == 1 else translators,
-                        translator_name=translator_key,
+                        translator_name=span_key,
                         dir_to_save=to_save_translator_path,
                     )
 
@@ -771,8 +797,9 @@ class SkipModel(nn.Module):
         transformed_space = None
 
         if mode == 1:
-            translator = translators if self.precomputed_translator_path else translators[0]
-            transformed_space = translator.transform(x.to(dtype))[0]
+            # Loaded translators are wrapped in a single-element list by compute_skipping, so
+            # fitted and loaded paths index identically here.
+            transformed_space = translators[0].transform(x.to(dtype))[0]
             transformed_space = transformed_space.reshape(original_shape)
         elif mode == 2:
             transformed_spaces = []
@@ -913,25 +940,63 @@ def save_translator(translator, translator_name, dir_to_save: Path):
         state_to_save = dir_to_save / translator_name / "aligner" / k
         state_to_save.parent.mkdir(exist_ok=True, parents=True)
 
+        # clone() is load-bearing: pickling a tensor writes its whole underlying storage,
+        # not just the view onto it. "linear" gets its matrix from torch.linalg.lstsq, whose
+        # solution is the LAPACK workspace [max(n_rows, D), D] narrowed to [D, D] -- so the
+        # uncloned tensor wrote every scratch row too. For rad-dino (D=768, 250 images x 1370
+        # tokens) that was 1.05GB on disk for a 2.36MB matrix, and it filled the home quota.
+        # .contiguous() alone does not help: the narrow is on dim 0, so the view is already
+        # contiguous and contiguous() returns it unchanged, still sharing the big storage.
+        if isinstance(v, torch.Tensor):
+            v = v.detach().cpu().contiguous().clone()
+
         with open(state_to_save, "wb") as f:
             pickle.dump(v, f)
 
 
 def load_translator(translator_key, translator_factory_name, dir_to_load: Path):
+    """Rebuild a translator saved by save_translator.
+
+    See _TRANSLATORS_WITH_UNSAVED_STATE for which translators cannot round-trip and why.
+    """
+    if translator_factory_name in _TRANSLATORS_WITH_UNSAVED_STATE:
+        raise ValueError(
+            f"translator '{translator_factory_name}' keeps fitted state outside its aligner "
+            f"(x_transform/y_transform), which save_translator does not persist -- reloading "
+            f"it would silently drop that state. This affects saving/loading only; the "
+            f"translator still works normally when fit and used in one run. For transfer "
+            f"experiments use linear, lowrank_*, rrr_* or lora_*, which have no transforms."
+        )
+
+    translator_dir = dir_to_load / translator_key
+    if not translator_dir.is_dir():
+        raise FileNotFoundError(
+            f"No saved translator at {translator_dir}. Run the fitting config (the row whose "
+            f"fit_dataset equals its dataset) before any row that transfers from it."
+        )
 
     translator_factory = NAME2TRANSLATORS[translator_factory_name]
     translator = translator_factory()
 
-    translator_dir = dir_to_load / translator_key
-    for subdir in translator_dir.iterdir():
+    n_restored = 0
+    for subdir in sorted(translator_dir.iterdir()):
+        # Skip stray files (.DS_Store and friends) that would otherwise be treated as a
+        # component name and blow up in getattr.
+        if not subdir.is_dir() or subdir.name.startswith("."):
+            continue
         translator_attribute = getattr(translator, subdir.name)
-        for attr in subdir.iterdir():
-            state_key = attr.name
+        for attr in sorted(subdir.iterdir()):
+            if not attr.is_file() or attr.name.startswith("."):
+                continue
 
             with open(attr, "rb") as f:
                 state_value = pickle.load(f)
 
-            translator_attribute.register_buffer(state_key, state_value)
+            translator_attribute.register_buffer(attr.name, state_value)
+            n_restored += 1
+
+    if n_restored == 0:
+        raise ValueError(f"Found {translator_dir} but restored no state from it.")
 
     translator._fitted = True
 

@@ -4,6 +4,10 @@ import torch.nn as nn
 from latentis.transform.translate.aligner import Translator, MatrixAligner
 from toast.modules.mlp_translator import SGDMLPAligner
 from toast.modules.deepmlp_translator import SGDDeepMLPAligner
+from toast.modules.lowrank_translator import (
+    build_translator_factories,
+    parse_translator_name,
+)
 from latentis.transform.translate.functional import lstsq_align_state
 from latentis.transform.base import StandardScaling
 from latentis.transform import Estimator
@@ -66,7 +70,10 @@ DATASET2NUM_CLASSES = {
     "sceneparse150": 150,
     # MedMNIST datasets
     "pathmnist": 9,
-    "chestmnist": 2,
+    # chestmnist is MULTI-LABEL: 14 binary labels, not 14 mutually exclusive classes.
+    # It needs BCEWithLogitsLoss + macro-AUC, not the CrossEntropyLoss + argmax path in
+    # train_skipped_full.py, so it is not runnable through the current eval as-is.
+    "chestmnist": 14,
     "dermamnist": 7,
     "pneumoniamnist": 2,
     "retinamnist": 5,
@@ -408,6 +415,19 @@ NAME2TRANSLATORS = {
     "deep_mlp": lambda: SGDDeepMLPAligner(num_steps=300, lr=1e-3, random_seed=0),
 }
 
+# Low-rank families: lowrank_<r> (SVD truncation), rrr_<r> (reduced-rank regression) and
+# lora_<r> (A/B fit by gradient descent), for r in DEFAULT_RANKS. Adding them here is all a
+# config CSV needs -- a row with skip_translator=rrr_32 just works.
+#
+# Each is wrapped in Translator(aligner=...) rather than registered bare, matching "linear".
+# That matters twice over: _prepare_translators_for_inference only moves weights to the GPU
+# for objects exposing an .aligner that is an nn.Module (so the bare "mlp"/"deep_mlp" entries
+# above silently skip the move), and save_translator serialises translator.aligner.state_dict().
+NAME2TRANSLATORS.update({
+    name: (lambda factory=factory: Translator(aligner=factory()))
+    for name, factory in build_translator_factories().items()
+})
+
 # Parameter savings per single edit, keyed by HF encoder name (matching
 # MODEL2NUM_LAYERS / MODEL2CONFIGS so the training loop can look an encoder up directly).
 # branch = sublayer + its LayerNorm (+ LayerScale for DINOv2).
@@ -628,9 +648,22 @@ def _resolve_param_savings(encoder):
 
 
 def _translator_cost(name, d):
-    """Params added by one skip-bridge translator. identity is free; linear and the
-    learned aligners are all costed as a single Linear(d, d, bias=True) = d*d + d."""
-    return 0 if name == "identity" else d * d + d
+    """Params added by one skip-bridge translator.
+
+    identity is free. The low-rank families store two factors, A (d x r) and B (r x d), so
+    they cost 2*d*r -- costing them as a full d*d map would erase the entire point of the
+    experiment. Everything else is a single Linear(d, d, bias=True) = d*d + d.
+
+    Note 2*d*r only beats a full d*d map while r < d/2 (r < 384 at d=768). Past that the
+    factorisation costs more than the matrix it replaces, so the reported saving correctly
+    goes negative rather than being clamped.
+    """
+    if name == "identity":
+        return 0
+    _, rank = parse_translator_name(name)
+    if rank is not None:
+        return 2 * d * min(rank, d)
+    return d * d + d
 
 
 def params_saved_for_config(

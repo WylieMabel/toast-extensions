@@ -1,7 +1,7 @@
 from typing import Any, Mapping
 import torch
 from torch import nn
-from pytorch_lightning import seed_everything
+from toast.utils.utils import seed_everything
 import torch.nn.functional as F
 from latentis.transform import Estimator
 

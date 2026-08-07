@@ -1,24 +1,25 @@
 import ast
 import csv as _csv
 import os
+from collections import Counter
 
 import fire
 import pandas as pd
 import torch
 from datasets import DatasetDict
-from pytorch_lightning import seed_everything
 from torch import nn, optim
 from torch.utils.data import DataLoader
 
 from toast import PROJECT_ROOT
 from toast.modules.module import HFwrapper, NoEncoder
+from toast.modules.lowrank_translator import parse_translator_name
 from toast.pl_modules.train_NN import train_classifier
 from toast.utils.dictionaries import (
     DATASET2LABEL_COLUMN,
     DATASET2NUM_CLASSES,
     params_saved_for_config,
 )
-from toast.utils.utils import cfg_embedding_dir
+from toast.utils.utils import cfg_embedding_dir, seed_everything
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -37,6 +38,10 @@ def _read_config_csv(path: str):
                 "skip_translator": row.get("skip_translator") or None,
                 "mlp_mode":        row.get("mlp_mode") or "identity",
                 "attn_mode":       row.get("attn_mode") or "identity",
+                # Must be parsed here too, not just in encode_vision_full: it feeds
+                # cfg_embedding_dir, so omitting it would look for the embeddings of the
+                # same-dataset run instead of the transfer run's own directory.
+                "fit_dataset":     row.get("fit_dataset") or None,
             })
     return configs
 
@@ -84,11 +89,19 @@ def skip_and_train_full_run(
             cfg["skip_translator"] = translator_name
 
     results_columns = [
-        "seed", "dataset", "model", "optimizer", "lr", "classifier",
-        "translator", "batch_size", "num_epochs",
+        # fit_dataset equals dataset for an ordinary run; it differs only for a transfer row,
+        # where the translator was fitted on one dataset and evaluated on another.
+        "seed", "dataset", "fit_dataset", "model", "optimizer", "lr", "classifier",
+        # translator is the raw name ("rrr_32"); translator_method/translator_rank break it
+        # out so a rank sweep can be grouped without string-parsing every row. Both are None
+        # for identity/linear/mlp, which have no rank.
+        "translator", "translator_method", "translator_rank", "batch_size", "num_epochs",
         "approx_layer", "mlp_linearize", "attn_linearize", "head_dict",
         "mlp_mode", "attn_mode",
         "num_layers", "original_accuracy", "accuracy", "delta_acc", "num_samples",
+        # accuracy <= majority_class_rate means the probe collapsed and the row is a null
+        # result. Stored per row so it can be checked across a whole sweep after the fact.
+        "majority_class_rate",
         "params_saved", "params_saved_pct",
     ]
     results_path = PROJECT_ROOT / "results" / os.environ.get("RESULTS_CSV_NAME", "results_new.csv")
@@ -106,6 +119,13 @@ def skip_and_train_full_run(
 
     embeddings_base = PROJECT_ROOT / "data" / "embeddings"
     hidden_size = None
+
+    # Rows that fail are skipped so one bad config does not kill a long sweep, but they
+    # are counted here and re-raised at the end. Without this the process exits 0 even
+    # when every row failed, so run_pipeline_row_by_row.sh marches on and the results CSV
+    # just quietly has holes in it.
+    n_failed = 0
+    n_missing_embeddings = 0
 
     for cfg in configs:
         try:
@@ -143,6 +163,7 @@ def skip_and_train_full_run(
 
             if not cfg_dir.exists():
                 print(f"  WARNING: embeddings not found at '{cfg_dir}'. Run encode first. Skipping.")
+                n_missing_embeddings += 1
                 continue
 
             embeddings = DatasetDict.load_from_disk(str(cfg_dir))
@@ -152,6 +173,9 @@ def skip_and_train_full_run(
             seed_everything(seed)
         except Exception as e:
             print(f"  ✗ Error loading embeddings: {e}")
+            import traceback
+            traceback.print_exc()
+            n_failed += 1
             continue
 
         try:
@@ -173,6 +197,24 @@ def skip_and_train_full_run(
 
             if hidden_size is None:
                 hidden_size = embeddings["train"][0]["embeddings"].shape[-1]
+
+            # Majority-class rate: the accuracy a constant predictor gets for free. A probe
+            # scoring this has collapsed to one class and learned nothing -- a null result,
+            # not a finding. Recorded per row (not just printed) because
+            # run_pipeline_row_by_row.sh deletes the per-row logs, so a printed-only warning
+            # would not survive the run.
+            #
+            # ChestMNIST sat at exactly its 0.892 majority rate across 520 rows and five
+            # encoders without anyone noticing, because the number was never stored next to
+            # the accuracy it explains.
+            test_labels = hf_test["labels"]
+            if torch.is_tensor(test_labels):
+                test_labels = test_labels.tolist()
+            if test_labels and not isinstance(test_labels[0], (list, tuple)):
+                counts = Counter(int(v) for v in test_labels)
+                majority_rate = max(counts.values()) / len(test_labels)
+            else:
+                majority_rate = None  # multi-label: no single majority class
 
             batch_size = 256
             train_loader = DataLoader(hf_train, shuffle=True,  batch_size=batch_size, num_workers=2, pin_memory=True)
@@ -215,6 +257,7 @@ def skip_and_train_full_run(
             print(f"  ✗ Error during training: {e}")
             import traceback
             traceback.print_exc()
+            n_failed += 1
             continue
 
         try:
@@ -222,6 +265,17 @@ def skip_and_train_full_run(
             if is_baseline:
                 original_accuracy = accuracy
             else:
+                # The baseline is the unmodified encoder: no skips, no sublayer edits, no head
+                # pruning. With nothing to bridge, the translator is never invoked, so the
+                # baseline accuracy cannot depend on translator / mlp_mode / attn_mode /
+                # fit_dataset and must NOT be matched on them.
+                #
+                # This used to match on translator, which meant a "linear" row only accepted a
+                # "linear" baseline. Since baseline rows are conventionally written with
+                # translator=identity, every non-identity row failed the lookup and silently
+                # reported delta_acc = 0.0 -- all 125 linear rows in results_pipeline.csv are
+                # affected. A rank sweep, where each row carries a different translator name,
+                # would have lost its baseline on every single row.
                 filtered = results_df[
                     (results_df["approx_layer"]  == str([]))
                     & (results_df["mlp_linearize"] == str([]))
@@ -230,23 +284,38 @@ def skip_and_train_full_run(
                     & (results_df["dataset"]       == row_dataset)
                     & (results_df["model"]         == row_encoder)
                     & (results_df["classifier"]    == classifier.__class__.__name__)
-                    & (results_df["translator"]    == row_translator)
                     & (results_df["seed"]          == seed)
                     & (results_df["num_samples"]   == samples_to_extract)
                 ]
-                original_accuracy = filtered["accuracy"].iloc[0] if not filtered.empty else 0.0
+                if filtered.empty:
+                    # Distinguish "no baseline to compare against" from "identical to
+                    # baseline". Both used to come out as delta_acc = 0.0.
+                    print(f"  WARNING: no baseline row for dataset={row_dataset} "
+                          f"model={row_encoder} seed={seed}; delta_acc will be NaN. "
+                          f"Put the all-empty baseline row first in the config CSV.")
+                    original_accuracy = float("nan")
+                else:
+                    original_accuracy = filtered["accuracy"].iloc[0]
 
-            delta_acc = original_accuracy - accuracy if original_accuracy != 0.0 else 0.0
+            # NaN propagates when there was no baseline, which is what we want: the drop is
+            # genuinely unknown. The old guard collapsed a missing baseline to 0.0, making it
+            # indistinguishable from a config that cost no accuracy at all.
+            delta_acc = original_accuracy - accuracy
             num_layers_skipped = sum(end - start for start, end in skip) if skip else 0
+
+            translator_method, translator_rank = parse_translator_name(row_translator)
 
             row = {
                 "seed":              seed,
                 "dataset":           row_dataset,
+                "fit_dataset":       cfg.get("fit_dataset") or row_dataset,
                 "model":             row_encoder,
                 "optimizer":         optimizer.__class__.__name__,
                 "lr":                lr,
                 "classifier":        classifier.__class__.__name__,
                 "translator":        row_translator,
+                "translator_method": translator_method,
+                "translator_rank":   translator_rank,
                 "batch_size":        batch_size,
                 "num_epochs":        num_epochs,
                 "approx_layer":      str(skip),
@@ -260,6 +329,7 @@ def skip_and_train_full_run(
                 "accuracy":          accuracy,
                 "delta_acc":         delta_acc,
                 "num_samples":       samples_to_extract,
+                "majority_class_rate": majority_rate,
                 "params_saved":      savings["params_saved"],
                 "params_saved_pct":  savings["params_saved_pct"],
             }
@@ -284,7 +354,15 @@ def skip_and_train_full_run(
             print(f"  ✗ Error processing results: {e}")
             import traceback
             traceback.print_exc()
+            n_failed += 1
             continue
+
+    if n_failed or n_missing_embeddings:
+        raise RuntimeError(
+            f"{n_failed}/{len(configs)} config rows failed and "
+            f"{n_missing_embeddings}/{len(configs)} had no embeddings on disk. "
+            f"Results in {results_path} are incomplete -- see the tracebacks above."
+        )
 
 
 if __name__ == "__main__":

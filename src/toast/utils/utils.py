@@ -1,22 +1,56 @@
 import hashlib
 import json
+import os
+import random
 from functools import partial, reduce
 from pathlib import Path
+import numpy as np
 import torch
 from torch import nn
 from typing import Optional, Sequence, List, Dict
 from collections import defaultdict
-from pytorch_lightning import seed_everything
 from tqdm import tqdm
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
+def seed_everything(seed: Optional[int] = None, workers: bool = False) -> int:
+    """Seed python, numpy and torch. Drop-in replacement for pytorch_lightning's version.
+
+    pytorch_lightning was a dependency of this project for this one function -- no
+    LightningModule, no Trainer, just seeding. That import segfaults against torch 2.11 +
+    numpy 2.x (a compiled extension loading with a mismatched ABI, which crashes in dlopen
+    rather than raising), taking down every entry point in the pipeline with it. Since the
+    only thing needed was five lines of seeding, the dependency is gone.
+
+    Behaviour matches pytorch_lightning.seed_everything(seed, workers=False): the same three
+    RNGs, seeded in the same way, so runs stay reproducible against earlier results. The
+    ``workers`` argument is accepted for signature compatibility and ignored, as it was
+    already never passed anywhere in this codebase.
+    """
+    seed = 0 if seed is None else int(seed)
+
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    random.seed(seed)
+    # numpy only accepts seeds in [0, 2**32); mask rather than raise on a large seed.
+    np.random.seed(seed % (2**32))
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
+    return seed
+
+
 def cfg_embedding_dir(cfg: dict, samples: int, base) -> Path:
-    """Return a unique, deterministic directory for a single experiment config's embeddings."""
+    """Return a unique, deterministic directory for a single experiment config's embeddings.
+
+    NOTE: this function is duplicated verbatim in src/toast/scripts/get_embed_dir.py (which
+    inlines it to avoid importing torch). Any change here must be mirrored there, or the
+    row-by-row runner will delete the wrong embedding directory.
+    """
     head_dict = cfg.get("head_dict") or {}
-    canonical = json.dumps({
+    payload = {
         "dataset":        cfg.get("dataset"),
         "encoder":        cfg.get("encoder"),
         "skip":           str(cfg.get("skip") or []),
@@ -29,8 +63,17 @@ def cfg_embedding_dir(cfg: dict, samples: int, base) -> Path:
         "mlp_mode":       cfg.get("mlp_mode", "identity"),
         "attn_mode":      cfg.get("attn_mode", "identity"),
         "samples":        samples,
-    }, sort_keys=True)
-    h = hashlib.md5(canonical.encode()).hexdigest()[:12]
+    }
+
+    # fit_dataset is only added to the hash when it actually differs from dataset. Adding it
+    # unconditionally would change every existing hash and invalidate every embedding already
+    # on disk; this way old caches keep resolving while transfer runs still get their own
+    # directory instead of colliding with the same-dataset run.
+    fit_dataset = cfg.get("fit_dataset")
+    if fit_dataset and fit_dataset != cfg.get("dataset"):
+        payload["fit_dataset"] = fit_dataset
+
+    h = hashlib.md5(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:12]
     enc_slug = (cfg.get("encoder") or "unknown").split("/")[-1]
     return Path(base) / (cfg.get("dataset") or "unknown") / enc_slug / h
 

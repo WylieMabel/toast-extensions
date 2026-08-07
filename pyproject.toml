@@ -21,8 +21,8 @@ dependencies = [
     "pandas",
     "numpy",
     "scikit-learn",
+    "medmnist",
     "tqdm",
-    "pytorch-lightning",
 ]
 
 [project.optional-dependencies]

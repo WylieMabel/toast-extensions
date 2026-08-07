@@ -1,0 +1,8 @@
+"dataset","encoder","skip","mlp_skip","attn_skip","head_dict","skip_translator","mlp_mode","attn_mode","fit_dataset"
+"pneumoniamnist","microsoft/rad-dino","[(0, 1), (2, 3)]","[]","[]","{}","linear","identity","identity",""
+"pneumoniamnist","microsoft/rad-dino","[(2, 3)]","[]","[]","{}","linear","identity","identity",""
+"pathmnist","microsoft/rad-dino","[(0, 4)]","[]","[]","{}","linear","identity","identity",""
+"pathmnist","microsoft/rad-dino","[(0, 1), (2, 3), (4, 5)]","[]","[]","{}","linear","identity","identity",""
+"pathmnist","microsoft/rad-dino","[(0, 1), (2, 3)]","[]","[]","{}","linear","identity","identity",""
+"pathmnist","microsoft/rad-dino","[(0, 1)]","[]","[]","{}","linear","identity","identity",""
+"pathmnist","microsoft/rad-dino","[(2, 3)]","[]","[]","{}","linear","identity","identity",""

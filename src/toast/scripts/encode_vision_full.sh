@@ -15,6 +15,11 @@ python src/toast/utils/encode_vision_full.py \
     --config_csv="$CONFIG_CSV" \
     --batch_size=8 \
     --samples_to_extract=250
+STATUS=$?
 
 echo "GPU Memory after:"
 nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader
+
+# Exit with the encoder's status, not nvidia-smi's. Without this the script always
+# returned 0 and the caller's failure check in run_pipeline_row_by_row.sh never fired.
+exit $STATUS
