@@ -1,0 +1,14 @@
+dataset,encoder,skip,mlp_skip,attn_skip,head_dict,skip_translator,mlp_mode,attn_mode,fit_dataset
+pneumoniamnist,google/vit-large-patch16-224,[],[],[],{},identity,identity,identity,
+cifar100,google/vit-large-patch16-224,[],[],[],{},identity,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,[],[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,[],[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,[],[],[],{},linear,identity,identity,
+pneumoniamnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,imagenet-1k

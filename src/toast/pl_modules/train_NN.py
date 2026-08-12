@@ -3,6 +3,7 @@ from collections import defaultdict
 import numpy as np
 import torch
 import torch.nn as nn
+from sklearn.metrics import roc_auc_score
 from tqdm import tqdm
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -20,6 +21,7 @@ def train_classifier(
     save_results: bool = False,
     scheduler=None,
     wandb_run=None,
+    is_multilabel: bool = False,
 ):
     train_losses = []
     train_accuracies = []
@@ -40,6 +42,9 @@ def train_classifier(
             try:
                 input_embeddings = batch["images"].to(device, non_blocking=True)
                 target = batch[label_column_name].to(device, non_blocking=True)
+
+                if is_multilabel:
+                    target = target.float()
 
                 batch_on_device = {"images": input_embeddings}
             except KeyError as e:
@@ -62,8 +67,12 @@ def train_classifier(
 
             total_loss += loss.item()
 
-            _, predicted_labels = torch.max(predicted.detach(), 1)
-            correct_train += (predicted_labels == target).sum().item()
+            if is_multilabel:
+                predicted_labels = (torch.sigmoid(predicted.detach()) > 0.5).long()
+                correct_train += (predicted_labels == target.long()).sum().item()
+            else:
+                _, predicted_labels = torch.max(predicted.detach(), 1)
+                correct_train += (predicted_labels == target).sum().item()
             total_train += target.size(0)
 
         average_epoch_loss = total_loss / len(train_data_loader) if len(train_data_loader) > 0 else 0.0
@@ -90,6 +99,7 @@ def train_classifier(
                 test_data_loader=test_data_loader,
                 criterion=criterion,
                 label_column_name=label_column_name,
+                is_multilabel=is_multilabel,
             )
             eval_losses.append(eval_loss)
             eval_accuracies.append(eval_accuracy)
@@ -110,7 +120,7 @@ def train_classifier(
 
     if save_results:
         _, _, test_results = eval_classifier(
-            model, test_data_loader, criterion, label_column_name, save_results=True
+            model, test_data_loader, criterion, label_column_name, save_results=True, is_multilabel=is_multilabel
         )
         return train_losses, eval_losses, train_accuracies, eval_accuracies, eval_indexes, test_results
 
@@ -123,6 +133,7 @@ def eval_classifier(
     criterion: nn.Module,
     label_column_name: str,
     save_results: bool = False,
+    is_multilabel: bool = False,
 ):
 
     model.eval()
@@ -133,11 +144,17 @@ def eval_classifier(
     if save_results:
         results = defaultdict(list)
 
+    all_logits = []
+    all_labels = []
+
     with torch.no_grad():
         for i, batch in enumerate(test_data_loader):
             try:
                 input_embeddings = batch["images"].to(device, non_blocking=True)
                 target = batch[label_column_name].to(device, non_blocking=True)
+
+                if is_multilabel:
+                    target = target.float()
 
                 batch_on_device = {"images": input_embeddings}
             except KeyError as e:
@@ -156,8 +173,15 @@ def eval_classifier(
 
             total_loss += loss.item()
 
-            _, predicted_labels = torch.max(predicted, 1)
-            correct_eval += (predicted_labels == target).sum().item()
+            all_logits.append(predicted.cpu().numpy())
+            all_labels.append(target.cpu().numpy())
+
+            if is_multilabel:
+                predicted_labels = (torch.sigmoid(predicted) > 0.5).long()
+                correct_eval += (predicted_labels == target.long()).sum().item()
+            else:
+                _, predicted_labels = torch.max(predicted, 1)
+                correct_eval += (predicted_labels == target).sum().item()
             total_eval += target.size(0)
 
             if save_results:
@@ -166,7 +190,17 @@ def eval_classifier(
                 results["labels"].append(target.cpu().numpy())
 
     average_eval_loss = total_loss / len(test_data_loader) if len(test_data_loader) > 0 else 0.0
-    eval_accuracy = correct_eval / total_eval if total_eval > 0 else 0.0
+
+    if is_multilabel:
+        all_logits = np.concatenate(all_logits, axis=0)
+        all_labels = np.concatenate(all_labels, axis=0)
+        try:
+            eval_accuracy = roc_auc_score(all_labels, all_logits, average='macro')
+        except Exception as e:
+            print(f"Warning: Could not compute macro-AUC: {e}. Using label accuracy instead.")
+            eval_accuracy = correct_eval / total_eval if total_eval > 0 else 0.0
+    else:
+        eval_accuracy = correct_eval / total_eval if total_eval > 0 else 0.0
 
     if save_results:
         results["images"] = np.concatenate(results["images"], axis=0)

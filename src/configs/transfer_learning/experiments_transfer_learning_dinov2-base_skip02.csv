@@ -1,0 +1,14 @@
+dataset,encoder,skip,mlp_skip,attn_skip,head_dict,skip_translator,mlp_mode,attn_mode,fit_dataset
+pneumoniamnist,facebook/dinov2-base,[],[],[],{},identity,identity,identity,
+cifar100,facebook/dinov2-base,[],[],[],{},identity,identity,identity,
+imagenet-1k,facebook/dinov2-base,[],[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,[],[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,[],[],[],{},linear,identity,identity,
+pneumoniamnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,
+cifar100,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,imagenet-1k

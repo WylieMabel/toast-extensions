@@ -4,8 +4,9 @@
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=48000
 #SBATCH --time=72:00:00
-# %j keeps concurrent submissions from writing over each other's log -- this script is
-# routinely run as several jobs at once, one per config shard.
+# Log naming: use LOG_PREFIX if provided, otherwise %j keeps concurrent submissions from
+# writing over each other's logs. This script is routinely run several times at once,
+# one per config shard.
 #SBATCH --output=logs/pipeline_row_by_row_%j.out.txt
 
 usage() {
@@ -23,6 +24,12 @@ over the environment. Concurrent jobs MUST end up with different RESULTS_CSV_NAM
 row rewrites that file in full, so two jobs sharing one lose each other's rows.
 
   sbatch src/run_scripts/run_pipeline_row_by_row.sh src/configs/experiments_skip_grid_part1.csv
+
+To customize the log file name, pass --output to sbatch:
+  CONFIG_CSV=src/configs/experiments_transfer_learning_part1.csv \
+  RESULTS_CSV_NAME=results_transfer_learning_part1.csv \
+    sbatch --output=logs/transfer_learning_part1.out.txt \
+      src/run_scripts/run_pipeline_row_by_row.sh
 USAGE
 }
 

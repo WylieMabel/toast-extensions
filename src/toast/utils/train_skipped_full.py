@@ -17,6 +17,7 @@ from toast.pl_modules.train_NN import train_classifier
 from toast.utils.dictionaries import (
     DATASET2LABEL_COLUMN,
     DATASET2NUM_CLASSES,
+    MULTILABEL_DATASETS,
     params_saved_for_config,
 )
 from toast.utils.utils import cfg_embedding_dir, seed_everything
@@ -181,6 +182,7 @@ def skip_and_train_full_run(
         try:
             row_label_col   = DATASET2LABEL_COLUMN[row_dataset]
             row_num_classes = DATASET2NUM_CLASSES[row_dataset]
+            is_multilabel = row_dataset in MULTILABEL_DATASETS
 
             hf_train = (
                 embeddings["train"]
@@ -198,15 +200,6 @@ def skip_and_train_full_run(
             if hidden_size is None:
                 hidden_size = embeddings["train"][0]["embeddings"].shape[-1]
 
-            # Majority-class rate: the accuracy a constant predictor gets for free. A probe
-            # scoring this has collapsed to one class and learned nothing -- a null result,
-            # not a finding. Recorded per row (not just printed) because
-            # run_pipeline_row_by_row.sh deletes the per-row logs, so a printed-only warning
-            # would not survive the run.
-            #
-            # ChestMNIST sat at exactly its 0.892 majority rate across 520 rows and five
-            # encoders without anyone noticing, because the number was never stored next to
-            # the accuracy it explains.
             test_labels = hf_test["labels"]
             if torch.is_tensor(test_labels):
                 test_labels = test_labels.tolist()
@@ -241,18 +234,22 @@ def skip_and_train_full_run(
             model.to(device)
             model.freeze_encoder()
 
+            criterion = nn.BCEWithLogitsLoss() if is_multilabel else nn.CrossEntropyLoss()
+
             print("  Starting classifier training...")
             _, _, _, eval_accuracies, _ = train_classifier(
                 model=model,
                 train_data_loader=train_loader,
                 test_data_loader=test_loader,
                 optimizer=optimizer,
-                criterion=nn.CrossEntropyLoss(),
+                criterion=criterion,
                 label_column_name="labels",
                 num_epochs=num_epochs,
+                is_multilabel=is_multilabel,
             )
             accuracy = eval_accuracies[-1]
-            print(f"  Done. Accuracy: {accuracy:.4f}")
+            metric_name = "macro-AUC" if is_multilabel else "Accuracy"
+            print(f"  Done. {metric_name}: {accuracy:.4f}")
         except Exception as e:
             print(f"  ✗ Error during training: {e}")
             import traceback

@@ -70,10 +70,7 @@ DATASET2NUM_CLASSES = {
     "sceneparse150": 150,
     # MedMNIST datasets
     "pathmnist": 9,
-    # chestmnist is MULTI-LABEL: 14 binary labels, not 14 mutually exclusive classes.
-    # It needs BCEWithLogitsLoss + macro-AUC, not the CrossEntropyLoss + argmax path in
-    # train_skipped_full.py, so it is not runnable through the current eval as-is.
-    "chestmnist": 14,
+    "chestmnist": 2,  # Binary: any disease vs normal
     "dermamnist": 7,
     "pneumoniamnist": 2,
     "retinamnist": 5,
@@ -84,6 +81,8 @@ DATASET2NUM_CLASSES = {
     "sst2": 2,
     "ag_news": 4,
 }
+
+MULTILABEL_DATASETS = set()
 
 MODEL_NAME2HF_NAME = {
     # VIT

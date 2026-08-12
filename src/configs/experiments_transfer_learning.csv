@@ -1,0 +1,285 @@
+dataset,encoder,skip,mlp_skip,attn_skip,head_dict,skip_translator,mlp_mode,attn_mode,fit_dataset
+pneumoniamnist,facebook/deit-small-patch16-224,[],[],[],{},identity,identity,identity,
+cifar100,facebook/deit-small-patch16-224,[],[],[],{},identity,identity,identity,
+imagenet-1k,facebook/deit-small-patch16-224,[],[],[],{},identity,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,[],[],[],{},identity,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,[],[],[],{},linear,identity,identity,
+pneumoniamnist,facebook/deit-small-patch16-224,"[(10, 11)]",[],[],{},linear,identity,identity,
+cifar100,facebook/deit-small-patch16-224,"[(10, 11)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/deit-small-patch16-224,"[(10, 11)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(10, 11)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(10, 11)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(10, 11)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/deit-small-patch16-224,"[(10, 11)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/deit-small-patch16-224,"[(10, 11)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/deit-small-patch16-224,"[(2, 3)]",[],[],{},linear,identity,identity,
+cifar100,facebook/deit-small-patch16-224,"[(2, 3)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/deit-small-patch16-224,"[(2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(2, 3)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(2, 3)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/deit-small-patch16-224,"[(2, 3)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/deit-small-patch16-224,"[(2, 3)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/deit-small-patch16-224,"[(8, 9)]",[],[],{},linear,identity,identity,
+cifar100,facebook/deit-small-patch16-224,"[(8, 9)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/deit-small-patch16-224,"[(8, 9)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(8, 9)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(8, 9)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(8, 9)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/deit-small-patch16-224,"[(8, 9)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/deit-small-patch16-224,"[(8, 9)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/deit-small-patch16-224,"[(9, 10)]",[],[],{},linear,identity,identity,
+cifar100,facebook/deit-small-patch16-224,"[(9, 10)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/deit-small-patch16-224,"[(9, 10)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(9, 10)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(9, 10)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(9, 10)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/deit-small-patch16-224,"[(9, 10)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/deit-small-patch16-224,"[(9, 10)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/deit-small-patch16-224,"[(9, 11)]",[],[],{},linear,identity,identity,
+cifar100,facebook/deit-small-patch16-224,"[(9, 11)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/deit-small-patch16-224,"[(9, 11)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(9, 11)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(9, 11)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(9, 11)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/deit-small-patch16-224,"[(9, 11)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/deit-small-patch16-224,"[(9, 11)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",[],[],{},linear,identity,identity,
+cifar100,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 10)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",[],[],{},linear,identity,identity,
+cifar100,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/deit-small-patch16-224,"[(3, 4), (9, 11)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/dinov2-base,[],[],[],{},identity,identity,identity,
+cifar100,facebook/dinov2-base,[],[],[],{},identity,identity,identity,
+imagenet-1k,facebook/dinov2-base,[],[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,[],[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,[],[],[],{},linear,identity,identity,
+pneumoniamnist,facebook/dinov2-base,"[(0, 1)]",[],[],{},linear,identity,identity,
+cifar100,facebook/dinov2-base,"[(0, 1)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/dinov2-base,"[(0, 1)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 1)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 1)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 1)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/dinov2-base,"[(0, 1)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/dinov2-base,"[(0, 1)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,
+cifar100,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/dinov2-base,"[(0, 4)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/dinov2-base,"[(2, 3)]",[],[],{},linear,identity,identity,
+cifar100,facebook/dinov2-base,"[(2, 3)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/dinov2-base,"[(2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(2, 3)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,"[(2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(2, 3)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/dinov2-base,"[(2, 3)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/dinov2-base,"[(2, 3)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/dinov2-base,"[(5, 6)]",[],[],{},linear,identity,identity,
+cifar100,facebook/dinov2-base,"[(5, 6)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/dinov2-base,"[(5, 6)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(5, 6)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,"[(5, 6)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(5, 6)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/dinov2-base,"[(5, 6)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/dinov2-base,"[(5, 6)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/dinov2-base,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,
+cifar100,facebook/dinov2-base,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/dinov2-base,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,
+cifar100,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,
+imagenet-1k,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,facebook/dinov2-base,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,[],[],[],{},identity,identity,identity,
+cifar100,google/vit-large-patch16-224,[],[],[],{},identity,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,[],[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,[],[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,[],[],[],{},linear,identity,identity,
+pneumoniamnist,google/vit-large-patch16-224,"[(17, 23)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(17, 23)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(17, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(17, 23)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(17, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(17, 23)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(17, 23)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(17, 23)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(20, 21)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(20, 21)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(20, 21)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(20, 21)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(20, 21)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(20, 21)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(20, 21)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(20, 21)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(20, 22)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(20, 22)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(20, 22)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(20, 22)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(20, 22)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(20, 22)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(20, 22)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(20, 22)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(20, 23)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(20, 23)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(20, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(20, 23)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(20, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(20, 23)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(20, 23)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(20, 23)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(21, 22)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(21, 22)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(21, 22)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(21, 22)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(21, 22)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(21, 22)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(21, 22)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(21, 22)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(22, 23)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(22, 23)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(22, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(22, 23)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(22, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(22, 23)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(22, 23)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(22, 23)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(3, 4)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(3, 4)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(3, 4)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(3, 4)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(3, 4)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(16, 17), (22, 23)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(2, 4), (18, 23)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (19, 23)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (20, 23)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 22)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(3, 4), (21, 23)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",[],[],{},linear,identity,identity,
+cifar100,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",[],[],{},linear,identity,identity,
+imagenet-1k,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",[],[],{},identity,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",[],[],{},linear,identity,identity,
+chestmnist,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,google/vit-large-patch16-224,"[(7, 8), (15, 16)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,microsoft/rad-dino,[],[],[],{},identity,identity,identity,
+cifar100,microsoft/rad-dino,[],[],[],{},identity,identity,identity,
+imagenet-1k,microsoft/rad-dino,[],[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,[],[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,[],[],[],{},linear,identity,identity,
+pneumoniamnist,microsoft/rad-dino,"[(0, 1)]",[],[],{},linear,identity,identity,
+cifar100,microsoft/rad-dino,"[(0, 1)]",[],[],{},linear,identity,identity,
+imagenet-1k,microsoft/rad-dino,"[(0, 1)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 1)]",[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 1)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 1)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,microsoft/rad-dino,"[(0, 1)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,microsoft/rad-dino,"[(0, 1)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,
+cifar100,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,
+imagenet-1k,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,microsoft/rad-dino,"[(2, 3)]",[],[],{},linear,identity,identity,
+cifar100,microsoft/rad-dino,"[(2, 3)]",[],[],{},linear,identity,identity,
+imagenet-1k,microsoft/rad-dino,"[(2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(2, 3)]",[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,"[(2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(2, 3)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,microsoft/rad-dino,"[(2, 3)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,microsoft/rad-dino,"[(2, 3)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,microsoft/rad-dino,"[(5, 6)]",[],[],{},linear,identity,identity,
+cifar100,microsoft/rad-dino,"[(5, 6)]",[],[],{},linear,identity,identity,
+imagenet-1k,microsoft/rad-dino,"[(5, 6)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(5, 6)]",[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,"[(5, 6)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(5, 6)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,microsoft/rad-dino,"[(5, 6)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,microsoft/rad-dino,"[(5, 6)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,microsoft/rad-dino,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,
+cifar100,microsoft/rad-dino,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,
+imagenet-1k,microsoft/rad-dino,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3)]",[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3)]",[],[],{},linear,identity,identity,imagenet-1k
+pneumoniamnist,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,
+cifar100,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,
+imagenet-1k,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,microsoft/rad-dino,"[(0, 1), (2, 3), (4, 5)]",[],[],{},linear,identity,identity,imagenet-1k

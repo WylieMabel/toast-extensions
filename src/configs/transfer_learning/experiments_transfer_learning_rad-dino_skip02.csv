@@ -1,0 +1,14 @@
+dataset,encoder,skip,mlp_skip,attn_skip,head_dict,skip_translator,mlp_mode,attn_mode,fit_dataset
+pneumoniamnist,microsoft/rad-dino,[],[],[],{},identity,identity,identity,
+cifar100,microsoft/rad-dino,[],[],[],{},identity,identity,identity,
+imagenet-1k,microsoft/rad-dino,[],[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,[],[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,[],[],[],{},linear,identity,identity,
+pneumoniamnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,
+cifar100,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,
+imagenet-1k,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},identity,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,pneumoniamnist
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,cifar100
+chestmnist,microsoft/rad-dino,"[(0, 4)]",[],[],{},linear,identity,identity,imagenet-1k
