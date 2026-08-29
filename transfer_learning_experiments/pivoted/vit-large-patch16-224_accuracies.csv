@@ -1,0 +1,25 @@
+config_key,accuracy_mean,accuracy_std,model
+"Encoder: google/vit-large-patch16-224, Block: [(16, 17), (22, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6157298028202499,0.03176212309231009,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(16, 17), (22, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7080324181403127,0.10645096593673418,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(17, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6162052927978127,0.021424907074345037,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(17, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6904324733038993,0.10159828495120374,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(2, 4), (18, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6179438030282768,0.01963645677618767,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(2, 4), (18, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6885136009346949,0.09355083553335455,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(20, 21)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6122825004829195,0.03259809614423032,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(20, 21)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.701212151517581,0.11230187543436478,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(20, 22)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6201429441745048,0.027474895474101,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(20, 22)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7005281583520964,0.10934978809037017,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(20, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.617557467421507,0.0303963565171834,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(20, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7048074601416553,0.10383481353001617,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(21, 22)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6202469576070967,0.03448260677656166,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(21, 22)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7051222466063236,0.11085885409330747,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(22, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6146302322471359,0.03406633306553398,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(22, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7087229887865247,0.10830627127375729,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(3, 4), (19, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.622520394062319,0.012380666235874287,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(3, 4), (19, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6959936712588787,0.10257414668756977,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(3, 4), (20, 23)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6170819774439442,0.028467655125769945,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(3, 4), (20, 23)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7014609291746902,0.10110146711162529,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(3, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6148828362977161,0.027110161772854195,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [(3, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7030748520774954,0.11055421849221513,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7739917806337656,0.10255395913651034,google/vit-large-patch16-224
+"Encoder: google/vit-large-patch16-224, Block: [], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6148679772359174,0.03619311514587949,google/vit-large-patch16-224

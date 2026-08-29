@@ -63,7 +63,29 @@ heads_to_keep = {
 
 @torch.no_grad()
 def encode_data(loader, skip_encoder):
+    """Returns (embeddings, cls_embeddings, labels), all in the order the loader yielded them.
+
+    Labels MUST come from the batch itself, not from re-reading the source dataset's label
+    column afterward: with shuffle=True the loader's iteration order no longer matches the
+    dataset's on-disk order, so re-fetching labels separately silently pairs each embedding
+    with the wrong image's label. (This is exactly what happened when shuffle was briefly
+    enabled here -- accuracy collapsed to worse than chance because every embedding got a
+    randomly mismatched label instead of an error.)
+
+    `embeddings` is SkipModel's normal pooled output (through .pooler when the model config
+    has one) -- unchanged from before, so every existing/retrained-classifier sweep stays
+    comparable. `cls_embeddings` is the raw CLS token (sequence_output[:, 0, :]), computed from
+    the same forward pass rather than a second one. This split exists because HF's own
+    ImageClassification heads (ViTForImageClassification etc.) are trained on the raw CLS
+    token, NOT on .pooler's output -- feeding a frozen pretrained head SkipModel's pooled
+    output collapses accuracy to chance even at zero skips, since .pooler (Linear+Tanh) is a
+    representation the head was never trained on. cls_embeddings exists so orig_head_accuracy
+    can score the pretrained head in the space it actually expects, without touching what
+    every other sweep in this repo has always trained/evaluated on.
+    """
     embeddings = []
+    cls_embeddings = []
+    labels = []
     skip_encoder.eval()
     for batch in tqdm(loader, desc="Encoding Batches"):
         image_input = batch.get("pixel_values", batch.get("images"))
@@ -73,9 +95,15 @@ def encode_data(loader, skip_encoder):
         attn_mask = batch.get("attention_mask", None)
         if attn_mask is not None:
             attn_mask = attn_mask.to(device)
-        x = skip_encoder(image_input, attention_mask=attn_mask)
-        embeddings.extend(x.cpu().tolist())
-    return embeddings
+
+        sequence_output = skip_encoder(image_input, attention_mask=attn_mask, return_sequence=True)
+        cls = sequence_output[:, 0, :]
+        pooled = skip_encoder.pooler_module(sequence_output) if skip_encoder.pooler_module else cls
+
+        embeddings.extend(pooled.cpu().tolist())
+        cls_embeddings.extend(cls.cpu().tolist())
+        labels.extend(batch["labels"].tolist())
+    return embeddings, cls_embeddings, labels
 
 
 def _read_config_csv(path: str):
@@ -258,9 +286,21 @@ def run_encoding(
             continue
 
         try:
+            # shuffle=True so the train split's iteration order (and hence which images a
+            # given translator/classifier sees first) varies with `seed` (RandomSampler
+            # draws from the global RNG seed_everything(seed) already set above). This
+            # previously caused a real bug -- embeddings came out in shuffled order while
+            # labels were re-read separately in the dataset's original order, silently
+            # mispairing every embedding with the wrong label (vit-large/imagenet-1k baseline
+            # collapsed from 0.7864 to 0.0010 accuracy). Fixed: encode_data() now returns
+            # labels pulled from the same batches as the embeddings, so both are always in
+            # the loader's actual iteration order regardless of shuffle. Test stays
+            # shuffle=False -- a fixed eval set across seeds keeps seed-to-seed accuracy
+            # deltas attributable to training noise, not to different seeds getting an
+            # easier or harder sample of test images.
             train_loader = DataLoader(
                 raw_data["train"], batch_size=batch_size, pin_memory=True,
-                shuffle=False, num_workers=1, collate_fn=collate_fn,
+                shuffle=True, num_workers=1, collate_fn=collate_fn,
             )
             test_loader = DataLoader(
                 raw_data["test"], batch_size=batch_size, pin_memory=True,
@@ -368,9 +408,11 @@ def run_encoding(
                 }
 
                 valid = True
-                for split, enc in split2encoding.items():
-                    if len(enc) != len(raw_data[split]):
-                        print(f"  Error: length mismatch for '{split}' ({len(enc)} vs {len(raw_data[split])}). Skipping.")
+                for split, (enc, cls_enc, lbls) in split2encoding.items():
+                    if len(enc) != len(raw_data[split]) or len(cls_enc) != len(raw_data[split]) or len(lbls) != len(raw_data[split]):
+                        print(f"  Error: length mismatch for '{split}' ({len(enc)} embeddings, "
+                              f"{len(cls_enc)} cls_embeddings, {len(lbls)} labels vs "
+                              f"{len(raw_data[split])} source rows). Skipping.")
                         valid = False
                         break
                 if not valid:
@@ -378,12 +420,16 @@ def run_encoding(
                     torch.cuda.empty_cache()
                     continue
 
+                # Labels come from encode_data's own per-batch labels, NOT raw_data[split][label_col]
+                # -- the latter is in the dataset's original order, which only matches the loader's
+                # iteration order when shuffle=False. See encode_data's docstring.
                 new_dataset = DatasetDict({
                     split: Dataset.from_dict({
-                        "embeddings": enc,
-                        label_col:    raw_data[split][label_col],
+                        "embeddings":     enc,
+                        "cls_embeddings": cls_enc,
+                        label_col:        lbls,
                     })
-                    for split, enc in split2encoding.items()
+                    for split, (enc, cls_enc, lbls) in split2encoding.items()
                 })
 
                 temp_dir = cfg_dir.parent / f"{cfg_dir.name}_temp"

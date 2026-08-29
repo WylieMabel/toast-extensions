@@ -1,0 +1,13 @@
+config_key,accuracy_mean,accuracy_std,model
+"Encoder: microsoft/rad-dino, Block: [(0, 1), (2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6901439843088307,0.0057922902405495,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [(0, 1), (2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.5688925972752835,0.2623708335520235,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [(0, 1)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6938141725731438,0.004660892391017398,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [(0, 1)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.570486252472224,0.2656959277694645,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [(0, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6788956745271104,0.014899808913352805,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [(0, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.5457875883182084,0.2569544508339571,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [(2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6865183732299144,0.020674605119951752,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.5705023323012001,0.26491413928377505,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [(5, 6)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6831453662015781,0.028726286746953586,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [(5, 6)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.5696169368811548,0.2654753246370948,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.4834142795298136,0.33310273076456676,microsoft/rad-dino
+"Encoder: microsoft/rad-dino, Block: [], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6802032719654081,0.03233339700322518,microsoft/rad-dino

@@ -9,6 +9,7 @@ import torch
 from datasets import DatasetDict
 from torch import nn, optim
 from torch.utils.data import DataLoader
+from transformers import AutoModelForImageClassification
 
 from toast import PROJECT_ROOT
 from toast.modules.module import HFwrapper, NoEncoder
@@ -23,6 +24,53 @@ from toast.utils.dictionaries import (
 from toast.utils.utils import cfg_embedding_dir, seed_everything
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# The original pretrained head is only meaningful when (a) the dataset is what it was trained
+# for -- these HF checkpoints ship a 1000-class ImageNet-1k head, so scoring it against e.g.
+# pathmnist labels would just be noise -- and (b) the checkpoint actually has a classification
+# head at all: dinov2/rad-dino/clip are backbone-only or non-ImageNet and have none. Rather than
+# hardcode which encoders qualify (easy to get wrong), each encoder is probed once and cached;
+# a failed load or an output width that doesn't match the dataset's class count both resolve to
+# "no usable head" (cached as None) so later rows for the same encoder don't retry.
+ORIG_HEAD_DATASETS = {"imagenet-1k"}
+_orig_head_cache: dict = {}
+
+
+def _get_orig_head(encoder_hf_id: str, num_classes: int):
+    if encoder_hf_id not in _orig_head_cache:
+        try:
+            head = AutoModelForImageClassification.from_pretrained(encoder_hf_id).classifier
+            out_features = head.out_features if isinstance(head, nn.Linear) else None
+            if out_features != num_classes:
+                print(f"  WARNING: '{encoder_hf_id}' classifier outputs "
+                      f"{out_features} classes, expected {num_classes}; treating as no "
+                      f"usable original head.")
+                head = None
+        except Exception as e:
+            print(f"  WARNING: could not load original head for '{encoder_hf_id}': {e}; "
+                  f"treating as no usable original head.")
+            head = None
+        if head is not None:
+            head.eval().to(device)
+            for p in head.parameters():
+                p.requires_grad_(False)
+        _orig_head_cache[encoder_hf_id] = head
+    return _orig_head_cache[encoder_hf_id]
+
+
+@torch.no_grad()
+def _orig_head_accuracy(encoder_hf_id: str, num_classes: int, test_loader) -> float:
+    head = _get_orig_head(encoder_hf_id, num_classes)
+    if head is None:
+        return float("nan")
+    correct, total = 0, 0
+    for batch in test_loader:
+        embeddings = batch["images"].to(device)
+        labels = batch["labels"].to(device)
+        preds = head(embeddings).argmax(dim=-1)
+        correct += (preds == labels).sum().item()
+        total += labels.shape[0]
+    return correct / total if total else float("nan")
 
 
 def _read_config_csv(path: str):
@@ -99,7 +147,11 @@ def skip_and_train_full_run(
         "translator", "translator_method", "translator_rank", "batch_size", "num_epochs",
         "approx_layer", "mlp_linearize", "attn_linearize", "head_dict",
         "mlp_mode", "attn_mode",
-        "num_layers", "original_accuracy", "accuracy", "delta_acc", "num_samples",
+        "num_layers", "original_accuracy", "accuracy", "delta_acc",
+        # orig_head_* mirror original_accuracy/accuracy/delta_acc but score the *frozen,
+        # pretrained* classifier head instead of a newly trained one -- NaN outside
+        # ORIG_HEAD_DATASETS, where the pretrained head has no meaningful class mapping.
+        "orig_head_accuracy", "orig_head_delta_acc", "num_samples",
         # accuracy <= majority_class_rate means the probe collapsed and the row is a null
         # result. Stored per row so it can be checked across a whole sweep after the fact.
         "majority_class_rate",
@@ -197,6 +249,19 @@ def skip_and_train_full_run(
                 .rename_column(row_label_col, "labels")
             )
 
+            # cls_embeddings (raw CLS token) is what the pretrained head was actually trained
+            # on -- "embeddings" is SkipModel's pooled output, a different space (see
+            # encode_data's docstring). Directories saved before this column existed won't
+            # have it; orig_head_accuracy just goes to NaN for those rather than KeyError'ing.
+            has_cls_embeddings = "cls_embeddings" in embeddings["test"].column_names
+            if has_cls_embeddings:
+                hf_test_cls = (
+                    embeddings["test"]
+                    .select_columns(["cls_embeddings", row_label_col])
+                    .rename_column("cls_embeddings", "images")
+                    .rename_column(row_label_col, "labels")
+                )
+
             if hidden_size is None:
                 hidden_size = embeddings["train"][0]["embeddings"].shape[-1]
 
@@ -212,6 +277,10 @@ def skip_and_train_full_run(
             batch_size = 256
             train_loader = DataLoader(hf_train, shuffle=True,  batch_size=batch_size, num_workers=2, pin_memory=True)
             test_loader  = DataLoader(hf_test,  shuffle=False, batch_size=batch_size, num_workers=2, pin_memory=True)
+            test_loader_cls = (
+                DataLoader(hf_test_cls, shuffle=False, batch_size=batch_size, num_workers=2, pin_memory=True)
+                if has_cls_embeddings else None
+            )
 
             if classifier_type == "MLP":
                 classifier = nn.Sequential(
@@ -250,6 +319,22 @@ def skip_and_train_full_run(
             accuracy = eval_accuracies[-1]
             metric_name = "macro-AUC" if is_multilabel else "Accuracy"
             print(f"  Done. {metric_name}: {accuracy:.4f}")
+
+            # Frozen-head accuracy: no training, just the pretrained classifier scored
+            # directly on this row's (possibly skip-approximated) test embeddings. Must use
+            # the raw CLS token (test_loader_cls), not the pooled "embeddings" test_loader
+            # above -- the pretrained head was trained on the CLS token, not on SkipModel's
+            # .pooler output. See encode_data's docstring for why these differ.
+            if row_dataset in ORIG_HEAD_DATASETS and test_loader_cls is not None:
+                orig_head_accuracy = _orig_head_accuracy(row_encoder, row_num_classes, test_loader_cls)
+                print(f"  Orig head accuracy: {orig_head_accuracy:.4f}")
+            elif row_dataset in ORIG_HEAD_DATASETS:
+                print("  WARNING: no cls_embeddings in this row's embedding dir (encoded "
+                      "before that column existed); orig_head_accuracy will be NaN. "
+                      "Re-run phase 1 for this config to get it.")
+                orig_head_accuracy = float("nan")
+            else:
+                orig_head_accuracy = float("nan")
         except Exception as e:
             print(f"  ✗ Error during training: {e}")
             import traceback
@@ -261,6 +346,7 @@ def skip_and_train_full_run(
             is_baseline = not skip and not mlp_skip and not attn_skip and not head_dict
             if is_baseline:
                 original_accuracy = accuracy
+                orig_head_original_accuracy = orig_head_accuracy
             else:
                 # The baseline is the unmodified encoder: no skips, no sublayer edits, no head
                 # pruning. With nothing to bridge, the translator is never invoked, so the
@@ -291,13 +377,22 @@ def skip_and_train_full_run(
                           f"model={row_encoder} seed={seed}; delta_acc will be NaN. "
                           f"Put the all-empty baseline row first in the config CSV.")
                     original_accuracy = float("nan")
+                    orig_head_original_accuracy = float("nan")
                 else:
                     original_accuracy = filtered["accuracy"].iloc[0]
+                    # A results CSV written before this column existed backfills it with
+                    # None (not NaN, see the load block above), which breaks the subtraction
+                    # below with a TypeError rather than propagating as an unknown value.
+                    raw = filtered["orig_head_accuracy"].iloc[0]
+                    orig_head_original_accuracy = float("nan") if raw is None else raw
 
             # NaN propagates when there was no baseline, which is what we want: the drop is
             # genuinely unknown. The old guard collapsed a missing baseline to 0.0, making it
             # indistinguishable from a config that cost no accuracy at all.
             delta_acc = original_accuracy - accuracy
+            # NaN whenever either side is NaN -- no baseline, or this encoder/dataset has no
+            # usable original head -- which is what we want rather than a fabricated 0.0.
+            orig_head_delta_acc = orig_head_original_accuracy - orig_head_accuracy
             num_layers_skipped = sum(end - start for start, end in skip) if skip else 0
 
             translator_method, translator_rank = parse_translator_name(row_translator)
@@ -325,6 +420,8 @@ def skip_and_train_full_run(
                 "original_accuracy": original_accuracy,
                 "accuracy":          accuracy,
                 "delta_acc":         delta_acc,
+                "orig_head_accuracy": orig_head_accuracy,
+                "orig_head_delta_acc": orig_head_delta_acc,
                 "num_samples":       samples_to_extract,
                 "majority_class_rate": majority_rate,
                 "params_saved":      savings["params_saved"],

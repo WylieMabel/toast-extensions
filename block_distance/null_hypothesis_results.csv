@@ -1,0 +1,28 @@
+model,dataset,shape,cka_screened,n_pool,predicted_span,predicted_actual_damage,random_ci_lo,random_ci_hi,beats_ci,single_random_pick_p,min_achievable_p,underpowered,significant
+facebook/deit-base-patch16-224,cifar100,contiguous,False,10,"[(9, 11)]",0.0201999999999999,0.0201999999999999,0.0691999999999999,False,0.1,0.1,True,False
+facebook/deit-base-patch16-224,dermamnist,contiguous,False,10,"[(3, 5)]",-0.0109725685785536,-0.0109725685785536,-0.0031587697423108,False,0.1,0.1,True,False
+facebook/deit-base-patch16-224,imagenet-1k,contiguous,False,10,"[(3, 5)]",0.0390333333333332,0.0390333333333332,0.0788999999999999,False,0.1,0.1,True,False
+facebook/deit-base-patch16-224,pneumoniamnist,contiguous,False,10,"[(7, 9)]",-0.018162393162393,-0.0202991452991452,-0.0074786324786324,False,0.2,0.1,True,False
+facebook/deit-small-patch16-224,cifar100,contiguous,True,10,"[(9, 11)]",-0.0085999999999999,-0.0085999999999999,0.0483,False,0.1,0.1,True,False
+facebook/deit-small-patch16-224,dermamnist,contiguous,False,10,"[(0, 2)]",-0.0134663341645885,-0.0134663341645885,-0.0006650041562759,False,0.1,0.1,True,False
+facebook/deit-small-patch16-224,imagenet-1k,contiguous,False,10,"[(9, 11)]",0.0389999999999999,0.0389999999999999,0.0966,False,0.1,0.1,True,False
+facebook/deit-small-patch16-224,imagenet-1k,disjoint,False,45,"[(2, 3), (10, 11)]",0.0115999999999998,0.0115999999999998,0.0730666666666666,False,0.022222222222222223,0.022222222222222223,False,True
+facebook/deit-small-patch16-224,pneumoniamnist,contiguous,False,10,"[(5, 7)]",-0.0272435897435896,-0.0331196581196581,-0.014957264957265,False,0.2,0.1,True,False
+facebook/dinov2-base,cifar100,contiguous,False,10,"[(8, 10)]",0.0809333333333334,0.0367333333333333,0.0809333333333334,False,0.6,0.1,True,False
+facebook/dinov2-base,dermamnist,contiguous,False,10,"[(8, 10)]",-0.0142975893599334,-0.0142975893599334,-0.0028262676641728,False,0.1,0.1,True,False
+facebook/dinov2-base,imagenet-1k,contiguous,False,10,"[(8, 10)]",0.1601,0.04236,0.10336,False,0.7,0.1,True,False
+facebook/dinov2-base,imagenet-1k,disjoint,False,45,"[(0, 1), (2, 3)]",0.03186,0.02298,0.11208,False,0.1111111111111111,0.022222222222222223,False,False
+facebook/dinov2-base,pneumoniamnist,contiguous,False,10,"[(8, 10)]",0.0219017094017094,-0.015491452991453,0.0058760683760684,False,1.0,0.1,True,False
+google/vit-base-patch16-224,cifar100,contiguous,False,10,"[(9, 11)]",0.0591666666666665,0.0329333333333332,0.0739333333333334,False,0.5,0.1,True,False
+google/vit-base-patch16-224,dermamnist,contiguous,False,10,"[(7, 9)]",-0.0141313383208645,-0.0217788861180382,-0.0123025768911055,False,0.4,0.1,True,False
+google/vit-base-patch16-224,imagenet-1k,contiguous,False,10,"[(1, 3)]",0.0886333333333333,0.0839666666666666,0.1576333333333333,False,0.2,0.1,True,False
+google/vit-base-patch16-224,pneumoniamnist,contiguous,False,10,"[(3, 5)]",-0.015491452991453,-0.0202991452991453,-0.0074786324786324,False,0.2,0.1,True,False
+google/vit-large-patch16-224,cifar100,contiguous,True,22,"[(21, 23)]",-0.0022333333333333,-0.0022333333333333,0.0144333333333334,False,0.045454545454545456,0.045454545454545456,False,True
+google/vit-large-patch16-224,dermamnist,contiguous,True,22,"[(19, 21)]",-0.0133000831255194,-0.0174563591022443,-0.0064837905236907,False,0.18181818181818182,0.045454545454545456,False,False
+google/vit-large-patch16-224,imagenet-1k,contiguous,True,22,"[(14, 16)]",0.0123333333333333,0.0123333333333333,0.0274333333333333,False,0.045454545454545456,0.045454545454545456,False,True
+google/vit-large-patch16-224,imagenet-1k,disjoint,False,186,"[(15, 16), (22, 23)]",0.0092999999999999,0.0087333333333332,0.0211666666666666,False,0.043010752688172046,0.005376344086021506,False,True
+google/vit-large-patch16-224,pneumoniamnist,contiguous,True,22,"[(10, 12)]",-0.0106837606837607,-0.0208333333333334,0.00267094017094,False,0.09090909090909091,0.045454545454545456,False,False
+microsoft/rad-dino,cifar100,contiguous,False,10,"[(0, 2)]",-0.0152999999999999,-0.0152999999999999,-0.0065333333333332,False,0.1,0.1,True,False
+microsoft/rad-dino,dermamnist,contiguous,False,10,"[(9, 11)]",-0.0019950124688278,-0.0093100581878635,-0.0019950124688278,False,0.6,0.1,True,False
+microsoft/rad-dino,imagenet-1k,contiguous,False,10,"[(3, 5)]",-0.0038,-0.0056,-0.0032,False,0.4,0.1,True,False
+microsoft/rad-dino,pneumoniamnist,contiguous,False,10,"[(2, 4)]",0.0149572649572649,0.00267094017094,0.0106837606837606,False,0.8,0.1,True,False

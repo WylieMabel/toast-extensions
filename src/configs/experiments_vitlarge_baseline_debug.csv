@@ -1,0 +1,2 @@
+"dataset","encoder","skip","mlp_skip","attn_skip","head_dict","skip_translator","mlp_mode","attn_mode","fit_dataset"
+"imagenet-1k","google/vit-large-patch16-224","[]","[]","[]","{}","identity","identity","identity",""

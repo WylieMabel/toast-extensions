@@ -62,7 +62,13 @@ elif [ -n "$1" ] && [ -z "$2" ] && [ "$RESULTS_CSV_NAME" != "$DERIVED_RESULTS" ]
     echo "         derive the name from the config." >&2
 fi
 export RESULTS_CSV_NAME
-SAMPLES=250
+SAMPLES=500
+
+# Images now vary by seed (encode_vision_full.py shuffles the train split using the seed's
+# RNG state), so phase 1 must be re-run per seed rather than once per row. Test images stay
+# fixed across seeds (see encode_vision_full.py) so accuracy deltas between seeds reflect
+# training noise, not an easier/harder eval sample.
+SEEDS="${SEEDS:-0 1 2}"
 
 # The loop below runs each row in its own process with a single-row temp CSV, so that process
 # cannot see whether a *later* row transfers from the translator it is about to fit. Exporting
@@ -137,40 +143,55 @@ for i in $(seq 1 "$NUM_ROWS"); do
     echo "=== Row $i / $NUM_ROWS ==="
     echo "$ROW"
 
-    LOG=$(mktemp /tmp/exp_row_log_XXXXXX)
+    ROW_FAILED=0
+    for seed in $SEEDS; do
+        echo "  -- seed $seed --"
 
-    # Phase 1: encode (silent unless it fails)
-    CONFIG_CSV="$TEMP_CSV" bash src/toast/scripts/encode_vision_full.sh > "$LOG" 2>&1
-    if [ $? -ne 0 ]; then
-        echo "ERROR: phase 1 failed for row $i:"
-        cat "$LOG"
-        FAILED_ROWS="$FAILED_ROWS $i"
+        # Force a fresh encode: phase 1 skips outright if this row's embedding dir already
+        # has a dataset_dict.json (see encode_vision_full.py), which would otherwise reuse
+        # the previous seed's images.
         cleanup_row_embeddings "$TEMP_CSV"
-        rm -f "$TEMP_CSV" "$LOG"
-        continue
-    fi
 
-    # Phase 2a: train — print the params-saved line and the per-seed accuracy strings
-    CONFIG_CSV="$TEMP_CSV" bash src/toast/scripts/train_skipped_full.sh > "$LOG" 2>&1
-    if [ $? -ne 0 ]; then
-        echo "ERROR: phase 2 failed for row $i:"
-        cat "$LOG"
-        FAILED_ROWS="$FAILED_ROWS $i"
-    else
-        grep -E '^[[:space:]]*Params saved:' "$LOG"
-        if ! grep -oE 'Accuracy: [0-9.]+' "$LOG"; then
-            # Phase 2 produced no accuracy despite exiting 0. Keep the log rather than
-            # deleting it -- this is exactly the case where the cause is in the text and
-            # discarding it leaves only the symptom.
-            KEPT="logs/failed_row_${i}.log"
-            cp "$LOG" "$KEPT"
-            echo "(no result — full log kept at $KEPT)"
+        LOG=$(mktemp /tmp/exp_row_log_XXXXXX)
+
+        # Phase 1: encode (silent unless it fails)
+        SEED="$seed" CONFIG_CSV="$TEMP_CSV" bash src/toast/scripts/encode_vision_full.sh > "$LOG" 2>&1
+        if [ $? -ne 0 ]; then
+            echo "ERROR: phase 1 failed for row $i, seed $seed:"
+            cat "$LOG"
             FAILED_ROWS="$FAILED_ROWS $i"
+            ROW_FAILED=1
+            cleanup_row_embeddings "$TEMP_CSV"
+            rm -f "$LOG"
+            break
         fi
-    fi
-    rm -f "$LOG"
 
-    cleanup_row_embeddings "$TEMP_CSV"
+        # Phase 2: train — single seed per call, print params-saved + accuracy
+        SEEDS="$seed" CONFIG_CSV="$TEMP_CSV" bash src/toast/scripts/train_skipped_full.sh > "$LOG" 2>&1
+        if [ $? -ne 0 ]; then
+            echo "ERROR: phase 2 failed for row $i, seed $seed:"
+            cat "$LOG"
+            FAILED_ROWS="$FAILED_ROWS $i"
+            ROW_FAILED=1
+        else
+            grep -E '^[[:space:]]*Params saved:' "$LOG"
+            if ! grep -oE 'Accuracy: [0-9.]+' "$LOG"; then
+                # Phase 2 produced no accuracy despite exiting 0. Keep the log rather than
+                # deleting it -- this is exactly the case where the cause is in the text and
+                # discarding it leaves only the symptom.
+                KEPT="logs/failed_row_${i}_seed_${seed}.log"
+                cp "$LOG" "$KEPT"
+                echo "(no result — full log kept at $KEPT)"
+                FAILED_ROWS="$FAILED_ROWS $i"
+                ROW_FAILED=1
+            fi
+        fi
+        rm -f "$LOG"
+
+        cleanup_row_embeddings "$TEMP_CSV"
+        [ "$ROW_FAILED" -eq 1 ] && break
+    done
+
     rm -f "$TEMP_CSV"
 done
 
@@ -184,6 +205,18 @@ if [ -n "$SAVED_TRANSLATORS" ]; then
     echo "$SAVED_TRANSLATORS" | while IFS= read -r d; do
         [ -n "$d" ] && [ -d "$d" ] && du -sh "$d" && rm -rf "$d"
     done
+fi
+
+# Package the per-seed results into one mean/std-per-config summary, same aggregation
+# skipping_heads/calculate_accuracies.py already uses elsewhere. Runs even on a partial/failed
+# sweep -- whatever rows did complete are still worth summarizing rather than only ever
+# available as a manual follow-up step.
+SUMMARY_NAME="accuracies_${RESULTS_CSV_NAME}"
+if [ -f "results/$RESULTS_CSV_NAME" ]; then
+    python skipping_heads/calculate_accuracies.py \
+        --input "results/$RESULTS_CSV_NAME" \
+        --output "results/$SUMMARY_NAME"
+    echo "Summary (mean/std per config): results/$SUMMARY_NAME"
 fi
 
 if [ -n "$FAILED_ROWS" ]; then

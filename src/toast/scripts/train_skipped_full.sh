@@ -17,7 +17,7 @@ do
         --seed=$seed \
         --classifier_type=linear \
         --translator_name=identity \
-        --samples_to_extract=250 \
+        --samples_to_extract=500 \
         --config_csv="$CONFIG_CSV"
     [ $? -ne 0 ] && FAILED_SEEDS="$FAILED_SEEDS $seed"
 done

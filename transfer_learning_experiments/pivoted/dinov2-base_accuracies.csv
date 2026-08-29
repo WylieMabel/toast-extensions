@@ -1,0 +1,15 @@
+config_key,accuracy_mean,accuracy_std,model
+"Encoder: facebook/dinov2-base, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.5863088604585506,0.09091956366134041,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(0, 1), (2, 3), (4, 5)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6848740290433154,0.09342021686153539,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(0, 1), (2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6238131324388179,0.03112818823662169,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(0, 1), (2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6917417770196935,0.11375465207328696,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(0, 1)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6395488788837872,0.017825468355434998,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(0, 1)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.712459817564467,0.10783611120742742,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(0, 4)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.603159036538433,0.00537156625422238,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(0, 4)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6089072755246161,0.15860119615724622,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6196377360733444,0.025181388595754937,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7076617477293803,0.11216955355798026,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(5, 6)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6583901692447139,0.010146509016514364,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [(5, 6)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7061230628042467,0.1063945999693761,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7746682022840283,0.1165151195617334,facebook/dinov2-base
+"Encoder: facebook/dinov2-base, Block: [], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6066360569993611,0.02175756358325307,facebook/dinov2-base

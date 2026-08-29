@@ -5,30 +5,46 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-def _config_key(row):
-    key = (f"Encoder: {row['model']}, Dataset: {row['dataset']}, "
-           f"Block: {row['approx_layer']}, Block Mode: {row['translator']}, "
-           f"MLP: {row['mlp_linearize']}, MLP Mode: {row['mlp_mode']}, "
-           f"Attn: {row['attn_linearize']} Heads: {row['head_dict']}")
-
-    # Transfer rows differ from their same-dataset control ONLY in fit_dataset -- same model,
-    # dataset, span and translator. Without this the four transfer sources collapse into one
-    # group and get averaged into a single meaningless number.
-    #
-    # Appended only when it actually differs, so keys for ordinary runs are unchanged and stay
-    # comparable with previously generated summaries.
-    fit = row.get("fit_dataset")
-    if isinstance(fit, str) and fit and fit != row["dataset"]:
-        key += f", Translator fit on: {fit}"
-    return key
+# One row per unique config -- same fields a config CSV / results row already carries, so a
+# summary row reads the same way as the raw data instead of needing a string parsed back apart.
+# fit_dataset is included whenever the column exists: two transfer rows that only differ in
+# fit_dataset (translator fitted on a different dataset than it's evaluated on) must NOT be
+# averaged together as if they were the same config.
+CONFIG_COLS = [
+    "model", "dataset", "approx_layer", "translator",
+    "mlp_linearize", "mlp_mode", "attn_linearize", "attn_mode", "head_dict",
+]
 
 
 def accuracies(input_path, output_path):
     tab = pd.read_csv(input_path)
     tab.reset_index(inplace=True)
-    tab["skip_config"] = tab.apply(_config_key, axis=1)
-    accuracies = tab[["skip_config", "seed", "accuracy","index"]].groupby(["skip_config"]).agg({"accuracy": ["mean", "std"], "index": ["first"]}).reset_index().sort_values(by=("index", "first"), ascending=True)
-    accuracies.columns = ["skip_config", "accuracy_mean", "accuracy_std", "order"]
+
+    config_cols = CONFIG_COLS + (["fit_dataset"] if "fit_dataset" in tab.columns else [])
+
+    # orig_head_accuracy (frozen pretrained head, no retraining) is a newer column and won't
+    # exist in results CSVs written before it was added -- aggregated only when present so
+    # older sweeps keep summarizing exactly as before.
+    agg_cols = ["accuracy"]
+    if "orig_head_accuracy" in tab.columns:
+        agg_cols.append("orig_head_accuracy")
+
+    # NaN in a groupby key drops the whole group in pandas -- fit_dataset is blank/NaN for
+    # every ordinary (non-transfer) row, which would silently discard almost everything.
+    tab[config_cols] = tab[config_cols].fillna("")
+
+    accuracies = (
+        tab[config_cols + ["seed", "index"] + agg_cols]
+        .groupby(config_cols, dropna=False)
+        .agg({**{c: ["mean", "std"] for c in agg_cols}, "index": ["first"]})
+        .reset_index()
+        .sort_values(by=("index", "first"), ascending=True)
+    )
+    flat_cols = list(config_cols)
+    for c in agg_cols:
+        flat_cols += [f"{c}_mean", f"{c}_std"]
+    flat_cols += ["order"]
+    accuracies.columns = flat_cols
     accuracies.to_csv(output_path, index=False)
     return accuracies
 

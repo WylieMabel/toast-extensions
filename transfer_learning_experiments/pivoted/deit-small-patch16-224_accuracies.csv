@@ -1,0 +1,17 @@
+config_key,accuracy_mean,accuracy_std,model
+"Encoder: facebook/deit-small-patch16-224, Block: [(10, 11)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6417034428446188,0.008067403260745083,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(10, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.687540919004125,0.05725476108027613,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(2, 3)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6473201682045796,0.002923234825328945,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(2, 3)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6886677827019511,0.059915204005068265,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(3, 4), (9, 10)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6435013893222782,0.0022630697470685315,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(3, 4), (9, 10)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6821694584557777,0.05090980101424726,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(3, 4), (9, 11)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6489992421878482,0.0008609284498652254,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(3, 4), (9, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6784239202319843,0.04209158149230756,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(8, 9)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6428475906031293,0.0064639993040486446,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(8, 9)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6851796277799577,0.056460051873679765,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(9, 10)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6412576709906537,0.006377238587039552,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(9, 10)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6838973201654831,0.05313012975540505,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(9, 11)], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6511092289632833,0.00047664942814438756,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [(9, 11)], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6837873662269418,0.04529481509440688,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [], Block Mode: identity, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.7195231042599407,0.05423096781061419,facebook/deit-small-patch16-224
+"Encoder: facebook/deit-small-patch16-224, Block: [], Block Mode: linear, MLP: [], MLP Mode: identity, Attn: [], Heads: {}",0.6424018187491641,0.0055753568080923206,facebook/deit-small-patch16-224
