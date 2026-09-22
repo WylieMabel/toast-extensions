@@ -2,8 +2,8 @@
 #SBATCH -p gpu
 #SBATCH --gres=gpu:rtx4090:1
 #SBATCH --cpus-per-task=2
-#SBATCH --mem=48000
-#SBATCH --time=72:00:00
+#SBATCH --mem=96000
+#SBATCH --time=12:00:00
 # Log naming: use LOG_PREFIX if provided, otherwise %j keeps concurrent submissions from
 # writing over each other's logs. This script is routinely run several times at once,
 # one per config shard.
@@ -191,6 +191,20 @@ for i in $(seq 1 "$NUM_ROWS"); do
         cleanup_row_embeddings "$TEMP_CSV"
         [ "$ROW_FAILED" -eq 1 ] && break
     done
+
+    # Delete any translator this sweep saved that no later row still needs, right after this
+    # row finishes rather than waiting for the whole file -- see sweep_translators.py. Matters
+    # when several small sweeps run concurrently: each one's peak translator count is bounded to
+    # "fit but not yet fully consumed", not "every span this file will ever fit".
+    ROW_GC=$(python src/toast/scripts/sweep_translators.py "$SWEEP_CSV" "$SAMPLES" "$((i - 1))" 2>/dev/null)
+    if [ -n "$ROW_GC" ]; then
+        echo "$ROW_GC" | while IFS= read -r d; do
+            if [ -n "$d" ] && [ -d "$d" ]; then
+                echo "  [translator gc] no longer needed after row $i, deleting: $d"
+                rm -rf "$d"
+            fi
+        done
+    fi
 
     rm -f "$TEMP_CSV"
 done

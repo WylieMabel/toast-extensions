@@ -1,0 +1,4 @@
+"dataset","encoder","skip","mlp_skip","attn_skip","head_dict","skip_translator","mlp_mode","attn_mode","fit_dataset"
+"patchcamelyon","google/vit-large-patch16-224","[(0, 3)]","[]","[]","{}","linear","identity","identity",""
+"patchcamelyon","google/vit-large-patch16-224","[(1, 4)]","[]","[]","{}","linear","identity","identity",""
+"patchcamelyon","google/vit-large-patch16-224","[(2, 6)]","[]","[]","{}","linear","identity","identity",""

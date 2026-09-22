@@ -48,11 +48,14 @@ MODEL_ALIASES = {
     "deitbase": "facebook/deit-base-patch16-224",
     "dinosmall": "facebook/dinov2-small",
     "dinobase": "facebook/dinov2-base",
+    "dinov2base": "facebook/dinov2-base",  # stem used across metric_experiments/
     "raddino": "microsoft/rad-dino",
+    "raddinomaira2": "microsoft/rad-dino-maira-2",
     "vittiny": "WinKawaks/vit-tiny-patch16-224",
     "vitsmall": "WinKawaks/vit-small-patch16-224",
     "vitbase": "google/vit-base-patch16-224",
     "vitlarge": "google/vit-large-patch16-224",
+    "phikonv2": "owkin/phikon-v2",  # stem used across metric_experiments/ (see group2's alias)
 }
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -71,14 +74,41 @@ def _collate(samples, processor, image_col, label_col):
     return pixel_values, labels
 
 
-def _load_dataset(dataset_name: str, num_samples: int, hf_id: str):
+def _load_dataset(dataset_name: str, num_samples: int, hf_id: str, split: str = None,
+                   shuffle: bool = False, shuffle_seed: int = 0):
+    """Load a calibration DataLoader for `dataset_name`.
+
+    `split` defaults to "validation" (falling back to "test") -- the calibration source
+    used by every existing caller. Pass split="train" explicitly for calibration that must
+    be label-independent of the test/validation ground truth (e.g. fitting a linear probe
+    whose accuracy will be compared against test-split accuracy -- see output_level_eval.py).
+
+    `shuffle` (default False, preserving every existing caller's deterministic contiguous
+    slice) randomly permutes the split (fixed `shuffle_seed`, so still reproducible) before
+    taking the first `num_samples` rows. The label-free similarity metrics never needed this
+    -- a contiguous slice is fine when nothing reads labels -- but some datasets store
+    examples grouped by class (e.g. chestxray_pneumonia's train split is normal-then-pneumonia),
+    so a labeled calibration set (a linear probe) MUST shuffle first or it can land entirely
+    inside one class and fail to fit.
+    """
     if dataset_name not in DATASET2LOCAL_PATH:
         raise ValueError(
             f"Unknown dataset '{dataset_name}'. Known: {sorted(DATASET2LOCAL_PATH)}"
         )
     raw = load_from_disk(DATASET2LOCAL_PATH[dataset_name])
-    split = "validation" if "validation" in raw else "test"
+    if split is not None:
+        if split not in raw:
+            raise ValueError(
+                f"Dataset '{dataset_name}' has no '{split}' split. Available: {sorted(raw.keys())}"
+            )
+    else:
+        split = "validation" if "validation" in raw else "test"
     ds = raw[split]
+    if shuffle:
+        # keep_in_memory=True: by default .shuffle() writes its permuted-indices cache file
+        # next to the dataset on disk, which fails when the dataset directory is read-only
+        # (as on the cluster). Doing it in memory avoids that write entirely.
+        ds = ds.shuffle(seed=shuffle_seed, keep_in_memory=True)
     n = min(num_samples, len(ds))
     ds = ds.select(range(n))
 

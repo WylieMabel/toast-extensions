@@ -43,6 +43,7 @@ from toast.utils.utils import (
     image_encode,
     extract_representations,
     open_clip_image_encode,
+    memlog,
 )
 from toast.modules.module import SkipModel, MLPLinearisedEncoder, AttentionLinearisedEncoder, HeadPrunedEncoder
 
@@ -83,10 +84,23 @@ def encode_data(loader, skip_encoder):
     can score the pretrained head in the space it actually expects, without touching what
     every other sweep in this repo has always trained/evaluated on.
     """
-    embeddings = []
-    cls_embeddings = []
+    # embeddings/cls_embeddings are accumulated as per-batch CPU tensors and only converted to
+    # numpy once, at the very end (mirroring extract_representations' pattern below) -- the
+    # previous version called .tolist() per batch and .extend()-ed into a plain Python list,
+    # i.e. every one of a full split's samples (patchcamelyon's train split is 262,144 images)
+    # ended up as individually-boxed Python float objects rather than a packed array. Confirmed
+    # via TOAST_MEMLOG=1 debug runs (src/run_scripts/debug_single_row.sh) as the dominant cost
+    # in the group2 host-RAM OOMs ("Killed", no CUDA traceback): peak RSS scaled with train
+    # split size on top of a fixed ~29GB extract_representations floor, and already exceeded
+    # the sweep's 48G at only 190k-262k training images. Dataset.from_dict accepts numpy arrays
+    # directly, and train_skipped_full.py calls .set_format("torch") on load regardless of how
+    # the column was stored, so this is a pure memory-representation change with no downstream
+    # effect on what gets read back.
+    embeddings_chunks = []
+    cls_embeddings_chunks = []
     labels = []
     skip_encoder.eval()
+    n_batches = 0
     for batch in tqdm(loader, desc="Encoding Batches"):
         image_input = batch.get("pixel_values", batch.get("images"))
         if image_input is None:
@@ -100,9 +114,16 @@ def encode_data(loader, skip_encoder):
         cls = sequence_output[:, 0, :]
         pooled = skip_encoder.pooler_module(sequence_output) if skip_encoder.pooler_module else cls
 
-        embeddings.extend(pooled.cpu().tolist())
-        cls_embeddings.extend(cls.cpu().tolist())
+        embeddings_chunks.append(pooled.cpu())
+        cls_embeddings_chunks.append(cls.cpu())
         labels.extend(batch["labels"].tolist())
+        n_batches += 1
+        if n_batches % 2000 == 0:
+            memlog(f"encode_data batch={n_batches} n_samples_so_far={len(labels)}")
+
+    embeddings = torch.cat(embeddings_chunks, dim=0).numpy()
+    cls_embeddings = torch.cat(cls_embeddings_chunks, dim=0).numpy()
+    memlog(f"encode_data done n_embeddings={len(embeddings)}")
     return embeddings, cls_embeddings, labels
 
 
@@ -150,6 +171,7 @@ def run_encoding(
     reduced_heads: bool = False,
     samples_to_extract: int = 500,
     batch_size: int = 8,
+    num_workers: int = 1,
     mode: int = 1,
 ):
     seed_everything(seed)
@@ -224,6 +246,7 @@ def run_encoding(
 
     for (ds_name, enc_name), config_rows in groups.items():
         print(f"\n=== dataset={ds_name} | encoder={enc_name} | {len(config_rows)} configs ===")
+        memlog(f"row start ds={ds_name} enc={enc_name}")
 
         if enc_name not in MODEL2CONFIGS:
             raise ValueError(f"Model config not found for {enc_name}.")
@@ -241,6 +264,9 @@ def run_encoding(
             if not os.path.exists(dataset_path):
                 raise ValueError(f"Dataset path does not exist: {dataset_path}")
             raw_data = load_from_disk(dataset_path)
+        memlog(f"dataset loaded ds={ds_name} "
+               f"train_n={len(raw_data['train']) if 'train' in raw_data else '?'} "
+               f"test_n={len(raw_data['test']) if 'test' in raw_data else '?'}")
 
         label_col = DATASET2LABEL_COLUMN[ds_name]
 
@@ -278,6 +304,7 @@ def run_encoding(
                 )
 
             encoder.eval().to(device)
+            memlog(f"encoder loaded enc={enc_name}")
         except Exception as e:
             print(f"✗ Error loading encoder '{enc_name}': {e}")
             import traceback
@@ -300,12 +327,15 @@ def run_encoding(
             # easier or harder sample of test images.
             train_loader = DataLoader(
                 raw_data["train"], batch_size=batch_size, pin_memory=True,
-                shuffle=True, num_workers=1, collate_fn=collate_fn,
+                shuffle=True, num_workers=num_workers, collate_fn=collate_fn,
+                persistent_workers=num_workers > 0,
             )
             test_loader = DataLoader(
                 raw_data["test"], batch_size=batch_size, pin_memory=True,
-                shuffle=False, num_workers=1, collate_fn=collate_fn,
+                shuffle=False, num_workers=num_workers, collate_fn=collate_fn,
+                persistent_workers=num_workers > 0,
             )
+            memlog(f"loaders built batch_size={batch_size} num_workers={num_workers}")
         except Exception as e:
             print(f"✗ Error creating data loaders: {e}")
             import traceback
@@ -402,10 +432,13 @@ def run_encoding(
                     **model_config,
                 ).to(device).eval()
 
+                memlog(f"before full-split encode_data: train_n={len(raw_data['train'])} "
+                       f"test_n={len(raw_data['test'])}")
                 split2encoding = {
                     "train": encode_data(loader=train_loader, skip_encoder=skip_encoder),
                     "test":  encode_data(loader=test_loader,  skip_encoder=skip_encoder),
                 }
+                memlog("after full-split encode_data (train+test)")
 
                 valid = True
                 for split, (enc, cls_enc, lbls) in split2encoding.items():

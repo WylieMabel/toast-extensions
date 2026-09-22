@@ -1,0 +1,145 @@
+model,dataset,approx_layer,translator,mlp_linearize,mlp_mode,attn_linearize,attn_mode,head_dict,fit_dataset,accuracy_mean,accuracy_std,orig_head_accuracy_mean,orig_head_accuracy_std,order
+facebook/dinov2-base,cifar100,[],linear,[],identity,[],identity,{},cifar100,0.8695666666666666,0.0020207259421636,,,0
+facebook/dinov2-base,imagenet-1k,[],linear,[],identity,[],identity,{},imagenet-1k,0.7476666666666666,0.0037447741364912,,,1
+facebook/dinov2-base,chestxray_pneumonia,[],linear,[],identity,[],identity,{},chestxray_pneumonia,0.827991452991453,0.0457877365685891,,,2
+facebook/dinov2-base,chestxray14,[],linear,[],identity,[],identity,{},chestxray14,0.5941848019978595,0.0789084900313913,,,3
+microsoft/rad-dino,cifar100,[],linear,[],identity,[],identity,{},cifar100,0.2936,0.0090901045098502,,,4
+microsoft/rad-dino,imagenet-1k,[],linear,[],identity,[],identity,{},imagenet-1k,0.079,0.0029308701779505,,,5
+microsoft/rad-dino,chestxray_pneumonia,[],linear,[],identity,[],identity,{},chestxray_pneumonia,0.9455128205128204,0.0057781270440128,,,6
+microsoft/rad-dino,chestxray14,[],linear,[],identity,[],identity,{},chestxray14,0.6908966583422523,0.0096078675757463,,,7
+microsoft/rad-dino-maira-2,cifar100,[],linear,[],identity,[],identity,{},cifar100,0.3072666666666666,0.0208072903890279,,,8
+microsoft/rad-dino-maira-2,imagenet-1k,[],linear,[],identity,[],identity,{},imagenet-1k,0.0734666666666666,0.0017214335111567,,,9
+microsoft/rad-dino-maira-2,chestxray_pneumonia,[],linear,[],identity,[],identity,{},chestxray_pneumonia,0.9011752136752136,0.0358463655337769,,,10
+microsoft/rad-dino-maira-2,chestxray14,[],linear,[],identity,[],identity,{},chestxray14,0.646063741229635,0.0081482580362208,,,11
+facebook/dinov2-base,cifar100,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.8624999999999999,0.0007,,,12
+facebook/dinov2-base,imagenet-1k,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.3560333333333333,0.0034122328955294,,,13
+facebook/dinov2-base,chestxray_pneumonia,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.7617521367521367,0.000925240816009,,,14
+facebook/dinov2-base,chestxray14,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.6023605660601735,0.0649742972750319,,,15
+microsoft/rad-dino,cifar100,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.3039666666666666,0.006610849668033,,,16
+microsoft/rad-dino,imagenet-1k,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.0760666666666666,0.002494660965609,,,17
+microsoft/rad-dino,chestxray_pneumonia,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.9412393162393164,0.0136296483142874,,,18
+microsoft/rad-dino,chestxray14,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.6965750981091688,0.0045748550136397,,,19
+microsoft/rad-dino-maira-2,cifar100,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.3116333333333333,0.012890823609581,,,20
+microsoft/rad-dino-maira-2,imagenet-1k,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.0610666666666666,0.0006658328118479,,,21
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.8514957264957265,0.0266398667516916,,,22
+microsoft/rad-dino-maira-2,chestxray14,"[(0, 1)]",linear,[],identity,[],identity,{},cifar100,0.6296527530027352,0.0266379101411091,,,23
+facebook/dinov2-base,cifar100,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.8535333333333334,0.001950213663508,,,24
+facebook/dinov2-base,imagenet-1k,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.5240666666666667,0.002112660250332,,,25
+facebook/dinov2-base,chestxray_pneumonia,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.8066239316239315,0.0115932341956254,,,26
+facebook/dinov2-base,chestxray14,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.5893090736116066,0.0789570326407888,,,27
+microsoft/rad-dino,cifar100,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.2995333333333333,0.0071451615330469,,,28
+microsoft/rad-dino,imagenet-1k,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.0815,0.0035594943461115,,,29
+microsoft/rad-dino,chestxray_pneumonia,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.9465811965811968,0.0104269344529609,,,30
+microsoft/rad-dino,chestxray14,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.695802116779641,0.0047500211719449,,,31
+microsoft/rad-dino-maira-2,cifar100,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.3120666666666666,0.0146302198661993,,,32
+microsoft/rad-dino-maira-2,imagenet-1k,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.0692333333333333,0.001040832999733,,,33
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.8958333333333334,0.0289793931410658,,,34
+microsoft/rad-dino-maira-2,chestxray14,"[(1, 2)]",linear,[],identity,[],identity,{},cifar100,0.6476691639909621,0.0095497348480472,,,35
+facebook/dinov2-base,cifar100,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.8601666666666666,0.0016921386861996,,,36
+facebook/dinov2-base,imagenet-1k,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.4848666666666667,0.0050202921561731,,,37
+facebook/dinov2-base,chestxray_pneumonia,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.780448717948718,0.0182016293134624,,,38
+facebook/dinov2-base,chestxray14,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.6418123439172315,0.0380870152296372,,,39
+microsoft/rad-dino,cifar100,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.3014333333333333,0.0074473709007496,,,40
+microsoft/rad-dino,imagenet-1k,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.0848999999999999,0.0027404379212089,,,41
+microsoft/rad-dino,chestxray_pneumonia,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.9524572649572648,0.0093901687132729,,,42
+microsoft/rad-dino,chestxray14,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.6933642525865146,0.009662632520492,,,43
+microsoft/rad-dino-maira-2,cifar100,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.3029,0.0113026545554573,,,44
+microsoft/rad-dino-maira-2,imagenet-1k,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.0706666666666666,0.0013316656236958,,,45
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.9011752136752138,0.0344582338095516,,,46
+microsoft/rad-dino-maira-2,chestxray14,"[(2, 3)]",linear,[],identity,[],identity,{},cifar100,0.645677250564871,0.0103922158150037,,,47
+facebook/dinov2-base,cifar100,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.8504333333333333,0.0041356176483486,,,48
+facebook/dinov2-base,imagenet-1k,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.6700333333333334,0.0043143172499636,,,49
+facebook/dinov2-base,chestxray_pneumonia,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.7783119658119658,0.006476685712063,,,50
+facebook/dinov2-base,chestxray14,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.5988226899750267,0.0718588743253435,,,51
+microsoft/rad-dino,cifar100,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.2997666666666667,0.0052166400425305,,,52
+microsoft/rad-dino,imagenet-1k,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.0805,0.001682260384126,,,53
+microsoft/rad-dino,chestxray_pneumonia,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.951388888888889,0.0033360032042726,,,54
+microsoft/rad-dino,chestxray14,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.6943750743251278,0.0097606524373104,,,55
+microsoft/rad-dino-maira-2,cifar100,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.3026,0.0156489616268939,,,56
+microsoft/rad-dino-maira-2,imagenet-1k,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.0757999999999999,0.001044030650891,,,57
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.9011752136752136,0.0369053962594355,,,58
+microsoft/rad-dino-maira-2,chestxray14,"[(3, 4)]",linear,[],identity,[],identity,{},cifar100,0.6436258770365085,0.0078630786538134,,,59
+facebook/dinov2-base,cifar100,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.8444666666666666,0.0018339392937971,,,60
+facebook/dinov2-base,imagenet-1k,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.6744,0.0006082762530298,,,61
+facebook/dinov2-base,chestxray_pneumonia,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.780982905982906,0.0454499535713799,,,62
+facebook/dinov2-base,chestxray14,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.641009632536568,0.0436985333945649,,,63
+microsoft/rad-dino,cifar100,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.3028333333333333,0.008637322115872,,,64
+microsoft/rad-dino,imagenet-1k,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.0833666666666666,0.0009451631252505,,,65
+microsoft/rad-dino,chestxray_pneumonia,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.9476495726495728,0.0091125652292905,,,66
+microsoft/rad-dino,chestxray14,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.6958615768819122,0.0116303412862668,,,67
+microsoft/rad-dino-maira-2,cifar100,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.3024333333333333,0.0088635959595038,,,68
+microsoft/rad-dino-maira-2,imagenet-1k,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.0749,0.0023811761799581,,,69
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.8979700854700855,0.0370443129221918,,,70
+microsoft/rad-dino-maira-2,chestxray14,"[(4, 5)]",linear,[],identity,[],identity,{},cifar100,0.6452015697467,0.0038630766727983,,,71
+facebook/dinov2-base,cifar100,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.8536666666666667,0.0034588051886935,,,72
+facebook/dinov2-base,imagenet-1k,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.6938,0.0019078784028338,,,73
+facebook/dinov2-base,chestxray_pneumonia,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.7852564102564102,0.0073438713060189,,,74
+facebook/dinov2-base,chestxray14,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.5998037816625045,0.0402630077306661,,,75
+microsoft/rad-dino,cifar100,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.3022666666666667,0.0071842420152256,,,76
+microsoft/rad-dino,imagenet-1k,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.0847333333333333,0.0014571661996262,,,77
+microsoft/rad-dino,chestxray_pneumonia,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.9465811965811968,0.0075734224779689,,,78
+microsoft/rad-dino,chestxray14,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.6974967296943752,0.0111117234434899,,,79
+microsoft/rad-dino-maira-2,cifar100,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.3147333333333333,0.0129881997726141,,,80
+microsoft/rad-dino-maira-2,imagenet-1k,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.0794333333333333,0.0016165807537309,,,81
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.8958333333333334,0.0408889449428624,,,82
+microsoft/rad-dino-maira-2,chestxray14,"[(5, 6)]",linear,[],identity,[],identity,{},cifar100,0.6397015102865977,0.0167383884307066,,,83
+facebook/dinov2-base,cifar100,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.8504999999999999,0.0019078784028338,,,84
+facebook/dinov2-base,imagenet-1k,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.7086333333333333,0.0021594752448993,,,85
+facebook/dinov2-base,chestxray_pneumonia,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.7996794871794872,0.0120990936462671,,,86
+facebook/dinov2-base,chestxray14,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.575454869782376,0.0554063274636397,,,87
+microsoft/rad-dino,cifar100,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.2997,0.0047570999569065,,,88
+microsoft/rad-dino,imagenet-1k,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.0815333333333333,0.0023437861108329,,,89
+microsoft/rad-dino,chestxray_pneumonia,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.9476495726495728,0.0056280201671222,,,90
+microsoft/rad-dino,chestxray14,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.7006778451658936,0.0092976189753999,,,91
+microsoft/rad-dino-maira-2,cifar100,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.3022,0.0181843339168637,,,92
+microsoft/rad-dino-maira-2,imagenet-1k,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.0785,0.0038196858509568,,,93
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.8883547008547007,0.0314173417789158,,,94
+microsoft/rad-dino-maira-2,chestxray14,"[(6, 7)]",linear,[],identity,[],identity,{},cifar100,0.6378285170650494,0.0221689717164581,,,95
+facebook/dinov2-base,cifar100,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.7808,0.0052258970521815,,,96
+facebook/dinov2-base,imagenet-1k,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.2467666666666666,0.0095322260429205,,,97
+facebook/dinov2-base,chestxray_pneumonia,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.780982905982906,0.0329338945337571,,,98
+facebook/dinov2-base,chestxray14,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.6666072065643953,0.0126988738712506,,,99
+microsoft/rad-dino,cifar100,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.2961333333333333,0.0031879983270593,,,100
+microsoft/rad-dino,imagenet-1k,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.0804,0.001819340539866,,,101
+microsoft/rad-dino,chestxray_pneumonia,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.9439102564102564,0.0073438713060188,,,102
+microsoft/rad-dino,chestxray14,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.6982994410750386,0.0095933674187852,,,103
+microsoft/rad-dino-maira-2,cifar100,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.3122666666666666,0.0041283572196859,,,104
+microsoft/rad-dino-maira-2,imagenet-1k,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.0767666666666666,0.0010066445913694,,,105
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.8824786324786325,0.0515152284241076,,,106
+microsoft/rad-dino-maira-2,chestxray14,"[(7, 8)]",linear,[],identity,[],identity,{},cifar100,0.639582590082055,0.0143596146985372,,,107
+facebook/dinov2-base,cifar100,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.8518666666666667,0.0033471380810079,,,108
+facebook/dinov2-base,imagenet-1k,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.6728999999999999,0.0058949130612757,,,109
+facebook/dinov2-base,chestxray_pneumonia,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.8012820512820512,0.0220316139180569,,,110
+facebook/dinov2-base,chestxray14,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.5919253181115471,0.0887415732096172,,,111
+microsoft/rad-dino,cifar100,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.2939333333333333,0.0068127331764376,,,112
+microsoft/rad-dino,imagenet-1k,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.0833,0.0031432467291003,,,113
+microsoft/rad-dino,chestxray_pneumonia,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.9497863247863249,0.00882623485142,,,114
+microsoft/rad-dino,chestxray14,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.700558924961351,0.0078822770496677,,,115
+microsoft/rad-dino-maira-2,cifar100,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.3047,0.021519526017085,,,116
+microsoft/rad-dino-maira-2,imagenet-1k,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.0778,0.0013892443989449,,,117
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.9102564102564102,0.0162642493030323,,,118
+microsoft/rad-dino-maira-2,chestxray14,"[(8, 9)]",linear,[],identity,[],identity,{},cifar100,0.6465988821500773,0.0082177647423311,,,119
+facebook/dinov2-base,cifar100,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.8345666666666668,0.0009018499505645,,,120
+facebook/dinov2-base,imagenet-1k,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.6486999999999999,0.0065642973729104,,,121
+facebook/dinov2-base,chestxray_pneumonia,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.8285256410256411,0.0178453985988142,,,122
+facebook/dinov2-base,chestxray14,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.6065822333214413,0.0441716429604201,,,123
+microsoft/rad-dino,cifar100,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.2977,0.0066022723360976,,,124
+microsoft/rad-dino,imagenet-1k,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.0824666666666666,0.0019295940851208,,,125
+microsoft/rad-dino,chestxray_pneumonia,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.9471153846153848,0.008479972150848,,,126
+microsoft/rad-dino,chestxray14,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.6984183612795815,0.0072597351592161,,,127
+microsoft/rad-dino-maira-2,cifar100,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.3077666666666667,0.0120504495075218,,,128
+microsoft/rad-dino-maira-2,imagenet-1k,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.0736,0.0015716233645501,,,129
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.9049145299145298,0.0259067428482524,,,130
+microsoft/rad-dino-maira-2,chestxray14,"[(9, 10)]",linear,[],identity,[],identity,{},cifar100,0.6557854679510049,0.0087430616400005,,,131
+facebook/dinov2-base,cifar100,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.8304666666666667,0.0025146238950056,,,132
+facebook/dinov2-base,imagenet-1k,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.6308333333333334,0.0030615900008547,,,133
+facebook/dinov2-base,chestxray_pneumonia,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.8210470085470085,0.0118126839676795,,,134
+facebook/dinov2-base,chestxray14,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.5931739802592461,0.0946657722643438,,,135
+microsoft/rad-dino,cifar100,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.2893333333333334,0.0053153864707407,,,136
+microsoft/rad-dino,imagenet-1k,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.0807333333333333,0.0027682726262659,,,137
+microsoft/rad-dino,chestxray_pneumonia,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.941239316239316,0.007573422477969,,,138
+microsoft/rad-dino,chestxray14,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.6970507789273398,0.0065208514587473,,,139
+microsoft/rad-dino-maira-2,cifar100,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.286,0.0119578426147863,,,140
+microsoft/rad-dino-maira-2,imagenet-1k,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.0742999999999999,0.001153256259467,,,141
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.921474358974359,0.0184816708247928,,,142
+microsoft/rad-dino-maira-2,chestxray14,"[(10, 11)]",linear,[],identity,[],identity,{},cifar100,0.658342252348674,0.0076216278240027,,,143

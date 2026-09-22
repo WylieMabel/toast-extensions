@@ -1,0 +1,13 @@
+model,dataset,rho,pval,n,sig
+vitlarge,imagenet-1k,0.981,5.099744097930607e-47,66,True
+vitlarge,cifar10,0.695,9.19819077882454e-11,66,True
+vitlarge,cifar100,0.698,7.47312394882208e-11,66,True
+vitlarge,pathmnist,0.251,0.10042089647620835,44,False
+deitsmall,imagenet-1k,0.969,2.4539167365290584e-31,51,True
+deitsmall,cifar10,0.853,1.8817492307479648e-15,51,True
+deitsmall,cifar100,0.836,2.1883065019421583e-14,51,True
+deitsmall,pathmnist,-0.018,0.902677280806891,51,False
+vitsmall,imagenet-1k,0.968,3.0789198339180112e-31,51,True
+vitsmall,cifar10,0.927,1.5602289107112353e-22,51,True
+vitsmall,cifar100,0.918,2.288079121535611e-21,51,True
+vitsmall,pathmnist,-0.141,0.32540376958121575,51,False

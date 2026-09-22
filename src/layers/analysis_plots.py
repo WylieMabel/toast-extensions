@@ -115,13 +115,20 @@ def main(stem, output_dir, plot_dir):
         print("No sublayer split for this architecture.")
 
     # ----- Angular-distance heatmap + best spans -----
+    # angdist/cka are (num_layers+1) x (num_layers+1), index 0 = embedding output (H0).
+    # Drop that row/col here -- the embedding is not a block and was never a meaningful
+    # comparison point; plot block-output-to-block-output only (block i's output = H[i+1],
+    # so angdist[1:, 1:][i, j] == angdist[i+1, j+1], i.e. block i vs block j).
+    block_angdist = angdist[1:, 1:]
+    block_cka = cka[1:, 1:]
+
     fig, ax = plt.subplots(figsize=(7, 6))
-    im = ax.imshow(angdist, cmap="viridis", origin="lower")
-    ax.set_xlabel("hidden state j"); ax.set_ylabel("hidden state i")
+    im = ax.imshow(block_angdist, cmap="viridis", origin="lower")
+    ax.set_xlabel("block j (output)"); ax.set_ylabel("block i (output)")
     ax.set_title(f"{stem} — angular distance d(i, j)")
     fig.colorbar(im, ax=ax, fraction=.046)
     for k, (s, e, d) in sorted(span.items()):
-        ax.plot(e + 1, s + 1, "r.", ms=8)
+        ax.plot(e, s, "r.", ms=8)
     fig.tight_layout(); _save(fig, "angular_distance.png")
 
     print("Best placement per number of blocks dropped  (skip = [(skip_from, skip_to)]):")
@@ -131,8 +138,8 @@ def main(stem, output_dir, plot_dir):
 
     # ----- CKA heatmap -----
     fig, ax = plt.subplots(figsize=(7, 6))
-    im = ax.imshow(cka, cmap="magma", origin="lower", vmin=0, vmax=1)
-    ax.set_xlabel("hidden state j"); ax.set_ylabel("hidden state i")
+    im = ax.imshow(block_cka, cmap="magma", origin="lower", vmin=0, vmax=1)
+    ax.set_xlabel("block j (output)"); ax.set_ylabel("block i (output)")
     ax.set_title(f"{stem} — linear CKA")
     fig.colorbar(im, ax=ax, fraction=.046)
     fig.tight_layout(); _save(fig, "cka.png")

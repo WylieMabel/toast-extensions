@@ -135,3 +135,43 @@ def sweep_saved_translator_dirs(rows, samples) -> set:
         for skip_from, skip_to in _parse(row.get("skip"), []) or []:
             dirs.add(span_translator_key(key, skip_from, skip_to))
     return dirs
+
+
+def _span_dirs(row, samples) -> set:
+    """Span directory names implied by row's own (fit_dataset, encoder, translator) + skips."""
+    _, fit_dataset, translator = _row_fields(row)
+    key = translator_store_key(fit_dataset, row.get("encoder"), translator, samples)
+    return {span_translator_key(key, a, b) for a, b in (_parse(row.get("skip"), []) or [])}
+
+
+def translators_ready_for_cleanup(rows, samples, completed_through) -> set:
+    """Dirs this sweep has saved that no row after `completed_through` still needs.
+
+    Call after each row finishes (completed_through = its 0-based index in `rows`) instead of
+    waiting for the whole sweep to end. sweep_saved_translator_dirs only tells you what a sweep
+    *will eventually* delete; grouping several fits into one file (e.g. one model per skip) then
+    keeps every one of them on disk for the file's entire runtime even though each is only
+    needed for the few rows right after it fits. Deleting as soon as the last consumer for a
+    span has run instead bounds how many translators are ever on disk at once to "spans
+    currently fit-but-not-yet-fully-consumed", which is what actually matters when many small
+    sweeps run concurrently and each one's peak, not the file-end total, is the shared resource.
+
+    requirements is computed over the *whole* sweep, same as sweep_saved_translator_dirs, so a
+    span already known to be required later is never flagged early just because this prefix
+    alone wouldn't ask for it.
+    """
+    requirements = transfer_requirements(rows)
+
+    saved_so_far = set()
+    for row in rows[:completed_through + 1]:
+        if row_saves_translator(row, requirements):
+            saved_so_far |= _span_dirs(row, samples)
+
+    still_needed = set()
+    for row in rows[completed_through + 1:]:
+        dataset, fit_dataset, translator = _row_fields(row)
+        if translator and translator != "identity" and fit_dataset != dataset \
+                and (fit_dataset, config_signature(row)) in requirements:
+            still_needed |= _span_dirs(row, samples)
+
+    return saved_so_far - still_needed

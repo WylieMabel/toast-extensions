@@ -31,6 +31,11 @@ DATASET2INPUT_COLUMN = {
     "breastmnist": "image",
     "bloodmnist": "image",
     "tissuemnist": "image",
+    "octmnist": "image",
+    "chestxray14": "image",
+    "chestxray_pneumonia": "image",
+    "patchcamelyon": "image",
+    "tcga_ut": "image",
     # text data
     "sst2": "sentence",
     "ag_news": "text",
@@ -54,6 +59,11 @@ DATASET2LABEL_COLUMN = {
     "breastmnist": "label",
     "bloodmnist": "label",
     "tissuemnist": "label",
+    "octmnist": "label",
+    "chestxray14": "label",
+    "chestxray_pneumonia": "label",
+    "patchcamelyon": "label",
+    "tcga_ut": "label",
     # text data
     "sst2": "label",
     "ag_news": "label",
@@ -77,6 +87,11 @@ DATASET2NUM_CLASSES = {
     "breastmnist": 2,
     "bloodmnist": 8,
     "tissuemnist": 8,
+    "octmnist": 4,
+    "chestxray14": 2,  # Binary: any pathology vs "No Finding", same convention as chestmnist
+    "chestxray_pneumonia": 2,
+    "patchcamelyon": 2,
+    "tcga_ut": 31,
     # text data
     "sst2": 2,
     "ag_news": 4,
@@ -150,6 +165,12 @@ DATASET2LOCAL_PATH = {
     "breastmnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_breastmnist_clean",
     "bloodmnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_bloodmnist_clean",
     "tissuemnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_tissuemnist_clean",
+    "octmnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_octmnist_clean",
+    # Real (non-MedMNIST) medical datasets, see claude_out/download_medical_datasets.py
+    "chestxray14": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/chestxray14_clean",
+    "chestxray_pneumonia": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/chestxray_pneumonia_clean",
+    "patchcamelyon": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/patchcamelyon_clean",
+    "tcga_ut": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/tcga_ut_clean",
 }
 
 # Text dataset configurations with full HuggingFace loading details
@@ -193,6 +214,8 @@ MODEL2NUM_LAYERS = {
     "facebook/dinov2-small": 12,
     "facebook/dinov2-base": 12,
     "microsoft/rad-dino": 12,
+    "microsoft/rad-dino-maira-2": 12,  # finetuned from dinov2-base, same depth
+    "owkin/phikon-v2": 24,  # ViT-L/16 trained from scratch with the DINOv2 recipe
 
     "openai/clip-vit-base-patch32": 12,
     # TIMM (DC-ViT Table 5 checkpoints)
@@ -224,6 +247,27 @@ MODEL2CONFIGS = {
         "layers_accept_masks": False,
     },
     "microsoft/rad-dino": {
+        "embeddings_path": "embeddings",
+        "layers_parent_path": "encoder",
+        "layers_attribute_name": "layer",
+        "pre_norm_path": None,
+        "post_norm_path": "layernorm",
+        "pooler_path": None,
+        "layers_accept_masks": False,
+    },
+    # Same Dinov2Model class/module layout as facebook/dinov2-base and microsoft/rad-dino
+    # above -- rad-dino-maira-2 is finetuned from dinov2-base, phikon-v2 is trained from
+    # scratch with the DINOv2 recipe but uses the same HF architecture implementation.
+    "microsoft/rad-dino-maira-2": {
+        "embeddings_path": "embeddings",
+        "layers_parent_path": "encoder",
+        "layers_attribute_name": "layer",
+        "pre_norm_path": None,
+        "post_norm_path": "layernorm",
+        "pooler_path": None,
+        "layers_accept_masks": False,
+    },
+    "owkin/phikon-v2": {
         "embeddings_path": "embeddings",
         "layers_parent_path": "encoder",
         "layers_attribute_name": "layer",

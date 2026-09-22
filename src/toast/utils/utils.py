@@ -2,6 +2,7 @@ import hashlib
 import json
 import os
 import random
+import resource
 from functools import partial, reduce
 from pathlib import Path
 import numpy as np
@@ -13,6 +14,29 @@ from tqdm import tqdm
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
+def memlog(tag: str):
+    """Print current + peak host RSS so far, and current GPU allocated/reserved. Debug-only
+    instrumentation for tracking down the group2 (tcga_ut/patchcamelyon, phikon-v2/vit-large)
+    "Killed" (host OOM-killer) failures -- see run_pipeline_row_by_row.sh's debug variant.
+    Gated on TOAST_MEMLOG=1 so it's a no-op (one env check) in normal sweep runs.
+
+    ru_maxrss is already the *peak* RSS since process start (kernel semantics on Linux), in KB;
+    no separate "current RSS" is available this cheaply without /proc/self/status, so both
+    numbers reported are peak-so-far, read at different times -- the delta between two calls is
+    still exactly how much peak RSS grew between them.
+    """
+    if os.environ.get("TOAST_MEMLOG") != "1":
+        return
+    peak_mb = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024  # KB -> MB on Linux
+    if torch.cuda.is_available():
+        gpu_alloc = torch.cuda.memory_allocated() / 1e6
+        gpu_reserved = torch.cuda.memory_reserved() / 1e6
+        print(f"[memlog] {tag}: host_peak_rss={peak_mb:.0f}MB gpu_alloc={gpu_alloc:.0f}MB "
+              f"gpu_reserved={gpu_reserved:.0f}MB", flush=True)
+    else:
+        print(f"[memlog] {tag}: host_peak_rss={peak_mb:.0f}MB", flush=True)
 
 
 def seed_everything(seed: Optional[int] = None, workers: bool = False) -> int:
@@ -198,8 +222,9 @@ def extract_representations(
                 raise ValueError("Cannot determine number of layers. Model lacks standard config.")
 
             num_layers = encoder.config.num_hidden_layers
+            memlog(f"extract_representations start (num_layers={num_layers})")
 
-            for batch in tqdm(loader, desc="Extracting via HiddenStates"):
+            for batch_idx, batch in enumerate(tqdm(loader, desc="Extracting via HiddenStates")):
                 if stored_samples >= max_samples:
                     break
 
@@ -229,6 +254,11 @@ def extract_representations(
                         layer_outputs_batches[layer_idx].append(layer_output[:num_to_add].cpu().detach().clone())
                     stored_samples += num_to_add
 
+                if batch_idx % 5 == 0:
+                    memlog(f"extract_representations batch={batch_idx} stored={stored_samples}/{max_samples}")
+
+            memlog("extract_representations capture loop done (pre torch.cat)")
+
     finally:
         if hooks:
             for hook in hooks:
@@ -240,6 +270,10 @@ def extract_representations(
         if layer_outputs_batches[layer_idx]:
             concatenated = torch.cat(layer_outputs_batches[layer_idx], dim=0)
             final_layer_embeddings[layer_idx] = concatenated[:max_samples]
+            memlog(f"extract_representations cat layer={layer_idx} "
+                   f"shape={tuple(concatenated.shape)}")
+
+    memlog("extract_representations return")
 
 
     return final_layer_embeddings

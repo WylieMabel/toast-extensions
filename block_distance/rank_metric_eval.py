@@ -27,7 +27,7 @@ def precision_recall_at_k(true_acc_drop, metric_scores, metric_name=None, k=5):
     For similarity metrics (cosine_sim, cka_embed, knn_overlap@5) where higher = safer,
     we flip the sign so ascending rank still means "safest".
     """
-    similarity_metrics = {'cosine_sim', 'cka_embed', 'knn_overlap@5', 'local_cka'}
+    similarity_metrics = {'cosine_sim', 'cka_embed', 'knn_overlap@5', 'knn_overlap@10', 'local_cka'}
 
     metric_scores = np.asarray(metric_scores).copy()
     if metric_name in similarity_metrics:

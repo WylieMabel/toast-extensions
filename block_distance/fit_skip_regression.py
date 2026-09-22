@@ -154,56 +154,63 @@ def fit_and_report(label, model, dataset, rows, feature_cols, results, predictio
     predictions.append(pred_df)
 
 
-def build_contiguous(rows, single_drop, cka):
+def build_contiguous(rows, single_drop, matrix, metric_col):
     def features(row):
         (start, end), = row["spans"]
         blocks = dropped_blocks(row["spans"])
         drops = [single_drop.get(b) for b in blocks]
         if any(d is None for d in drops):
-            return pd.Series({"cka": None, "block_drop_sum": None})
+            return pd.Series({metric_col: None, "block_drop_sum": None})
         return pd.Series({
-            "cka": cka[start + 1, end + 1],
+            metric_col: matrix[start + 1, end + 1],
             "block_drop_sum": sum(drops),
         })
 
     rows = rows.copy()
     if rows.empty:
-        rows["cka"], rows["block_drop_sum"] = None, None
+        rows[metric_col], rows["block_drop_sum"] = None, None
         return rows
-    rows[["cka", "block_drop_sum"]] = rows.apply(features, axis=1)
-    return rows.dropna(subset=["cka", "block_drop_sum"])
+    rows[[metric_col, "block_drop_sum"]] = rows.apply(features, axis=1)
+    return rows.dropna(subset=[metric_col, "block_drop_sum"])
 
 
-def build_disjoint(rows, single_drop, cka):
+def build_disjoint(rows, single_drop, matrix, metric_col):
+    col1, col2 = f"{metric_col}_1", f"{metric_col}_2"
+
     def features(row):
         spans = sorted(row["spans"])
         (s1, e1), (s2, e2) = spans
         b1, b2 = dropped_blocks([(s1, e1)])[0], dropped_blocks([(s2, e2)])[0]
         d1, d2 = single_drop.get(b1), single_drop.get(b2)
         if d1 is None or d2 is None:
-            return pd.Series({"cka_1": None, "cka_2": None, "block_drop_sum": None})
+            return pd.Series({col1: None, col2: None, "block_drop_sum": None})
         return pd.Series({
-            "cka_1": cka[s1 + 1, e1 + 1],
-            "cka_2": cka[s2 + 1, e2 + 1],
+            col1: matrix[s1 + 1, e1 + 1],
+            col2: matrix[s2 + 1, e2 + 1],
             "block_drop_sum": d1 + d2,
         })
 
     rows = rows.copy()
     if rows.empty:
-        rows["cka_1"], rows["cka_2"], rows["block_drop_sum"] = None, None, None
+        rows[col1], rows[col2], rows["block_drop_sum"] = None, None, None
         return rows
-    rows[["cka_1", "cka_2", "block_drop_sum"]] = rows.apply(features, axis=1)
-    return rows.dropna(subset=["cka_1", "cka_2", "block_drop_sum"])
+    rows[[col1, col2, "block_drop_sum"]] = rows.apply(features, axis=1)
+    return rows.dropna(subset=[col1, col2, "block_drop_sum"])
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--distance-csv", default="block_distance/distance_analysis.csv")
     p.add_argument("--cka-dir", default="src/layers/outputs")
+    p.add_argument("--metric", choices=["cka", "angdist"], default="cka",
+                    help="Local boundary similarity feature to use: CKA (default) or angular distance")
     p.add_argument("--min-spans", type=int, default=5)
     p.add_argument("--out", default="block_distance/skip_regression_coefs.csv")
     p.add_argument("--predictions-out", default="block_distance/skip_regression_predictions.csv")
     args = p.parse_args()
+
+    metric_suffix = args.metric  # "cka" or "angdist" -- matches the .npy filename suffix
+    metric_col = "angdist" if args.metric == "angdist" else "cka"
 
     outputs_dir = Path(args.cka_dir)
     df = pd.read_csv(args.distance_csv)
@@ -225,35 +232,40 @@ def main():
             if len(blocks) == 1:
                 single_drop[blocks[0]] = baseline - row["accuracy_mean_linear"]
 
-        cka_file = outputs_dir / f"{model.replace('/', '_')}_{dataset}_cka.npy"
-        if not cka_file.exists():
-            print(f"{model} / {dataset}: missing {cka_file.name}, skipped")
+        metric_file = outputs_dir / f"{model.replace('/', '_')}_{dataset}_{metric_suffix}.npy"
+        if not metric_file.exists():
+            print(f"{model} / {dataset}: missing {metric_file.name}, skipped")
             continue
-        cka = np.load(cka_file)
+        matrix = np.load(metric_file)
 
         two = g[g["skip_count"] == 2].copy()
         two["delta_acc"] = baseline - two["accuracy_mean_linear"]
 
-        contiguous = build_contiguous(two[two["skip_distance"] == 1], single_drop, cka)
-        disjoint = build_disjoint(two[two["skip_distance"] > 1], single_drop, cka)
+        contiguous = build_contiguous(two[two["skip_distance"] == 1], single_drop, matrix, metric_col)
+        disjoint = build_disjoint(two[two["skip_distance"] > 1], single_drop, matrix, metric_col)
 
         print(f"{model} / {dataset}  (baseline={baseline:.4f})")
 
-        threshold = find_cka_gap_split(contiguous["cka"].tolist()) if len(contiguous) else None
-        contiguous["cka_safe"] = True if threshold is None else contiguous["cka"] >= threshold
+        # CKA: higher = more similar = safer. angdist: lower = more similar = safer -- flip
+        # sign so find_cka_gap_split's "top group is safe" logic works for either metric.
+        higher_is_safer = metric_col == "cka"
+        safety_score = contiguous[metric_col] if higher_is_safer else -contiguous[metric_col]
+        threshold = find_cka_gap_split(safety_score.tolist()) if len(contiguous) else None
+        contiguous["cka_safe"] = True if threshold is None else safety_score >= threshold
         fit_and_report("contiguous", model, dataset, contiguous,
-                        ["cka", "block_drop_sum"], results, predictions, args.min_spans)
+                        [metric_col, "block_drop_sum"], results, predictions, args.min_spans)
         if threshold is not None:
             unsafe = contiguous[~contiguous["cka_safe"]]
-            print(f"  cka-boundary gap found at cka={threshold:.3f}: "
+            display_threshold = threshold if higher_is_safer else -threshold
+            print(f"  {metric_col}-boundary gap found at {metric_col}={display_threshold:.3f}: "
                   f"{len(unsafe)} unsafe span(s) excluded from the safe-only fit: "
                   f"{unsafe['approx_layer_str'].tolist()}")
             fit_and_report("contiguous", model, dataset, contiguous[contiguous["cka_safe"]],
-                            ["cka", "block_drop_sum"], results, predictions, args.min_spans,
+                            [metric_col, "block_drop_sum"], results, predictions, args.min_spans,
                             cka_screened=True)
 
         fit_and_report("disjoint", model, dataset, disjoint,
-                        ["cka_1", "cka_2", "block_drop_sum"], results, predictions, args.min_spans)
+                        [f"{metric_col}_1", f"{metric_col}_2", "block_drop_sum"], results, predictions, args.min_spans)
 
     out_df = pd.DataFrame(results)
     out_df.to_csv(args.out, index=False)

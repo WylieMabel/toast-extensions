@@ -1,0 +1,24 @@
+source_group,model,dataset,baseline_accuracy,worst_skip,worst_accuracy,worst_drop_pct_of_baseline,n_spans
+cifar100_imagenet1k,WinKawaks/vit-small-patch16-224,cifar100,0.8163666666666667,"[(0, 4)]",0.4408,46.0,39
+cifar100_imagenet1k,WinKawaks/vit-small-patch16-224,imagenet-1k,0.7348333333333334,"[(0, 4)]",0.1489333333333333,79.73,39
+cifar100_imagenet1k,facebook/deit-small-patch16-224,cifar100,0.7084,"[(0, 4)]",0.4551333333333333,35.75,39
+cifar100_imagenet1k,facebook/deit-small-patch16-224,imagenet-1k,0.7390333333333334,"[(0, 4)]",0.2629999999999999,64.41,39
+cifar100_imagenet1k,facebook/dinov2-base,cifar100,0.8729666666666667,"[(4, 8)]",0.3943666666666667,54.82,39
+cifar100_imagenet1k,facebook/dinov2-base,imagenet-1k,0.7444333333333333,"[(6, 8)]",0.3197333333333333,57.05,22
+cifar100_imagenet1k,google/vit-large-patch16-224,cifar100,0.8599,"[(5, 7)]",0.4158333333333333,51.64,46
+cifar100_imagenet1k,google/vit-large-patch16-224,imagenet-1k,0.7862,"[(5, 7)]",0.0667333333333333,91.51,46
+group1,facebook/dinov2-base,chestxray14,0.6445276885876244,"[(8, 10)]",0.5885063622309431,8.69,22
+group1,facebook/dinov2-base,chestxray_pneumonia,0.8114316239316239,"[(3, 5)]",0.7740384615384616,4.61,22
+group1,facebook/dinov2-base,imagenet-1k,0.7444333333333333,"[(6, 8)]",0.3197333333333333,57.05,22
+group1,microsoft/rad-dino,chestxray14,0.6908966583422523,"[(0, 2)]",0.6905398977286241,0.05,22
+group1,microsoft/rad-dino,chestxray_pneumonia,0.9417735042735044,"[(5, 7)]",0.9342948717948716,0.79,22
+group1,microsoft/rad-dino,imagenet-1k,0.0764666666666666,[],0.0764666666666666,0.0,22
+group1,microsoft/rad-dino-maira-2,chestxray14,0.646063741229635,"[(9, 10)]",0.6336365798549174,1.92,22
+group1,microsoft/rad-dino-maira-2,chestxray_pneumonia,0.9193376068376068,"[(9, 11)]",0.8974358974358975,2.38,22
+group1,microsoft/rad-dino-maira-2,imagenet-1k,0.0727,[],0.0727,0.0,22
+group2,google/vit-large-patch16-224,imagenet-1k,0.7862,"[(5, 7)]",0.0667333333333333,91.51,46
+group2,google/vit-large-patch16-224,patchcamelyon,0.8164571126302084,"[(0, 2)]",0.781707763671875,4.26,46
+group2,google/vit-large-patch16-224,tcga_ut,0.6119105890031,"[(3, 5)]",0.4880159895578397,20.25,46
+group2,owkin/phikon-v2,imagenet-1k,0.1758333333333333,"[(0, 2)]",0.1716666666666666,2.37,46
+group2,owkin/phikon-v2,patchcamelyon,0.888092041015625,"[(18, 20)]",0.87841796875,1.09,46
+group2,owkin/phikon-v2,tcga_ut,0.8180208843204438,"[(19, 21)]",0.8072034589655734,1.32,46

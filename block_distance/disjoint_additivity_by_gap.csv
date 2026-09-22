@@ -1,0 +1,10 @@
+model,dataset,gap_bin,n,gap_min,gap_max,r2,pearson
+facebook/deit-small-patch16-224,imagenet-1k,near,15,2,3,0.5556165045154041,0.9660541434501596
+facebook/deit-small-patch16-224,imagenet-1k,mid,15,3,5,0.8577084924655678,0.9716387248914427
+facebook/deit-small-patch16-224,imagenet-1k,far,15,6,10,0.991973981480301,0.9978829381476441
+facebook/dinov2-base,imagenet-1k,near,15,2,3,0.9227464303359337,0.9880726466976083
+facebook/dinov2-base,imagenet-1k,mid,15,3,5,0.9254966542685598,0.9945191026678962
+facebook/dinov2-base,imagenet-1k,far,15,6,10,0.9697446919168725,0.9956571299290666
+google/vit-large-patch16-224,imagenet-1k,near,62,2,5,0.9958846520814781,0.9984733644649173
+google/vit-large-patch16-224,imagenet-1k,mid,62,5,8,0.9982868490865702,0.999624296221974
+google/vit-large-patch16-224,imagenet-1k,far,62,8,13,0.9995739905965596,0.9998473730269981

@@ -1,0 +1,5 @@
+"dataset","encoder","skip","mlp_skip","attn_skip","head_dict","skip_translator","mlp_mode","attn_mode","fit_dataset"
+"chestxray_pneumonia","microsoft/rad-dino","[(9, 10)]","[]","[]","{}","linear","identity","identity","chestxray_pneumonia"
+"chestxray14","microsoft/rad-dino","[(9, 10)]","[]","[]","{}","linear","identity","identity","chestxray_pneumonia"
+"chestxray_pneumonia","microsoft/rad-dino-maira-2","[(9, 10)]","[]","[]","{}","linear","identity","identity","chestxray_pneumonia"
+"chestxray14","microsoft/rad-dino-maira-2","[(9, 10)]","[]","[]","{}","linear","identity","identity","chestxray_pneumonia"

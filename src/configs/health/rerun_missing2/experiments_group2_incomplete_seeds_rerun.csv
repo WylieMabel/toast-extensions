@@ -1,0 +1,6 @@
+"dataset","encoder","skip","mlp_skip","attn_skip","head_dict","skip_translator","mlp_mode","attn_mode","fit_dataset"
+"patchcamelyon","google/vit-large-patch16-224","[(3, 6)]","[]","[]","{}","linear","identity","identity",""
+"patchcamelyon","google/vit-large-patch16-224","[(15, 18)]","[]","[]","{}","linear","identity","identity",""
+"patchcamelyon","google/vit-large-patch16-224","[(14, 17)]","[]","[]","{}","linear","identity","identity",""
+"tcga_ut","google/vit-large-patch16-224","[(14, 18)]","[]","[]","{}","linear","identity","identity",""
+"tcga_ut","owkin/phikon-v2","[(5, 9)]","[]","[]","{}","linear","identity","identity",""

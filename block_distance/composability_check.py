@@ -41,7 +41,7 @@ def r_squared(actual, predicted):
     return 1 - ss_res / ss_tot if ss_tot else float("nan")
 
 
-def analyze_group(label, rows, single_drop, baseline):
+def analyze_group(label, rows, single_drop, baseline, model, dataset, results):
     if len(rows) == 0:
         print(f"  {label}: no rows")
         return
@@ -60,22 +60,32 @@ def analyze_group(label, rows, single_drop, baseline):
 
     actual_s = pd.Series(actual_drop)
     predicted_s = pd.Series(predicted_drop)
+    pearson_r = actual_s.corr(predicted_s)
+    spearman_r = spearman(actual_s, predicted_s)
+    r2 = r_squared(actual_s, predicted_s)
     print(
         f"  {label}: n={len(actual_s)}  "
-        f"pearson r={actual_s.corr(predicted_s):+.3f}  "
-        f"spearman r={spearman(actual_s, predicted_s):+.3f}  "
-        f"R^2={r_squared(actual_s, predicted_s):+.3f}"
+        f"pearson r={pearson_r:+.3f}  "
+        f"spearman r={spearman_r:+.3f}  "
+        f"R^2={r2:+.3f}"
     )
+    if results is not None:
+        results.append({
+            "model": model, "dataset": dataset, "shape": label, "n_spans": len(actual_s),
+            "pearson_r": pearson_r, "spearman_r": spearman_r, "r2": r2,
+        })
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--distance-csv", default="block_distance/distance_analysis.csv")
+    p.add_argument("--out", default=None, help="Optional CSV path to save per-(model,dataset,shape) correlation stats")
     args = p.parse_args()
 
     df = pd.read_csv(args.distance_csv)
     df["skip_count"] = df["skip_count"].astype(int)
 
+    results = [] if args.out else None
     for (model, dataset), g in df.groupby(["model", "dataset"]):
         baseline_rows = g[g["skip_count"] == 0]
         if baseline_rows.empty:
@@ -94,9 +104,14 @@ def main():
         disjoint = two[two["skip_distance"] > 1]
 
         print(f"{model} / {dataset}  (baseline={baseline:.4f}, n_single={len(single_drop)})")
-        analyze_group("contiguous 2-block spans", contiguous, single_drop, baseline)
-        analyze_group("disjoint single-block pairs", disjoint, single_drop, baseline)
+        analyze_group("contiguous 2-block spans", contiguous, single_drop, baseline, model, dataset, results)
+        analyze_group("disjoint single-block pairs", disjoint, single_drop, baseline, model, dataset, results)
         print()
+
+    if args.out:
+        out_df = pd.DataFrame(results)
+        out_df.to_csv(args.out, index=False)
+        print(f"Saved {len(out_df)} rows -> {args.out}")
 
 
 if __name__ == "__main__":
