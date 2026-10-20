@@ -6,6 +6,7 @@ import ast
 import csv
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -61,4 +62,4 @@ cfg = {
     "fit_dataset":     row.get("fit_dataset") or None,
 }
 
-print(cfg_embedding_dir(cfg, samples, PROJECT_ROOT / "data" / "embeddings"))
+print(cfg_embedding_dir(cfg, samples, Path(os.environ.get("EMBEDDINGS_DIR", PROJECT_ROOT / "data" / "embeddings"))))

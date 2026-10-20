@@ -75,7 +75,7 @@ from layers.layer_priority import (
     _sublayer_modules,
     _linear_cka,
 )
-from toast.utils.dictionaries import MODEL2CONFIGS
+from toast.utils.dictionaries import MODEL2CONFIGS, MULTILABEL_DATASETS
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -345,15 +345,17 @@ def _fit_translator(h_in, h_out):
 
 def _angular_distance(h_in, h_out):
     """
-    Local boundary angular distance (Gromov et al. 2024): (1/pi) * arccos(mean token cosine).
-    h_in, h_out: [n_samples, seq_len, d]. Matches layer_priority.analyse()'s angdist formula
-    exactly (arccos applied to the mean cosine, not mean of per-token arccos values) so the
-    two stay comparable if ever cross-checked against a *_angdist.npy file.
+    Local boundary angular distance (Gromov et al. 2024): (1/pi) * mean_token arccos(cosine).
+    h_in, h_out: [n_samples, seq_len, d]. arccos is applied per token (CLS + patches pooled,
+    matching local_cka/BI), then averaged -- not arccos of the mean cosine -- matching
+    Gromov et al.'s per-example aggregation order. Matches layer_priority.analyse()'s angdist
+    formula exactly, so the two stay comparable if ever cross-checked against a *_angdist.npy
+    file.
     """
     a = F.normalize(h_in.reshape(-1, h_in.shape[-1]), dim=-1)
     b = F.normalize(h_out.reshape(-1, h_out.shape[-1]), dim=-1)
-    mean_cos = (a * b).sum(dim=-1).mean().clamp(-1.0, 1.0)
-    return (torch.arccos(mean_cos) / torch.pi).item()
+    per_token_cos = (a * b).sum(dim=-1).clamp(-1.0, 1.0)
+    return (torch.arccos(per_token_cos) / torch.pi).mean().item()
 
 
 def _toast_linear_approx_error(h_in, h_out):
@@ -565,35 +567,43 @@ def run(model_arg, dataset_name, num_samples, output_csv, spans_csv=None, probe_
     # true accuracy it's being compared against). A separate hidden-state collection pass is
     # needed here since these are different images than the test/validation calibration set
     # collected above -- this roughly doubles this script's forward-pass cost.
-    print("[probe] Loading train-split probe calibration set...")
-    # shuffle=True: unlike every other calibration set in this script, the probe reads
-    # labels and needs class diversity -- some datasets' train splits are stored grouped by
-    # class (e.g. chestxray_pneumonia is normal-then-pneumonia), so a contiguous slice can
-    # land entirely inside one class. See _load_dataset's docstring.
-    probe_loader, probe_n = _load_dataset(
-        ds_key, probe_num_samples, hf_id, split="train", shuffle=True
-    )
-    print(f"      Using {probe_n} probe images (train split)")
-    probe_hidden_states, probe_labels = _collect_hidden_states_with_labels(
-        model, probe_loader, num_layers, layers, probe_n
-    )
-    probe_labels_np = probe_labels.numpy()
-    # Same final-layernorm fix as embeddings_orig above: probe_hidden_states[num_layers] is
-    # the RAW last-block output (pre-final-layernorm), but probe_embeddings_approx (below,
-    # via _apply_skip_forward) IS post-layernorm -- frozen_probe would otherwise be fit on
-    # one normalization state and scored on another.
-    probe_cls = probe_hidden_states[num_layers][:, 0, :].float()
-    if hasattr(encoder, "layernorm"):
-        with torch.no_grad():
-            probe_cls = encoder.layernorm(probe_cls.to(device)).cpu()
-    probe_embeddings_orig = probe_cls.numpy()
+    # The probe is a single-label LogisticRegression scored by accuracy, which has no meaning
+    # for multi-hot labels, so the probe_* columns are left empty there (as kl_div etc. are
+    # without a head). This also skips the train-split forward pass entirely.
+    run_probe = ds_key not in MULTILABEL_DATASETS
+    probe_baseline_accuracy = None
+    if not run_probe:
+        print(f"[probe] '{ds_key}' is multilabel -- skipping probe_frozen/refit/baseline_accuracy.")
+    else:
+        print("[probe] Loading train-split probe calibration set...")
+        # shuffle=True: unlike every other calibration set in this script, the probe reads
+        # labels and needs class diversity -- some datasets' train splits are stored grouped by
+        # class (e.g. chestxray_pneumonia is normal-then-pneumonia), so a contiguous slice can
+        # land entirely inside one class. See _load_dataset's docstring.
+        probe_loader, probe_n = _load_dataset(
+            ds_key, probe_num_samples, hf_id, split="train", shuffle=True
+        )
+        print(f"      Using {probe_n} probe images (train split)")
+        probe_hidden_states, probe_labels = _collect_hidden_states_with_labels(
+            model, probe_loader, num_layers, layers, probe_n
+        )
+        probe_labels_np = probe_labels.numpy()
+        # Same final-layernorm fix as embeddings_orig above: probe_hidden_states[num_layers] is
+        # the RAW last-block output (pre-final-layernorm), but probe_embeddings_approx (below,
+        # via _apply_skip_forward) IS post-layernorm -- frozen_probe would otherwise be fit on
+        # one normalization state and scored on another.
+        probe_cls = probe_hidden_states[num_layers][:, 0, :].float()
+        if hasattr(encoder, "layernorm"):
+            with torch.no_grad():
+                probe_cls = encoder.layernorm(probe_cls.to(device)).cpu()
+        probe_embeddings_orig = probe_cls.numpy()
 
-    probe_fit_idx, probe_score_idx = _split_probe_indices(probe_labels)
-    frozen_probe, probe_baseline_accuracy = _fit_probe(
-        probe_embeddings_orig, probe_labels_np, probe_fit_idx, probe_score_idx
-    )
-    print(f"      probe_baseline_accuracy (frozen probe on unmodified embeddings) = "
-          f"{probe_baseline_accuracy:.4f}")
+        probe_fit_idx, probe_score_idx = _split_probe_indices(probe_labels)
+        frozen_probe, probe_baseline_accuracy = _fit_probe(
+            probe_embeddings_orig, probe_labels_np, probe_fit_idx, probe_score_idx
+        )
+        print(f"      probe_baseline_accuracy (frozen probe on unmodified embeddings) = "
+              f"{probe_baseline_accuracy:.4f}")
 
     # Spans to evaluate: either every contiguous single/multi-span candidate found for this
     # (model, dataset) in a calculate_accuracies.py-style summary CSV, or -- if no spans_csv
@@ -671,16 +681,18 @@ def run(model_arg, dataset_name, num_samples, output_csv, spans_csv=None, probe_
         # precomputed hidden states (never the test/validation calibration set), so the
         # probe's labeled fit/score data stays independent of the real accuracy ground
         # truth. See _fit_probe's docstring for the LogME/LEEP framing.
-        _, probe_embeddings_approx = _apply_skip_forward(
-            probe_hidden_states, probe_n, skip_from, skip_to, W, encoder, num_layers,
-        )
-        probe_embeddings_approx = probe_embeddings_approx.numpy()
-        probe_frozen_accuracy = frozen_probe.score(
-            probe_embeddings_approx[probe_score_idx], probe_labels_np[probe_score_idx]
-        )
-        _, probe_refit_accuracy = _fit_probe(
-            probe_embeddings_approx, probe_labels_np, probe_fit_idx, probe_score_idx
-        )
+        probe_frozen_accuracy = probe_refit_accuracy = None
+        if run_probe:
+            _, probe_embeddings_approx = _apply_skip_forward(
+                probe_hidden_states, probe_n, skip_from, skip_to, W, encoder, num_layers,
+            )
+            probe_embeddings_approx = probe_embeddings_approx.numpy()
+            probe_frozen_accuracy = frozen_probe.score(
+                probe_embeddings_approx[probe_score_idx], probe_labels_np[probe_score_idx]
+            )
+            _, probe_refit_accuracy = _fit_probe(
+                probe_embeddings_approx, probe_labels_np, probe_fit_idx, probe_score_idx
+            )
 
         results.append({
             "skip_from": skip_from,
@@ -711,8 +723,8 @@ def run(model_arg, dataset_name, num_samples, output_csv, spans_csv=None, probe_
               f"MSE={mse:.6f}, CKA={cka:.4f}, PR_change={pr_change:.4f}, "
               f"local_CKA={local_cka:.4f}, angular_dist={angular_dist:.4f}, "
               f"toast_linear_error={toast_linear_error:.4f}, "
-              f"probe_frozen={probe_frozen_accuracy:.4f}, probe_refit={probe_refit_accuracy:.4f} "
-              f"(baseline={probe_baseline_accuracy:.4f})")
+              + (f"probe_frozen={probe_frozen_accuracy:.4f}, probe_refit={probe_refit_accuracy:.4f} "
+                 f"(baseline={probe_baseline_accuracy:.4f})" if run_probe else "probe=skipped (multilabel)"))
 
         gc.collect()
         if device.type == "cuda":

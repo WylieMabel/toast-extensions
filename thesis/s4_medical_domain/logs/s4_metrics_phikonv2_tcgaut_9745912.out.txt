@@ -1,0 +1,301 @@
+============================================================
+  Output-level Skip-Safety Metrics
+============================================================
+  Model   : facebook/deit-small-patch16-224 (phikonv2)
+  Dataset : tcga_ut
+  Samples : 500
+  Start   : Thu Oct 15 14:25:50 CEST 2026
+
+
+============================================================
+  Model   : phikonv2  (owkin/phikon-v2)
+  Dataset : tcga_ut
+  Samples : 500 (test/validation calibration), 500 (train-split probe calibration)
+  Device  : cuda
+============================================================
+
+      Note: no original head for dataset 'tcga_ut' -- skipping kl_div/top1_flip_pct/entropy_delta (embedding-level metrics only).
+[1/5] Loading model...
+Loading weights:   0%|          | 0/439 [00:00<?, ?it/s]Loading weights:  95%|█████████▍| 415/439 [00:00<00:00, 4148.52it/s]Loading weights: 100%|██████████| 439/439 [00:00<00:00, 4265.04it/s]
+      24 layers
+[2/5] Loading dataset...
+      Using 500 samples (deterministic order, shuffle=False)
+[3/5] Collecting hidden states from original model...
+  Collecting hidden states:   0%|          | 0/63 [00:00<?, ?it/s]  Collecting hidden states:   2%|▏         | 1/63 [00:00<00:33,  1.85it/s]  Collecting hidden states:   3%|▎         | 2/63 [00:00<00:18,  3.22it/s]  Collecting hidden states:   5%|▍         | 3/63 [00:00<00:14,  4.27it/s]  Collecting hidden states:   6%|▋         | 4/63 [00:00<00:11,  4.94it/s]  Collecting hidden states:   8%|▊         | 5/63 [00:01<00:11,  5.08it/s]  Collecting hidden states:  10%|▉         | 6/63 [00:01<00:10,  5.60it/s]  Collecting hidden states:  11%|█         | 7/63 [00:01<00:09,  5.99it/s]  Collecting hidden states:  13%|█▎        | 8/63 [00:01<00:08,  6.17it/s]  Collecting hidden states:  14%|█▍        | 9/63 [00:01<00:08,  6.21it/s]  Collecting hidden states:  16%|█▌        | 10/63 [00:01<00:08,  6.32it/s]  Collecting hidden states:  17%|█▋        | 11/63 [00:02<00:09,  5.58it/s]  Collecting hidden states:  19%|█▉        | 12/63 [00:02<00:08,  5.78it/s]  Collecting hidden states:  21%|██        | 13/63 [00:02<00:08,  5.84it/s]  Collecting hidden states:  22%|██▏       | 14/63 [00:02<00:08,  5.88it/s]  Collecting hidden states:  24%|██▍       | 15/63 [00:02<00:08,  5.98it/s]  Collecting hidden states:  25%|██▌       | 16/63 [00:02<00:07,  6.01it/s]  Collecting hidden states:  27%|██▋       | 17/63 [00:03<00:07,  5.92it/s]  Collecting hidden states:  29%|██▊       | 18/63 [00:03<00:07,  6.10it/s]  Collecting hidden states:  30%|███       | 19/63 [00:03<00:07,  6.21it/s]  Collecting hidden states:  32%|███▏      | 20/63 [00:03<00:07,  5.51it/s]  Collecting hidden states:  33%|███▎      | 21/63 [00:03<00:07,  5.82it/s]  Collecting hidden states:  35%|███▍      | 22/63 [00:03<00:06,  6.13it/s]  Collecting hidden states:  37%|███▋      | 23/63 [00:04<00:06,  6.39it/s]  Collecting hidden states:  38%|███▊      | 24/63 [00:04<00:05,  6.57it/s]  Collecting hidden states:  40%|███▉      | 25/63 [00:04<00:08,  4.68it/s]  Collecting hidden states:  41%|████▏     | 26/63 [00:04<00:07,  5.20it/s]  Collecting hidden states:  43%|████▎     | 27/63 [00:04<00:06,  5.67it/s]  Collecting hidden states:  44%|████▍     | 28/63 [00:05<00:05,  6.04it/s]  Collecting hidden states:  46%|████▌     | 29/63 [00:05<00:05,  6.29it/s]  Collecting hidden states:  48%|████▊     | 30/63 [00:05<00:06,  4.99it/s]  Collecting hidden states:  49%|████▉     | 31/63 [00:05<00:05,  5.36it/s]  Collecting hidden states:  51%|█████     | 32/63 [00:05<00:05,  5.70it/s]  Collecting hidden states:  52%|█████▏    | 33/63 [00:05<00:05,  5.89it/s]  Collecting hidden states:  54%|█████▍    | 34/63 [00:06<00:04,  6.16it/s]  Collecting hidden states:  56%|█████▌    | 35/63 [00:06<00:04,  5.68it/s]  Collecting hidden states:  57%|█████▋    | 36/63 [00:06<00:04,  5.96it/s]  Collecting hidden states:  59%|█████▊    | 37/63 [00:06<00:04,  6.20it/s]  Collecting hidden states:  60%|██████    | 38/63 [00:06<00:03,  6.35it/s]  Collecting hidden states:  62%|██████▏   | 39/63 [00:06<00:03,  6.52it/s]  Collecting hidden states:  63%|██████▎   | 40/63 [00:07<00:05,  4.50it/s]  Collecting hidden states:  65%|██████▌   | 41/63 [00:07<00:04,  4.97it/s]  Collecting hidden states:  67%|██████▋   | 42/63 [00:07<00:03,  5.30it/s]  Collecting hidden states:  68%|██████▊   | 43/63 [00:07<00:03,  5.58it/s]  Collecting hidden states:  70%|██████▉   | 44/63 [00:07<00:03,  5.91it/s]  Collecting hidden states:  71%|███████▏  | 45/63 [00:08<00:02,  6.16it/s]  Collecting hidden states:  73%|███████▎  | 46/63 [00:08<00:02,  5.70it/s]  Collecting hidden states:  75%|███████▍  | 47/63 [00:08<00:02,  6.09it/s]  Collecting hidden states:  76%|███████▌  | 48/63 [00:08<00:02,  6.30it/s]  Collecting hidden states:  78%|███████▊  | 49/63 [00:08<00:02,  6.47it/s]  Collecting hidden states:  79%|███████▉  | 50/63 [00:08<00:02,  6.18it/s]  Collecting hidden states:  81%|████████  | 51/63 [00:08<00:01,  6.32it/s]  Collecting hidden states:  83%|████████▎ | 52/63 [00:09<00:01,  6.35it/s]  Collecting hidden states:  84%|████████▍ | 53/63 [00:09<00:01,  6.45it/s]  Collecting hidden states:  86%|████████▌ | 54/63 [00:09<00:01,  6.62it/s]  Collecting hidden states:  87%|████████▋ | 55/63 [00:09<00:01,  4.47it/s]  Collecting hidden states:  89%|████████▉ | 56/63 [00:10<00:01,  4.69it/s]  Collecting hidden states:  90%|█████████ | 57/63 [00:10<00:01,  5.06it/s]  Collecting hidden states:  92%|█████████▏| 58/63 [00:10<00:00,  5.50it/s]  Collecting hidden states:  94%|█████████▎| 59/63 [00:10<00:00,  5.93it/s]  Collecting hidden states:  95%|█████████▌| 60/63 [00:10<00:00,  6.24it/s]  Collecting hidden states:  97%|█████████▋| 61/63 [00:10<00:00,  6.39it/s]  Collecting hidden states:  98%|█████████▊| 62/63 [00:10<00:00,  6.42it/s]  Collecting hidden states:  98%|█████████▊| 62/63 [00:11<00:00,  5.63it/s]
+      Collected layers 0..24
+[4/5] Computing original model outputs...
+  Orig forward:   0%|          | 0/63 [00:00<?, ?it/s]  Orig forward:   2%|▏         | 1/63 [00:00<00:28,  2.21it/s]  Orig forward:   6%|▋         | 4/63 [00:00<00:06,  8.70it/s]  Orig forward:  11%|█         | 7/63 [00:00<00:04, 13.68it/s]  Orig forward:  16%|█▌        | 10/63 [00:00<00:03, 17.49it/s]  Orig forward:  21%|██        | 13/63 [00:00<00:02, 20.29it/s]  Orig forward:  25%|██▌       | 16/63 [00:01<00:02, 22.34it/s]  Orig forward:  30%|███       | 19/63 [00:01<00:01, 23.88it/s]  Orig forward:  35%|███▍      | 22/63 [00:01<00:01, 24.99it/s]  Orig forward:  40%|███▉      | 25/63 [00:01<00:01, 25.75it/s]  Orig forward:  44%|████▍     | 28/63 [00:01<00:01, 26.23it/s]  Orig forward:  49%|████▉     | 31/63 [00:01<00:01, 26.57it/s]  Orig forward:  54%|█████▍    | 34/63 [00:01<00:01, 26.89it/s]  Orig forward:  59%|█████▊    | 37/63 [00:01<00:00, 27.11it/s]  Orig forward:  63%|██████▎   | 40/63 [00:01<00:00, 27.26it/s]  Orig forward:  68%|██████▊   | 43/63 [00:01<00:00, 27.29it/s]  Orig forward:  73%|███████▎  | 46/63 [00:02<00:00, 27.25it/s]  Orig forward:  78%|███████▊  | 49/63 [00:02<00:00, 27.22it/s]  Orig forward:  83%|████████▎ | 52/63 [00:02<00:00, 27.28it/s]  Orig forward:  87%|████████▋ | 55/63 [00:02<00:00, 27.22it/s]  Orig forward:  92%|█████████▏| 58/63 [00:02<00:00, 27.28it/s]  Orig forward:  97%|█████████▋| 61/63 [00:02<00:00, 27.21it/s]  Orig forward: 100%|██████████| 63/63 [00:03<00:00, 20.22it/s]
+      Logits: skipped (no head), Embeddings: torch.Size([500, 1024])
+[probe] Loading train-split probe calibration set...
+      Using 500 probe images (train split)
+  Collecting probe hidden states:   0%|          | 0/63 [00:00<?, ?it/s]  Collecting probe hidden states:   2%|▏         | 1/63 [00:00<00:48,  1.28it/s]  Collecting probe hidden states:   3%|▎         | 2/63 [00:01<00:33,  1.82it/s]  Collecting probe hidden states:   5%|▍         | 3/63 [00:01<00:29,  2.05it/s]  Collecting probe hidden states:   6%|▋         | 4/63 [00:01<00:26,  2.23it/s]  Collecting probe hidden states:   8%|▊         | 5/63 [00:02<00:24,  2.35it/s]  Collecting probe hidden states:  10%|▉         | 6/63 [00:02<00:23,  2.44it/s]  Collecting probe hidden states:  11%|█         | 7/63 [00:03<00:22,  2.49it/s]  Collecting probe hidden states:  13%|█▎        | 8/63 [00:03<00:21,  2.51it/s]  Collecting probe hidden states:  14%|█▍        | 9/63 [00:03<00:21,  2.53it/s]  Collecting probe hidden states:  16%|█▌        | 10/63 [00:04<00:20,  2.55it/s]  Collecting probe hidden states:  17%|█▋        | 11/63 [00:04<00:20,  2.56it/s]  Collecting probe hidden states:  19%|█▉        | 12/63 [00:05<00:20,  2.55it/s]  Collecting probe hidden states:  21%|██        | 13/63 [00:05<00:19,  2.56it/s]  Collecting probe hidden states:  22%|██▏       | 14/63 [00:05<00:19,  2.56it/s]  Collecting probe hidden states:  24%|██▍       | 15/63 [00:06<00:18,  2.55it/s]  Collecting probe hidden states:  25%|██▌       | 16/63 [00:06<00:18,  2.57it/s]  Collecting probe hidden states:  27%|██▋       | 17/63 [00:07<00:17,  2.58it/s]  Collecting probe hidden states:  29%|██▊       | 18/63 [00:07<00:17,  2.57it/s]  Collecting probe hidden states:  30%|███       | 19/63 [00:07<00:17,  2.57it/s]  Collecting probe hidden states:  32%|███▏      | 20/63 [00:08<00:16,  2.58it/s]  Collecting probe hidden states:  33%|███▎      | 21/63 [00:08<00:16,  2.58it/s]  Collecting probe hidden states:  35%|███▍      | 22/63 [00:08<00:15,  2.59it/s]  Collecting probe hidden states:  37%|███▋      | 23/63 [00:09<00:15,  2.55it/s]  Collecting probe hidden states:  38%|███▊      | 24/63 [00:09<00:15,  2.55it/s]  Collecting probe hidden states:  40%|███▉      | 25/63 [00:10<00:14,  2.56it/s]  Collecting probe hidden states:  41%|████▏     | 26/63 [00:10<00:14,  2.57it/s]  Collecting probe hidden states:  43%|████▎     | 27/63 [00:10<00:13,  2.58it/s]  Collecting probe hidden states:  44%|████▍     | 28/63 [00:11<00:13,  2.53it/s]  Collecting probe hidden states:  46%|████▌     | 29/63 [00:11<00:13,  2.55it/s]  Collecting probe hidden states:  48%|████▊     | 30/63 [00:12<00:12,  2.57it/s]  Collecting probe hidden states:  49%|████▉     | 31/63 [00:12<00:12,  2.59it/s]  Collecting probe hidden states:  51%|█████     | 32/63 [00:12<00:11,  2.59it/s]  Collecting probe hidden states:  52%|█████▏    | 33/63 [00:13<00:11,  2.57it/s]  Collecting probe hidden states:  54%|█████▍    | 34/63 [00:13<00:11,  2.55it/s]  Collecting probe hidden states:  56%|█████▌    | 35/63 [00:14<00:10,  2.56it/s]  Collecting probe hidden states:  57%|█████▋    | 36/63 [00:14<00:10,  2.54it/s]  Collecting probe hidden states:  59%|█████▊    | 37/63 [00:14<00:10,  2.53it/s]  Collecting probe hidden states:  60%|██████    | 38/63 [00:15<00:10,  2.48it/s]  Collecting probe hidden states:  62%|██████▏   | 39/63 [00:15<00:09,  2.47it/s]  Collecting probe hidden states:  63%|██████▎   | 40/63 [00:16<00:09,  2.36it/s]  Collecting probe hidden states:  65%|██████▌   | 41/63 [00:16<00:09,  2.41it/s]  Collecting probe hidden states:  67%|██████▋   | 42/63 [00:16<00:08,  2.45it/s]  Collecting probe hidden states:  68%|██████▊   | 43/63 [00:17<00:08,  2.47it/s]  Collecting probe hidden states:  70%|██████▉   | 44/63 [00:17<00:07,  2.49it/s]  Collecting probe hidden states:  71%|███████▏  | 45/63 [00:18<00:07,  2.51it/s]  Collecting probe hidden states:  73%|███████▎  | 46/63 [00:18<00:06,  2.49it/s]  Collecting probe hidden states:  75%|███████▍  | 47/63 [00:18<00:06,  2.49it/s]  Collecting probe hidden states:  76%|███████▌  | 48/63 [00:19<00:05,  2.51it/s]  Collecting probe hidden states:  78%|███████▊  | 49/63 [00:19<00:05,  2.51it/s]  Collecting probe hidden states:  79%|███████▉  | 50/63 [00:20<00:05,  2.51it/s]  Collecting probe hidden states:  81%|████████  | 51/63 [00:20<00:04,  2.50it/s]  Collecting probe hidden states:  83%|████████▎ | 52/63 [00:20<00:04,  2.52it/s]  Collecting probe hidden states:  84%|████████▍ | 53/63 [00:21<00:03,  2.53it/s]  Collecting probe hidden states:  86%|████████▌ | 54/63 [00:21<00:03,  2.53it/s]  Collecting probe hidden states:  87%|████████▋ | 55/63 [00:22<00:03,  2.53it/s]  Collecting probe hidden states:  89%|████████▉ | 56/63 [00:22<00:02,  2.53it/s]  Collecting probe hidden states:  90%|█████████ | 57/63 [00:22<00:02,  2.54it/s]  Collecting probe hidden states:  92%|█████████▏| 58/63 [00:23<00:01,  2.55it/s]  Collecting probe hidden states:  94%|█████████▎| 59/63 [00:23<00:01,  2.54it/s]  Collecting probe hidden states:  95%|█████████▌| 60/63 [00:24<00:01,  2.54it/s]  Collecting probe hidden states:  97%|█████████▋| 61/63 [00:24<00:00,  2.54it/s]  Collecting probe hidden states:  98%|█████████▊| 62/63 [00:24<00:00,  2.88it/s]  Collecting probe hidden states:  98%|█████████▊| 62/63 [00:25<00:00,  2.40it/s]
+      WARNING: stratified probe split failed (The least populated classes in y have only 1 member, which is too few. The minimum number of groups for any class cannot be less than 2. Classes with too few members are: [5, 16]); falling back to non-stratified split.
+      probe_baseline_accuracy (frozen probe on unmodified embeddings) = 0.6700
+[5/5] Loading spans from thesis/s4_medical_domain/accuracies/combined/accuracies_results_phikonv2_tcgaut.csv...
+      86 spans (lengths 1-4)
+
+  Skip [0, 1)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1344, KNN10=0.1494, cosine=0.0024, MSE=0.157367, CKA=0.3797, PR_change=76.4207, local_CKA=0.9723, angular_dist=0.0825, toast_linear_error=0.0332, probe_frozen=0.0800, probe_refit=0.3900 (baseline=0.6700)
+
+  Skip [0, 2)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1360, KNN10=0.1522, cosine=0.0075, MSE=0.166641, CKA=0.3877, PR_change=76.9320, local_CKA=0.9215, angular_dist=0.1371, toast_linear_error=0.0419, probe_frozen=0.0900, probe_refit=0.3400 (baseline=0.6700)
+
+  Skip [0, 3)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1440, KNN10=0.1558, cosine=0.0086, MSE=0.184141, CKA=0.3814, PR_change=77.2760, local_CKA=0.8615, angular_dist=0.1796, toast_linear_error=0.0555, probe_frozen=0.0800, probe_refit=0.3300 (baseline=0.6700)
+
+  Skip [0, 4)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1380, KNN10=0.1562, cosine=0.0073, MSE=0.198883, CKA=0.3795, PR_change=77.4104, local_CKA=0.7983, angular_dist=0.2112, toast_linear_error=0.0655, probe_frozen=0.0700, probe_refit=0.3200 (baseline=0.6700)
+
+  Skip [1, 2)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2176, KNN10=0.2322, cosine=0.1080, MSE=0.128810, CKA=0.4876, PR_change=69.0078, local_CKA=0.9805, angular_dist=0.0641, toast_linear_error=0.0165, probe_frozen=0.1100, probe_refit=0.3400 (baseline=0.6700)
+
+  Skip [1, 3)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1800, KNN10=0.2084, cosine=0.0430, MSE=0.156742, CKA=0.4163, PR_change=75.4806, local_CKA=0.9399, angular_dist=0.1110, toast_linear_error=0.0263, probe_frozen=0.0700, probe_refit=0.3300 (baseline=0.6700)
+
+  Skip [1, 4)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1740, KNN10=0.2010, cosine=0.0298, MSE=0.179294, CKA=0.3903, PR_change=76.5571, local_CKA=0.8883, angular_dist=0.1472, toast_linear_error=0.0337, probe_frozen=0.1200, probe_refit=0.3100 (baseline=0.6700)
+
+  Skip [1, 5)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1752, KNN10=0.1904, cosine=0.0390, MSE=0.184808, CKA=0.3908, PR_change=76.5119, local_CKA=0.8299, angular_dist=0.1795, toast_linear_error=0.0409, probe_frozen=0.0700, probe_refit=0.3400 (baseline=0.6700)
+
+  Skip [2, 3)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2620, KNN10=0.2684, cosine=0.1842, MSE=0.107710, CKA=0.5343, PR_change=62.8204, local_CKA=0.9837, angular_dist=0.0575, toast_linear_error=0.0095, probe_frozen=0.1300, probe_refit=0.4000 (baseline=0.6700)
+
+  Skip [2, 4)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2244, KNN10=0.2352, cosine=0.0660, MSE=0.143580, CKA=0.4821, PR_change=70.8904, local_CKA=0.9493, angular_dist=0.0977, toast_linear_error=0.0139, probe_frozen=0.1000, probe_refit=0.3900 (baseline=0.6700)
+
+  Skip [2, 5)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2100, KNN10=0.2224, cosine=0.0733, MSE=0.162929, CKA=0.4635, PR_change=71.6959, local_CKA=0.9012, angular_dist=0.1353, toast_linear_error=0.0180, probe_frozen=0.1200, probe_refit=0.3600 (baseline=0.6700)
+
+  Skip [2, 6)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2036, KNN10=0.2154, cosine=0.0324, MSE=0.200273, CKA=0.4705, PR_change=71.0460, local_CKA=0.8451, angular_dist=0.1692, toast_linear_error=0.0233, probe_frozen=0.0800, probe_refit=0.3700 (baseline=0.6700)
+
+  Skip [3, 4)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2720, KNN10=0.3006, cosine=0.2218, MSE=0.114235, CKA=0.5845, PR_change=56.1263, local_CKA=0.9851, angular_dist=0.0534, toast_linear_error=0.0032, probe_frozen=0.1700, probe_refit=0.4500 (baseline=0.6700)
+
+  Skip [3, 5)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2344, KNN10=0.2448, cosine=0.1112, MSE=0.137025, CKA=0.5237, PR_change=67.0383, local_CKA=0.9513, angular_dist=0.0959, toast_linear_error=0.0047, probe_frozen=0.0700, probe_refit=0.4400 (baseline=0.6700)
+
+  Skip [3, 6)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2040, KNN10=0.2232, cosine=0.0661, MSE=0.176156, CKA=0.4651, PR_change=69.2834, local_CKA=0.9037, angular_dist=0.1341, toast_linear_error=0.0065, probe_frozen=0.0200, probe_refit=0.3800 (baseline=0.6700)
+
+  Skip [3, 7)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1832, KNN10=0.2024, cosine=0.0329, MSE=0.206612, CKA=0.4435, PR_change=71.2084, local_CKA=0.8431, angular_dist=0.1685, toast_linear_error=0.0086, probe_frozen=0.0300, probe_refit=0.3400 (baseline=0.6700)
+
+  Skip [4, 5)...
+      KL/flip/entropy=skipped (no head), KNN5=0.3044, KNN10=0.3282, cosine=0.3314, MSE=0.094916, CKA=0.6467, PR_change=52.6713, local_CKA=0.9832, angular_dist=0.0582, toast_linear_error=0.0002, probe_frozen=0.3500, probe_refit=0.4900 (baseline=0.6700)
+
+  Skip [4, 6)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2220, KNN10=0.2326, cosine=0.1220, MSE=0.142436, CKA=0.4667, PR_change=69.7553, local_CKA=0.9476, angular_dist=0.0997, toast_linear_error=0.0003, probe_frozen=0.1200, probe_refit=0.3800 (baseline=0.6700)
+
+  Skip [4, 7)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1980, KNN10=0.2140, cosine=0.0681, MSE=0.181865, CKA=0.4178, PR_change=73.7040, local_CKA=0.8948, angular_dist=0.1376, toast_linear_error=0.0004, probe_frozen=0.0800, probe_refit=0.3700 (baseline=0.6700)
+
+  Skip [4, 8)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1756, KNN10=0.1924, cosine=0.0492, MSE=0.200996, CKA=0.3891, PR_change=74.7311, local_CKA=0.8298, angular_dist=0.1692, toast_linear_error=0.0006, probe_frozen=0.0800, probe_refit=0.3400 (baseline=0.6700)
+
+  Skip [5, 6)...
+      KL/flip/entropy=skipped (no head), KNN5=0.3060, KNN10=0.3246, cosine=0.2707, MSE=0.116258, CKA=0.6192, PR_change=55.4669, local_CKA=0.9818, angular_dist=0.0575, toast_linear_error=0.0001, probe_frozen=0.1900, probe_refit=0.5500 (baseline=0.6700)
+
+  Skip [5, 7)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2300, KNN10=0.2466, cosine=0.1084, MSE=0.166706, CKA=0.4712, PR_change=71.2059, local_CKA=0.9424, angular_dist=0.0992, toast_linear_error=0.0002, probe_frozen=0.1100, probe_refit=0.3400 (baseline=0.6700)
+
+  Skip [5, 8)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2020, KNN10=0.2182, cosine=0.0782, MSE=0.192332, CKA=0.4246, PR_change=72.7231, local_CKA=0.8853, angular_dist=0.1354, toast_linear_error=0.0003, probe_frozen=0.1200, probe_refit=0.3600 (baseline=0.6700)
+
+  Skip [5, 9)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1820, KNN10=0.2022, cosine=0.0512, MSE=0.217317, CKA=0.3671, PR_change=75.2875, local_CKA=0.8086, angular_dist=0.1692, toast_linear_error=0.0004, probe_frozen=0.0800, probe_refit=0.3500 (baseline=0.6700)
+
+  Skip [6, 7)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2916, KNN10=0.3030, cosine=0.1388, MSE=0.157944, CKA=0.5907, PR_change=62.8059, local_CKA=0.9791, angular_dist=0.0608, toast_linear_error=0.0001, probe_frozen=0.1600, probe_refit=0.4500 (baseline=0.6700)
+
+  Skip [6, 8)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2324, KNN10=0.2508, cosine=0.0702, MSE=0.211658, CKA=0.4861, PR_change=68.5953, local_CKA=0.9351, angular_dist=0.1023, toast_linear_error=0.0002, probe_frozen=0.0800, probe_refit=0.4000 (baseline=0.6700)
+
+  Skip [6, 9)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2088, KNN10=0.2344, cosine=0.0400, MSE=0.269619, CKA=0.4540, PR_change=70.4221, local_CKA=0.8651, angular_dist=0.1409, toast_linear_error=0.0003, probe_frozen=0.0800, probe_refit=0.3700 (baseline=0.6700)
+
+  Skip [6, 10)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2220, KNN10=0.2320, cosine=0.0227, MSE=0.325540, CKA=0.4532, PR_change=70.7092, local_CKA=0.7860, angular_dist=0.1700, toast_linear_error=0.0004, probe_frozen=0.0700, probe_refit=0.4700 (baseline=0.6700)
+
+  Skip [7, 8)...
+      KL/flip/entropy=skipped (no head), KNN5=0.3132, KNN10=0.3374, cosine=0.2067, MSE=0.133764, CKA=0.6378, PR_change=54.9520, local_CKA=0.9754, angular_dist=0.0634, toast_linear_error=0.0001, probe_frozen=0.2100, probe_refit=0.5200 (baseline=0.6700)
+
+  Skip [7, 9)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2240, KNN10=0.2448, cosine=0.0857, MSE=0.220361, CKA=0.4790, PR_change=69.0749, local_CKA=0.9202, angular_dist=0.1059, toast_linear_error=0.0002, probe_frozen=0.0800, probe_refit=0.3900 (baseline=0.6700)
+
+  Skip [7, 10)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1884, KNN10=0.2034, cosine=0.0372, MSE=0.281350, CKA=0.2516, PR_change=76.5179, local_CKA=0.8489, angular_dist=0.1390, toast_linear_error=0.0003, probe_frozen=0.0500, probe_refit=0.3900 (baseline=0.6700)
+
+  Skip [7, 11)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2004, KNN10=0.2176, cosine=0.0266, MSE=0.336262, CKA=0.4282, PR_change=70.3671, local_CKA=0.7522, angular_dist=0.1718, toast_linear_error=0.0004, probe_frozen=0.0700, probe_refit=0.3100 (baseline=0.6700)
+
+  Skip [8, 9)...
+      KL/flip/entropy=skipped (no head), KNN5=0.3164, KNN10=0.3266, cosine=0.2505, MSE=0.132525, CKA=0.6123, PR_change=51.6903, local_CKA=0.9708, angular_dist=0.0628, toast_linear_error=0.0001, probe_frozen=0.2400, probe_refit=0.4800 (baseline=0.6700)
+
+  Skip [8, 10)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2416, KNN10=0.2668, cosine=0.0878, MSE=0.214415, CKA=0.4997, PR_change=65.3833, local_CKA=0.9172, angular_dist=0.1001, toast_linear_error=0.0002, probe_frozen=0.0700, probe_refit=0.4300 (baseline=0.6700)
+
+  Skip [8, 11)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1900, KNN10=0.2126, cosine=0.0490, MSE=0.272182, CKA=0.4211, PR_change=70.9597, local_CKA=0.8301, angular_dist=0.1382, toast_linear_error=0.0002, probe_frozen=0.0300, probe_refit=0.3800 (baseline=0.6700)
+
+  Skip [8, 12)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1768, KNN10=0.1978, cosine=0.0286, MSE=0.348928, CKA=0.3819, PR_change=73.4204, local_CKA=0.7346, angular_dist=0.1705, toast_linear_error=0.0003, probe_frozen=0.0200, probe_refit=0.3600 (baseline=0.6700)
+
+  Skip [9, 10)...
+      KL/flip/entropy=skipped (no head), KNN5=0.3048, KNN10=0.3274, cosine=0.1367, MSE=0.192343, CKA=0.6375, PR_change=47.9772, local_CKA=0.9725, angular_dist=0.0595, toast_linear_error=0.0001, probe_frozen=0.1000, probe_refit=0.5100 (baseline=0.6700)
+
+  Skip [9, 11)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2108, KNN10=0.2278, cosine=0.0752, MSE=0.248129, CKA=0.4743, PR_change=64.1672, local_CKA=0.9079, angular_dist=0.1021, toast_linear_error=0.0001, probe_frozen=0.0400, probe_refit=0.3800 (baseline=0.6700)
+
+  Skip [9, 12)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1816, KNN10=0.1992, cosine=0.0435, MSE=0.361851, CKA=0.4062, PR_change=70.2495, local_CKA=0.8246, angular_dist=0.1380, toast_linear_error=0.0002, probe_frozen=0.0100, probe_refit=0.3900 (baseline=0.6700)
+
+  Skip [9, 13)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1548, KNN10=0.1698, cosine=0.0272, MSE=0.390245, CKA=0.3521, PR_change=72.7327, local_CKA=0.7374, angular_dist=0.1688, toast_linear_error=0.0002, probe_frozen=0.0700, probe_refit=0.3400 (baseline=0.6700)
+
+  Skip [10, 11)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2352, KNN10=0.2496, cosine=0.1258, MSE=0.182637, CKA=0.5148, PR_change=48.5383, local_CKA=0.9654, angular_dist=0.0640, toast_linear_error=0.0001, probe_frozen=0.0800, probe_refit=0.3600 (baseline=0.6700)
+
+  Skip [10, 12)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1864, KNN10=0.2070, cosine=0.0795, MSE=0.278362, CKA=0.4183, PR_change=65.3082, local_CKA=0.8994, angular_dist=0.1046, toast_linear_error=0.0001, probe_frozen=0.0500, probe_refit=0.3900 (baseline=0.6700)
+
+  Skip [10, 13)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1616, KNN10=0.1778, cosine=0.0464, MSE=0.339845, CKA=0.3641, PR_change=69.6203, local_CKA=0.8211, angular_dist=0.1387, toast_linear_error=0.0001, probe_frozen=0.0800, probe_refit=0.3300 (baseline=0.6700)
+
+  Skip [10, 14)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1604, KNN10=0.1718, cosine=0.0115, MSE=0.680936, CKA=0.3048, PR_change=75.4149, local_CKA=0.7294, angular_dist=0.1697, toast_linear_error=0.0002, probe_frozen=0.0300, probe_refit=0.4200 (baseline=0.6700)
+
+  Skip [11, 12)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2312, KNN10=0.2316, cosine=0.0863, MSE=0.329235, CKA=0.4137, PR_change=65.6612, local_CKA=0.9663, angular_dist=0.0629, toast_linear_error=0.0000, probe_frozen=0.0700, probe_refit=0.4900 (baseline=0.6700)
+
+  Skip [11, 13)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1668, KNN10=0.1858, cosine=0.0421, MSE=0.527717, CKA=0.3716, PR_change=66.6948, local_CKA=0.9065, angular_dist=0.1019, toast_linear_error=0.0001, probe_frozen=0.0800, probe_refit=0.3800 (baseline=0.6700)
+
+  Skip [11, 14)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1544, KNN10=0.1698, cosine=0.0130, MSE=1.064158, CKA=0.2902, PR_change=75.2463, local_CKA=0.8208, angular_dist=0.1375, toast_linear_error=0.0001, probe_frozen=0.0300, probe_refit=0.4400 (baseline=0.6700)
+
+  Skip [11, 15)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1268, KNN10=0.1462, cosine=-0.0012, MSE=1.061653, CKA=0.2942, PR_change=74.6663, local_CKA=0.7022, angular_dist=0.1719, toast_linear_error=0.0001, probe_frozen=0.0300, probe_refit=0.3600 (baseline=0.6700)
+
+  Skip [12, 13)...
+      KL/flip/entropy=skipped (no head), KNN5=0.2124, KNN10=0.2246, cosine=0.0592, MSE=0.398616, CKA=0.4404, PR_change=58.9916, local_CKA=0.9663, angular_dist=0.0634, toast_linear_error=0.0000, probe_frozen=0.0900, probe_refit=0.4200 (baseline=0.6700)
+
+  Skip [12, 14)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1792, KNN10=0.1880, cosine=0.0114, MSE=0.961756, CKA=0.3252, PR_change=71.9367, local_CKA=0.8969, angular_dist=0.1042, toast_linear_error=0.0001, probe_frozen=0.0100, probe_refit=0.4300 (baseline=0.6700)
+
+  Skip [12, 15)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1420, KNN10=0.1602, cosine=-0.0023, MSE=1.167660, CKA=0.3144, PR_change=72.1982, local_CKA=0.7847, angular_dist=0.1430, toast_linear_error=0.0001, probe_frozen=0.0500, probe_refit=0.3800 (baseline=0.6700)
+
+  Skip [12, 16)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1416, KNN10=0.1454, cosine=-0.0011, MSE=1.550938, CKA=0.3076, PR_change=73.6484, local_CKA=0.6330, angular_dist=0.1780, toast_linear_error=0.0001, probe_frozen=0.0700, probe_refit=0.3900 (baseline=0.6700)
+
+  Skip [13, 14)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1900, KNN10=0.1994, cosine=0.0280, MSE=0.850754, CKA=0.3567, PR_change=70.0150, local_CKA=0.9588, angular_dist=0.0657, toast_linear_error=0.0000, probe_frozen=0.0300, probe_refit=0.4300 (baseline=0.6700)
+
+  Skip [13, 15)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1440, KNN10=0.1584, cosine=0.0055, MSE=1.002944, CKA=0.3375, PR_change=69.6411, local_CKA=0.8629, angular_dist=0.1099, toast_linear_error=0.0001, probe_frozen=0.0200, probe_refit=0.4400 (baseline=0.6700)
+
+  Skip [13, 16)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1392, KNN10=0.1506, cosine=0.0013, MSE=1.341281, CKA=0.3320, PR_change=72.6846, local_CKA=0.7136, angular_dist=0.1490, toast_linear_error=0.0001, probe_frozen=0.0400, probe_refit=0.3600 (baseline=0.6700)
+
+  Skip [13, 17)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1228, KNN10=0.1340, cosine=-0.0087, MSE=1.809492, CKA=0.3087, PR_change=74.2877, local_CKA=0.5745, angular_dist=0.1860, toast_linear_error=0.0001, probe_frozen=0.0600, probe_refit=0.3800 (baseline=0.6700)
+
+  Skip [14, 15)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1700, KNN10=0.1690, cosine=0.0293, MSE=0.629431, CKA=0.2339, PR_change=77.8025, local_CKA=0.9418, angular_dist=0.0705, toast_linear_error=0.0000, probe_frozen=0.0600, probe_refit=0.4800 (baseline=0.6700)
+
+  Skip [14, 16)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1460, KNN10=0.1492, cosine=0.0149, MSE=0.678644, CKA=0.2419, PR_change=76.9245, local_CKA=0.8139, angular_dist=0.1144, toast_linear_error=0.0000, probe_frozen=0.0800, probe_refit=0.4600 (baseline=0.6700)
+
+  Skip [14, 17)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1304, KNN10=0.1390, cosine=0.0020, MSE=0.987751, CKA=0.2475, PR_change=77.6706, local_CKA=0.6745, angular_dist=0.1560, toast_linear_error=0.0001, probe_frozen=0.0800, probe_refit=0.3700 (baseline=0.6700)
+
+  Skip [14, 18)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1036, KNN10=0.1192, cosine=-0.0083, MSE=1.344678, CKA=0.2398, PR_change=78.2777, local_CKA=0.5383, angular_dist=0.1955, toast_linear_error=0.0001, probe_frozen=0.0800, probe_refit=0.3800 (baseline=0.6700)
+
+  Skip [15, 16)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1924, KNN10=0.2026, cosine=0.0851, MSE=0.330914, CKA=0.3305, PR_change=72.1648, local_CKA=0.9272, angular_dist=0.0700, toast_linear_error=0.0000, probe_frozen=0.1100, probe_refit=0.4800 (baseline=0.6700)
+
+  Skip [15, 17)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1464, KNN10=0.1524, cosine=0.0438, MSE=0.653568, CKA=0.2915, PR_change=74.6934, local_CKA=0.8090, angular_dist=0.1165, toast_linear_error=0.0000, probe_frozen=0.0300, probe_refit=0.4300 (baseline=0.6700)
+
+  Skip [15, 18)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1160, KNN10=0.1262, cosine=0.0207, MSE=1.277259, CKA=0.2344, PR_change=77.3874, local_CKA=0.6742, angular_dist=0.1600, toast_linear_error=0.0000, probe_frozen=0.0300, probe_refit=0.4400 (baseline=0.6700)
+
+  Skip [15, 19)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1148, KNN10=0.1160, cosine=0.0079, MSE=1.485847, CKA=0.2444, PR_change=77.3167, local_CKA=0.5698, angular_dist=0.2003, toast_linear_error=0.0001, probe_frozen=0.0600, probe_refit=0.4100 (baseline=0.6700)
+
+  Skip [16, 17)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1336, KNN10=0.1456, cosine=0.0690, MSE=0.731063, CKA=0.2276, PR_change=77.3777, local_CKA=0.9343, angular_dist=0.0731, toast_linear_error=0.0000, probe_frozen=0.0300, probe_refit=0.4400 (baseline=0.6700)
+
+  Skip [16, 18)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1000, KNN10=0.1098, cosine=0.0339, MSE=1.437246, CKA=0.2219, PR_change=78.7602, local_CKA=0.8259, angular_dist=0.1212, toast_linear_error=0.0000, probe_frozen=0.0300, probe_refit=0.4300 (baseline=0.6700)
+
+  Skip [16, 19)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0956, KNN10=0.1054, cosine=0.0245, MSE=1.582043, CKA=0.2251, PR_change=78.4447, local_CKA=0.7231, angular_dist=0.1653, toast_linear_error=0.0000, probe_frozen=0.0500, probe_refit=0.4600 (baseline=0.6700)
+
+  Skip [16, 20)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0904, KNN10=0.0936, cosine=0.0153, MSE=1.724331, CKA=0.2123, PR_change=78.0926, local_CKA=0.6464, angular_dist=0.1997, toast_linear_error=0.0001, probe_frozen=0.0500, probe_refit=0.4100 (baseline=0.6700)
+
+  Skip [17, 18)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1048, KNN10=0.1110, cosine=0.0549, MSE=1.237921, CKA=0.2304, PR_change=79.1891, local_CKA=0.9368, angular_dist=0.0750, toast_linear_error=0.0000, probe_frozen=0.1500, probe_refit=0.4800 (baseline=0.6700)
+
+  Skip [17, 19)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1052, KNN10=0.1126, cosine=0.0429, MSE=1.372217, CKA=0.2492, PR_change=78.1865, local_CKA=0.8525, angular_dist=0.1230, toast_linear_error=0.0000, probe_frozen=0.1000, probe_refit=0.4400 (baseline=0.6700)
+
+  Skip [17, 20)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0948, KNN10=0.1062, cosine=0.0331, MSE=1.599751, CKA=0.2483, PR_change=77.9279, local_CKA=0.7780, angular_dist=0.1608, toast_linear_error=0.0000, probe_frozen=0.0800, probe_refit=0.4400 (baseline=0.6700)
+
+  Skip [17, 21)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0924, KNN10=0.1004, cosine=0.0368, MSE=2.065044, CKA=0.2369, PR_change=78.4062, local_CKA=0.7311, angular_dist=0.1913, toast_linear_error=0.0000, probe_frozen=0.1000, probe_refit=0.4100 (baseline=0.6700)
+
+  Skip [18, 19)...
+      KL/flip/entropy=skipped (no head), KNN5=0.1000, KNN10=0.1080, cosine=0.0695, MSE=0.727298, CKA=0.2644, PR_change=76.2063, local_CKA=0.9504, angular_dist=0.0735, toast_linear_error=0.0000, probe_frozen=0.2100, probe_refit=0.4800 (baseline=0.6700)
+
+  Skip [18, 20)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0892, KNN10=0.0978, cosine=0.0243, MSE=1.315669, CKA=0.2288, PR_change=77.0937, local_CKA=0.8904, angular_dist=0.1155, toast_linear_error=0.0000, probe_frozen=0.0900, probe_refit=0.5400 (baseline=0.6700)
+
+  Skip [18, 21)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0892, KNN10=0.0972, cosine=0.0289, MSE=1.974707, CKA=0.2076, PR_change=77.7645, local_CKA=0.8440, angular_dist=0.1500, toast_linear_error=0.0000, probe_frozen=0.1300, probe_refit=0.4400 (baseline=0.6700)
+
+  Skip [18, 22)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0964, KNN10=0.1002, cosine=0.0298, MSE=3.512338, CKA=0.2097, PR_change=77.0058, local_CKA=0.8193, angular_dist=0.1753, toast_linear_error=0.0000, probe_frozen=0.0900, probe_refit=0.4600 (baseline=0.6700)
+
+  Skip [19, 20)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0996, KNN10=0.0980, cosine=0.0444, MSE=1.298197, CKA=0.2041, PR_change=76.8529, local_CKA=0.9655, angular_dist=0.0653, toast_linear_error=0.0000, probe_frozen=0.0800, probe_refit=0.5900 (baseline=0.6700)
+
+  Skip [19, 21)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0784, KNN10=0.0896, cosine=0.0404, MSE=1.900550, CKA=0.1869, PR_change=77.7047, local_CKA=0.9303, angular_dist=0.1042, toast_linear_error=0.0000, probe_frozen=0.1400, probe_refit=0.4900 (baseline=0.6700)
+
+  Skip [19, 22)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0836, KNN10=0.0956, cosine=0.0326, MSE=3.475219, CKA=0.1926, PR_change=77.3915, local_CKA=0.9076, angular_dist=0.1338, toast_linear_error=0.0000, probe_frozen=0.1400, probe_refit=0.4200 (baseline=0.6700)
+
+  Skip [19, 23)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0628, KNN10=0.0792, cosine=0.0205, MSE=28.601740, CKA=0.2097, PR_change=78.4291, local_CKA=0.8881, angular_dist=0.1562, toast_linear_error=0.0000, probe_frozen=0.1500, probe_refit=0.5900 (baseline=0.6700)
+
+  Skip [20, 21)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0796, KNN10=0.0870, cosine=0.0723, MSE=1.245979, CKA=0.1548, PR_change=77.6259, local_CKA=0.9805, angular_dist=0.0589, toast_linear_error=0.0000, probe_frozen=0.1300, probe_refit=0.5400 (baseline=0.6700)
+
+  Skip [20, 22)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0684, KNN10=0.0854, cosine=0.0407, MSE=3.297657, CKA=0.1520, PR_change=77.5650, local_CKA=0.9628, angular_dist=0.0934, toast_linear_error=0.0000, probe_frozen=0.1200, probe_refit=0.4500 (baseline=0.6700)
+
+  Skip [20, 23)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0692, KNN10=0.0782, cosine=0.0295, MSE=25.241737, CKA=0.1809, PR_change=78.6108, local_CKA=0.9439, angular_dist=0.1182, toast_linear_error=0.0000, probe_frozen=0.1600, probe_refit=0.6000 (baseline=0.6700)
+
+  Skip [21, 22)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0752, KNN10=0.0820, cosine=0.0621, MSE=1.953364, CKA=0.2073, PR_change=77.6609, local_CKA=0.9915, angular_dist=0.0464, toast_linear_error=0.0000, probe_frozen=0.1200, probe_refit=0.5300 (baseline=0.6700)
+
+  Skip [21, 23)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0616, KNN10=0.0742, cosine=0.0219, MSE=28.146347, CKA=0.1842, PR_change=78.7405, local_CKA=0.9771, angular_dist=0.0741, toast_linear_error=0.0000, probe_frozen=0.1300, probe_refit=0.6000 (baseline=0.6700)
+
+  Skip [22, 23)...
+      KL/flip/entropy=skipped (no head), KNN5=0.0556, KNN10=0.0700, cosine=0.0105, MSE=36.065811, CKA=0.1394, PR_change=79.4067, local_CKA=0.9925, angular_dist=0.0385, toast_linear_error=0.0000, probe_frozen=0.1100, probe_refit=0.6500 (baseline=0.6700)
+
+Results written to: thesis/s4_medical_domain/analysis/output_level_eval_s4_phikonv2_tcgaut.csv
+  86 rows evaluated (24-layer model)
+
+============================================================
+  Stage 1 complete (EVAL_ONLY) -> thesis/s4_medical_domain/analysis/output_level_eval_s4_phikonv2_tcgaut.csv
+  End: Thu Oct 15 14:37:03 CEST 2026
+============================================================

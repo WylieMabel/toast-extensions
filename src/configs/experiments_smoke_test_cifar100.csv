@@ -1,0 +1,3 @@
+"dataset","encoder","skip","mlp_skip","attn_skip","head_dict","skip_translator","mlp_mode","attn_mode","fit_dataset"
+"cifar100","facebook/deit-small-patch16-224","[]","[]","[]","{}","linear","identity","identity",""
+

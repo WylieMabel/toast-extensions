@@ -1,0 +1,23 @@
+model,dataset,approx_layer,translator,mlp_linearize,mlp_mode,attn_linearize,attn_mode,head_dict,fit_dataset,accuracy_mean,accuracy_std,orig_head_accuracy_mean,orig_head_accuracy_std,order
+facebook/dinov2-base,chestxray14,[],linear,[],identity,[],identity,{},chestxray14,0.6445276885876244,0.0556393260423439,,,0
+facebook/dinov2-base,chestxray14,"[(0, 1)]",linear,[],identity,[],identity,{},chestxray14,0.6335572997185556,0.0594158753790535,,,3
+facebook/dinov2-base,chestxray14,"[(1, 2)]",linear,[],identity,[],identity,{},chestxray14,0.6418024339001863,0.0595987205708651,,,6
+facebook/dinov2-base,chestxray14,"[(2, 3)]",linear,[],identity,[],identity,{},chestxray14,0.6365897649343957,0.0627517401601124,,,9
+facebook/dinov2-base,chestxray14,"[(3, 4)]",linear,[],identity,[],identity,{},chestxray14,0.6498592777579577,0.0431569480414204,,,12
+facebook/dinov2-base,chestxray14,"[(4, 5)]",linear,[],identity,[],identity,{},chestxray14,0.6480754746898164,0.039685503725569,,,15
+facebook/dinov2-base,chestxray14,"[(5, 6)]",linear,[],identity,[],identity,{},chestxray14,0.6453700400364688,0.0600109643218677,,,18
+facebook/dinov2-base,chestxray14,"[(6, 7)]",linear,[],identity,[],identity,{},chestxray14,0.6597296547350061,0.0384271779207689,,,21
+facebook/dinov2-base,chestxray14,"[(7, 8)]",linear,[],identity,[],identity,{},chestxray14,0.6243707139176279,0.0307651770717865,,,24
+facebook/dinov2-base,chestxray14,"[(8, 9)]",linear,[],identity,[],identity,{},chestxray14,0.6448646291671621,0.0479730234974753,,,27
+facebook/dinov2-base,chestxray14,"[(9, 10)]",linear,[],identity,[],identity,{},chestxray14,0.6390276291275221,0.0471594101678239,,,30
+facebook/dinov2-base,chestxray14,"[(10, 11)]",linear,[],identity,[],identity,{},chestxray14,0.645806080786459,0.0552758948937274,,,33
+facebook/dinov2-base,chestxray14,"[(0, 2)]",linear,[],identity,[],identity,{},chestxray14,0.6381555476275419,0.0569001024638509,,,36
+facebook/dinov2-base,chestxray14,"[(1, 3)]",linear,[],identity,[],identity,{},chestxray14,0.639442434126701,0.0545101405452214,,,39
+facebook/dinov2-base,chestxray14,"[(2, 4)]",linear,[],identity,[],identity,{},chestxray14,0.634810916874777,0.05721245587053,,,42
+facebook/dinov2-base,chestxray14,"[(3, 5)]",linear,[],identity,[],identity,{},chestxray14,0.6264716375312166,0.0609598876377162,,,45
+facebook/dinov2-base,chestxray14,"[(4, 6)]",linear,[],identity,[],identity,{},chestxray14,0.6346474015935307,0.0641886772147704,,,48
+facebook/dinov2-base,chestxray14,"[(5, 7)]",linear,[],identity,[],identity,{},chestxray14,0.6321352122725651,0.0707914501720689,,,51
+facebook/dinov2-base,chestxray14,"[(6, 8)]",linear,[],identity,[],identity,{},chestxray14,0.5911374717564514,0.0353312995915351,,,54
+facebook/dinov2-base,chestxray14,"[(7, 9)]",linear,[],identity,[],identity,{},chestxray14,0.6075811630396004,0.0732791804194525,,,57
+facebook/dinov2-base,chestxray14,"[(8, 10)]",linear,[],identity,[],identity,{},chestxray14,0.5885063622309431,0.0788796694802923,,,159
+facebook/dinov2-base,chestxray14,"[(9, 11)]",linear,[],identity,[],identity,{},chestxray14,0.609376858128196,0.0700776027684479,,,162

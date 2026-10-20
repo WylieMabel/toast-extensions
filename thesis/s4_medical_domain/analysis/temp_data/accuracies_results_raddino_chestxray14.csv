@@ -1,0 +1,23 @@
+model,dataset,approx_layer,translator,mlp_linearize,mlp_mode,attn_linearize,attn_mode,head_dict,fit_dataset,accuracy_mean,accuracy_std,orig_head_accuracy_mean,orig_head_accuracy_std,order
+microsoft/rad-dino,chestxray14,[],linear,[],identity,[],identity,{},chestxray14,0.6908966583422523,0.0096078675757463,,,165
+microsoft/rad-dino,chestxray14,"[(0, 1)]",linear,[],identity,[],identity,{},chestxray14,0.6910453085979308,0.0102622951716545,,,168
+microsoft/rad-dino,chestxray14,"[(1, 2)]",linear,[],identity,[],identity,{},chestxray14,0.6908669282911166,0.0077153349225367,,,171
+microsoft/rad-dino,chestxray14,"[(2, 3)]",linear,[],identity,[],identity,{},chestxray14,0.690837198239981,0.0095484852734668,,,174
+microsoft/rad-dino,chestxray14,"[(3, 4)]",linear,[],identity,[],identity,{},chestxray14,0.6914020692115591,0.0093624174708438,,,177
+microsoft/rad-dino,chestxray14,"[(4, 5)]",linear,[],identity,[],identity,{},chestxray14,0.6920561303365442,0.0105491002657367,,,180
+microsoft/rad-dino,chestxray14,"[(5, 6)]",linear,[],identity,[],identity,{},chestxray14,0.6933345225353787,0.0091914913927902,,,183
+microsoft/rad-dino,chestxray14,"[(6, 7)]",linear,[],identity,[],identity,{},chestxray14,0.6955642763705554,0.0072772461036323,,,186
+microsoft/rad-dino,chestxray14,"[(7, 8)]",linear,[],identity,[],identity,{},chestxray14,0.6967832084671185,0.0088479748985109,,,189
+microsoft/rad-dino,chestxray14,"[(8, 9)]",linear,[],identity,[],identity,{},chestxray14,0.6963075276489475,0.0045574335679776,,,192
+microsoft/rad-dino,chestxray14,"[(9, 10)]",linear,[],identity,[],identity,{},chestxray14,0.6973183493875609,0.0076106608211674,,,195
+microsoft/rad-dino,chestxray14,"[(10, 11)]",linear,[],identity,[],identity,{},chestxray14,0.6971102390296111,0.006769644277255,,,198
+microsoft/rad-dino,chestxray14,"[(0, 2)]",linear,[],identity,[],identity,{},chestxray14,0.6905398977286241,0.0087988395545673,,,201
+microsoft/rad-dino,chestxray14,"[(1, 3)]",linear,[],identity,[],identity,{},chestxray14,0.692175050541087,0.0090475633449212,,,204
+microsoft/rad-dino,chestxray14,"[(2, 4)]",linear,[],identity,[],identity,{},chestxray14,0.6923237007967654,0.0091767667501105,,,207
+microsoft/rad-dino,chestxray14,"[(3, 5)]",linear,[],identity,[],identity,{},chestxray14,0.6930669520751577,0.0067161626598154,,,210
+microsoft/rad-dino,chestxray14,"[(4, 6)]",linear,[],identity,[],identity,{},chestxray14,0.6959210369841836,0.0067126084030211,,,213
+microsoft/rad-dino,chestxray14,"[(5, 7)]",linear,[],identity,[],identity,{},chestxray14,0.7005886550124867,0.0056893251636878,,,216
+microsoft/rad-dino,chestxray14,"[(6, 8)]",linear,[],identity,[],identity,{},chestxray14,0.7041562611487692,0.0040647623493064,,,219
+microsoft/rad-dino,chestxray14,"[(7, 9)]",linear,[],identity,[],identity,{},chestxray14,0.7075157569271019,0.0019830189256335,,,222
+microsoft/rad-dino,chestxray14,"[(8, 10)]",linear,[],identity,[],identity,{},chestxray14,0.7037697704840052,0.0018110945903815,,,225
+microsoft/rad-dino,chestxray14,"[(9, 11)]",linear,[],identity,[],identity,{},chestxray14,0.6987156617909384,0.004114364107981,,,228

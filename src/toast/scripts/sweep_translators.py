@@ -17,8 +17,14 @@ was saved to begin with.
 Kept out of the heavy modules so the runner does not import torch just to list paths; the
 naming rules themselves live in toast.utils.translator_keys and are not duplicated here.
 
+Reads SEEDS from the environment (space-separated, default "0") to match
+run_pipeline_row_by_row.sh's own SEEDS -- each seed gets its own translator directory (see
+translator_store_key), so this has to enumerate every seed the sweep loops over, not just one,
+or it will under-report what's saved / over-delete what's still needed.
+
     python src/toast/scripts/sweep_translators.py <sweep_csv> <samples> [row_index]
 """
+import os
 import sys
 from pathlib import Path
 
@@ -33,11 +39,12 @@ if len(sys.argv) not in (3, 4):
     raise SystemExit(2)
 
 csv_path, samples = sys.argv[1], int(sys.argv[2])
+seeds = [int(s) for s in os.environ.get("SEEDS", "0").split()]
 rows = read_sweep_rows(csv_path)
 if len(sys.argv) == 4:
-    names = translators_ready_for_cleanup(rows, samples, int(sys.argv[3]))
+    names = translators_ready_for_cleanup(rows, samples, int(sys.argv[3]), seeds)
 else:
-    names = sweep_saved_translator_dirs(rows, samples)
+    names = sweep_saved_translator_dirs(rows, samples, seeds)
 
 base = PROJECT_ROOT / "data" / "translators"
 for name in sorted(names):

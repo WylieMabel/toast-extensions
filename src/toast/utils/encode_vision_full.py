@@ -3,6 +3,7 @@ import copy
 import functools
 import os
 import shutil
+from pathlib import Path
 
 import fire
 import torch
@@ -208,7 +209,7 @@ def run_encoding(
         key = (cfg["dataset"], cfg["encoder"])
         groups.setdefault(key, []).append(cfg)
 
-    embeddings_base = PROJECT_ROOT / "data" / "embeddings"
+    embeddings_base = Path(os.environ.get("EMBEDDINGS_DIR", PROJECT_ROOT / "data" / "embeddings"))
     # Fitted translators persist here so a transfer row in the same sweep can reuse one across
     # datasets. Unlike embeddings (which run_pipeline_row_by_row.sh deletes per row to bound
     # disk use), these outlive the row that produced them -- until the sweep ends and the
@@ -381,7 +382,7 @@ def run_encoding(
                 # identity has no state worth persisting, so it opts out entirely.
                 is_transfer = row_fit_dataset != ds_name
                 translator_key = translator_store_key(
-                    row_fit_dataset, enc_name, row_translator, samples_to_extract
+                    row_fit_dataset, enc_name, row_translator, samples_to_extract, seed
                 )
                 save_path = load_path = None
                 if row_translator != "identity":
@@ -431,6 +432,15 @@ def run_encoding(
                     translator_key=translator_key if (load_path or save_path) else None,
                     **model_config,
                 ).to(device).eval()
+
+                # The capture is only read inside SkipModel.__init__, to fit the translators
+                # (fit_translators copies the two layers it needs to the GPU). Keeping it
+                # referenced through the full-split encode below held 10-25GB of dead host RAM
+                # at that stage's peak. Later configs in this group fit from the same capture,
+                # so only the last one releases it.
+                skip_encoder.precomputed_embeddings = None
+                if combo_idx == total:
+                    all_layer_embeddings = None
 
                 memlog(f"before full-split encode_data: train_n={len(raw_data['train'])} "
                        f"test_n={len(raw_data['test'])}")

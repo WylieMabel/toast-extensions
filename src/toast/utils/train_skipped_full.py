@@ -2,6 +2,7 @@ import ast
 import csv as _csv
 import os
 from collections import Counter
+from pathlib import Path
 
 import fire
 import pandas as pd
@@ -14,7 +15,7 @@ from transformers import AutoModelForImageClassification
 from toast import PROJECT_ROOT
 from toast.modules.module import HFwrapper, NoEncoder
 from toast.modules.lowrank_translator import parse_translator_name
-from toast.pl_modules.train_NN import train_classifier
+from toast.pl_modules.train_NN import eval_classifier, train_classifier
 from toast.utils.dictionaries import (
     DATASET2LABEL_COLUMN,
     DATASET2NUM_CLASSES,
@@ -71,6 +72,37 @@ def _orig_head_accuracy(encoder_hf_id: str, num_classes: int, test_loader) -> fl
         correct += (preds == labels).sum().item()
         total += labels.shape[0]
     return correct / total if total else float("nan")
+
+
+def _build_classifier(classifier_type: str, hidden_size: int, num_classes: int):
+    """(classifier, lr, num_epochs). Shared by training and by reloading a saved frozen head,
+    so the two can never disagree on the architecture a state_dict has to fit."""
+    if classifier_type == "MLP":
+        classifier = nn.Sequential(
+            nn.Linear(hidden_size, hidden_size),
+            nn.Dropout(0.5),
+            nn.LayerNorm(hidden_size),
+            nn.SiLU(),
+            nn.Linear(hidden_size, num_classes),
+        )
+        return classifier, 0.001, 50
+    if classifier_type == "linear":
+        return nn.Linear(hidden_size, num_classes), 0.01, 5
+    raise ValueError(f"Unsupported classifier_type: {classifier_type}")
+
+
+# Frozen heads (s5 setup 2): every baseline row saves the head it trained on the unskipped
+# model, and every later row on the same dataset/encoder/seed scores that head, unchanged, on
+# its own (skipped + translated) test embeddings. This mimics having an existing head for the
+# full model and condensing the model with translators fitted elsewhere, without retraining.
+# Keyed by seed because the train split is reshuffled per seed (see run_pipeline_row_by_row.sh),
+# so seed s's skipped row is compared against the head trained under seed s.
+# run_pipeline_row_by_row.sh points HEADS_DIR at a per-sweep folder and clears it at the start,
+# so concurrent sweeps never share heads; set HEADS_DIR yourself to share them on purpose.
+def _frozen_head_path(dataset, encoder, classifier_type, samples, seed) -> Path:
+    heads_dir = Path(os.environ.get("HEADS_DIR", PROJECT_ROOT / "data" / "heads"))
+    enc_slug = (encoder or "unknown").replace("/", "_")
+    return heads_dir / f"{dataset}__{enc_slug}__{classifier_type}__n{samples}__seed{seed}.pt"
 
 
 def _read_config_csv(path: str):
@@ -148,16 +180,30 @@ def skip_and_train_full_run(
         "approx_layer", "mlp_linearize", "attn_linearize", "head_dict",
         "mlp_mode", "attn_mode",
         "num_layers", "original_accuracy", "accuracy", "delta_acc",
+        # auroc/auprc mirror accuracy's own baseline/delta bookkeeping: threshold-independent
+        # (AUROC) and imbalance-sensitive (AUPRC) companions to plain accuracy, binary
+        # one-vs-rest macro-averaged for >2-class datasets (see DATASET2NUM_CLASSES), NaN
+        # when sklearn can't score them (see _auroc_auprc in train_NN.py).
+        "original_auroc", "auroc", "delta_auroc",
+        "original_auprc", "auprc", "delta_auprc",
         # orig_head_* mirror original_accuracy/accuracy/delta_acc but score the *frozen,
         # pretrained* classifier head instead of a newly trained one -- NaN outside
         # ORIG_HEAD_DATASETS, where the pretrained head has no meaningful class mapping.
-        "orig_head_accuracy", "orig_head_delta_acc", "num_samples",
+        "orig_head_accuracy", "orig_head_delta_acc",
+        # frozen_head_* score the head trained on this dataset's *unskipped* baseline row
+        # (same encoder and seed), applied without retraining -- see _frozen_head_path. Its
+        # baseline is original_accuracy/auroc/auprc itself (that head on its own embeddings),
+        # so the deltas need no separate lookup. NaN when no saved head exists.
+        "frozen_head_accuracy", "frozen_head_auroc", "frozen_head_auprc",
+        "frozen_head_delta_acc", "frozen_head_delta_auroc", "frozen_head_delta_auprc",
+        "num_samples",
         # accuracy <= majority_class_rate means the probe collapsed and the row is a null
         # result. Stored per row so it can be checked across a whole sweep after the fact.
         "majority_class_rate",
         "params_saved", "params_saved_pct",
     ]
-    results_path = PROJECT_ROOT / "results" / os.environ.get("RESULTS_CSV_NAME", "results_new.csv")
+    results_path = (PROJECT_ROOT / os.environ.get("RESULTS_DIR", "results")
+                    / os.environ.get("RESULTS_CSV_NAME", "results_new.csv"))
     if os.path.exists(results_path):
         try:
             results_df = pd.read_csv(results_path)
@@ -170,7 +216,7 @@ def skip_and_train_full_run(
         results_path.parent.mkdir(parents=True, exist_ok=True)
         results_df = pd.DataFrame(columns=results_columns)
 
-    embeddings_base = PROJECT_ROOT / "data" / "embeddings"
+    embeddings_base = Path(os.environ.get("EMBEDDINGS_DIR", PROJECT_ROOT / "data" / "embeddings"))
     hidden_size = None
 
     # Rows that fail are skipped so one bad config does not kill a long sweep, but they
@@ -265,14 +311,14 @@ def skip_and_train_full_run(
             if hidden_size is None:
                 hidden_size = embeddings["train"][0]["embeddings"].shape[-1]
 
-            test_labels = hf_test["labels"]
-            if torch.is_tensor(test_labels):
-                test_labels = test_labels.tolist()
-            if test_labels and not isinstance(test_labels[0], (list, tuple)):
-                counts = Counter(int(v) for v in test_labels)
-                majority_rate = max(counts.values()) / len(test_labels)
-            else:
+            # Decided by MULTILABEL_DATASETS, not by sniffing the label type: datasets>=4 returns
+            # a lazy Column here (neither tensor nor list), so the old isinstance check let a
+            # multi-hot row through to int() and crashed.
+            if is_multilabel:
                 majority_rate = None  # multi-label: no single majority class
+            else:
+                counts = Counter(int(v) for v in hf_test["labels"])
+                majority_rate = max(counts.values()) / len(hf_test)
 
             batch_size = 256
             train_loader = DataLoader(hf_train, shuffle=True,  batch_size=batch_size, num_workers=2, pin_memory=True)
@@ -282,22 +328,11 @@ def skip_and_train_full_run(
                 if has_cls_embeddings else None
             )
 
+            classifier, lr, num_epochs = _build_classifier(classifier_type, hidden_size, row_num_classes)
             if classifier_type == "MLP":
-                classifier = nn.Sequential(
-                    nn.Linear(hidden_size, hidden_size),
-                    nn.Dropout(0.5),
-                    nn.LayerNorm(hidden_size),
-                    nn.SiLU(),
-                    nn.Linear(hidden_size, row_num_classes),
-                )
-                lr, num_epochs = 0.001, 50
                 optimizer = optim.Adam(classifier.parameters(), lr=lr, weight_decay=1e-5)
-            elif classifier_type == "linear":
-                classifier = nn.Linear(hidden_size, row_num_classes)
-                lr, num_epochs = 0.01, 5
-                optimizer = optim.Adam(classifier.parameters(), lr=lr)
             else:
-                raise ValueError(f"Unsupported classifier_type: {classifier_type}")
+                optimizer = optim.Adam(classifier.parameters(), lr=lr)
 
             model = HFwrapper(encoder=NoEncoder(), classifier=classifier)
             model.to(device)
@@ -306,7 +341,7 @@ def skip_and_train_full_run(
             criterion = nn.BCEWithLogitsLoss() if is_multilabel else nn.CrossEntropyLoss()
 
             print("  Starting classifier training...")
-            _, _, _, eval_accuracies, _ = train_classifier(
+            _, _, _, eval_accuracies, _, eval_aurocs, eval_auprcs = train_classifier(
                 model=model,
                 train_data_loader=train_loader,
                 test_data_loader=test_loader,
@@ -317,8 +352,38 @@ def skip_and_train_full_run(
                 is_multilabel=is_multilabel,
             )
             accuracy = eval_accuracies[-1]
+            auroc = eval_aurocs[-1]
+            auprc = eval_auprcs[-1]
             metric_name = "macro-AUC" if is_multilabel else "Accuracy"
-            print(f"  Done. {metric_name}: {accuracy:.4f}")
+            print(f"  Done. {metric_name}: {accuracy:.4f} | AUROC: {auroc:.4f} | AUPRC: {auprc:.4f}")
+
+            is_baseline = not skip and not mlp_skip and not attn_skip and not head_dict
+            head_path = _frozen_head_path(row_dataset, row_encoder, classifier_type,
+                                          samples_to_extract, seed)
+            frozen_acc = frozen_auroc = frozen_auprc = float("nan")
+            if is_baseline:
+                head_path.parent.mkdir(parents=True, exist_ok=True)
+                # Written to a temp file and renamed, so a reader never sees a half-written head.
+                tmp_path = head_path.with_suffix(".tmp")
+                torch.save(model.classifier.state_dict(), tmp_path)
+                os.replace(tmp_path, head_path)
+                print(f"  Frozen head saved to: {head_path}")
+            elif head_path.exists():
+                frozen, _, _ = _build_classifier(classifier_type, hidden_size, row_num_classes)
+                frozen.load_state_dict(torch.load(head_path, map_location=device))
+                _, frozen_acc, frozen_auroc, frozen_auprc = eval_classifier(
+                    model=HFwrapper(encoder=NoEncoder(), classifier=frozen).to(device),
+                    test_data_loader=test_loader,
+                    criterion=criterion,
+                    label_column_name="labels",
+                    is_multilabel=is_multilabel,
+                )
+                # Worded so run_pipeline_row_by_row.sh's "(Accuracy|macro-AUC): " grep, which
+                # reads the retrained head's score, does not pick this line up as well.
+                print(f"  Frozen head score: {frozen_acc:.4f} | AUROC: {frozen_auroc:.4f} "
+                      f"| AUPRC: {frozen_auprc:.4f}")
+            else:
+                print(f"  No frozen head at {head_path}; frozen_head_* will be NaN.")
 
             # Frozen-head accuracy: no training, just the pretrained classifier scored
             # directly on this row's (possibly skip-approximated) test embeddings. Must use
@@ -343,9 +408,10 @@ def skip_and_train_full_run(
             continue
 
         try:
-            is_baseline = not skip and not mlp_skip and not attn_skip and not head_dict
             if is_baseline:
                 original_accuracy = accuracy
+                original_auroc = auroc
+                original_auprc = auprc
                 orig_head_original_accuracy = orig_head_accuracy
             else:
                 # The baseline is the unmodified encoder: no skips, no sublayer edits, no head
@@ -377,9 +443,22 @@ def skip_and_train_full_run(
                           f"model={row_encoder} seed={seed}; delta_acc will be NaN. "
                           f"Put the all-empty baseline row first in the config CSV.")
                     original_accuracy = float("nan")
+                    original_auroc = float("nan")
+                    original_auprc = float("nan")
                     orig_head_original_accuracy = float("nan")
                 else:
                     original_accuracy = filtered["accuracy"].iloc[0]
+                    # auroc/auprc columns may not exist yet in an older results CSV (backfilled
+                    # to None by the load block above, same as orig_head_accuracy below) --
+                    # guarded lookup so an old results file doesn't KeyError here.
+                    original_auroc = (
+                        float("nan") if "auroc" not in filtered.columns or filtered["auroc"].iloc[0] is None
+                        else filtered["auroc"].iloc[0]
+                    )
+                    original_auprc = (
+                        float("nan") if "auprc" not in filtered.columns or filtered["auprc"].iloc[0] is None
+                        else filtered["auprc"].iloc[0]
+                    )
                     # A results CSV written before this column existed backfills it with
                     # None (not NaN, see the load block above), which breaks the subtraction
                     # below with a TypeError rather than propagating as an unknown value.
@@ -390,6 +469,8 @@ def skip_and_train_full_run(
             # genuinely unknown. The old guard collapsed a missing baseline to 0.0, making it
             # indistinguishable from a config that cost no accuracy at all.
             delta_acc = original_accuracy - accuracy
+            delta_auroc = original_auroc - auroc
+            delta_auprc = original_auprc - auprc
             # NaN whenever either side is NaN -- no baseline, or this encoder/dataset has no
             # usable original head -- which is what we want rather than a fabricated 0.0.
             orig_head_delta_acc = orig_head_original_accuracy - orig_head_accuracy
@@ -420,8 +501,20 @@ def skip_and_train_full_run(
                 "original_accuracy": original_accuracy,
                 "accuracy":          accuracy,
                 "delta_acc":         delta_acc,
+                "original_auroc":    original_auroc,
+                "auroc":             auroc,
+                "delta_auroc":       delta_auroc,
+                "original_auprc":    original_auprc,
+                "auprc":             auprc,
+                "delta_auprc":       delta_auprc,
                 "orig_head_accuracy": orig_head_accuracy,
                 "orig_head_delta_acc": orig_head_delta_acc,
+                "frozen_head_accuracy": frozen_acc,
+                "frozen_head_auroc":    frozen_auroc,
+                "frozen_head_auprc":    frozen_auprc,
+                "frozen_head_delta_acc":   original_accuracy - frozen_acc,
+                "frozen_head_delta_auroc": original_auroc - frozen_auroc,
+                "frozen_head_delta_auprc": original_auprc - frozen_auprc,
                 "num_samples":       samples_to_extract,
                 "majority_class_rate": majority_rate,
                 "params_saved":      savings["params_saved"],

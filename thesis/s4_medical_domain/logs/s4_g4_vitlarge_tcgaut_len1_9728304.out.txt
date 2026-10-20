@@ -1,0 +1,534 @@
+CPUs: 4, NUM_WORKERS=3
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://nexus-central.leomed.ethz.ch/repository/pypi/simple
+Obtaining file:///cluster/home/mwylie/toast-extensions
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.11.0)
+Requirement already satisfied: transformers>=4.30 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (5.7.0)
+Requirement already satisfied: datasets>=2.14 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (4.8.5)
+Requirement already satisfied: latentis in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.0.8)
+Requirement already satisfied: fire in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.7.1)
+Requirement already satisfied: timm in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.0.26)
+Requirement already satisfied: pandas in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (3.0.2)
+Requirement already satisfied: numpy in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.4.4)
+Requirement already satisfied: scikit-learn in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.8.0)
+Requirement already satisfied: tqdm in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from toast==0.1.0) (4.67.3)
+Requirement already satisfied: pytorch-lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.6.1)
+Requirement already satisfied: filelock in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.29.0)
+Requirement already satisfied: pyarrow>=21.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (24.0.0)
+Requirement already satisfied: dill<0.4.2,>=0.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: requests>=2.32.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (2.32.5)
+Requirement already satisfied: httpx<1.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.28.1)
+Requirement already satisfied: xxhash in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.7.0)
+Requirement already satisfied: multiprocess<0.70.20 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.70.19)
+Requirement already satisfied: fsspec<=2026.2.0,>=2023.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2026.2.0)
+Requirement already satisfied: huggingface-hub<2.0,>=0.25.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (1.13.0)
+Requirement already satisfied: packaging in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (6.0.3)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (3.13.5)
+Requirement already satisfied: anyio in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (4.10.0)
+Requirement already satisfied: certifi in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (2026.1.4)
+Requirement already satisfied: httpcore==1.* in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.0.9)
+Requirement already satisfied: idna in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (3.11)
+Requirement already satisfied: h11>=0.16 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpcore==1.*->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (0.16.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.4.3)
+Requirement already satisfied: typer in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.20.0)
+Requirement already satisfied: typing-extensions>=4.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.15.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (6.7.1)
+Requirement already satisfied: propcache>=0.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.23.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (3.4.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (2.6.3)
+Requirement already satisfied: setuptools<82 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (80.10.2)
+Requirement already satisfied: sympy>=1.13.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.1.6)
+Requirement already satisfied: cuda-toolkit==13.0.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.2)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (13.2.0)
+Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (0.8.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.0)
+Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.1.0.3)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.0.61)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.6.3.3)
+Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-bindings<14,>=13.0.3->torch>=2.0->toast==0.1.0) (1.5.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from sympy>=1.13.3->torch>=2.0->toast==0.1.0) (1.3.0)
+Requirement already satisfied: regex>=2025.10.22 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (2026.4.4)
+Requirement already satisfied: tokenizers<=0.23.0,>=0.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.22.2)
+Requirement already satisfied: safetensors>=0.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.7.0)
+Requirement already satisfied: sniffio>=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from anyio->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.3.1)
+Requirement already satisfied: termcolor in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fire->toast==0.1.0) (3.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from jinja2->torch>=2.0->toast==0.1.0) (3.0.3)
+Requirement already satisfied: torchmetrics in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.9.0)
+Requirement already satisfied: backports.strenum in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.8)
+Requirement already satisfied: python-dotenv in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.1)
+Requirement already satisfied: GitPython in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.1.49)
+Requirement already satisfied: matplotlib in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.10.9)
+Requirement already satisfied: faiss-cpu in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.13.2)
+Requirement already satisfied: lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (2.6.1)
+Requirement already satisfied: gitdb<5,>=4.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from GitPython->latentis->toast==0.1.0) (4.0.12)
+Requirement already satisfied: smmap<6,>=3.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from gitdb<5,>=4.0.1->GitPython->latentis->toast==0.1.0) (5.0.3)
+Requirement already satisfied: lightning-utilities<2.0,>=0.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from lightning->latentis->toast==0.1.0) (0.15.3)
+Requirement already satisfied: contourpy>=1.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (4.62.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.5.0)
+Requirement already satisfied: pillow>=8 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (12.2.0)
+Requirement already satisfied: pyparsing>=3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (3.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from python-dateutil>=2.7->matplotlib->latentis->toast==0.1.0) (1.17.0)
+Requirement already satisfied: scipy>=1.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.17.1)
+Requirement already satisfied: joblib>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (3.6.0)
+Requirement already satisfied: torchvision in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from timm->toast==0.1.0) (0.26.0)
+Requirement already satisfied: click>=8.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (8.2.1)
+Requirement already satisfied: shellingham>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.5.4)
+Requirement already satisfied: rich>=10.11.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (14.2.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (2.19.2)
+Requirement already satisfied: mdurl~=0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from markdown-it-py>=2.2.0->rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.1.2)
+Building wheels for collected packages: toast
+  Building editable for toast (pyproject.toml): started
+  Building editable for toast (pyproject.toml): finished with status 'done'
+  Created wheel for toast: filename=toast-0.1.0-0.editable-py3-none-any.whl size=4561 sha256=6ed69a9e1742b7701a8667fd4342c1c2346352a2617a79ff7a440bc2c0994962
+  Stored in directory: /scratch/slurm-job.9728304/pip-ephem-wheel-cache-pqgbef1z/wheels/a0/f4/1f/d3c12de536bc82f378cfe768fdfa423266178ffc40a4f1de51
+Successfully built toast
+Installing collected packages: toast
+  Attempting uninstall: toast
+    Found existing installation: toast 0.1.0
+    Not uninstalling toast at /cluster/home/mwylie/.local/lib/python3.13/site-packages, outside environment /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env
+    Can't uninstall 'toast'. No files were found to uninstall.
+Successfully installed toast-0.1.0
+
+[notice] A new release of pip is available: 25.3 -> 26.2.1
+[notice] To update, run: pip install --upgrade pip
+Config : thesis/s4_medical_domain/configs/experiments_vitlarge_tcgaut_len1.csv
+Results: thesis/s4_medical_domain/results/results_vitlarge_tcgaut_len1.csv
+Embeddings: /scratch/mwylie/9728304/embeddings on gpu-biomed-18
+Running 24 rows from thesis/s4_medical_domain/configs/experiments_vitlarge_tcgaut_len1.csv
+
+=== Row 1 / 24 -- started 2026-10-12 03:46:44 ===
+"tcga_ut","google/vit-large-patch16-224","[]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 03:46:44
+ERROR: phase 1 failed for row 1, seed 0:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 24080 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/115d40265fa9
+Filtered layers (kept 24 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3054482 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 21112 MiB
+=== Row 1 / 24 -- finished 2026-10-12 04:04:19 (elapsed 1055s) ===
+
+=== Row 2 / 24 -- started 2026-10-12 04:04:19 ===
+"tcga_ut","google/vit-large-patch16-224","[(0, 1)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 04:04:19
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6114
+  -- seed 1 -- 2026-10-12 04:22:07
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6015
+  -- seed 2 -- 2026-10-12 04:39:19
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6031
+=== Row 2 / 24 -- finished 2026-10-12 04:56:53 (elapsed 3154s) ===
+
+=== Row 3 / 24 -- started 2026-10-12 04:56:54 ===
+"tcga_ut","google/vit-large-patch16-224","[(1, 2)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 04:56:54
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6090
+  -- seed 1 -- 2026-10-12 05:14:19
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6069
+  -- seed 2 -- 2026-10-12 05:32:10
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6076
+=== Row 3 / 24 -- finished 2026-10-12 05:50:01 (elapsed 3187s) ===
+
+=== Row 4 / 24 -- started 2026-10-12 05:50:01 ===
+"tcga_ut","google/vit-large-patch16-224","[(2, 3)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 05:50:01
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6131
+  -- seed 1 -- 2026-10-12 06:07:51
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6069
+  -- seed 2 -- 2026-10-12 06:25:35
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6029
+=== Row 4 / 24 -- finished 2026-10-12 06:42:49 (elapsed 3168s) ===
+
+=== Row 5 / 24 -- started 2026-10-12 06:42:49 ===
+"tcga_ut","google/vit-large-patch16-224","[(3, 4)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 06:42:49
+ERROR: phase 1 failed for row 5, seed 0:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 24080 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(3, 4)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/307cd30be70a
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3109810 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 5 / 24 -- finished 2026-10-12 06:59:38 (elapsed 1009s) ===
+
+=== Row 6 / 24 -- started 2026-10-12 06:59:38 ===
+"tcga_ut","google/vit-large-patch16-224","[(4, 5)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 06:59:38
+ERROR: phase 1 failed for row 6, seed 0:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(4, 5)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/36cae10995f1
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3114564 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 6 / 24 -- finished 2026-10-12 07:17:06 (elapsed 1048s) ===
+
+=== Row 7 / 24 -- started 2026-10-12 07:17:06 ===
+"tcga_ut","google/vit-large-patch16-224","[(5, 6)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 07:17:06
+ERROR: phase 1 failed for row 7, seed 0:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(5, 6)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/f999dfb36509
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3119668 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 7 / 24 -- finished 2026-10-12 07:34:22 (elapsed 1036s) ===
+
+=== Row 8 / 24 -- started 2026-10-12 07:34:22 ===
+"tcga_ut","google/vit-large-patch16-224","[(6, 7)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 07:34:22
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6234
+  -- seed 1 -- 2026-10-12 07:52:11
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6140
+  -- seed 2 -- 2026-10-12 08:09:47
+ERROR: phase 1 failed for row 8, seed 2:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 24080 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(6, 7)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/13291b4859bc
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3135542 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 8 / 24 -- finished 2026-10-12 08:26:25 (elapsed 3123s) ===
+
+=== Row 9 / 24 -- started 2026-10-12 08:26:25 ===
+"tcga_ut","google/vit-large-patch16-224","[(7, 8)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 08:26:25
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6255
+  -- seed 1 -- 2026-10-12 08:44:45
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6149
+  -- seed 2 -- 2026-10-12 09:01:55
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6125
+=== Row 9 / 24 -- finished 2026-10-12 09:19:36 (elapsed 3191s) ===
+
+=== Row 10 / 24 -- started 2026-10-12 09:19:36 ===
+"tcga_ut","google/vit-large-patch16-224","[(8, 9)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 09:19:36
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6252
+  -- seed 1 -- 2026-10-12 09:37:06
+ERROR: phase 1 failed for row 10, seed 1:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 24080 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(8, 9)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/00f5c3530d68
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3161785 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 10 / 24 -- finished 2026-10-12 09:53:55 (elapsed 2059s) ===
+
+=== Row 11 / 24 -- started 2026-10-12 09:53:56 ===
+"tcga_ut","google/vit-large-patch16-224","[(9, 10)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 09:53:56
+ERROR: phase 1 failed for row 11, seed 0:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(9, 10)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/cbd187bff173
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3166814 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 11 / 24 -- finished 2026-10-12 10:11:18 (elapsed 1042s) ===
+
+=== Row 12 / 24 -- started 2026-10-12 10:11:18 ===
+"tcga_ut","google/vit-large-patch16-224","[(10, 11)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 10:11:18
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6289
+  -- seed 1 -- 2026-10-12 10:29:24
+ERROR: phase 1 failed for row 12, seed 1:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 24080 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(10, 11)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/b56e913b0f2f
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3177474 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 12 / 24 -- finished 2026-10-12 10:46:07 (elapsed 2089s) ===
+
+=== Row 13 / 24 -- started 2026-10-12 10:46:07 ===
+"tcga_ut","google/vit-large-patch16-224","[(11, 12)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 10:46:07
+ERROR: phase 1 failed for row 13, seed 0:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(11, 12)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/87d590a150fa
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3182644 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 13 / 24 -- finished 2026-10-12 11:03:26 (elapsed 1039s) ===
+
+=== Row 14 / 24 -- started 2026-10-12 11:03:26 ===
+"tcga_ut","google/vit-large-patch16-224","[(12, 13)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 11:03:26
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6256
+  -- seed 1 -- 2026-10-12 11:21:07
+ERROR: phase 1 failed for row 14, seed 1:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 24080 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(12, 13)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/093d1ddffad1
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3193078 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 14 / 24 -- finished 2026-10-12 11:37:49 (elapsed 2063s) ===
+
+=== Row 15 / 24 -- started 2026-10-12 11:37:50 ===
+"tcga_ut","google/vit-large-patch16-224","[(13, 14)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 11:37:50
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6309
+  -- seed 1 -- 2026-10-12 11:55:55
+ERROR: phase 1 failed for row 15, seed 1:
+GPU Memory before:
+NVIDIA GeForce RTX 4090, 24564 MiB, 24080 MiB
+cuda
+
+=== dataset=tcga_ut | encoder=google/vit-large-patch16-224 | 1 configs ===
+Captured embeddings for layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+[1/1] skip=[(13, 14)] | attn=[](identity) | mlp=[](identity) | heads=full | translator=linear
+  -> /scratch/mwylie/9728304/embeddings/tcga_ut/vit-large-patch16-224/5c48af7c2293
+Filtered layers (kept 23 out of 24)
+src/toast/scripts/encode_vision_full.sh: line 21: 3203474 Killed                  python src/toast/utils/encode_vision_full.py --translator_name=identity --seed=$SEED --config_csv="$CONFIG_CSV" --batch_size=$BATCH_SIZE --num_workers=$NUM_WORKERS --samples_to_extract=500
+GPU Memory after:
+NVIDIA GeForce RTX 4090, 24564 MiB, 19186 MiB
+=== Row 15 / 24 -- finished 2026-10-12 12:12:41 (elapsed 2091s) ===
+
+=== Row 16 / 24 -- started 2026-10-12 12:12:41 ===
+"tcga_ut","google/vit-large-patch16-224","[(14, 15)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 12:12:41
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6258
+  -- seed 1 -- 2026-10-12 12:30:43
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6133
+  -- seed 2 -- 2026-10-12 12:48:33
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6125
+=== Row 16 / 24 -- finished 2026-10-12 13:06:17 (elapsed 3216s) ===
+
+=== Row 17 / 24 -- started 2026-10-12 13:06:17 ===
+"tcga_ut","google/vit-large-patch16-224","[(15, 16)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 13:06:17
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6217
+  -- seed 1 -- 2026-10-12 13:23:43
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6076
+  -- seed 2 -- 2026-10-12 13:41:33
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6095
+=== Row 17 / 24 -- finished 2026-10-12 13:59:15 (elapsed 3178s) ===
+
+=== Row 18 / 24 -- started 2026-10-12 13:59:15 ===
+"tcga_ut","google/vit-large-patch16-224","[(16, 17)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 13:59:15
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6272
+  -- seed 1 -- 2026-10-12 14:16:59
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6056
+  -- seed 2 -- 2026-10-12 14:34:43
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6126
+=== Row 18 / 24 -- finished 2026-10-12 14:52:05 (elapsed 3170s) ===
+
+=== Row 19 / 24 -- started 2026-10-12 14:52:05 ===
+"tcga_ut","google/vit-large-patch16-224","[(17, 18)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 14:52:05
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6249
+  -- seed 1 -- 2026-10-12 15:09:23
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6048
+  -- seed 2 -- 2026-10-12 15:26:51
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6105
+=== Row 19 / 24 -- finished 2026-10-12 15:44:28 (elapsed 3143s) ===
+
+=== Row 20 / 24 -- started 2026-10-12 15:44:28 ===
+"tcga_ut","google/vit-large-patch16-224","[(18, 19)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 15:44:28
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6244
+  -- seed 1 -- 2026-10-12 16:02:24
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6080
+  -- seed 2 -- 2026-10-12 16:20:06
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6104
+=== Row 20 / 24 -- finished 2026-10-12 16:37:27 (elapsed 3179s) ===
+
+=== Row 21 / 24 -- started 2026-10-12 16:37:27 ===
+"tcga_ut","google/vit-large-patch16-224","[(19, 20)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 16:37:27
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6229
+  -- seed 1 -- 2026-10-12 16:54:56
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6106
+  -- seed 2 -- 2026-10-12 17:12:27
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6114
+=== Row 21 / 24 -- finished 2026-10-12 17:29:26 (elapsed 3119s) ===
+
+=== Row 22 / 24 -- started 2026-10-12 17:29:26 ===
+"tcga_ut","google/vit-large-patch16-224","[(20, 21)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 17:29:26
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6256
+  -- seed 1 -- 2026-10-12 17:46:54
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6051
+  -- seed 2 -- 2026-10-12 18:04:11
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6130
+=== Row 22 / 24 -- finished 2026-10-12 18:21:25 (elapsed 3119s) ===
+
+=== Row 23 / 24 -- started 2026-10-12 18:21:26 ===
+"tcga_ut","google/vit-large-patch16-224","[(21, 22)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:21:26
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6295
+  -- seed 1 -- 2026-10-12 18:38:46
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6060
+  -- seed 2 -- 2026-10-12 18:55:46
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6138
+=== Row 23 / 24 -- finished 2026-10-12 19:13:01 (elapsed 3095s) ===
+
+=== Row 24 / 24 -- started 2026-10-12 19:13:01 ===
+"tcga_ut","google/vit-large-patch16-224","[(22, 23)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 19:13:01
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6337
+  -- seed 1 -- 2026-10-12 19:30:01
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6225
+  -- seed 2 -- 2026-10-12 19:47:26
+  Params saved: 11,546,624 (3.82% of encoder body)
+Accuracy: 0.6147
+=== Row 24 / 24 -- finished 2026-10-12 20:04:44 (elapsed 3103s) ===
+Summary (mean/std per config): thesis/s4_medical_domain/accuracies/accuracies_results_vitlarge_tcgaut_len1.csv
+
+==================================================
+INCOMPLETE: 11 of 24 rows failed: 1 5 6 7 8 10 11 12 13 14 15
+thesis/s4_medical_domain/results/results_vitlarge_tcgaut_len1.csv is missing those configs.
+==================================================
+Scratch cleaned: /scratch/mwylie/9728304 removed on gpu-biomed-18
+Left in /scratch/mwylie: 9728301 
+slurmstepd-gpu-biomed-18: error: Detected 11 oom-kill event(s) in step 9728304.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.

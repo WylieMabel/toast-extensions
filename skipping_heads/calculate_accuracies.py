@@ -17,17 +17,21 @@ CONFIG_COLS = [
 
 
 def accuracies(input_path, output_path):
-    tab = pd.read_csv(input_path)
+    # input_path may also be an already-loaded results DataFrame (e.g. several job CSVs concatenated).
+    tab = input_path.copy() if isinstance(input_path, pd.DataFrame) else pd.read_csv(input_path)
+    tab.reset_index(drop=True, inplace=True)
     tab.reset_index(inplace=True)
 
     config_cols = CONFIG_COLS + (["fit_dataset"] if "fit_dataset" in tab.columns else [])
 
-    # orig_head_accuracy (frozen pretrained head, no retraining) is a newer column and won't
-    # exist in results CSVs written before it was added -- aggregated only when present so
-    # older sweeps keep summarizing exactly as before.
+    # orig_head_accuracy (frozen pretrained head, no retraining) and auroc/auprc are newer
+    # columns and won't exist in results CSVs written before they were added -- aggregated
+    # only when present so older sweeps keep summarizing exactly as before.
     agg_cols = ["accuracy"]
-    if "orig_head_accuracy" in tab.columns:
-        agg_cols.append("orig_head_accuracy")
+    for optional_col in ("orig_head_accuracy", "auroc", "auprc",
+                         "frozen_head_accuracy", "frozen_head_auroc", "frozen_head_auprc"):
+        if optional_col in tab.columns:
+            agg_cols.append(optional_col)
 
     # NaN in a groupby key drops the whole group in pandas -- fit_dataset is blank/NaN for
     # every ordinary (non-transfer) row, which would silently discard almost everything.

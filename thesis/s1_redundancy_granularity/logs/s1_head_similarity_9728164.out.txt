@@ -1,0 +1,209 @@
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://nexus-central.leomed.ethz.ch/repository/pypi/simple
+Obtaining file:///cluster/home/mwylie/toast-extensions
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.11.0)
+Requirement already satisfied: transformers>=4.30 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (5.7.0)
+Requirement already satisfied: datasets>=2.14 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (4.8.5)
+Requirement already satisfied: latentis in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.0.8)
+Requirement already satisfied: fire in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.7.1)
+Requirement already satisfied: timm in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.0.26)
+Requirement already satisfied: pandas in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (3.0.2)
+Requirement already satisfied: numpy in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.4.4)
+Requirement already satisfied: scikit-learn in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.8.0)
+Requirement already satisfied: tqdm in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from toast==0.1.0) (4.67.3)
+Requirement already satisfied: pytorch-lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.6.1)
+Requirement already satisfied: filelock in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.29.0)
+Requirement already satisfied: pyarrow>=21.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (24.0.0)
+Requirement already satisfied: dill<0.4.2,>=0.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: requests>=2.32.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (2.32.5)
+Requirement already satisfied: httpx<1.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.28.1)
+Requirement already satisfied: xxhash in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.7.0)
+Requirement already satisfied: multiprocess<0.70.20 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.70.19)
+Requirement already satisfied: fsspec<=2026.2.0,>=2023.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2026.2.0)
+Requirement already satisfied: huggingface-hub<2.0,>=0.25.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (1.13.0)
+Requirement already satisfied: packaging in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (6.0.3)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (3.13.5)
+Requirement already satisfied: anyio in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (4.10.0)
+Requirement already satisfied: certifi in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (2026.1.4)
+Requirement already satisfied: httpcore==1.* in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.0.9)
+Requirement already satisfied: idna in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (3.11)
+Requirement already satisfied: h11>=0.16 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpcore==1.*->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (0.16.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.4.3)
+Requirement already satisfied: typer in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.20.0)
+Requirement already satisfied: typing-extensions>=4.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.15.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (6.7.1)
+Requirement already satisfied: propcache>=0.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.23.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (3.4.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (2.6.3)
+Requirement already satisfied: setuptools<82 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (80.10.2)
+Requirement already satisfied: sympy>=1.13.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.1.6)
+Requirement already satisfied: cuda-toolkit==13.0.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.2)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (13.2.0)
+Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (0.8.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.0)
+Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.1.0.3)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.0.61)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.6.3.3)
+Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-bindings<14,>=13.0.3->torch>=2.0->toast==0.1.0) (1.5.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from sympy>=1.13.3->torch>=2.0->toast==0.1.0) (1.3.0)
+Requirement already satisfied: regex>=2025.10.22 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (2026.4.4)
+Requirement already satisfied: tokenizers<=0.23.0,>=0.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.22.2)
+Requirement already satisfied: safetensors>=0.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.7.0)
+Requirement already satisfied: sniffio>=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from anyio->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.3.1)
+Requirement already satisfied: termcolor in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fire->toast==0.1.0) (3.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from jinja2->torch>=2.0->toast==0.1.0) (3.0.3)
+Requirement already satisfied: torchmetrics in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.9.0)
+Requirement already satisfied: backports.strenum in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.8)
+Requirement already satisfied: python-dotenv in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.1)
+Requirement already satisfied: GitPython in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.1.49)
+Requirement already satisfied: matplotlib in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.10.9)
+Requirement already satisfied: faiss-cpu in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.13.2)
+Requirement already satisfied: lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (2.6.1)
+Requirement already satisfied: gitdb<5,>=4.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from GitPython->latentis->toast==0.1.0) (4.0.12)
+Requirement already satisfied: smmap<6,>=3.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from gitdb<5,>=4.0.1->GitPython->latentis->toast==0.1.0) (5.0.3)
+Requirement already satisfied: lightning-utilities<2.0,>=0.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from lightning->latentis->toast==0.1.0) (0.15.3)
+Requirement already satisfied: contourpy>=1.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (4.62.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.5.0)
+Requirement already satisfied: pillow>=8 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (12.2.0)
+Requirement already satisfied: pyparsing>=3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (3.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from python-dateutil>=2.7->matplotlib->latentis->toast==0.1.0) (1.17.0)
+Requirement already satisfied: scipy>=1.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.17.1)
+Requirement already satisfied: joblib>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (3.6.0)
+Requirement already satisfied: torchvision in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from timm->toast==0.1.0) (0.26.0)
+Requirement already satisfied: click>=8.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (8.2.1)
+Requirement already satisfied: shellingham>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.5.4)
+Requirement already satisfied: rich>=10.11.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (14.2.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (2.19.2)
+Requirement already satisfied: mdurl~=0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from markdown-it-py>=2.2.0->rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.1.2)
+Building wheels for collected packages: toast
+  Building editable for toast (pyproject.toml): started
+  Building editable for toast (pyproject.toml): finished with status 'done'
+  Created wheel for toast: filename=toast-0.1.0-0.editable-py3-none-any.whl size=4561 sha256=ee2e90021e4bf65dfa65edf42bbede3d2b3f8bd598510aaa875dcf59e9ff6aef
+  Stored in directory: /scratch/slurm-job.9728164/pip-ephem-wheel-cache-f6lubihl/wheels/a0/f4/1f/d3c12de536bc82f378cfe768fdfa423266178ffc40a4f1de51
+Successfully built toast
+Installing collected packages: toast
+  Attempting uninstall: toast
+    Found existing installation: toast 0.1.0
+    Not uninstalling toast at /cluster/home/mwylie/.local/lib/python3.13/site-packages, outside environment /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env
+    Can't uninstall 'toast'. No files were found to uninstall.
+Successfully installed toast-0.1.0
+
+[notice] A new release of pip is available: 25.3 -> 26.2.1
+[notice] To update, run: pip install --upgrade pip
+Loading weights:   0%|          | 0/198 [00:00<?, ?it/s]Loading weights: 100%|██████████| 198/198 [00:00<00:00, 19565.38it/s]
+[transformers] [1mViTModel LOAD REPORT[0m from: WinKawaks/vit-small-patch16-224
+Key                 | Status     | 
+--------------------+------------+-
+classifier.bias     | UNEXPECTED | 
+classifier.weight   | UNEXPECTED | 
+pooler.dense.bias   | MISSING    | 
+pooler.dense.weight | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+============================================================
+  Model   : vitsmall (WinKawaks/vit-small-patch16-224)  12 x 6 heads
+  Dataset : imagenet-1k  (500 samples)
+  Device  : cuda
+============================================================
+  Analysing:   0%|          | 0/63 [00:00<?, ?it/s]  Analysing:   2%|▏         | 1/63 [00:00<00:47,  1.30it/s]  Analysing:   8%|▊         | 5/63 [00:00<00:08,  7.03it/s]  Analysing:  11%|█         | 7/63 [00:01<00:06,  9.10it/s]  Analysing:  17%|█▋        | 11/63 [00:01<00:03, 14.29it/s]  Analysing:  24%|██▍       | 15/63 [00:01<00:02, 18.85it/s]  Analysing:  29%|██▊       | 18/63 [00:01<00:02, 17.35it/s]  Analysing:  35%|███▍      | 22/63 [00:01<00:01, 20.91it/s]  Analysing:  40%|███▉      | 25/63 [00:01<00:01, 21.28it/s]  Analysing:  44%|████▍     | 28/63 [00:01<00:01, 23.01it/s]  Analysing:  49%|████▉     | 31/63 [00:02<00:01, 18.44it/s]  Analysing:  56%|█████▌    | 35/63 [00:02<00:01, 21.50it/s]  Analysing:  60%|██████    | 38/63 [00:02<00:01, 22.73it/s]  Analysing:  67%|██████▋   | 42/63 [00:02<00:00, 26.19it/s]  Analysing:  73%|███████▎  | 46/63 [00:02<00:00, 27.86it/s]  Analysing:  79%|███████▉  | 50/63 [00:02<00:00, 28.29it/s]  Analysing:  84%|████████▍ | 53/63 [00:02<00:00, 21.53it/s]  Analysing:  90%|█████████ | 57/63 [00:03<00:00, 24.86it/s]  Analysing:  97%|█████████▋| 61/63 [00:03<00:00, 26.93it/s]  Analysing: 100%|██████████| 63/63 [00:03<00:00, 19.23it/s]
+  500 images, 98500 tokens
+  cka      -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/vitsmall_imagenet1k_head_cka.npy
+  angdist  -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/vitsmall_imagenet1k_head_angdist.npy
+  head_dicts -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/head_keep_imagenet1k.csv
+  config (21 rows) -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/configs/experiments_heads_vitsmall_imagenet1k.csv
+Loading weights:   0%|          | 0/198 [00:00<?, ?it/s]Loading weights: 100%|██████████| 198/198 [00:00<00:00, 44188.16it/s]
+[transformers] [1mViTModel LOAD REPORT[0m from: facebook/deit-small-patch16-224
+Key                 | Status     | 
+--------------------+------------+-
+classifier.bias     | UNEXPECTED | 
+classifier.weight   | UNEXPECTED | 
+pooler.dense.bias   | MISSING    | 
+pooler.dense.weight | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+============================================================
+  Model   : deitsmall (facebook/deit-small-patch16-224)  12 x 6 heads
+  Dataset : imagenet-1k  (500 samples)
+  Device  : cuda
+============================================================
+  Analysing:   0%|          | 0/63 [00:00<?, ?it/s]  Analysing:   2%|▏         | 1/63 [00:00<00:09,  6.22it/s]  Analysing:   6%|▋         | 4/63 [00:00<00:03, 15.82it/s]  Analysing:  11%|█         | 7/63 [00:00<00:02, 19.85it/s]  Analysing:  17%|█▋        | 11/63 [00:00<00:02, 23.83it/s]  Analysing:  24%|██▍       | 15/63 [00:00<00:01, 26.61it/s]  Analysing:  29%|██▊       | 18/63 [00:00<00:02, 21.34it/s]  Analysing:  35%|███▍      | 22/63 [00:00<00:01, 24.84it/s]  Analysing:  40%|███▉      | 25/63 [00:01<00:01, 23.16it/s]  Analysing:  46%|████▌     | 29/63 [00:01<00:01, 18.67it/s]  Analysing:  52%|█████▏    | 33/63 [00:01<00:01, 22.45it/s]  Analysing:  57%|█████▋    | 36/63 [00:01<00:01, 23.39it/s]  Analysing:  63%|██████▎   | 40/63 [00:01<00:00, 25.67it/s]  Analysing:  70%|██████▉   | 44/63 [00:01<00:00, 27.94it/s]  Analysing:  76%|███████▌  | 48/63 [00:02<00:00, 29.05it/s]  Analysing:  83%|████████▎ | 52/63 [00:02<00:00, 21.05it/s]  Analysing:  90%|█████████ | 57/63 [00:02<00:00, 25.65it/s]  Analysing:  97%|█████████▋| 61/63 [00:02<00:00, 27.38it/s]  Analysing: 100%|██████████| 63/63 [00:02<00:00, 23.49it/s]
+  500 images, 98500 tokens
+  cka      -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/deitsmall_imagenet1k_head_cka.npy
+  angdist  -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/deitsmall_imagenet1k_head_angdist.npy
+  head_dicts -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/head_keep_imagenet1k.csv
+  config (19 rows) -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/configs/experiments_heads_deitsmall_imagenet1k.csv
+Loading weights:   0%|          | 0/223 [00:00<?, ?it/s]Loading weights:   6%|▌         | 13/223 [00:00<00:06, 32.52it/s]Loading weights: 100%|██████████| 223/223 [00:00<00:00, 449.62it/s]
+
+============================================================
+  Model   : dinobase (facebook/dinov2-base)  12 x 12 heads
+  Dataset : imagenet-1k  (500 samples)
+  Device  : cuda
+============================================================
+  Analysing:   0%|          | 0/63 [00:00<?, ?it/s]  Analysing:   2%|▏         | 1/63 [00:00<00:17,  3.51it/s]  Analysing:   6%|▋         | 4/63 [00:00<00:05, 11.11it/s]  Analysing:  11%|█         | 7/63 [00:00<00:03, 14.80it/s]  Analysing:  14%|█▍        | 9/63 [00:00<00:03, 15.96it/s]  Analysing:  19%|█▉        | 12/63 [00:00<00:02, 17.97it/s]  Analysing:  24%|██▍       | 15/63 [00:00<00:02, 19.20it/s]  Analysing:  29%|██▊       | 18/63 [00:01<00:02, 19.77it/s]  Analysing:  33%|███▎      | 21/63 [00:01<00:02, 20.37it/s]  Analysing:  38%|███▊      | 24/63 [00:01<00:01, 20.81it/s]  Analysing:  43%|████▎     | 27/63 [00:01<00:01, 21.10it/s]  Analysing:  48%|████▊     | 30/63 [00:01<00:01, 18.96it/s]  Analysing:  52%|█████▏    | 33/63 [00:01<00:01, 19.89it/s]  Analysing:  57%|█████▋    | 36/63 [00:01<00:01, 20.42it/s]  Analysing:  62%|██████▏   | 39/63 [00:02<00:01, 20.81it/s]  Analysing:  67%|██████▋   | 42/63 [00:02<00:00, 21.08it/s]  Analysing:  71%|███████▏  | 45/63 [00:02<00:00, 21.27it/s]  Analysing:  76%|███████▌  | 48/63 [00:02<00:00, 21.42it/s]  Analysing:  81%|████████  | 51/63 [00:02<00:00, 21.50it/s]  Analysing:  86%|████████▌ | 54/63 [00:02<00:00, 19.04it/s]  Analysing:  90%|█████████ | 57/63 [00:02<00:00, 19.76it/s]  Analysing:  95%|█████████▌| 60/63 [00:03<00:00, 20.30it/s]  Analysing: 100%|██████████| 63/63 [00:03<00:00, 20.67it/s]  Analysing: 100%|██████████| 63/63 [00:03<00:00, 18.85it/s]
+  500 images, 128500 tokens
+  cka      -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/dinobase_imagenet1k_head_cka.npy
+  angdist  -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/dinobase_imagenet1k_head_angdist.npy
+  head_dicts -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/head_keep_imagenet1k.csv
+  config (26 rows) -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/configs/experiments_heads_dinobase_imagenet1k.csv
+Loading weights:   0%|          | 0/390 [00:00<?, ?it/s]Loading weights: 100%|██████████| 390/390 [00:00<00:00, 42620.60it/s]
+[transformers] [1mViTModel LOAD REPORT[0m from: google/vit-large-patch16-224
+Key                 | Status     | 
+--------------------+------------+-
+classifier.bias     | UNEXPECTED | 
+classifier.weight   | UNEXPECTED | 
+pooler.dense.bias   | MISSING    | 
+pooler.dense.weight | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+
+============================================================
+  Model   : vitlarge (google/vit-large-patch16-224)  24 x 16 heads
+  Dataset : imagenet-1k  (500 samples)
+  Device  : cuda
+============================================================
+  Analysing:   0%|          | 0/63 [00:00<?, ?it/s]  Analysing:   2%|▏         | 1/63 [00:00<00:15,  4.00it/s]  Analysing:   5%|▍         | 3/63 [00:00<00:08,  7.23it/s]  Analysing:   6%|▋         | 4/63 [00:00<00:07,  7.67it/s]  Analysing:   8%|▊         | 5/63 [00:00<00:07,  7.97it/s]  Analysing:  10%|▉         | 6/63 [00:00<00:07,  8.08it/s]  Analysing:  11%|█         | 7/63 [00:00<00:06,  8.21it/s]  Analysing:  13%|█▎        | 8/63 [00:01<00:06,  8.36it/s]  Analysing:  14%|█▍        | 9/63 [00:01<00:06,  8.47it/s]  Analysing:  16%|█▌        | 10/63 [00:01<00:06,  8.53it/s]  Analysing:  17%|█▋        | 11/63 [00:01<00:06,  8.57it/s]  Analysing:  19%|█▉        | 12/63 [00:01<00:05,  8.55it/s]  Analysing:  21%|██        | 13/63 [00:01<00:05,  8.56it/s]  Analysing:  22%|██▏       | 14/63 [00:01<00:05,  8.59it/s]  Analysing:  24%|██▍       | 15/63 [00:01<00:05,  8.60it/s]  Analysing:  25%|██▌       | 16/63 [00:01<00:05,  8.56it/s]  Analysing:  27%|██▋       | 17/63 [00:02<00:05,  8.60it/s]  Analysing:  29%|██▊       | 18/63 [00:02<00:05,  8.58it/s]  Analysing:  30%|███       | 19/63 [00:02<00:05,  8.58it/s]  Analysing:  32%|███▏      | 20/63 [00:02<00:04,  8.62it/s]  Analysing:  33%|███▎      | 21/63 [00:02<00:04,  8.60it/s]  Analysing:  35%|███▍      | 22/63 [00:02<00:04,  8.58it/s]  Analysing:  37%|███▋      | 23/63 [00:02<00:04,  8.61it/s]  Analysing:  38%|███▊      | 24/63 [00:02<00:04,  8.58it/s]  Analysing:  40%|███▉      | 25/63 [00:03<00:04,  8.60it/s]  Analysing:  41%|████▏     | 26/63 [00:03<00:04,  8.62it/s]  Analysing:  43%|████▎     | 27/63 [00:03<00:04,  8.23it/s]  Analysing:  44%|████▍     | 28/63 [00:03<00:04,  8.67it/s]  Analysing:  46%|████▌     | 29/63 [00:03<00:03,  8.68it/s]  Analysing:  48%|████▊     | 30/63 [00:03<00:03,  8.61it/s]  Analysing:  49%|████▉     | 31/63 [00:03<00:03,  8.62it/s]  Analysing:  51%|█████     | 32/63 [00:03<00:03,  8.65it/s]  Analysing:  52%|█████▏    | 33/63 [00:03<00:03,  8.60it/s]  Analysing:  54%|█████▍    | 34/63 [00:04<00:03,  8.58it/s]  Analysing:  56%|█████▌    | 35/63 [00:04<00:03,  8.62it/s]  Analysing:  57%|█████▋    | 36/63 [00:04<00:03,  8.57it/s]  Analysing:  59%|█████▊    | 37/63 [00:04<00:03,  8.58it/s]  Analysing:  60%|██████    | 38/63 [00:04<00:02,  8.62it/s]  Analysing:  62%|██████▏   | 39/63 [00:04<00:02,  8.58it/s]  Analysing:  63%|██████▎   | 40/63 [00:04<00:02,  8.56it/s]  Analysing:  65%|██████▌   | 41/63 [00:04<00:02,  8.60it/s]  Analysing:  67%|██████▋   | 42/63 [00:04<00:02,  8.56it/s]  Analysing:  68%|██████▊   | 43/63 [00:05<00:02,  8.57it/s]  Analysing:  70%|██████▉   | 44/63 [00:05<00:02,  8.61it/s]  Analysing:  71%|███████▏  | 45/63 [00:05<00:02,  8.57it/s]  Analysing:  73%|███████▎  | 46/63 [00:05<00:01,  8.56it/s]  Analysing:  75%|███████▍  | 47/63 [00:05<00:01,  8.60it/s]  Analysing:  76%|███████▌  | 48/63 [00:05<00:01,  8.55it/s]  Analysing:  78%|███████▊  | 49/63 [00:05<00:01,  8.55it/s]  Analysing:  79%|███████▉  | 50/63 [00:05<00:01,  8.60it/s]  Analysing:  81%|████████  | 51/63 [00:06<00:01,  8.57it/s]  Analysing:  83%|████████▎ | 52/63 [00:06<00:01,  8.56it/s]  Analysing:  84%|████████▍ | 53/63 [00:06<00:01,  8.60it/s]  Analysing:  86%|████████▌ | 54/63 [00:06<00:01,  8.57it/s]  Analysing:  87%|████████▋ | 55/63 [00:06<00:00,  8.57it/s]  Analysing:  89%|████████▉ | 56/63 [00:06<00:00,  8.61it/s]  Analysing:  90%|█████████ | 57/63 [00:06<00:00,  8.58it/s]  Analysing:  92%|█████████▏| 58/63 [00:06<00:00,  8.56it/s]  Analysing:  94%|█████████▎| 59/63 [00:06<00:00,  8.60it/s]  Analysing:  95%|█████████▌| 60/63 [00:07<00:00,  8.58it/s]  Analysing:  97%|█████████▋| 61/63 [00:07<00:00,  8.57it/s]  Analysing:  98%|█████████▊| 62/63 [00:07<00:00,  8.61it/s]  Analysing: 100%|██████████| 63/63 [00:07<00:00,  8.54it/s]  Analysing: 100%|██████████| 63/63 [00:07<00:00,  8.35it/s]
+  500 images, 98500 tokens
+  cka      -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/vitlarge_imagenet1k_head_cka.npy
+  angdist  -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/vitlarge_imagenet1k_head_angdist.npy
+  head_dicts -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/results/head_similarity/head_keep_imagenet1k.csv
+  config (19 rows) -> /cluster/home/mwylie/toast-extensions/thesis/s1_redundancy_granularity/configs/experiments_heads_vitlarge_imagenet1k.csv

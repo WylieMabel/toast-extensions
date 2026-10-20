@@ -272,6 +272,11 @@ def extract_representations(
             final_layer_embeddings[layer_idx] = concatenated[:max_samples]
             memlog(f"extract_representations cat layer={layer_idx} "
                    f"shape={tuple(concatenated.shape)}")
+        # torch.cat copies, so the per-batch pieces are dead once their layer is joined. Holding
+        # them until return doubled the capture's peak (~50GB for 518px rad-dino at 500
+        # samples) for a few seconds -- too short for sacct's sampling to see, long enough for
+        # the cgroup OOM killer.
+        del layer_outputs_batches[layer_idx]
 
     memlog("extract_representations return")
 

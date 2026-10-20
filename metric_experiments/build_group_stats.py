@@ -114,6 +114,61 @@ GROUPS = {
         "truth_std_col": "accuracy_std",
         "truth_layer_col": "approx_layer",
     },
+    "s2": {
+        # Thesis section s2 (contiguous skips of length 1-4). Stage 1 is launched per combo by
+        # thesis/s2_skip_cost_metrics/launch_s2_metrics.sh; every output (stage-1 CSVs included)
+        # lives in the section's analysis/ folder rather than metric_experiments/.
+        "models": {
+            "deitsmall": "facebook/deit-small-patch16-224",
+            "vitsmall": "WinKawaks/vit-small-patch16-224",
+            "dinov2base": "facebook/dinov2-base",
+            "vitlarge": "google/vit-large-patch16-224",
+        },
+        "datasets": [
+            ("cifar100", "cifar100"),
+            ("imagenet-1k", "imagenet1k"),
+        ],
+        "eval_stem": "{group}_{alias}_{tag}",
+        "truth_csv": os.path.join(REPO, "thesis", "s2_skip_cost_metrics", "accuracies",
+                                  "accuracies_results_{alias}_{tag}.csv"),
+        "truth_acc_col": "accuracy_mean",
+        "truth_std_col": "accuracy_std",
+        "truth_layer_col": "approx_layer",
+        "out_dir": os.path.join(REPO, "thesis", "s2_skip_cost_metrics", "analysis"),
+    },
+    "s4": {
+        # Thesis section s4 (medical domain, same skip list as s2). Not a full models x datasets
+        # cross product: combos with no stage-1 CSV (e.g. phikonv2 x chestxray14) are skipped.
+        # Truth is the per-combo file thesis/s4_medical_domain/combine_s4.py builds from the split
+        # job outputs (_len1.._len4, _len12/_len34, _len1_rerun). truth_csv may also be a glob;
+        # matched files are concatenated, later ones winning on duplicate spans.
+        "models": {
+            "dinov2base": "facebook/dinov2-base",
+            "raddino": "microsoft/rad-dino",
+            "raddinomaira2": "microsoft/rad-dino-maira-2",
+            "vitlarge": "google/vit-large-patch16-224",
+            "phikonv2": "owkin/phikon-v2",
+        },
+        # ChestX-ray14 is analysed as the original 14-label task only; the binary any-finding
+        # runs (tag "chestxray14") are left out of s4.
+        "datasets": [
+            ("chestxray_pneumonia", "chestxraypneumonia"),
+            ("chestxray14_multilabel", "chestxray14multilabel"),
+            ("patchcamelyon", "patchcamelyon"),
+            ("tcga_ut", "tcgaut"),
+        ],
+        "eval_stem": "{group}_{alias}_{tag}",
+        "truth_csv": os.path.join(REPO, "thesis", "s4_medical_domain", "accuracies",
+                                  "combined", "accuracies_results_{alias}_{tag}.csv"),
+        # s4 is scored on macro-AUROC, not accuracy: the multilabel combos only have AUROC, and
+        # on the weaker probes (dinov2 x chestxray14 / pneumonia) argmax accuracy's seed-to-seed
+        # std is 10-20x AUROC's, so accuracy rankings there are mostly noise. "true_accuracy"
+        # in the outputs therefore holds AUROC for s4.
+        "truth_acc_col": "auroc_mean",
+        "truth_std_col": "auroc_std",
+        "truth_layer_col": "approx_layer",
+        "out_dir": os.path.join(REPO, "thesis", "s4_medical_domain", "analysis"),
+    },
 }
 
 
@@ -125,18 +180,19 @@ def _span_key(approx_layer_str):
     return tuple(parsed[0])
 
 
-def stage_join(eval_csv, truth_csv, hf_id, ds_key, cfg):
-    """Join one combo's metric CSV with its accuracy ground truth. Returns a DataFrame with
-    one row per span: [span, true_accuracy, acc_std, <metric cols...>]."""
+def stage_join(eval_csv, truth_csvs, hf_id, ds_key, cfg):
+    """Join one combo's metric CSV with its accuracy ground truth (one or more CSVs, later ones
+    winning on duplicate spans). Returns a DataFrame with one row per span:
+    [span, true_accuracy, acc_std, <metric cols...>]."""
     ev = pd.read_csv(eval_csv)
 
-    truth = pd.read_csv(truth_csv)
+    truth = pd.concat([pd.read_csv(p) for p in truth_csvs], ignore_index=True)
     truth = truth[
         (truth["model"].str.lower().str.replace("/", "_") == hf_id.lower().replace("/", "_"))
         & (truth["dataset"].str.lower() == ds_key.lower())
-    ].copy()
+    ].drop_duplicates(subset=[cfg["truth_layer_col"]], keep="last").copy()
     if truth.empty:
-        raise SystemExit(f"  no truth rows for {hf_id} x {ds_key} in {truth_csv}")
+        raise SystemExit(f"  no truth rows for {hf_id} x {ds_key} in {truth_csvs}")
 
     truth["span"] = truth[cfg["truth_layer_col"]].apply(_span_key)
     truth = truth.dropna(subset=["span"])
@@ -187,7 +243,7 @@ def stage_grouped(joined, out_path):
     return df
 
 
-def stage_aggregate(group, grouped_entries, skip_heatmap):
+def stage_aggregate(group, grouped_entries, skip_heatmap, out_dir=HERE):
     """grouped_entries: list of (key, grouped_csv_path) -- key is the combo label used as the
     row index in every combined_stats_* output (e.g. "dinov2base_chestxray14")."""
     rho_rows, rho_p_rows, auc_rows, auc_p_rows, ir_rows = {}, {}, {}, {}, {}
@@ -227,11 +283,11 @@ def stage_aggregate(group, grouped_entries, skip_heatmap):
     ir_df = pd.DataFrame(ir_rows).T
 
     sfx = f"_{group}"
-    rho_df.to_csv(os.path.join(HERE, f"combined_stats_spearman_rho{sfx}.csv"))
-    rho_p_df.to_csv(os.path.join(HERE, f"combined_stats_spearman_pvalues{sfx}.csv"))
-    auc_df.to_csv(os.path.join(HERE, f"combined_stats_safe_auc{sfx}.csv"))
-    auc_p_df.to_csv(os.path.join(HERE, f"combined_stats_safe_auc_pvalues{sfx}.csv"))
-    ir_df.to_csv(os.path.join(HERE, f"combined_stats_ir_precision{sfx}.csv"))
+    rho_df.to_csv(os.path.join(out_dir, f"combined_stats_spearman_rho{sfx}.csv"))
+    rho_p_df.to_csv(os.path.join(out_dir, f"combined_stats_spearman_pvalues{sfx}.csv"))
+    auc_df.to_csv(os.path.join(out_dir, f"combined_stats_safe_auc{sfx}.csv"))
+    auc_p_df.to_csv(os.path.join(out_dir, f"combined_stats_safe_auc_pvalues{sfx}.csv"))
+    ir_df.to_csv(os.path.join(out_dir, f"combined_stats_ir_precision{sfx}.csv"))
 
     all_metrics = sorted(set(rho_df.columns) | set(auc_df.columns) | set(ir_df.columns))
     combined = pd.DataFrame(index=rho_df.index, columns=all_metrics, dtype=object)
@@ -249,17 +305,17 @@ def stage_aggregate(group, grouped_entries, skip_heatmap):
             auc_s = f"AUC={auc:.2f}{'*' if pd.notna(p_auc) and p_auc < 0.05 else ''}" if pd.notna(auc) else "AUC=n/a"
             ir_s = f"IR={ir:.2f}" if pd.notna(ir) else "IR=n/a"
             combined.loc[idx, metric] = f"{rho_s} | {auc_s} | {ir_s}"
-    combined.to_csv(os.path.join(HERE, f"combined_correlation_safety_stats{sfx}.csv"))
+    combined.to_csv(os.path.join(out_dir, f"combined_correlation_safety_stats{sfx}.csv"))
 
     print("\n=== Spearman rho (metric vs true_accuracy), * = p<0.05 ===")
     print(combined.to_string())
 
     if not skip_heatmap:
-        _heatmap(rho_df, rho_p_df, auc_df, auc_p_df, group)
+        _heatmap(rho_df, rho_p_df, auc_df, auc_p_df, group, out_dir)
     return rho_df, auc_df
 
 
-def _heatmap(rho_df, rho_p_df, auc_df, auc_p_df, group):
+def _heatmap(rho_df, rho_p_df, auc_df, auc_p_df, group, out_dir=HERE):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -287,7 +343,7 @@ def _heatmap(rho_df, rho_p_df, auc_df, auc_p_df, group):
     fig.suptitle(f"{group}: metric vs true accuracy -- correlation/AUC summary "
                  f"(NOT the baseline pairwise angular-distance heatmap)", fontsize=11)
     fig.tight_layout()
-    out = os.path.join(HERE, f"combined_stats_corr_summary_{group}.png")
+    out = os.path.join(out_dir, f"combined_stats_corr_summary_{group}.png")
     fig.savefig(out, dpi=200)
     print(f"\nheatmap -> {out}")
 
@@ -295,12 +351,17 @@ def _heatmap(rho_df, rho_p_df, auc_df, auc_p_df, group):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--group", required=True, choices=sorted(GROUPS))
-    ap.add_argument("--eval-dir", default=HERE,
-                    help="directory holding output_level_eval_<group>_<alias>_<tag>.csv (default: metric_experiments/)")
+    ap.add_argument("--eval-dir", default=None,
+                    help="directory holding output_level_eval_<group>_<alias>_<tag>.csv "
+                         "(default: the group's out_dir, metric_experiments/ unless the group sets one)")
     ap.add_argument("--skip-heatmap", action="store_true")
     args = ap.parse_args()
 
     cfg = GROUPS[args.group]
+    out_dir = cfg.get("out_dir", HERE)
+    os.makedirs(out_dir, exist_ok=True)
+    if args.eval_dir is None:
+        args.eval_dir = out_dir
     eval_stem_tmpl = cfg.get("eval_stem", "{group}_{alias}_{tag}")
     grouped_entries = []
     for alias, hf_id in cfg["models"].items():
@@ -310,24 +371,26 @@ def main():
             if not os.path.exists(eval_csv):
                 print(f"[skip] {stem}: no {eval_csv}")
                 continue
-            truth_csv = cfg["truth_csv"].format(group=args.group, alias=alias, tag=tag)
-            if not os.path.exists(truth_csv):
-                print(f"[skip] {stem}: no truth csv {truth_csv}")
+            truth_pattern = cfg["truth_csv"].format(group=args.group, alias=alias, tag=tag)
+            truth_csvs = sorted(glob.glob(truth_pattern))
+            if not truth_csvs:
+                print(f"[skip] {stem}: no truth csv {truth_pattern}")
                 continue
-            print(f"[{stem}] joining {os.path.basename(eval_csv)} <- {os.path.basename(truth_csv)}")
+            print(f"[{stem}] joining {os.path.basename(eval_csv)} <- "
+                  f"{', '.join(os.path.basename(p) for p in truth_csvs)}")
 
-            joined = stage_join(eval_csv, truth_csv, hf_id, ds_key, cfg)
-            joined_path = os.path.join(HERE, f"joined_metrics_{stem}.csv")
+            joined = stage_join(eval_csv, truth_csvs, hf_id, ds_key, cfg)
+            joined_path = os.path.join(out_dir, f"joined_metrics_{stem}.csv")
             joined.drop(columns=["acc_std"]).to_csv(joined_path, index=False)
 
-            grouped_path = os.path.join(HERE, f"grouped_metrics_{stem}.csv")
+            grouped_path = os.path.join(out_dir, f"grouped_metrics_{stem}.csv")
             g = stage_grouped(joined, grouped_path)
             grouped_entries.append((f"{alias}_{tag}", grouped_path))
             print(f"    -> {os.path.basename(grouped_path)}  ({(g['safe'] == 'safe').sum()}/{len(g)} safe)")
 
     if not grouped_entries:
         raise SystemExit("no combos built -- run stage 1 (output_level_eval.py) first")
-    stage_aggregate(args.group, grouped_entries, args.skip_heatmap)
+    stage_aggregate(args.group, grouped_entries, args.skip_heatmap, out_dir)
 
 
 if __name__ == "__main__":

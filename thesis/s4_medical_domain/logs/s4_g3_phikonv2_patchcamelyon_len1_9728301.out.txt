@@ -1,0 +1,445 @@
+CPUs: 4, NUM_WORKERS=3
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://nexus-central.leomed.ethz.ch/repository/pypi/simple
+Obtaining file:///cluster/home/mwylie/toast-extensions
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.11.0)
+Requirement already satisfied: transformers>=4.30 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (5.7.0)
+Requirement already satisfied: datasets>=2.14 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (4.8.5)
+Requirement already satisfied: latentis in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.0.8)
+Requirement already satisfied: fire in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.7.1)
+Requirement already satisfied: timm in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.0.26)
+Requirement already satisfied: pandas in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (3.0.2)
+Requirement already satisfied: numpy in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.4.4)
+Requirement already satisfied: scikit-learn in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.8.0)
+Requirement already satisfied: tqdm in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from toast==0.1.0) (4.67.3)
+Requirement already satisfied: pytorch-lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.6.1)
+Requirement already satisfied: filelock in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.29.0)
+Requirement already satisfied: pyarrow>=21.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (24.0.0)
+Requirement already satisfied: dill<0.4.2,>=0.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: requests>=2.32.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (2.32.5)
+Requirement already satisfied: httpx<1.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.28.1)
+Requirement already satisfied: xxhash in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.7.0)
+Requirement already satisfied: multiprocess<0.70.20 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.70.19)
+Requirement already satisfied: fsspec<=2026.2.0,>=2023.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2026.2.0)
+Requirement already satisfied: huggingface-hub<2.0,>=0.25.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (1.13.0)
+Requirement already satisfied: packaging in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (6.0.3)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (3.13.5)
+Requirement already satisfied: anyio in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (4.10.0)
+Requirement already satisfied: certifi in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (2026.1.4)
+Requirement already satisfied: httpcore==1.* in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.0.9)
+Requirement already satisfied: idna in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (3.11)
+Requirement already satisfied: h11>=0.16 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpcore==1.*->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (0.16.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.4.3)
+Requirement already satisfied: typer in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.20.0)
+Requirement already satisfied: typing-extensions>=4.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.15.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (6.7.1)
+Requirement already satisfied: propcache>=0.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.23.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (3.4.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (2.6.3)
+Requirement already satisfied: setuptools<82 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (80.10.2)
+Requirement already satisfied: sympy>=1.13.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.1.6)
+Requirement already satisfied: cuda-toolkit==13.0.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.2)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (13.2.0)
+Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (0.8.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.0)
+Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.1.0.3)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.0.61)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.6.3.3)
+Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-bindings<14,>=13.0.3->torch>=2.0->toast==0.1.0) (1.5.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from sympy>=1.13.3->torch>=2.0->toast==0.1.0) (1.3.0)
+Requirement already satisfied: regex>=2025.10.22 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (2026.4.4)
+Requirement already satisfied: tokenizers<=0.23.0,>=0.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.22.2)
+Requirement already satisfied: safetensors>=0.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.7.0)
+Requirement already satisfied: sniffio>=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from anyio->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.3.1)
+Requirement already satisfied: termcolor in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fire->toast==0.1.0) (3.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from jinja2->torch>=2.0->toast==0.1.0) (3.0.3)
+Requirement already satisfied: torchmetrics in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.9.0)
+Requirement already satisfied: backports.strenum in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.8)
+Requirement already satisfied: python-dotenv in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.1)
+Requirement already satisfied: GitPython in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.1.49)
+Requirement already satisfied: matplotlib in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.10.9)
+Requirement already satisfied: faiss-cpu in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.13.2)
+Requirement already satisfied: lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (2.6.1)
+Requirement already satisfied: gitdb<5,>=4.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from GitPython->latentis->toast==0.1.0) (4.0.12)
+Requirement already satisfied: smmap<6,>=3.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from gitdb<5,>=4.0.1->GitPython->latentis->toast==0.1.0) (5.0.3)
+Requirement already satisfied: lightning-utilities<2.0,>=0.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from lightning->latentis->toast==0.1.0) (0.15.3)
+Requirement already satisfied: contourpy>=1.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (4.62.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.5.0)
+Requirement already satisfied: pillow>=8 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (12.2.0)
+Requirement already satisfied: pyparsing>=3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (3.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from python-dateutil>=2.7->matplotlib->latentis->toast==0.1.0) (1.17.0)
+Requirement already satisfied: scipy>=1.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.17.1)
+Requirement already satisfied: joblib>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (3.6.0)
+Requirement already satisfied: torchvision in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from timm->toast==0.1.0) (0.26.0)
+Requirement already satisfied: click>=8.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (8.2.1)
+Requirement already satisfied: shellingham>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.5.4)
+Requirement already satisfied: rich>=10.11.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (14.2.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (2.19.2)
+Requirement already satisfied: mdurl~=0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from markdown-it-py>=2.2.0->rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.1.2)
+Building wheels for collected packages: toast
+  Building editable for toast (pyproject.toml): started
+  Building editable for toast (pyproject.toml): finished with status 'done'
+  Created wheel for toast: filename=toast-0.1.0-0.editable-py3-none-any.whl size=4561 sha256=b28d7652d4600be366da3ddf8129061be6a6e46d00d414c2aab6124d980389ca
+  Stored in directory: /scratch/slurm-job.9728301/pip-ephem-wheel-cache-751v3htk/wheels/a0/f4/1f/d3c12de536bc82f378cfe768fdfa423266178ffc40a4f1de51
+Successfully built toast
+Installing collected packages: toast
+  Attempting uninstall: toast
+    Found existing installation: toast 0.1.0
+    Not uninstalling toast at /cluster/home/mwylie/.local/lib/python3.13/site-packages, outside environment /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env
+    Can't uninstall 'toast'. No files were found to uninstall.
+Successfully installed toast-0.1.0
+
+[notice] A new release of pip is available: 25.3 -> 26.2.1
+[notice] To update, run: pip install --upgrade pip
+Config : thesis/s4_medical_domain/configs/experiments_phikonv2_patchcamelyon_len1.csv
+Results: thesis/s4_medical_domain/results/results_phikonv2_patchcamelyon_len1.csv
+Embeddings: /scratch/mwylie/9728301/embeddings on gpu-biomed-18
+Running 24 rows from thesis/s4_medical_domain/configs/experiments_phikonv2_patchcamelyon_len1.csv
+
+=== Row 1 / 24 -- started 2026-10-12 03:59:38 ===
+"patchcamelyon","owkin/phikon-v2","[]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 03:59:38
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8852
+  -- seed 1 -- 2026-10-12 04:23:22
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8919
+  -- seed 2 -- 2026-10-12 04:46:24
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8871
+=== Row 1 / 24 -- finished 2026-10-12 05:09:50 (elapsed 4212s) ===
+
+=== Row 2 / 24 -- started 2026-10-12 05:09:50 ===
+"patchcamelyon","owkin/phikon-v2","[(0, 1)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 05:09:50
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8884
+  -- seed 1 -- 2026-10-12 05:32:11
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8947
+  -- seed 2 -- 2026-10-12 05:55:11
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8916
+=== Row 2 / 24 -- finished 2026-10-12 06:18:03 (elapsed 4093s) ===
+
+=== Row 3 / 24 -- started 2026-10-12 06:18:03 ===
+"patchcamelyon","owkin/phikon-v2","[(1, 2)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 06:18:03
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8890
+  -- seed 1 -- 2026-10-12 06:41:13
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8931
+  -- seed 2 -- 2026-10-12 07:04:14
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8891
+=== Row 3 / 24 -- finished 2026-10-12 07:27:08 (elapsed 4145s) ===
+
+=== Row 4 / 24 -- started 2026-10-12 07:27:08 ===
+"patchcamelyon","owkin/phikon-v2","[(2, 3)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 07:27:08
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8873
+  -- seed 1 -- 2026-10-12 07:50:11
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8923
+  -- seed 2 -- 2026-10-12 08:13:17
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8890
+=== Row 4 / 24 -- finished 2026-10-12 08:36:15 (elapsed 4147s) ===
+
+=== Row 5 / 24 -- started 2026-10-12 08:36:15 ===
+"patchcamelyon","owkin/phikon-v2","[(3, 4)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 08:36:15
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8867
+  -- seed 1 -- 2026-10-12 08:59:02
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8916
+  -- seed 2 -- 2026-10-12 09:22:10
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8884
+=== Row 5 / 24 -- finished 2026-10-12 09:44:55 (elapsed 4120s) ===
+
+=== Row 6 / 24 -- started 2026-10-12 09:44:55 ===
+"patchcamelyon","owkin/phikon-v2","[(4, 5)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 09:44:55
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8844
+  -- seed 1 -- 2026-10-12 10:07:44
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8907
+  -- seed 2 -- 2026-10-12 10:30:46
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8876
+=== Row 6 / 24 -- finished 2026-10-12 10:53:50 (elapsed 4135s) ===
+
+=== Row 7 / 24 -- started 2026-10-12 10:53:50 ===
+"patchcamelyon","owkin/phikon-v2","[(5, 6)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 10:53:50
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8871
+  -- seed 1 -- 2026-10-12 11:16:59
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8948
+  -- seed 2 -- 2026-10-12 11:40:30
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8912
+=== Row 7 / 24 -- finished 2026-10-12 12:03:37 (elapsed 4187s) ===
+
+=== Row 8 / 24 -- started 2026-10-12 12:03:37 ===
+"patchcamelyon","owkin/phikon-v2","[(6, 7)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 12:03:37
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8883
+  -- seed 1 -- 2026-10-12 12:26:30
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8943
+  -- seed 2 -- 2026-10-12 12:49:13
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8875
+=== Row 8 / 24 -- finished 2026-10-12 13:12:21 (elapsed 4124s) ===
+
+=== Row 9 / 24 -- started 2026-10-12 13:12:21 ===
+"patchcamelyon","owkin/phikon-v2","[(7, 8)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 13:12:21
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8817
+  -- seed 1 -- 2026-10-12 13:35:12
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8891
+  -- seed 2 -- 2026-10-12 13:58:09
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8818
+=== Row 9 / 24 -- finished 2026-10-12 14:20:58 (elapsed 4117s) ===
+
+=== Row 10 / 24 -- started 2026-10-12 14:20:58 ===
+"patchcamelyon","owkin/phikon-v2","[(8, 9)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 14:20:58
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8828
+  -- seed 1 -- 2026-10-12 14:43:55
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8857
+  -- seed 2 -- 2026-10-12 15:06:35
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8867
+=== Row 10 / 24 -- finished 2026-10-12 15:29:16 (elapsed 4098s) ===
+
+=== Row 11 / 24 -- started 2026-10-12 15:29:16 ===
+"patchcamelyon","owkin/phikon-v2","[(9, 10)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 15:29:16
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8817
+  -- seed 1 -- 2026-10-12 15:51:44
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8862
+  -- seed 2 -- 2026-10-12 16:14:23
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8871
+=== Row 11 / 24 -- finished 2026-10-12 16:37:12 (elapsed 4076s) ===
+
+=== Row 12 / 24 -- started 2026-10-12 16:37:12 ===
+"patchcamelyon","owkin/phikon-v2","[(10, 11)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 16:37:12
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8835
+  -- seed 1 -- 2026-10-12 17:00:18
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8884
+  -- seed 2 -- 2026-10-12 17:22:41
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8849
+=== Row 12 / 24 -- finished 2026-10-12 17:45:17 (elapsed 4085s) ===
+
+=== Row 13 / 24 -- started 2026-10-12 17:45:17 ===
+"patchcamelyon","owkin/phikon-v2","[(11, 12)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 17:45:17
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8822
+  -- seed 1 -- 2026-10-12 18:07:50
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8889
+  -- seed 2 -- 2026-10-12 18:30:30
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8856
+=== Row 13 / 24 -- finished 2026-10-12 18:52:59 (elapsed 4062s) ===
+
+=== Row 14 / 24 -- started 2026-10-12 18:52:59 ===
+"patchcamelyon","owkin/phikon-v2","[(12, 13)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:52:59
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8840
+  -- seed 1 -- 2026-10-12 19:15:24
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8877
+  -- seed 2 -- 2026-10-12 19:37:53
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8882
+=== Row 14 / 24 -- finished 2026-10-12 20:00:29 (elapsed 4050s) ===
+
+=== Row 15 / 24 -- started 2026-10-12 20:00:29 ===
+"patchcamelyon","owkin/phikon-v2","[(13, 14)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:00:29
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8884
+  -- seed 1 -- 2026-10-12 20:22:50
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8906
+  -- seed 2 -- 2026-10-12 20:45:25
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8896
+=== Row 15 / 24 -- finished 2026-10-12 21:07:41 (elapsed 4032s) ===
+
+=== Row 16 / 24 -- started 2026-10-12 21:07:41 ===
+"patchcamelyon","owkin/phikon-v2","[(14, 15)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 21:07:41
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8865
+  -- seed 1 -- 2026-10-12 21:30:17
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8878
+  -- seed 2 -- 2026-10-12 21:53:02
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8839
+=== Row 16 / 24 -- finished 2026-10-12 22:15:39 (elapsed 4078s) ===
+
+=== Row 17 / 24 -- started 2026-10-12 22:15:39 ===
+"patchcamelyon","owkin/phikon-v2","[(15, 16)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 22:15:39
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8832
+  -- seed 1 -- 2026-10-12 22:38:08
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8881
+  -- seed 2 -- 2026-10-12 23:00:51
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8887
+=== Row 17 / 24 -- finished 2026-10-12 23:23:28 (elapsed 4069s) ===
+
+=== Row 18 / 24 -- started 2026-10-12 23:23:28 ===
+"patchcamelyon","owkin/phikon-v2","[(16, 17)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 23:23:28
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8846
+  -- seed 1 -- 2026-10-12 23:45:55
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8896
+  -- seed 2 -- 2026-10-13 00:08:26
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8883
+=== Row 18 / 24 -- finished 2026-10-13 00:30:51 (elapsed 4043s) ===
+
+=== Row 19 / 24 -- started 2026-10-13 00:30:51 ===
+"patchcamelyon","owkin/phikon-v2","[(17, 18)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-13 00:30:51
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8842
+  -- seed 1 -- 2026-10-13 00:53:08
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8905
+  -- seed 2 -- 2026-10-13 01:15:21
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8882
+=== Row 19 / 24 -- finished 2026-10-13 01:37:51 (elapsed 4020s) ===
+
+=== Row 20 / 24 -- started 2026-10-13 01:37:52 ===
+"patchcamelyon","owkin/phikon-v2","[(18, 19)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-13 01:37:52
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8818
+  -- seed 1 -- 2026-10-13 02:00:31
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8901
+  -- seed 2 -- 2026-10-13 02:22:50
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8884
+=== Row 20 / 24 -- finished 2026-10-13 02:45:40 (elapsed 4068s) ===
+
+=== Row 21 / 24 -- started 2026-10-13 02:45:40 ===
+"patchcamelyon","owkin/phikon-v2","[(19, 20)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-13 02:45:40
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8827
+  -- seed 1 -- 2026-10-13 03:07:53
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8891
+  -- seed 2 -- 2026-10-13 03:30:22
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8870
+=== Row 21 / 24 -- finished 2026-10-13 03:52:40 (elapsed 4020s) ===
+
+=== Row 22 / 24 -- started 2026-10-13 03:52:40 ===
+"patchcamelyon","owkin/phikon-v2","[(20, 21)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-13 03:52:40
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8839
+  -- seed 1 -- 2026-10-13 04:15:07
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8923
+  -- seed 2 -- 2026-10-13 04:37:16
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8899
+=== Row 22 / 24 -- finished 2026-10-13 04:59:45 (elapsed 4025s) ===
+
+=== Row 23 / 24 -- started 2026-10-13 04:59:45 ===
+"patchcamelyon","owkin/phikon-v2","[(21, 22)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-13 04:59:45
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8869
+  -- seed 1 -- 2026-10-13 05:22:12
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8927
+  -- seed 2 -- 2026-10-13 05:44:31
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8907
+=== Row 23 / 24 -- finished 2026-10-13 06:06:55 (elapsed 4030s) ===
+
+=== Row 24 / 24 -- started 2026-10-13 06:06:55 ===
+"patchcamelyon","owkin/phikon-v2","[(22, 23)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-13 06:06:55
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8859
+  -- seed 1 -- 2026-10-13 06:29:21
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8926
+  -- seed 2 -- 2026-10-13 06:51:38
+  Params saved: n/a (no PARAM_SAVINGS entry for 'owkin/phikon-v2')
+Accuracy: 0.8875
+=== Row 24 / 24 -- finished 2026-10-13 07:14:05 (elapsed 4030s) ===
+Summary (mean/std per config): thesis/s4_medical_domain/accuracies/accuracies_results_phikonv2_patchcamelyon_len1.csv
+Done. All 24 rows completed.
+Scratch cleaned: /scratch/mwylie/9728301 removed on gpu-biomed-18
+Left in /scratch/mwylie: 9728305 

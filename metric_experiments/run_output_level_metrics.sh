@@ -44,7 +44,13 @@ SPANS_CSV="${SPANS_CSV:-}"
 STEM="${STEM:-$MODEL_ALIAS}"
 # Filename tag for the dataset, hyphens stripped to match the pre-existing "imagenet1k" style
 # (DATASET=imagenet-1k -> imagenet1k; cifar10/cifar100/pathmnist pass through unchanged).
-DATASET_TAG="${DATASET//-/}"
+# Set DATASET_TAG to override it (s4 names files chestxraypneumonia / tcgaut).
+DATASET_TAG="${DATASET_TAG:-${DATASET//-/}}"
+# Where the stage-1 CSV is written (single-combo mode), e.g. a thesis section's analysis/ folder.
+OUT_DIR="${OUT_DIR:-metric_experiments}"
+# EVAL_ONLY=1 stops after stage 1 (output_level_eval.py); the join/stats are then done for the
+# whole group at once by build_group_stats.py (see thesis/s2_skip_cost_metrics/launch_s2_metrics.sh).
+EVAL_ONLY="${EVAL_ONLY:-}"
 # ----------------
 
 PROJECT_DIR="/cluster/home/mwylie/toast-extensions"
@@ -130,8 +136,17 @@ python metric_experiments/output_level_eval.py \
     --dataset "$DATASET" \
     --num-samples "$NUM_SAMPLES" \
     --probe-num-samples "$PROBE_NUM_SAMPLES" \
-    --output "metric_experiments/output_level_eval_${STEM}_${DATASET_TAG}.csv" \
+    --output "${OUT_DIR}/output_level_eval_${STEM}_${DATASET_TAG}.csv" \
     "${SPANS_ARGS[@]}"
+
+if [ -n "$EVAL_ONLY" ]; then
+    echo ""
+    echo "============================================================"
+    echo "  Stage 1 complete (EVAL_ONLY) -> ${OUT_DIR}/output_level_eval_${STEM}_${DATASET_TAG}.csv"
+    echo "  End: $(date)"
+    echo "============================================================"
+    exit 0
+fi
 
 # Step 2: Join + evaluate. --truth-layer-col/--truth-acc-col let this point at either
 # distance_analysis.csv's linear/identity-merged shape (approx_layer_str/accuracy_mean_linear)
@@ -143,7 +158,7 @@ if [ -n "$USE_RAW_ACCURACY" ]; then
     USE_RAW_ACCURACY_ARGS=(--use-raw-accuracy)
 fi
 python metric_experiments/join_and_evaluate.py \
-    --eval-csv "metric_experiments/output_level_eval_${STEM}_${DATASET_TAG}.csv" \
+    --eval-csv "${OUT_DIR}/output_level_eval_${STEM}_${DATASET_TAG}.csv" \
     --truth-csv "$TRUTH_CSV" \
     --model "$MODEL" \
     --dataset "$DATASET" \

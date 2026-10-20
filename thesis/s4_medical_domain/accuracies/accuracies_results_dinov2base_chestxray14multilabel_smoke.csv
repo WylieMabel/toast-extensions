@@ -1,0 +1,2 @@
+model,dataset,approx_layer,translator,mlp_linearize,mlp_mode,attn_linearize,attn_mode,head_dict,fit_dataset,accuracy_mean,accuracy_std,orig_head_accuracy_mean,orig_head_accuracy_std,auroc_mean,auroc_std,auprc_mean,auprc_std,order
+facebook/dinov2-base,chestxray14_multilabel,"[(4, 6)]",linear,[],identity,[],identity,{},chestxray14_multilabel,0.778274097056172,0.0008238923323976591,,,0.778274097056172,0.0008238923323976591,0.17444948445901287,0.0009450806213078978,0

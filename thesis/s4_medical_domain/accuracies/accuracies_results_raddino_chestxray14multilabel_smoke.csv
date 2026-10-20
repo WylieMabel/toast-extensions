@@ -1,0 +1,2 @@
+model,dataset,approx_layer,translator,mlp_linearize,mlp_mode,attn_linearize,attn_mode,head_dict,fit_dataset,accuracy_mean,accuracy_std,orig_head_accuracy_mean,orig_head_accuracy_std,auroc_mean,auroc_std,auprc_mean,auprc_std,order
+microsoft/rad-dino,chestxray14_multilabel,"[(4, 6)]",linear,[],identity,[],identity,{},chestxray14_multilabel,0.8189691288565001,0.0024154172198542667,,,0.8189691288565001,0.0024154172198542667,0.2451733584749671,0.005068325625561429,0

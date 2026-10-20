@@ -1,0 +1,2 @@
+"dataset","encoder","skip","mlp_skip","attn_skip","head_dict","skip_translator","mlp_mode","attn_mode","fit_dataset"
+"chestxray_pneumonia","microsoft/rad-dino","[(4, 6)]","[]","[]","{}","linear","identity","identity",""

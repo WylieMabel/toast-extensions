@@ -7,10 +7,11 @@ computes cheap redundancy signals that rank what can be dropped:
   - Block Influence (ShortGPT, Men et al. 2024):  BI_i = 1 - E_tokens cos(h_in, h_out).
     Low BI = the block barely moves the residual stream = safe to drop. Computed per
     whole block, and per sub-block (attention vs MLP) so the two are ranked separately.
-  - Angular distance over spans (Gromov et al. 2024): d(i,j) = (1/pi) arccos(E cos(h_i,h_j)).
+  - Angular distance over spans (Gromov et al. 2024): d(i,j) = (1/pi) E_token arccos(cos(h_i,h_j)).
     The contiguous span with the smallest distance is the best (start, end) to skip.
   - Linear CKA (Kornblith et al. 2019): representational similarity between layer pairs;
     high CKA predicts an `identity` skip translator suffices, low predicts you need `linear`.
+    Computed exactly over every token of every sample from streamed cross-covariances.
   - Head JSD (Michel et al. 2019, Voita et al. 2019): pairwise Jensen-Shannon divergence
     between attention heads within a layer; high similarity = redundant head.
 
@@ -229,7 +230,7 @@ def _accumulate_head_jsd(attentions, total_jsd, num_layers, num_heads):
 # Main capture pass
 # ----------------------------------------------------------------------------- #
 @torch.no_grad()
-def analyse(model, loader, num_layers, num_heads, layers, token_cap):
+def analyse(model, loader, num_layers, num_heads, layers):
     n_states = num_layers + 1  # hidden_states length
 
     # BI / relnorm accumulators (streaming, full tokens)
@@ -240,13 +241,18 @@ def analyse(model, loader, num_layers, num_heads, layers, token_cap):
     sum_relnorm_mlp = np.zeros(num_layers, dtype=np.float64)
     tok_count = np.zeros(num_layers, dtype=np.float64)
 
-    # angular-distance accumulator (streaming): sum of per-token cosine between every
-    # pair of hidden states, plus total token count.
-    sum_cos_pair = torch.zeros((n_states, n_states), dtype=torch.float64)
+    # angular-distance accumulator (streaming): sum of PER-TOKEN arccos(cosine) between every
+    # pair of hidden states (arccos applied before summing, per Gromov et al.'s aggregation
+    # order -- not arccos of the summed/averaged cosine), plus total token count.
+    sum_angdist_pair = torch.zeros((n_states, n_states), dtype=torch.float64)
     pair_tokens = 0
 
-    # capped token store per hidden state, for CKA at the end (float16 to save memory)
-    cka_store = [[] for _ in range(n_states)]
+    # CKA accumulators (streaming, full tokens): per-state feature sums and the uncentered
+    # cross-products X_a^T X_b for every pair a <= b (float64, allocated once D is known).
+    # Centering at the end gives Xc_a^T Xc_b exactly, so CKA covers every token, not a cap.
+    cka_pairs = [(a, b) for a in range(n_states) for b in range(a, n_states)]
+    cka_sum = None
+    cka_cross = None
     cka_tokens = 0
 
     # head JSD
@@ -294,17 +300,22 @@ def analyse(model, loader, num_layers, num_heads, layers, token_cap):
                             d_mlp.norm(dim=-1) / h2.norm(dim=-1).clamp_min(1e-12)
                         ).sum().item()
 
-            # ----- angular distance: per-token cosine between all hidden-state pairs -----
+            # ----- angular distance: per-token arccos(cosine) between all hidden-state pairs -----
             U = torch.stack([F.normalize(_flatten(h), dim=-1) for h in hs])  # [n_states, T, D]
-            sum_cos_pair += torch.einsum("itd,jtd->ij", U, U).double().cpu()
+            cos_per_token = torch.einsum("itd,jtd->ijt", U, U).clamp(-1.0, 1.0)  # [n_states, n_states, T]
+            sum_angdist_pair += torch.arccos(cos_per_token).sum(dim=-1).double().cpu()
             pair_tokens += U.shape[1]
 
-            # ----- capped token store for CKA -----
-            if cka_tokens < token_cap:
-                take = min(hs[0].reshape(-1, hs[0].shape[-1]).shape[0], token_cap - cka_tokens)
-                for s in range(n_states):
-                    cka_store[s].append(_flatten(hs[s])[:take].half().cpu())
-                cka_tokens += take
+            # ----- streamed sums for CKA (float32 per-batch products, float64 accumulation) -----
+            X = torch.stack([_flatten(h) for h in hs])  # [n_states, T, D]
+            if cka_cross is None:
+                D = X.shape[-1]
+                cka_sum = torch.zeros((n_states, D), dtype=torch.float64, device=device)
+                cka_cross = torch.zeros((len(cka_pairs), D, D), dtype=torch.float64, device=device)
+            cka_sum += X.sum(1).double()
+            for p, (a, b) in enumerate(cka_pairs):
+                cka_cross[p] += (X[a].t() @ X[b]).double()
+            cka_tokens += X.shape[1]
 
             # ----- head JSD -----
             if do_heads and outputs.attentions is not None:
@@ -312,7 +323,7 @@ def analyse(model, loader, num_layers, num_heads, layers, token_cap):
                     outputs.attentions, total_jsd, num_layers, num_heads
                 )
 
-            del outputs, hs, U
+            del outputs, hs, U, X
             if device.type == "cuda":
                 torch.cuda.empty_cache()
             gc.collect()
@@ -330,17 +341,20 @@ def analyse(model, loader, num_layers, num_heads, layers, token_cap):
         "relnorm_mlp": sum_relnorm_mlp / np.clip(tok_count, 1, None) if have_sub else None,
     }
 
-    # angular-distance matrix [n_states, n_states]
-    mean_cos_pair = (sum_cos_pair / max(pair_tokens, 1)).clamp(-1.0, 1.0)
-    angdist = (torch.arccos(mean_cos_pair) / torch.pi).numpy()
+    # angular-distance matrix [n_states, n_states]: mean over tokens of arccos(per-token cosine)
+    angdist = (sum_angdist_pair / max(pair_tokens, 1) / torch.pi).numpy()
     results["angdist"] = angdist
 
-    # CKA matrix [n_states, n_states]
-    reps = [torch.cat(chunks).float().to(device) for chunks in cka_store]
-    cka = np.eye(n_states, dtype=np.float64)
-    for a in range(n_states):
-        for b in range(a + 1, n_states):
-            cka[a, b] = cka[b, a] = _linear_cka(reps[a], reps[b])
+    # CKA matrix [n_states, n_states]: same quantity as _linear_cka over all tokens, with
+    # HSIC(a, b) = ||Xc_a^T Xc_b||_F^2 and Xc_a^T Xc_b = X_a^T X_b - n mu_a mu_b^T.
+    mu = cka_sum / cka_tokens
+    hsic = torch.zeros((n_states, n_states), dtype=torch.float64)
+    for p, (a, b) in enumerate(cka_pairs):
+        cov = cka_cross[p] - cka_tokens * torch.outer(mu[a], mu[b])
+        hsic[a, b] = hsic[b, a] = cov.pow(2).sum().item()
+    diag = hsic.diagonal().sqrt()
+    cka = (hsic / torch.outer(diag, diag).clamp_min(1e-12)).numpy()
+    np.fill_diagonal(cka, 1.0)
     results["cka"] = cka
 
     # head similarity [L, H, H]
@@ -458,7 +472,7 @@ def _adopt_legacy_stems(out_dir, hf_id, ds_key, stem):
     return False
 
 
-def run(model_arg, dataset_name, num_samples, max_span, token_cap, output_dir, force=False):
+def run(model_arg, dataset_name, num_samples, max_span, output_dir, force=False):
     hf_id = _resolve_hf_id(model_arg)
     ds_key = dataset_name.lower().strip()
     out_dir = Path(output_dir)
@@ -497,7 +511,7 @@ def run(model_arg, dataset_name, num_samples, max_span, token_cap, output_dir, f
     print(f"      Using {actual_n} samples")
 
     print("[3/4] Analysing...")
-    results = analyse(model, loader, num_layers, num_heads, layers, token_cap)
+    results = analyse(model, loader, num_layers, num_heads, layers)
 
     print("[4/4] Saving outputs...")
     _save_block_scores(results, num_layers, min(max_span, num_layers), out_dir / f"{stem}_block_scores.csv")
@@ -519,7 +533,6 @@ if __name__ == "__main__":
     p.add_argument("--dataset", required=True, help="dataset key (dermamnist, mnist, cifar100, imagenet-1k, ...)")
     p.add_argument("--num-samples", type=int, default=5000, help="images to run (default: 5000)")
     p.add_argument("--max-span", type=int, default=8, help="longest contiguous block span to report (default: 8)")
-    p.add_argument("--token-cap", type=int, default=10000, help="tokens used for CKA (default: 10000)")
     p.add_argument("--output-dir", default="./outputs", help="output directory (default: ./outputs)")
     p.add_argument("--force", action="store_true", help="recompute even if score files already exist")
     args = p.parse_args()
@@ -529,7 +542,6 @@ if __name__ == "__main__":
         dataset_name=args.dataset,
         num_samples=args.num_samples,
         max_span=args.max_span,
-        token_cap=args.token_cap,
         output_dir=args.output_dir,
         force=args.force,
     )

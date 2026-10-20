@@ -1,0 +1,5 @@
+model,dataset,approx_layer,translator,mlp_linearize,mlp_mode,attn_linearize,attn_mode,head_dict,fit_dataset,accuracy_mean,accuracy_std,orig_head_accuracy_mean,orig_head_accuracy_std,auroc_mean,auroc_std,auprc_mean,auprc_std,order
+microsoft/rad-dino,chestxray14,"[(3, 9)]",linear,[],identity,[],identity,{},chestxray14,0.7040968010464977,0.0026463085755111964,,,0.7608572023688244,0.0012904177986158196,0.7159416342053362,0.0015833846891630174,0
+microsoft/rad-dino-maira-2,chestxray14,"[(3, 9)]",linear,[],identity,[],identity,{},chestxray14,0.6389879890593412,0.06218705229877961,,,0.7118529984358678,0.04243536295266273,0.6609602172660213,0.042974136040233264,3
+microsoft/rad-dino,chestxray_pneumonia,"[(3, 9)]",linear,[],identity,[],identity,{},chestxray_pneumonia,0.8771367521367521,0.012953371424126255,,,0.9823635765943459,0.0005971948279639786,0.9866149450687874,0.0007577180136360985,6
+microsoft/rad-dino-maira-2,chestxray_pneumonia,"[(3, 9)]",linear,[],identity,[],identity,{},chestxray_pneumonia,0.8231837606837606,0.044909934950819866,,,0.9778471765651252,0.00036840269884573675,0.9821469545809988,0.0005393655553012228,9

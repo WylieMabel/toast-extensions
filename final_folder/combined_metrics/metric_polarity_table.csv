@@ -1,0 +1,17 @@
+metric,raw_high_means,median_raw_rho_vs_true_accuracy,high_means_similar_raw,correction_applied
+angular_dist,more different (dissimilar),-0.883,False,negated (-value)
+cka_embed,more similar,0.542,True,none
+cosine_sim,more similar,0.622,True,none
+entropy_delta,more different (dissimilar),-0.322,False,negated (-value)
+kl_div,more different (dissimilar),-0.727,False,negated (-value)
+knn_overlap@10,more similar,0.559,True,none
+knn_overlap@5,more similar,0.577,True,none
+local_cka,more similar,0.687,True,none
+mse,more different (dissimilar),-0.692,False,negated (-value)
+orig_head_accuracy,more similar,0.969,True,none
+participation_ratio_change,more different (dissimilar),-0.588,False,negated (-value)
+probe_baseline_accuracy,more similar,,True,none
+probe_frozen_accuracy,more similar,0.468,True,none
+probe_refit_accuracy,more similar,0.605,True,none
+toast_linear_error,more different (dissimilar),-0.39,False,negated (-value)
+top1_flip_pct,more different (dissimilar),-0.723,False,negated (-value)

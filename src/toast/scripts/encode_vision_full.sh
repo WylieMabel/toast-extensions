@@ -7,7 +7,7 @@ export TRANSFORMERS_OFFLINE=1
 CONFIG_CSV="${CONFIG_CSV:-src/configs/experiments.csv}"
 SEED="${SEED:-0}"
 BATCH_SIZE="${BATCH_SIZE:-8}"
-NUM_WORKERS="${NUM_WORKERS:-1}"
+NUM_WORKERS="${NUM_WORKERS:-7}"
 
 echo "GPU Memory before:"
 nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader

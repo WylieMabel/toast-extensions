@@ -33,6 +33,7 @@ DATASET2INPUT_COLUMN = {
     "tissuemnist": "image",
     "octmnist": "image",
     "chestxray14": "image",
+    "chestxray14_multilabel": "image",
     "chestxray_pneumonia": "image",
     "patchcamelyon": "image",
     "tcga_ut": "image",
@@ -61,6 +62,7 @@ DATASET2LABEL_COLUMN = {
     "tissuemnist": "label",
     "octmnist": "label",
     "chestxray14": "label",
+    "chestxray14_multilabel": "label",
     "chestxray_pneumonia": "label",
     "patchcamelyon": "label",
     "tcga_ut": "label",
@@ -89,6 +91,7 @@ DATASET2NUM_CLASSES = {
     "tissuemnist": 8,
     "octmnist": 4,
     "chestxray14": 2,  # Binary: any pathology vs "No Finding", same convention as chestmnist
+    "chestxray14_multilabel": 14,  # Original NIH task: 14 multi-hot pathology labels
     "chestxray_pneumonia": 2,
     "patchcamelyon": 2,
     "tcga_ut": 31,
@@ -97,7 +100,9 @@ DATASET2NUM_CLASSES = {
     "ag_news": 4,
 }
 
-MULTILABEL_DATASETS = set()
+# Multi-hot labels: trained with BCEWithLogitsLoss, and the results "accuracy" column holds
+# macro-AUROC for these (see eval_classifier in train_NN.py).
+MULTILABEL_DATASETS = {"chestxray14_multilabel"}
 
 MODEL_NAME2HF_NAME = {
     # VIT
@@ -168,6 +173,7 @@ DATASET2LOCAL_PATH = {
     "octmnist": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/medmnist_octmnist_clean",
     # Real (non-MedMNIST) medical datasets, see claude_out/download_medical_datasets.py
     "chestxray14": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/chestxray14_clean",
+    "chestxray14_multilabel": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/chestxray14_multilabel_clean",
     "chestxray_pneumonia": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/chestxray_pneumonia_clean",
     "patchcamelyon": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/patchcamelyon_clean",
     "tcga_ut": "/cluster/customapps/biomed/vogtlab/users/mwylie/toast/tcga_ut_clean",

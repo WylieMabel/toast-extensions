@@ -1,0 +1,3 @@
+"dataset","encoder","skip","mlp_skip","attn_skip","head_dict","skip_translator","mlp_mode","attn_mode","fit_dataset"
+"chestxray14","microsoft/rad-dino","[(5, 7)]","[]","[]","{}","linear","identity","identity",""
+"chestxray14","microsoft/rad-dino","[(5, 9)]","[]","[]","{}","linear","identity","identity",""

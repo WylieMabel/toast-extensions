@@ -1,0 +1,3 @@
+"dataset","encoder","skip","mlp_skip","attn_skip","head_dict","skip_translator","mlp_mode","attn_mode","fit_dataset"
+"tcga_ut","owkin/phikon-v2","[(11, 12)]","[]","[]","{}","linear","identity","identity","tcga_ut"
+"patchcamelyon","owkin/phikon-v2","[(11, 12)]","[]","[]","{}","linear","identity","identity","tcga_ut"

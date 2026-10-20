@@ -31,16 +31,22 @@ import csv
 import json
 
 
-def translator_store_key(fit_dataset, encoder, skip_translator, samples) -> str:
+def translator_store_key(fit_dataset, encoder, skip_translator, samples, seed) -> str:
     """Directory name identifying a fitted translator, independent of where it is used.
 
     Both sides of a transfer derive this from the *fitting* dataset, so the row that fits
     (fit_dataset == dataset) and the row that reuses (fit_dataset != dataset) agree on the
     key without any bookkeeping between them. The span is appended separately, per skip, by
     span_translator_key -- one config can hold several spans and each needs its own map.
+
+    seed has to be part of the key: encode_vision_full.py reshuffles the train split per seed
+    (see run_pipeline_row_by_row.sh), so a linear/lowrank translator fit under seed 0 is
+    different fitted state from the "same" row under seed 1. Without seed here, every seed's
+    fit overwrites the last one's on disk, and a transfer row loading under seed 1 would
+    silently get seed 2's bridge instead of its own.
     """
     enc_slug = (encoder or "unknown").replace("/", "_")
-    return f"{fit_dataset}__{enc_slug}__{skip_translator}__n{samples}"
+    return f"{fit_dataset}__{enc_slug}__{skip_translator}__n{samples}__seed{seed}"
 
 
 def span_translator_key(translator_key: str, skip_from: int, skip_to: int) -> str:
@@ -119,11 +125,13 @@ def row_saves_translator(row, requirements) -> bool:
     return (dataset, config_signature(row)) in requirements
 
 
-def sweep_saved_translator_dirs(rows, samples) -> set:
+def sweep_saved_translator_dirs(rows, samples, seeds) -> set:
     """Span directory names this sweep will write -- exactly what it may delete afterwards.
 
     Scoped to the sweep on purpose: the store is shared, so a blanket wipe would take out
-    translators another sweep still depends on.
+    translators another sweep still depends on. seeds is every seed the run loops over
+    (SEEDS in run_pipeline_row_by_row.sh) -- each saving row writes one directory per seed,
+    not one directory total, so all of them have to be listed here.
     """
     requirements = transfer_requirements(rows)
     dirs = set()
@@ -131,20 +139,27 @@ def sweep_saved_translator_dirs(rows, samples) -> set:
         if not row_saves_translator(row, requirements):
             continue
         _, fit_dataset, translator = _row_fields(row)
-        key = translator_store_key(fit_dataset, row.get("encoder"), translator, samples)
-        for skip_from, skip_to in _parse(row.get("skip"), []) or []:
-            dirs.add(span_translator_key(key, skip_from, skip_to))
+        for seed in seeds:
+            key = translator_store_key(fit_dataset, row.get("encoder"), translator, samples, seed)
+            for skip_from, skip_to in _parse(row.get("skip"), []) or []:
+                dirs.add(span_translator_key(key, skip_from, skip_to))
     return dirs
 
 
-def _span_dirs(row, samples) -> set:
-    """Span directory names implied by row's own (fit_dataset, encoder, translator) + skips."""
+def _span_dirs(row, samples, seeds) -> set:
+    """Span directory names implied by row's own (fit_dataset, encoder, translator) + skips.
+
+    One set of spans per seed -- see translator_store_key for why seed is part of the key.
+    """
     _, fit_dataset, translator = _row_fields(row)
-    key = translator_store_key(fit_dataset, row.get("encoder"), translator, samples)
-    return {span_translator_key(key, a, b) for a, b in (_parse(row.get("skip"), []) or [])}
+    dirs = set()
+    for seed in seeds:
+        key = translator_store_key(fit_dataset, row.get("encoder"), translator, samples, seed)
+        dirs |= {span_translator_key(key, a, b) for a, b in (_parse(row.get("skip"), []) or [])}
+    return dirs
 
 
-def translators_ready_for_cleanup(rows, samples, completed_through) -> set:
+def translators_ready_for_cleanup(rows, samples, completed_through, seeds) -> set:
     """Dirs this sweep has saved that no row after `completed_through` still needs.
 
     Call after each row finishes (completed_through = its 0-based index in `rows`) instead of
@@ -165,13 +180,13 @@ def translators_ready_for_cleanup(rows, samples, completed_through) -> set:
     saved_so_far = set()
     for row in rows[:completed_through + 1]:
         if row_saves_translator(row, requirements):
-            saved_so_far |= _span_dirs(row, samples)
+            saved_so_far |= _span_dirs(row, samples, seeds)
 
     still_needed = set()
     for row in rows[completed_through + 1:]:
         dataset, fit_dataset, translator = _row_fields(row)
         if translator and translator != "identity" and fit_dataset != dataset \
                 and (fit_dataset, config_signature(row)) in requirements:
-            still_needed |= _span_dirs(row, samples)
+            still_needed |= _span_dirs(row, samples, seeds)
 
     return saved_so_far - still_needed

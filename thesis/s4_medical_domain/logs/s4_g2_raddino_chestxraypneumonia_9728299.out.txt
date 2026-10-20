@@ -1,0 +1,640 @@
+CPUs: 4, NUM_WORKERS=3
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://nexus-central.leomed.ethz.ch/repository/pypi/simple
+Obtaining file:///cluster/home/mwylie/toast-extensions
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: torch>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.11.0)
+Requirement already satisfied: transformers>=4.30 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (5.7.0)
+Requirement already satisfied: datasets>=2.14 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (4.8.5)
+Requirement already satisfied: latentis in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.0.8)
+Requirement already satisfied: fire in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (0.7.1)
+Requirement already satisfied: timm in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.0.26)
+Requirement already satisfied: pandas in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (3.0.2)
+Requirement already satisfied: numpy in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.4.4)
+Requirement already satisfied: scikit-learn in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (1.8.0)
+Requirement already satisfied: tqdm in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from toast==0.1.0) (4.67.3)
+Requirement already satisfied: pytorch-lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from toast==0.1.0) (2.6.1)
+Requirement already satisfied: filelock in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.29.0)
+Requirement already satisfied: pyarrow>=21.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (24.0.0)
+Requirement already satisfied: dill<0.4.2,>=0.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: requests>=2.32.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (2.32.5)
+Requirement already satisfied: httpx<1.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.28.1)
+Requirement already satisfied: xxhash in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (3.7.0)
+Requirement already satisfied: multiprocess<0.70.20 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (0.70.19)
+Requirement already satisfied: fsspec<=2026.2.0,>=2023.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2026.2.0)
+Requirement already satisfied: huggingface-hub<2.0,>=0.25.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (1.13.0)
+Requirement already satisfied: packaging in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (25.0)
+Requirement already satisfied: pyyaml>=5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from datasets>=2.14->toast==0.1.0) (6.0.3)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (3.13.5)
+Requirement already satisfied: anyio in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (4.10.0)
+Requirement already satisfied: certifi in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (2026.1.4)
+Requirement already satisfied: httpcore==1.* in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.0.9)
+Requirement already satisfied: idna in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpx<1.0.0->datasets>=2.14->toast==0.1.0) (3.11)
+Requirement already satisfied: h11>=0.16 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from httpcore==1.*->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (0.16.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.4.3)
+Requirement already satisfied: typer in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.20.0)
+Requirement already satisfied: typing-extensions>=4.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.15.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (6.7.1)
+Requirement already satisfied: propcache>=0.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets>=2.14->toast==0.1.0) (1.23.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (3.4.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from requests>=2.32.2->datasets>=2.14->toast==0.1.0) (2.6.3)
+Requirement already satisfied: setuptools<82 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (80.10.2)
+Requirement already satisfied: sympy>=1.13.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.1)
+Requirement already satisfied: jinja2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.1.6)
+Requirement already satisfied: cuda-toolkit==13.0.2 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.2)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (13.2.0)
+Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (0.8.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.4.5)
+Requirement already satisfied: triton==3.6.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from torch>=2.0->toast==0.1.0) (3.6.0)
+Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.1.0.3)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.0.61)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (12.6.3.3)
+Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.88)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch>=2.0->toast==0.1.0) (13.0.85)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from cuda-bindings<14,>=13.0.3->torch>=2.0->toast==0.1.0) (1.5.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from sympy>=1.13.3->torch>=2.0->toast==0.1.0) (1.3.0)
+Requirement already satisfied: regex>=2025.10.22 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (2026.4.4)
+Requirement already satisfied: tokenizers<=0.23.0,>=0.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.22.2)
+Requirement already satisfied: safetensors>=0.4.3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from transformers>=4.30->toast==0.1.0) (0.7.0)
+Requirement already satisfied: sniffio>=1.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from anyio->httpx<1.0.0->datasets>=2.14->toast==0.1.0) (1.3.1)
+Requirement already satisfied: termcolor in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from fire->toast==0.1.0) (3.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from jinja2->torch>=2.0->toast==0.1.0) (3.0.3)
+Requirement already satisfied: torchmetrics in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.9.0)
+Requirement already satisfied: backports.strenum in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.8)
+Requirement already satisfied: python-dotenv in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.2.1)
+Requirement already satisfied: GitPython in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.1.49)
+Requirement already satisfied: matplotlib in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (3.10.9)
+Requirement already satisfied: faiss-cpu in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (1.13.2)
+Requirement already satisfied: lightning in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from latentis->toast==0.1.0) (2.6.1)
+Requirement already satisfied: gitdb<5,>=4.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from GitPython->latentis->toast==0.1.0) (4.0.12)
+Requirement already satisfied: smmap<6,>=3.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from gitdb<5,>=4.0.1->GitPython->latentis->toast==0.1.0) (5.0.3)
+Requirement already satisfied: lightning-utilities<2.0,>=0.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from lightning->latentis->toast==0.1.0) (0.15.3)
+Requirement already satisfied: contourpy>=1.0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (4.62.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (1.5.0)
+Requirement already satisfied: pillow>=8 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (12.2.0)
+Requirement already satisfied: pyparsing>=3 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (3.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from matplotlib->latentis->toast==0.1.0) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from python-dateutil>=2.7->matplotlib->latentis->toast==0.1.0) (1.17.0)
+Requirement already satisfied: scipy>=1.10.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.17.1)
+Requirement already satisfied: joblib>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from scikit-learn->toast==0.1.0) (3.6.0)
+Requirement already satisfied: torchvision in /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env/lib/python3.13/site-packages (from timm->toast==0.1.0) (0.26.0)
+Requirement already satisfied: click>=8.0.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (8.2.1)
+Requirement already satisfied: shellingham>=1.3.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (1.5.4)
+Requirement already satisfied: rich>=10.11.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (14.2.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (2.19.2)
+Requirement already satisfied: mdurl~=0.1 in /cluster/customapps/biomed/vogtlab/users/mwylie/software/anaconda/lib/python3.13/site-packages (from markdown-it-py>=2.2.0->rich>=10.11.0->typer->huggingface-hub<2.0,>=0.25.0->datasets>=2.14->toast==0.1.0) (0.1.2)
+Building wheels for collected packages: toast
+  Building editable for toast (pyproject.toml): started
+  Building editable for toast (pyproject.toml): finished with status 'done'
+  Created wheel for toast: filename=toast-0.1.0-0.editable-py3-none-any.whl size=4561 sha256=3728d40351d82f041341d1e9d8f2fca0f3f9f06e7760f2b9acb8a0a6e4e3ebd3
+  Stored in directory: /scratch/slurm-job.9728299/pip-ephem-wheel-cache-wb3nk1xv/wheels/a0/f4/1f/d3c12de536bc82f378cfe768fdfa423266178ffc40a4f1de51
+Successfully built toast
+Installing collected packages: toast
+  Attempting uninstall: toast
+    Found existing installation: toast 0.1.0
+    Not uninstalling toast at /cluster/home/mwylie/.local/lib/python3.13/site-packages, outside environment /cluster/customapps/biomed/vogtlab/users/mwylie/toast/gpu_env
+    Can't uninstall 'toast'. No files were found to uninstall.
+Successfully installed toast-0.1.0
+
+[notice] A new release of pip is available: 25.3 -> 26.2.1
+[notice] To update, run: pip install --upgrade pip
+Config : thesis/s4_medical_domain/configs/experiments_raddino_chestxraypneumonia.csv
+Results: thesis/s4_medical_domain/results/results_raddino_chestxraypneumonia.csv
+Embeddings: /scratch/mwylie/9728299/embeddings on gpu-biomed-25
+Running 39 rows from thesis/s4_medical_domain/configs/experiments_raddino_chestxraypneumonia.csv
+
+=== Row 1 / 39 -- started 2026-10-12 17:14:02 ===
+"chestxray_pneumonia","microsoft/rad-dino","[]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 17:14:02
+  Params saved: 0 (0.00% of encoder body)
+Accuracy: 0.9391
+  -- seed 1 -- 2026-10-12 17:16:34
+  Params saved: 0 (0.00% of encoder body)
+Accuracy: 0.9503
+  -- seed 2 -- 2026-10-12 17:19:13
+  Params saved: 0 (0.00% of encoder body)
+Accuracy: 0.9471
+=== Row 1 / 39 -- finished 2026-10-12 17:21:43 (elapsed 461s) ===
+
+=== Row 2 / 39 -- started 2026-10-12 17:21:43 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(0, 1)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 17:21:43
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9407
+  -- seed 1 -- 2026-10-12 17:24:10
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9503
+  -- seed 2 -- 2026-10-12 17:26:42
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9455
+=== Row 2 / 39 -- finished 2026-10-12 17:29:18 (elapsed 455s) ===
+
+=== Row 3 / 39 -- started 2026-10-12 17:29:18 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(1, 2)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 17:29:18
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9359
+  -- seed 1 -- 2026-10-12 17:31:44
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9503
+  -- seed 2 -- 2026-10-12 17:34:08
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9455
+=== Row 3 / 39 -- finished 2026-10-12 17:36:34 (elapsed 436s) ===
+
+=== Row 4 / 39 -- started 2026-10-12 17:36:34 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(2, 3)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 17:36:34
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9439
+  -- seed 1 -- 2026-10-12 17:39:01
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9567
+  -- seed 2 -- 2026-10-12 17:41:24
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9455
+=== Row 4 / 39 -- finished 2026-10-12 17:43:47 (elapsed 433s) ===
+
+=== Row 5 / 39 -- started 2026-10-12 17:43:47 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(3, 4)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 17:43:47
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9439
+  -- seed 1 -- 2026-10-12 17:46:10
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9567
+  -- seed 2 -- 2026-10-12 17:48:36
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9455
+=== Row 5 / 39 -- finished 2026-10-12 17:51:01 (elapsed 434s) ===
+
+=== Row 6 / 39 -- started 2026-10-12 17:51:01 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(4, 5)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 17:51:01
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9391
+  -- seed 1 -- 2026-10-12 17:53:34
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9535
+  -- seed 2 -- 2026-10-12 17:56:04
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9455
+=== Row 6 / 39 -- finished 2026-10-12 17:58:35 (elapsed 454s) ===
+
+=== Row 7 / 39 -- started 2026-10-12 17:58:35 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(5, 6)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 17:58:35
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9391
+  -- seed 1 -- 2026-10-12 18:01:01
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9551
+  -- seed 2 -- 2026-10-12 18:03:25
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9423
+=== Row 7 / 39 -- finished 2026-10-12 18:06:04 (elapsed 449s) ===
+
+=== Row 8 / 39 -- started 2026-10-12 18:06:04 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(6, 7)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:06:04
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9407
+  -- seed 1 -- 2026-10-12 18:08:30
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9535
+  -- seed 2 -- 2026-10-12 18:10:54
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9439
+=== Row 8 / 39 -- finished 2026-10-12 18:13:19 (elapsed 435s) ===
+
+=== Row 9 / 39 -- started 2026-10-12 18:13:19 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(7, 8)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:13:19
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9375
+  -- seed 1 -- 2026-10-12 18:15:43
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9535
+  -- seed 2 -- 2026-10-12 18:18:08
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9423
+=== Row 9 / 39 -- finished 2026-10-12 18:20:37 (elapsed 438s) ===
+
+=== Row 10 / 39 -- started 2026-10-12 18:20:37 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(8, 9)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:20:37
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9407
+  -- seed 1 -- 2026-10-12 18:23:14
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9583
+  -- seed 2 -- 2026-10-12 18:25:40
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9503
+=== Row 10 / 39 -- finished 2026-10-12 18:28:15 (elapsed 458s) ===
+
+=== Row 11 / 39 -- started 2026-10-12 18:28:15 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(9, 10)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:28:15
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9407
+  -- seed 1 -- 2026-10-12 18:30:49
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9551
+  -- seed 2 -- 2026-10-12 18:33:26
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9455
+=== Row 11 / 39 -- finished 2026-10-12 18:35:49 (elapsed 454s) ===
+
+=== Row 12 / 39 -- started 2026-10-12 18:35:49 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(10, 11)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:35:49
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9343
+  -- seed 1 -- 2026-10-12 18:38:12
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9503
+  -- seed 2 -- 2026-10-12 18:40:37
+  Params saved: 6,498,816 (7.64% of encoder body)
+Accuracy: 0.9407
+=== Row 12 / 39 -- finished 2026-10-12 18:43:06 (elapsed 437s) ===
+
+=== Row 13 / 39 -- started 2026-10-12 18:43:06 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(0, 2)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:43:06
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9327
+  -- seed 1 -- 2026-10-12 18:45:24
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9519
+  -- seed 2 -- 2026-10-12 18:47:51
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9455
+=== Row 13 / 39 -- finished 2026-10-12 18:50:09 (elapsed 423s) ===
+
+=== Row 14 / 39 -- started 2026-10-12 18:50:10 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(1, 3)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:50:10
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9295
+  -- seed 1 -- 2026-10-12 18:52:40
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9551
+  -- seed 2 -- 2026-10-12 18:55:06
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9375
+=== Row 14 / 39 -- finished 2026-10-12 18:57:30 (elapsed 441s) ===
+
+=== Row 15 / 39 -- started 2026-10-12 18:57:30 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(2, 4)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 18:57:30
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9471
+  -- seed 1 -- 2026-10-12 18:59:57
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9567
+  -- seed 2 -- 2026-10-12 19:02:23
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9503
+=== Row 15 / 39 -- finished 2026-10-12 19:04:41 (elapsed 431s) ===
+
+=== Row 16 / 39 -- started 2026-10-12 19:04:41 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(3, 5)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 19:04:41
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9423
+  -- seed 1 -- 2026-10-12 19:07:06
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9567
+  -- seed 2 -- 2026-10-12 19:09:24
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9471
+=== Row 16 / 39 -- finished 2026-10-12 19:11:46 (elapsed 425s) ===
+
+=== Row 17 / 39 -- started 2026-10-12 19:11:47 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(4, 6)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 19:11:47
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9295
+  -- seed 1 -- 2026-10-12 19:14:11
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9519
+  -- seed 2 -- 2026-10-12 19:16:32
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9295
+=== Row 17 / 39 -- finished 2026-10-12 19:18:51 (elapsed 424s) ===
+
+=== Row 18 / 39 -- started 2026-10-12 19:18:52 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(5, 7)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 19:18:52
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9359
+  -- seed 1 -- 2026-10-12 19:21:13
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9503
+  -- seed 2 -- 2026-10-12 19:23:31
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9295
+=== Row 18 / 39 -- finished 2026-10-12 19:25:50 (elapsed 418s) ===
+
+=== Row 19 / 39 -- started 2026-10-12 19:25:50 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(6, 8)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 19:25:50
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9407
+  -- seed 1 -- 2026-10-12 19:28:13
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9551
+  -- seed 2 -- 2026-10-12 19:30:35
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9423
+=== Row 19 / 39 -- finished 2026-10-12 19:32:58 (elapsed 428s) ===
+
+=== Row 20 / 39 -- started 2026-10-12 19:32:58 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(7, 9)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 19:32:58
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9439
+  -- seed 1 -- 2026-10-12 19:35:18
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9535
+  -- seed 2 -- 2026-10-12 19:37:44
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9503
+=== Row 20 / 39 -- finished 2026-10-12 19:40:21 (elapsed 443s) ===
+
+=== Row 21 / 39 -- started 2026-10-12 19:40:21 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(8, 10)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 19:40:21
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9407
+  -- seed 1 -- 2026-10-12 19:42:49
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9519
+  -- seed 2 -- 2026-10-12 19:45:12
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9455
+=== Row 21 / 39 -- finished 2026-10-12 19:47:39 (elapsed 438s) ===
+
+=== Row 22 / 39 -- started 2026-10-12 19:47:39 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(9, 11)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 19:47:39
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9423
+  -- seed 1 -- 2026-10-12 19:50:22
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9551
+  -- seed 2 -- 2026-10-12 19:52:49
+  Params saved: 13,588,224 (15.97% of encoder body)
+Accuracy: 0.9471
+=== Row 22 / 39 -- finished 2026-10-12 19:55:12 (elapsed 453s) ===
+
+=== Row 23 / 39 -- started 2026-10-12 19:55:12 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(0, 3)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 19:55:12
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9279
+  -- seed 1 -- 2026-10-12 19:57:26
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9439
+  -- seed 2 -- 2026-10-12 19:59:41
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9327
+=== Row 23 / 39 -- finished 2026-10-12 20:01:51 (elapsed 399s) ===
+
+=== Row 24 / 39 -- started 2026-10-12 20:01:51 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(1, 4)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:01:51
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9263
+  -- seed 1 -- 2026-10-12 20:04:00
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9519
+  -- seed 2 -- 2026-10-12 20:06:22
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9327
+=== Row 24 / 39 -- finished 2026-10-12 20:08:41 (elapsed 410s) ===
+
+=== Row 25 / 39 -- started 2026-10-12 20:08:41 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(2, 5)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:08:41
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9263
+  -- seed 1 -- 2026-10-12 20:10:59
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9551
+  -- seed 2 -- 2026-10-12 20:13:13
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9295
+=== Row 25 / 39 -- finished 2026-10-12 20:15:28 (elapsed 407s) ===
+
+=== Row 26 / 39 -- started 2026-10-12 20:15:28 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(3, 6)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:15:28
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9263
+  -- seed 1 -- 2026-10-12 20:17:40
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9519
+  -- seed 2 -- 2026-10-12 20:19:57
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9263
+=== Row 26 / 39 -- finished 2026-10-12 20:22:12 (elapsed 404s) ===
+
+=== Row 27 / 39 -- started 2026-10-12 20:22:12 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(4, 7)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:22:12
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9247
+  -- seed 1 -- 2026-10-12 20:24:38
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9455
+  -- seed 2 -- 2026-10-12 20:26:59
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9167
+=== Row 27 / 39 -- finished 2026-10-12 20:29:20 (elapsed 428s) ===
+
+=== Row 28 / 39 -- started 2026-10-12 20:29:21 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(5, 8)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:29:21
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9375
+  -- seed 1 -- 2026-10-12 20:31:37
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9519
+  -- seed 2 -- 2026-10-12 20:34:01
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9375
+=== Row 28 / 39 -- finished 2026-10-12 20:36:23 (elapsed 422s) ===
+
+=== Row 29 / 39 -- started 2026-10-12 20:36:23 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(6, 9)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:36:23
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9407
+  -- seed 1 -- 2026-10-12 20:38:43
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9439
+  -- seed 2 -- 2026-10-12 20:41:04
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9311
+=== Row 29 / 39 -- finished 2026-10-12 20:43:25 (elapsed 422s) ===
+
+=== Row 30 / 39 -- started 2026-10-12 20:43:25 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(7, 10)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:43:25
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9391
+  -- seed 1 -- 2026-10-12 20:45:45
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9583
+  -- seed 2 -- 2026-10-12 20:48:08
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9487
+=== Row 30 / 39 -- finished 2026-10-12 20:50:28 (elapsed 423s) ===
+
+=== Row 31 / 39 -- started 2026-10-12 20:50:28 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(8, 11)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:50:28
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9423
+  -- seed 1 -- 2026-10-12 20:52:49
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9535
+  -- seed 2 -- 2026-10-12 20:55:11
+  Params saved: 20,677,632 (24.31% of encoder body)
+Accuracy: 0.9487
+=== Row 31 / 39 -- finished 2026-10-12 20:57:35 (elapsed 427s) ===
+
+=== Row 32 / 39 -- started 2026-10-12 20:57:35 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(0, 4)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 20:57:35
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9054
+  -- seed 1 -- 2026-10-12 20:59:55
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9327
+  -- seed 2 -- 2026-10-12 21:02:11
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9022
+=== Row 32 / 39 -- finished 2026-10-12 21:04:26 (elapsed 411s) ===
+
+=== Row 33 / 39 -- started 2026-10-12 21:04:26 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(1, 5)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 21:04:26
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9006
+  -- seed 1 -- 2026-10-12 21:06:41
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9343
+  -- seed 2 -- 2026-10-12 21:09:01
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9054
+=== Row 33 / 39 -- finished 2026-10-12 21:11:17 (elapsed 411s) ===
+
+=== Row 34 / 39 -- started 2026-10-12 21:11:17 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(2, 6)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 21:11:17
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9038
+  -- seed 1 -- 2026-10-12 21:13:31
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9359
+  -- seed 2 -- 2026-10-12 21:15:45
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9151
+=== Row 34 / 39 -- finished 2026-10-12 21:18:00 (elapsed 403s) ===
+
+=== Row 35 / 39 -- started 2026-10-12 21:18:00 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(3, 7)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 21:18:00
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9135
+  -- seed 1 -- 2026-10-12 21:20:15
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9375
+  -- seed 2 -- 2026-10-12 21:22:30
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9135
+=== Row 35 / 39 -- finished 2026-10-12 21:24:43 (elapsed 403s) ===
+
+=== Row 36 / 39 -- started 2026-10-12 21:24:43 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(4, 8)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 21:24:43
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9151
+  -- seed 1 -- 2026-10-12 21:27:01
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9455
+  -- seed 2 -- 2026-10-12 21:29:12
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9151
+=== Row 36 / 39 -- finished 2026-10-12 21:31:24 (elapsed 401s) ===
+
+=== Row 37 / 39 -- started 2026-10-12 21:31:24 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(5, 9)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 21:31:24
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9263
+  -- seed 1 -- 2026-10-12 21:33:34
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9439
+  -- seed 2 -- 2026-10-12 21:35:45
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9215
+=== Row 37 / 39 -- finished 2026-10-12 21:37:56 (elapsed 392s) ===
+
+=== Row 38 / 39 -- started 2026-10-12 21:37:56 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(6, 10)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 21:37:56
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9407
+  -- seed 1 -- 2026-10-12 21:40:08
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9455
+  -- seed 2 -- 2026-10-12 21:42:20
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9375
+=== Row 38 / 39 -- finished 2026-10-12 21:44:32 (elapsed 396s) ===
+
+=== Row 39 / 39 -- started 2026-10-12 21:44:32 ===
+"chestxray_pneumonia","microsoft/rad-dino","[(7, 11)]","[]","[]","{}","linear","identity","identity",""
+  -- seed 0 -- 2026-10-12 21:44:32
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9295
+  -- seed 1 -- 2026-10-12 21:46:42
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9487
+  -- seed 2 -- 2026-10-12 21:48:56
+  Params saved: 27,767,040 (32.64% of encoder body)
+Accuracy: 0.9455
+=== Row 39 / 39 -- finished 2026-10-12 21:51:12 (elapsed 400s) ===
+Summary (mean/std per config): thesis/s4_medical_domain/accuracies/accuracies_results_raddino_chestxraypneumonia.csv
+Done. All 39 rows completed.
+Scratch cleaned: /scratch/mwylie/9728299 removed on gpu-biomed-25
+Left in /scratch/mwylie: 
